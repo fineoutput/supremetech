@@ -42,6 +42,7 @@
                                               <tr>
                                                   <th>#</th>
                                                   <th>Image</th>
+                                                  <th>Sub Category</th>
                                                   <th>Product Title</th>
                                                   <th>MRP & Sell Price</th>
                                                   <th>Model No</th>
@@ -62,6 +63,12 @@
                             Sorry No image Found
                             <?php } ?>
                               </td>
+                            <td><?php $this->db->select('*');
+                                        $this->db->from('tbl_subcategory');
+                                        $this->db->where('id',$data->subcategory_id);
+                                        $dsa= $this->db->get();
+                                        $da=$dsa->row();
+                                        echo $da->title; ?></td>
                             <td><?php echo $data->title ?></td>
                             <td><?php echo $data->mrp." & ".$data->sell_price ?></td>
                             <td><?php echo $data->model_no ?></td>

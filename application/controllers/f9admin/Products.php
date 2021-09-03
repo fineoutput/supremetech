@@ -131,50 +131,50 @@ public function add_products(){
                 $model_no=$this->input->post('model_no');
                 $subcategory_id=$this->input->post('subcategory_id');
 
-								// $img1='image';
-								//
-								//             $file_check=($_FILES['image']['error']);
-								//             if($file_check!=4){
-								//           	$image_upload_folder = FCPATH . "assets/uploads/products/";
-								//   						if (!file_exists($image_upload_folder))
-								//   						{
-								//   							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-								//   						}
-								//   						$new_file_name="product".date("Ymdhms");
-								//   						$this->upload_config = array(
-								//   								'upload_path'   => $image_upload_folder,
-								//   								'file_name' => $new_file_name,
-								//   								'allowed_types' =>'jpg|jpeg|png',
-								//   								'max_size'      => 25000
-								//   						);
-								//   						$this->upload->initialize($this->upload_config);
-								//   						if (!$this->upload->do_upload($img1))
-								//   						{
-								//   							$upload_error = $this->upload->display_errors();
-								//   							// echo json_encode($upload_error);
-								//   							echo $upload_error;
-								//   						}
-								//   						else
-								//   						{
-								//
-								//   							$file_info = $this->upload->data();
-								//
-								//   							$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
-								//   							$file_info['new_name']=$videoNAmePath;
-								//   							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-								//   							$nnnn=$file_info['file_name'];
-								//   							// echo json_encode($file_info);
-								//   						}
-								//             }
+								$img1='image';
 
-								$productsimg = time() . '_' . $_FILES["image"]["name"];
-								$liciense_tmp_name = $_FILES["image"]["tmp_name"];
-								$error = $_FILES["image"]["error"];
-								$liciense_path = 'assets/admin/products/' . $productsimg;
-								move_uploaded_file($liciense_tmp_name, $liciense_path);
-								$prdctimage = $liciense_path;
+														$file_check=($_FILES['image']['error']);
+														if($file_check!=4){
+														$image_upload_folder = FCPATH . "assets/uploads/products/";
+															if (!file_exists($image_upload_folder))
+															{
+																mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+															}
+															$new_file_name="product".date("Ymdhms");
+															$this->upload_config = array(
+																	'upload_path'   => $image_upload_folder,
+																	'file_name' => $new_file_name,
+																	'allowed_types' =>'jpg|jpeg|png',
+																	'max_size'      => 25000
+															);
+															$this->upload->initialize($this->upload_config);
+															if (!$this->upload->do_upload($img1))
+															{
+																$upload_error = $this->upload->display_errors();
+																// echo json_encode($upload_error);
+																echo $upload_error;
+															}
+															else
+															{
 
-                  // $ip = $this->input->ip_address();
+																$file_info = $this->upload->data();
+
+																$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+																$file_info['new_name']=$videoNAmePath;
+																// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+																$productsimg=$file_info['file_name'];
+																// echo json_encode($file_info);
+															}
+														}
+
+								// $productsimg = time() . '_' . $_FILES["image"]["name"];
+								// $liciense_tmp_name = $_FILES["image"]["tmp_name"];
+								// $error = $_FILES["image"]["error"];
+								// $liciense_path = 'assets/admin/products/' . $productsimg;
+								// move_uploaded_file($liciense_tmp_name, $liciense_path);
+								// $prdctimage = $liciense_path;
+
+                  $ip = $this->input->ip_address();
           date_default_timezone_set("Asia/Calcutta");
                   $cur_date=date("Y-m-d H:i:s");
 
@@ -185,11 +185,12 @@ public function add_products(){
 
           $data_insert = array('title'=>$title,
                     'mrp'=>$mrp,
-										'image'=>$prdctimage,
+										'image'=>$productsimg,
                     'sell_price'=>$sell_price,
                     'description'=>$description,
                     'model_no' =>$model_no,
                     'subcategory_id' =>$subcategory_id,
+										'ip'=>$ip,
                     'added_by' =>$addedby,
                     'is_active' =>1,
                     'date'=>$cur_date
@@ -224,7 +225,7 @@ public function add_products(){
 //     }
 
           $data_insert = array('title'=>$title,
-										'image'=>$prdctimage,
+										'image'=>$productsimg,
                     'mrp'=>$mrp,
                     'sell_price'=>$sell_price,
                     'description'=>$description,

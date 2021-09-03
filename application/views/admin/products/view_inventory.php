@@ -41,6 +41,7 @@
                                           <thead>
                                               <tr>
                                                   <th>#</th>
+                                                  <th>Product Title</th>
                                                   <th>Stocks</th>
                                                   <th>Model No.</th>
                                                   <th>Colour</th>
@@ -52,6 +53,12 @@
                                                   <?php $i=1; foreach($inventory_data->result() as $data) { ?>
                         <tr>
                             <td><?php echo $i ?> </td>
+                            <td><?php $this->db->select('*');
+                                        $this->db->from('tbl_products');
+                                        $this->db->where('id',$$data->product_id);
+                                        $dsa= $this->db->get();
+                                        $da=$dsa->row();
+                                        echo $da->title; ?></td>
                             <td><?php echo $data->stocks ?></td>
                             <td><?php echo $data->model_no ?></td>
                             <td><?php echo $data->colour ?></td>
