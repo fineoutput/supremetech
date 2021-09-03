@@ -102,7 +102,7 @@ public function add_products(){
 								$productsimg = time() . '_' . $_FILES["slider_image"]["name"];
 								$liciense_tmp_name = $_FILES["slider_image"]["tmp_name"];
 								$error = $_FILES["slider_image"]["error"];
-								$liciense_path = 'assets/admin/slider/' . $productsimg;
+								$liciense_path = 'assets/admin/products/' . $productsimg;
 								move_uploaded_file($liciense_tmp_name, $liciense_path);
 								$prdctimage = $liciense_path;
 
@@ -258,6 +258,8 @@ $this->session->set_flashdata('emessage','Please insert some data, No data avail
 					               }
 
 public function delete_products($idd){
+
+
 
        if(!empty($this->session->userdata('admin_data'))){
 
