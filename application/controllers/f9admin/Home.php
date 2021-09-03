@@ -24,6 +24,12 @@ function __construct()
 				// $this->db->where('student_shift',$cvf);
 				$data['sidebar_data']= $this->db->get();
 
+				// $this->db->select('*');
+				//             $this->db->from('tbl_vendors');
+				//             // $this->db->where('id',$id);
+				//             $dsa= $this->db->get('');
+				//             $da=$dsa->row();
+				//             echo $da->name;
 				// echo $this->session->userdata('image');
 				// echo $this->session->userdata('position');
 			// exit;

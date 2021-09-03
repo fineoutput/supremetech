@@ -5,7 +5,6 @@
         <section class="content-header">
           <h1>
             Dashboard
-            <small>Version 2.0</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -22,7 +21,7 @@
                 <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Total Vendors</span>
-                  <span class="info-box-number">2</span>
+                  <span class="info-box-number">0</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -31,7 +30,7 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Total Vendor Requests</span>
-                  <span class="info-box-number">41</span>
+                  <span class="info-box-number">0</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -44,7 +43,7 @@
                 <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Total Orders</span>
-                  <span class="info-box-number">760</span>
+                  <span class="info-box-number">0</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -53,7 +52,7 @@
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">New Orders</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-number">0</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->

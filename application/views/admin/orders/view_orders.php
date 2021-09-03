@@ -42,21 +42,34 @@
                                               <tr>
                                                   <th>#</th>
                                                   <th>Username</th>
-                                                  <th>Product</th>
-                                                  <th>Product Details</th>
+                                                  <th>Order</th>
                                                   <th>Orders Status</th>
                                                   <th>Status</th>
+                                                  <th>Order Status</th>
                                                   <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                  <?php $i=1; foreach($users_data->result() as $data) { ?>
+                                                  <?php $i=1; foreach($orders_data->result() as $data) { ?>
                         <tr>
                             <td><?php echo $i ?> </td>
-                            <td><?php echo $data->name ?></td>
-                            <td><?php echo $data->email ?></td>
-                            <td><?php echo $data->phone ?></td>
-                            <td><?php echo $data->address ?></td>
+                            <td><?php $this->db->select('*');
+                                        $this->db->from('tbl_users');
+                                        $this->db->where('id',$data->user_id);
+                                        $dsa= $this->db->get();
+                                        $da=$dsa->row();
+                                        echo $da->name; ?></td>
+                            <td><a href="<?php echo base_url() ?>dcadmin/orders/view_productdetails/<?php echo base64_encode($data->id) ?>">Orders Details</a></td>
+                            <td><?php if($data->order_status==1){ ?>
+                                <p class="label bg-green" >Approved</p>
+                                <?php } elseif ($data->order_status==2){ ?>
+                                <p class="label bg-yellow" >Hold</p>
+                                <?php		}elseif ($data->order_status==3){ ?>
+                                <p class="label bg-blue" >Dispatch</p>
+                                <?php		} elseif ($data->order_status==4){ ?>
+                                <p class="label bg-red" >Rejected</p>
+                                <?php		}   ?>
+                            </td>
                               <td><?php if($data->is_active==1){ ?>
         <p class="label bg-green" >Active</p>
 
@@ -65,6 +78,35 @@
 
 
 <?php		}   ?>
+      </td>
+      <td>
+          <div class="btn-group" id="btns<?php echo $i ?>">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Action <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+
+                <?php if($data->order_status==1){ ?>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/hold">Hold</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/dispatch">Dispatch</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
+                <?php } elseif($data->order_status==2) { ?>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/dispatch">Dispatch</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
+                <?php		} elseif($data->order_status==3) { ?>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/hold">Hold</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
+                <?php		}  elseif($data->order_status==4) { ?>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/hold">Dispatch</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/dispatch">Inactive</a></li>
+                <?php		}   ?>
+                <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </td>
                     <td>
 <div class="btn-group" id="btns<?php echo $i ?>">
@@ -77,6 +119,7 @@
 <?php } else { ?>
 <li><a href="<?php echo base_url() ?>dcadmin/users/updateuserStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
+
 <li><a href="<?php echo base_url() ?>dcadmin/users/update_users/<?php echo base64_encode($data->id) ?>">Edit</a></li>
 <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
 </ul>

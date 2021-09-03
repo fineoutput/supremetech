@@ -55,7 +55,7 @@
                             <td><?php echo $i ?> </td>
                             <td><?php $this->db->select('*');
                                         $this->db->from('tbl_products');
-                                        $this->db->where('id',$$data->product_id);
+                                        $this->db->where('id',$data->product_id);
                                         $dsa= $this->db->get();
                                         $da=$dsa->row();
                                         echo $da->title; ?></td>
@@ -83,7 +83,7 @@
 <?php } else { ?>
 <li><a href="<?php echo base_url() ?>dcadmin/products/updateproductsinventoryStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
-<li><a href="<?php echo base_url() ?>dcadmin/products/update_inventory/<?php echo base64_encode($data->id) ?>">Edit</a></li>
+<!-- <li><a href="<?php echo base_url() ?>dcadmin/products/update_inventory/<?php echo base64_encode($data->id) ?>">Edit</a></li> -->
 <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
 </ul>
 </div>
@@ -91,7 +91,7 @@
 
 <div style="display:none" id="cnfbox<?php echo $i ?>">
 <p> Are you sure delete this </p>
-<a href="<?php echo base_url() ?>dcadmin/products/delete_products/<?php echo base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
+<a href="<?php echo base_url() ?>dcadmin/products/delete_inventory/<?php echo base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
 <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>" >No</a>
 </div>
 </td>

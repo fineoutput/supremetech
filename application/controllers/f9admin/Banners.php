@@ -84,12 +84,48 @@ public function add_banners(){
               {
                 $redirection=$this->input->post('redirection_link');
 
-                  $banner = time() . '_' . $_FILES["banner_image"]["name"];
-					        $liciense_tmp_name = $_FILES["banner_image"]["tmp_name"];
-					        $error = $_FILES["banner_image"]["error"];
-					        $liciense_path = 'assets/admin/banner/' . $banner;
-					        move_uploaded_file($liciense_tmp_name, $liciense_path);
-					        $image = $liciense_path;
+								$img1='banner_image';
+
+								            $file_check=($_FILES['banner_image']['error']);
+								            if($file_check!=4){
+								          	$image_upload_folder = FCPATH . "assets/uploads/banner/";
+								  						if (!file_exists($image_upload_folder))
+								  						{
+								  							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+								  						}
+								  						$new_file_name="team".date("Ymdhms");
+								  						$this->upload_config = array(
+								  								'upload_path'   => $image_upload_folder,
+								  								'file_name' => $new_file_name,
+								  								'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+								  								'max_size'      => 25000
+								  						);
+								  						$this->upload->initialize($this->upload_config);
+								  						if (!$this->upload->do_upload($img1))
+								  						{
+								  							$upload_error = $this->upload->display_errors();
+								  							// echo json_encode($upload_error);
+								  							echo $upload_error;
+								  						}
+								  						else
+								  						{
+
+								  							$file_info = $this->upload->data();
+
+								  							$image = "assets/uploads/banner/".$new_file_name.$file_info['file_ext'];
+								  							$file_info['new_name']=$videoNAmePath;
+								  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+								  							$nn=$file_info['file_name'];
+								  							// echo json_encode($file_info);
+								  						}
+								            }
+
+                  // $banner = time() . '_' . $_FILES["banner_image"]["name"];
+					        // $liciense_tmp_name = $_FILES["banner_image"]["tmp_name"];
+					        // $error = $_FILES["banner_image"]["error"];
+					        // $liciense_path = 'assets/admin/banner/' . $banner;
+					        // move_uploaded_file($liciense_tmp_name, $liciense_path);
+					        // $image = $liciense_path;
 
 
 

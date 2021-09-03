@@ -124,12 +124,48 @@ public function add_subcategory(){
 									$subtitle=$this->input->post('title');
 									$category_id=$this->input->post('category_id');
 
-									$subimage = time() . '_' . $_FILES["subimage"]["name"];
-									$liciense_tmp_name = $_FILES["subimage"]["tmp_name"];
-									$error = $_FILES["subimage"]["error"];
-									$liciense_path = 'assets/admin/category/' . $subimage;
-									move_uploaded_file($liciense_tmp_name, $liciense_path);
-									$categoryimage = $liciense_path;
+									$img1='subimage';
+
+									            $file_check=($_FILES['subimage']['error']);
+									            if($file_check!=4){
+									          	$image_upload_folder = FCPATH . "assets/uploads/subcategory/";
+									  						if (!file_exists($image_upload_folder))
+									  						{
+									  							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+									  						}
+									  						$new_file_name="team".date("Ymdhms");
+									  						$this->upload_config = array(
+									  								'upload_path'   => $image_upload_folder,
+									  								'file_name' => $new_file_name,
+									  								'allowed_types' =>'jpg|jpeg|png',
+									  								'max_size'      => 25000
+									  						);
+									  						$this->upload->initialize($this->upload_config);
+									  						if (!$this->upload->do_upload($img1))
+									  						{
+									  							$upload_error = $this->upload->display_errors();
+									  							// echo json_encode($upload_error);
+									  							echo $upload_error;
+									  						}
+									  						else
+									  						{
+
+									  							$file_info = $this->upload->data();
+
+									  							$videoNAmePath = "assets/uploads/subcategory/".$new_file_name.$file_info['file_ext'];
+									  							$file_info['new_name']=$videoNAmePath;
+									  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+									  							$categoryimage=$file_info['file_name'];
+									  							// echo json_encode($file_info);
+									  						}
+									            }
+
+									// $subimage = time() . '_' . $_FILES["subimage"]["name"];
+									// $liciense_tmp_name = $_FILES["subimage"]["tmp_name"];
+									// $error = $_FILES["subimage"]["error"];
+									// $liciense_path = 'assets/admin/category/' . $subimage;
+									// move_uploaded_file($liciense_tmp_name, $liciense_path);
+									// $categoryimage = $liciense_path;
 
 
 
@@ -143,7 +179,7 @@ public function add_subcategory(){
 			if($typ==1){
 
 			$data_insert = array('title'=>$subtitle,
-								'image'=>$categoryimage,
+								'image'=>$videoNAmePath,
 								'category_id'=>$category_id,
 								'added_by' =>$addedby,
 								'is_active' =>1,
@@ -178,7 +214,7 @@ $idw=base64_decode($iw);
 //     }
 
 			$data_insert = array('title'=>$subtitle,
-								'image'=>$categoryimage,
+								'image'=>$videoNAmePath,
 								'category_id'=>$category_id
 								);
 
@@ -280,12 +316,48 @@ public function add_category(){
               {
                 $title=$this->input->post('title');
 
-                  $banner = time() . '_' . $_FILES["image"]["name"];
-					        $liciense_tmp_name = $_FILES["image"]["tmp_name"];
-					        $error = $_FILES["image"]["error"];
-					        $liciense_path = 'assets/admin/category/' . $banner;
-					        move_uploaded_file($liciense_tmp_name, $liciense_path);
-					        $image = $liciense_path;
+								$img2='image';
+
+								            $file_check=($_FILES['image']['error']);
+								            if($file_check!=4){
+								          	$image_upload_folder = FCPATH . "assets/uploads/category/";
+								  						if (!file_exists($image_upload_folder))
+								  						{
+								  							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+								  						}
+								  						$new_file_name="team".date("Ymdhms");
+								  						$this->upload_config = array(
+								  								'upload_path'   => $image_upload_folder,
+								  								'file_name' => $new_file_name,
+								  								'allowed_types' =>'jpg|jpeg|png',
+								  								'max_size'      => 25000
+								  						);
+								  						$this->upload->initialize($this->upload_config);
+								  						if (!$this->upload->do_upload($img2))
+								  						{
+								  							$upload_error = $this->upload->display_errors();
+								  							// echo json_encode($upload_error);
+								  							echo $upload_error;
+								  						}
+								  						else
+								  						{
+
+								  							$file_info = $this->upload->data();
+
+								  							$image = "assets/uploads/category/".$new_file_name.$file_info['file_ext'];
+								  							$file_info['new_name']=$videoNAmePath;
+								  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+								  							$nnn=$file_info['file_name'];
+								  							// echo json_encode($file_info);
+								  						}
+								            }
+
+                  // $banner = time() . '_' . $_FILES["image"]["name"];
+					        // $liciense_tmp_name = $_FILES["image"]["tmp_name"];
+					        // $error = $_FILES["image"]["error"];
+					        // $liciense_path = 'assets/admin/category/' . $banner;
+					        // move_uploaded_file($liciense_tmp_name, $liciense_path);
+					        // $image = $liciense_path;
 
 
 

@@ -1,21 +1,21 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-           Products
+           Orders Details
           </h1>
           <ol class="breadcrumb">
            <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>dcadmin/products/view_products"><i class="fa fa-dashboard"></i> All Products </a></li>
-            <li class="active">View Products</li>
+            <li><a href="<?php echo base_url() ?>dcadmin/orders/view_orders"><i class="fa fa-dashboard"></i> All Orders </a></li>
+            <li class="active">View Slider Images</li>
           </ol>
         </section>
           <section class="content">
           <div class="row">
              <div class="col-lg-12">
-                 <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/products/add_products" role="button" style="margin-bottom:12px;"> Add Products</a>
+                 <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/orders/view_orders" role="button" style="margin-bottom:12px;">Orders</a>
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Products</h3>
+                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Order Details</h3>
                                   </div>
                                      <div class="panel panel-default">
 
@@ -41,75 +41,35 @@
                                           <thead>
                                               <tr>
                                                   <th>#</th>
-                                                  <th>Image</th>
-                                                  <th>Sub Category</th>
+                                                  <th>Product Image</th>
                                                   <th>Product Title</th>
-                                                  <th>MRP & Sell Price</th>
-                                                  <th>Model No</th>
-                                                  <th>Inventory</th>
-                                                  <th>Description</th>
-                                                  <th>Status</th>
-                                                  <th>Action</th>
+                                                  <th>Order Id</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                  <?php $i=1; foreach($product_data->result() as $data) { ?>
+                                                  <?php $i=1; foreach($orderdetails_data->result() as $data) { ?>
                         <tr>
                             <td><?php echo $i ?> </td>
                             <td>
-                                <?php if($data->image!=""){  ?>
-          <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $data->image; ?>">
+                            <?php  $this->db->select('*');
+                                          $this->db->from('tbl_products');
+                                          $this->db->where('id',$data->product_id);
+                                          $dsa= $this->db->get();
+                                          $da=$dsa->row();
+                                 if($da->image!=""){  ?>
+          <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $da->image ?>">
                             <?php }else {  ?>
                             Sorry No image Found
                             <?php } ?>
                               </td>
                             <td><?php $this->db->select('*');
-                                        $this->db->from('tbl_subcategory');
-                                        $this->db->where('id',$data->subcategory_id);
-                                        $dsa= $this->db->get();
-                                        $da=$dsa->row();
-                                        echo $da->title; ?></td>
-                            <td><?php echo $data->title ?></td>
-                            <td><?php echo $data->mrp." & ".$data->sell_price ?></td>
-                            <td><?php echo $data->model_no ?></td>
-                            <td><a href="<?php echo base_url() ?>dcadmin/products/view_inventory/<?php echo base64_encode($data->id) ?>">View</a> & <a href="<?php echo base_url() ?>dcadmin/products/add_inventory/<?php echo base64_encode($data->id) ?>">Add</a></td>
-                            <td><?php echo $data->description ?></td>
+                                          $this->db->from('tbl_products');
+                                          $this->db->where('id',$data->product_id);
+                                          $dsa= $this->db->get();
+                                          $da=$dsa->row();
+                                          echo $da->title; ?></td>
 
-                              <td><?php if($data->is_active==1){ ?>
-        <p class="label bg-green" >Active</p>
-
-    <?php } else { ?>
-        <p class="label bg-yellow" >Inactive</p>
-
-
-<?php		}   ?>
-      </td>
-                    <td>
-<div class="btn-group" id="btns<?php echo $i ?>">
-<div class="btn-group">
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Action <span class="caret"></span></button>
-<ul class="dropdown-menu" role="menu">
-
-<?php if($data->is_active==1){ ?>
-<li><a href="<?php echo base_url() ?>dcadmin/products/updateproductsStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
-<?php } else { ?>
-<li><a href="<?php echo base_url() ?>dcadmin/products/updateproductsStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
-<?php		}   ?>
-<li><a href="<?php echo base_url() ?>dcadmin/products/update_products/<?php echo base64_encode($data->id) ?>">Edit</a></li>
-<li><a href="<?php echo base_url() ?>dcadmin/products/view_productstype/<?php echo base64_encode($data->id) ?>">View Type</a></li>
-<li><a href="<?php echo base_url() ?>dcadmin/products/add_productstype/<?php echo base64_encode($data->id) ?>">Add Type</a></li>
-<li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
-</ul>
-</div>
-</div>
-
-<div style="display:none" id="cnfbox<?php echo $i ?>">
-<p> Are you sure delete this </p>
-<a href="<?php echo base_url() ?>dcadmin/products/delete_products/<?php echo base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
-<a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>" >No</a>
-</div>
-</td>
-                </tr>
+                              <td><?php echo $data->order_id ?> </td>
 <?php $i++; } ?>
             </tbody>
         </table>

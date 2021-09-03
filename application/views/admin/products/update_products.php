@@ -83,7 +83,7 @@
                                 <tr>
                                                           <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
                                                           <td>
-                                    <input type="file" name="subimage"  class="form-control" placeholder="" required value="<?= $product->title; ?>" />
+                                    <input type="file" name="image"  class="form-control" placeholder="" required value="<?= $product->title; ?>" />
                                                         </td>
                                                         <td>
                                                             <?php if($product->image!=""){  ?>
