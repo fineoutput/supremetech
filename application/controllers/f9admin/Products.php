@@ -99,6 +99,13 @@ public function add_products(){
                 $model_no=$this->input->post('model_no');
                 $subcategory_id=$this->input->post('subcategory_id');
 
+								$productsimg = time() . '_' . $_FILES["slider_image"]["name"];
+								$liciense_tmp_name = $_FILES["slider_image"]["tmp_name"];
+								$error = $_FILES["slider_image"]["error"];
+								$liciense_path = 'assets/admin/slider/' . $productsimg;
+								move_uploaded_file($liciense_tmp_name, $liciense_path);
+								$prdctimage = $liciense_path;
+
                   // $ip = $this->input->ip_address();
           date_default_timezone_set("Asia/Calcutta");
                   $cur_date=date("Y-m-d H:i:s");
@@ -110,6 +117,7 @@ public function add_products(){
 
           $data_insert = array('title'=>$title,
                     'mrp'=>$mrp,
+										'image'=>$prdctimage,
                     'sell_price'=>$sell_price,
                     'description'=>$description,
                     'model_no' =>$model_no,
@@ -148,6 +156,7 @@ public function add_products(){
 //     }
 
           $data_insert = array('title'=>$title,
+										'image'=>$prdctimage,
                     'mrp'=>$mrp,
                     'sell_price'=>$sell_price,
                     'description'=>$description,
