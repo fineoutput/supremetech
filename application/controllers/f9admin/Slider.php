@@ -84,6 +84,9 @@ public function add_slider(){
               {
                 $title=$this->input->post('title');
 
+								// Load library
+								$this->load->library('upload');
+
 								$img1='slider_image';
 
 								            $file_check=($_FILES['slider_image']['error']);
@@ -113,7 +116,7 @@ public function add_slider(){
 								  							$file_info = $this->upload->data();
 
 								  							$image = "assets/uploads/slider/".$new_file_name.$file_info['file_ext'];
-								  							$file_info['new_name']=$videoNAmePath;
+								  							$file_info['new_name']=$image;
 								  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
 								  							$nnn=$file_info['file_name'];
 								  							// echo json_encode($file_info);

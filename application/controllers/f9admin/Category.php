@@ -124,6 +124,9 @@ public function add_subcategory(){
 									$subtitle=$this->input->post('title');
 									$category_id=$this->input->post('category_id');
 
+									// Load library
+									$this->load->library('upload');
+
 									$img1='subimage';
 
 									            $file_check=($_FILES['subimage']['error']);
@@ -316,6 +319,9 @@ public function add_category(){
               {
                 $title=$this->input->post('title');
 
+								// Load library
+								$this->load->library('upload');
+
 								$img2='image';
 
 								            $file_check=($_FILES['image']['error']);
@@ -345,7 +351,7 @@ public function add_category(){
 								  							$file_info = $this->upload->data();
 
 								  							$image = "assets/uploads/category/".$new_file_name.$file_info['file_ext'];
-								  							$file_info['new_name']=$videoNAmePath;
+								  							$file_info['new_name']=$image;
 								  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
 								  							$nnn=$file_info['file_name'];
 								  							// echo json_encode($file_info);

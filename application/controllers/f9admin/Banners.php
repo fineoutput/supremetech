@@ -84,6 +84,9 @@ public function add_banners(){
               {
                 $redirection=$this->input->post('redirection_link');
 
+								// Load library
+								$this->load->library('upload');
+
 								$img1='banner_image';
 
 								            $file_check=($_FILES['banner_image']['error']);
@@ -97,7 +100,7 @@ public function add_banners(){
 								  						$this->upload_config = array(
 								  								'upload_path'   => $image_upload_folder,
 								  								'file_name' => $new_file_name,
-								  								'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+								  								'allowed_types' =>'jpg|jpeg|png',
 								  								'max_size'      => 25000
 								  						);
 								  						$this->upload->initialize($this->upload_config);
@@ -113,9 +116,9 @@ public function add_banners(){
 								  							$file_info = $this->upload->data();
 
 								  							$image = "assets/uploads/banner/".$new_file_name.$file_info['file_ext'];
-								  							$file_info['new_name']=$videoNAmePath;
-								  							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-								  							$nn=$file_info['file_name'];
+								  							// $file_info['new_name']=$videoNAmePath;
+								  							// // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+								  							// $nn=$file_info['file_name'];
 								  							// echo json_encode($file_info);
 								  						}
 								            }
