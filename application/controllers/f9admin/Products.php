@@ -539,7 +539,7 @@ public function add_inventory_data($t,$iw="")
 					                $stocks=$this->input->post('stocks');
 					                $model_no=$this->input->post('model_no');
 													$colour=$this->input->post('colour');
-													$product_idds = $product_id;
+													// $product_idds = $product_id;
 
 					                  $ip = $this->input->ip_address();
 					          date_default_timezone_set("Asia/Calcutta");
