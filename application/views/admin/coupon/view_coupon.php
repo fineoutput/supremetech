@@ -57,8 +57,8 @@
                             <td><?php echo $data->promocode ?></td>
                             <td><?php echo $data->start_date." To ".$data->end_date ?></td>
                             <td><?php echo $data->min_cart_amount ?></td>
-                            <td><?php echo $data->discount_percent ?></td>
                             <td><?php echo $data->maximum_discount ?></td>
+                            <td><?php echo $data->discount_percent ?></td>
                               <td><?php if($data->is_active==1){ ?>
         <p class="label bg-green" >Active</p>
 
