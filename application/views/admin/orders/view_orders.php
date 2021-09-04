@@ -99,10 +99,10 @@
                   <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
                 <?php		}  elseif($data->order_status==4) { ?>
                   <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
-                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/hold">Dispatch</a></li>
-                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/dispatch">Inactive</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/hold">Hold</a></li>
+                  <li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderprocessStatus/<?php echo base64_encode($data->id) ?>/dispatch">Dispatch</a></li>
                 <?php		}   ?>
-                <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
+
               </ul>
             </div>
           </div>
@@ -115,12 +115,12 @@
 <ul class="dropdown-menu" role="menu">
 
 <?php if($data->is_active==1){ ?>
-<li><a href="<?php echo base_url() ?>dcadmin/users/updateuserStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
+<li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
 <?php } else { ?>
-<li><a href="<?php echo base_url() ?>dcadmin/users/updateuserStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
+<li><a href="<?php echo base_url() ?>dcadmin/orders/updateorderStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
 
-<li><a href="<?php echo base_url() ?>dcadmin/users/update_users/<?php echo base64_encode($data->id) ?>">Edit</a></li>
+<!-- <li><a href="<?php echo base_url() ?>dcadmin/users/update_users/<?php echo base64_encode($data->id) ?>">Edit</a></li> -->
 <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
 </ul>
 </div>

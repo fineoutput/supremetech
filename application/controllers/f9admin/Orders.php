@@ -233,42 +233,6 @@ $this->session->set_flashdata('emessage','Please insert some data, No data avail
           }
 
           }
-
-
-					public function update_coupon($idd){
-
-					                 if(!empty($this->session->userdata('admin_data'))){
-
-
-					                   $data['user_name']=$this->load->get_var('user_name');
-
-					                   // echo SITE_NAME;
-					                   // echo $this->session->userdata('image');
-					                   // echo $this->session->userdata('position');
-					                   // exit;
-
-														  $id=base64_decode($idd);
-														 $data['id']=$idd;
-
-														 $this->db->select('*');
-														             $this->db->from('tbl_coupon');
-														             $this->db->where('id',$id);
-														             $dsa= $this->db->get();
-														             $data['coupon']=$dsa->row();
-
-
-					                   $this->load->view('admin/common/header_view',$data);
-					                   $this->load->view('admin/coupon/update_coupon');
-					                   $this->load->view('admin/common/footer_view');
-
-					               }
-					               else{
-
-					                  redirect("login/admin_login","refresh");
-					               }
-
-					               }
-
 public function delete_orders($idd){
 
        if(!empty($this->session->userdata('admin_data'))){
