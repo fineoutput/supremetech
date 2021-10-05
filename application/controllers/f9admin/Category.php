@@ -85,13 +85,10 @@ public function add_subcategory(){
 						// echo $this->session->userdata('position');
 						// exit;
 
-						$this->db->select('*');
-						$this->db->from('tbl_category');
-						// $this->db->where('category_id',$idd);
-						$data['categories_data']= $this->db->get();
 
 
-						$this->load->view('admin/common/header_view',$data);
+
+						$this->load->view('admin/common/header_view');
 						$this->load->view('admin/category/add_subcategory');
 						$this->load->view('admin/common/footer_view');
 
@@ -116,8 +113,7 @@ public function add_subcategory(){
 							if($this->input->post())
 							{
 
-								$this->form_validation->set_rules('title', 'title', 'required|xss_clean|trim');
-								$this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+
 
 								if($this->form_validation->run()== TRUE)
 								{

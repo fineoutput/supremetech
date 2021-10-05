@@ -1,121 +1,58 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once(APPPATH . 'core/CI_finecontrol.php');
-class Products extends CI_finecontrol{
-function __construct()
-		{
-			parent::__construct();
-			$this->load->model("login_model");
-			$this->load->model("admin/base_model");
-			$this->load->library('user_agent');
-		}
+<?php
+    if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+       require_once(APPPATH . 'core/CI_finecontrol.php');
+       class Products extends CI_finecontrol{
+       function __construct()
+           {
+             parent::__construct();
+             $this->load->model("login_model");
+             $this->load->model("admin/base_model");
+             $this->load->library('user_agent');
+             $this->load->library('upload');
+           }
+
+         public function view_products(){
+
+            if(!empty($this->session->userdata('admin_data'))){
 
 
-    public function view_products(){
+              $data['user_name']=$this->load->get_var('user_name');
 
-                     if(!empty($this->session->userdata('admin_data'))){
-// echo "hii";
-// exit;
+              // echo SITE_NAME;
+              // echo $this->session->userdata('image');
+              // echo $this->session->userdata('position');
+              // exit;
 
-                       $data['user_name']=$this->load->get_var('user_name');
+                           $this->db->select('*');
+               $this->db->from('tbl_products');
+               //$this->db->where('id',$usr);
+               $data['products_data']= $this->db->get();
 
-                       // echo SITE_NAME;
-                       // echo $this->session->userdata('image');
-                       // echo $this->session->userdata('position');
-                       // exit;
+              $this->load->view('admin/common/header_view',$data);
+              $this->load->view('admin/products/view_products');
+              $this->load->view('admin/common/footer_view');
 
-											       			$this->db->select('*');
-											 $this->db->from('tbl_products');
-											 //$this->db->where('id',$usr);
-											 $data['product_data']= $this->db->get();
+          }
+          else{
 
+             redirect("login/admin_login","refresh");
+          }
 
-                       $this->load->view('admin/common/header_view',$data);
-                       $this->load->view('admin/products/view_products');
-                       $this->load->view('admin/common/footer_view');
+          }
 
-                   }
-                   else{
-
-                      redirect("login/admin_login","refresh");
-                   }
-
-                   }
-
- public function view_inventory($innventory_id){
-
-									 								 if(!empty($this->session->userdata('admin_data'))){
-
-
-									 									 $data['user_name']=$this->load->get_var('user_name');
-
-									 									 // echo SITE_NAME;
-									 									 // echo $this->session->userdata('image');
-									 									 // echo $this->session->userdata('position');
-									 									 // exit;
-																		 $id=base64_decode($innventory_id);
-									 								 	$data['id']=$innventory_id;
-
-
-									 															$this->db->select('*');
-									 									 $this->db->from('tbl_inventory');
-									 									 $this->db->where('product_id',$id);
-									 									 $data['inventory_data']= $this->db->get();
-
-
-									 									 $this->load->view('admin/common/header_view',$data);
-									 									 $this->load->view('admin/products/view_inventory');
-									 									 $this->load->view('admin/common/footer_view');
-
-									 							 }
-									 							 else{
-
-									 									redirect("login/admin_login","refresh");
-									 							 }
-
-									 							 }
-
-public function view_productstype($idds){
-
-						if(!empty($this->session->userdata('admin_data'))){
-
-
-									$data['user_name']=$this->load->get_var('user_name');
-
-									$id=base64_decode($idds);
-								 	$data['id']=$idds;
-
-										$this->db->select('*');
-										$this->db->from('tbl_productstype');
-										$this->db->where('product_id',$id);
-										$data['productstype_data']= $this->db->get();
-
-
-										$this->load->view('admin/common/header_view',$data);
-										$this->load->view('admin/products/view_productstype');
-										$this->load->view('admin/common/footer_view');
-						}
-							else{
-
-									redirect("login/admin_login","refresh");
-							}
-
-							}
-
-public function add_products(){
+              public function add_products(){
 
                  if(!empty($this->session->userdata('admin_data'))){
 
+            $this->db->select('*');
+$this->db->from('tbl_category');
+//$this->db->where('id',$usr);
+$data['category_data']= $this->db->get();
 
-                   $data['user_name']=$this->load->get_var('user_name');
-
-                   // echo SITE_NAME;
-                   // echo $this->session->userdata('image');
-                   // echo $this->session->userdata('position');
-                   // exit;
-                            $this->db->select('*');
-                  $this->db->from('tbl_subcategory');
-                  //$this->db->where('id',$usr);
-                  $data['subcategories_data']= $this->db->get();
+            $this->db->select('*');
+$this->db->from('tbl_subcategory');
+//$this->db->where('id',$usr);
+$data['subcategory_data']= $this->db->get();
 
 
                    $this->load->view('admin/common/header_view',$data);
@@ -130,909 +67,673 @@ public function add_products(){
 
                }
 
-      			public function add_product_data($t,$iw="")
-
-              {
-
-                if(!empty($this->session->userdata('admin_data'))){
-
-
-          	$this->load->helper(array('form', 'url'));
-            $this->load->library('form_validation');
-            $this->load->helper('security');
-            if($this->input->post())
-            {
-              // print_r($this->input->post());
-              // exit;
-              $this->form_validation->set_rules('title', 'title', 'required|xss_clean|trim');
-              $this->form_validation->set_rules('mrp', 'mrp', 'required|xss_clean|trim');
-              $this->form_validation->set_rules('sell_price', 'sell_price', 'required|xss_clean|trim');
-							$this->form_validation->set_rules('description', 'description', 'required|xss_clean|trim');
-              $this->form_validation->set_rules('model_no', 'model_no', 'required|xss_clean|trim');
-              $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-
-              if($this->form_validation->run()== TRUE)
-              {
-                $title=$this->input->post('title');
-                $mrp=$this->input->post('mrp');
-								$sell_price=$this->input->post('sell_price');
-								$description=$this->input->post('description');
-                $model_no=$this->input->post('model_no');
-                $subcategory_id=$this->input->post('subcategory_id');
-
-								// Load library
-								$this->load->library('upload');
-
-								$img1='image';
-
-														$file_check=($_FILES['image']['error']);
-														if($file_check!=4){
-														$image_upload_folder = FCPATH . "assets/uploads/products/";
-															if (!file_exists($image_upload_folder))
-															{
-																mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-															}
-															$new_file_name="product".date("Ymdhms");
-															$this->upload_config = array(
-																	'upload_path'   => $image_upload_folder,
-																	'file_name' => $new_file_name,
-																	'allowed_types' =>'jpg|jpeg|png',
-																	'max_size'      => 25000
-															);
-															$this->upload->initialize($this->upload_config);
-															if (!$this->upload->do_upload($img1))
-															{
-																$upload_error = $this->upload->display_errors();
-																// echo json_encode($upload_error);
-																echo $upload_error;
-															}
-															else
-															{
-
-																$file_info = $this->upload->data();
+public function getSubcategory(){
 
-																$productsimg = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
-																// $file_info['new_name']=$videoNAmePath;
-																// // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-																// $videoNAmePath=$file_info['file_name'];
-																// echo json_encode($file_info);
-															}
-														}
+                   // $data['user_name']=$this->load->get_var('user_name');
 
-								// $productsimg = time() . '_' . $_FILES["image"]["name"];
-								// $liciense_tmp_name = $_FILES["image"]["tmp_name"];
-								// $error = $_FILES["image"]["error"];
-								// $liciense_path = 'assets/admin/products/' . $productsimg;
-								// move_uploaded_file($liciense_tmp_name, $liciense_path);
-								// $prdctimage = $liciense_path;
+                   // echo SITE_NAME;
+                   // echo $this->session->userdata('image');
+                   // echo $this->session->userdata('position');
+                   // exit;
 
-                  $ip = $this->input->ip_address();
-          date_default_timezone_set("Asia/Calcutta");
-                  $cur_date=date("Y-m-d H:i:s");
+$id=$_GET['isl'];
+            $this->db->select('*');
+$this->db->from('tbl_subcategory');
+$this->db->where('category',$id);
+$dat= $this->db->get();
 
-                  $addedby=$this->session->userdata('admin_id');
+$i=1; foreach($dat->result() as $data) {
 
-          $typ=base64_decode($t);
-          if($typ==1){
+$igt[] = array('sub_id' =>$data->id ,'sub_name'=>$data->subcategory);
 
-          $data_insert = array('title'=>$title,
-                    'mrp'=>$mrp,
-										'image'=>$productsimg,
-                    'sell_price'=>$sell_price,
-                    'description'=>$description,
-                    'model_no' =>$model_no,
-                    'subcategory_id' =>$subcategory_id,
-										'ip'=>$ip,
-                    'added_by' =>$addedby,
-                    'is_active' =>1,
-                    'date'=>$cur_date
+}
 
-                    );
+echo json_encode($igt);
 
 
+               }
 
+               public function update_products($idd){
 
+                   if(!empty($this->session->userdata('admin_data'))){
 
-          $last_id=$this->base_model->insert_table("tbl_products",$data_insert,1) ;
 
-          }
-          if($typ==2){
+                     $data['user_name']=$this->load->get_var('user_name');
 
-   $idw=base64_decode($iw);
+                     // echo SITE_NAME;
+                     // echo $this->session->userdata('image');
+                     // echo $this->session->userdata('position');
+                     // exit;
 
-// $this->db->select('*');
-//     $this->db->from('tbl_minor_category');
-//    $this->db->where('name',$name);
-//     $damm= $this->db->get();
-//    foreach($damm->result() as $da) {
-//      $uid=$da->id;
-// if($uid==$idw)
-// {
-//
-//  }
-// else{
-//    echo "Multiple Entry of Same Name";
-//       exit;
-//  }
-//     }
+                      $id=base64_decode($idd);
+                     $data['id']=$idd;
 
-          $data_insert = array('title'=>$title,
-										'image'=>$productsimg,
-                    'mrp'=>$mrp,
-                    'sell_price'=>$sell_price,
-                    'description'=>$description,
-                    'model_no' =>$model_no,
-                    'subcategory_id' =>$subcategory_id,
-                    );
+                            $this->db->select('*');
+                            $this->db->from('tbl_products');
+                            $this->db->where('id',$id);
+                            $data['products_data']= $this->db->get()->row();
 
 
+                            $this->db->select('*');
+                            $this->db->from('tbl_category');
+                            // $this->db->where('id',$id);
+                            $data['category_data']= $this->db->get();
 
+                     $this->load->view('admin/common/header_view',$data);
+                     $this->load->view('admin/products/update_products');
+                     $this->load->view('admin/common/footer_view');
 
-          	$this->db->where('id', $idw);
-            $last_id=$this->db->update('tbl_products', $data_insert);
+                 }
+                 else{
 
-          }
+                    redirect("login/admin_login","refresh");
+                 }
 
+                 }
 
-                              if($last_id!=0){
+             public function add_products_data($t,$iw="")
 
-                              $this->session->set_flashdata('smessage','Data inserted successfully');
+               {
 
-                              redirect("dcadmin/products/view_products","refresh");
+                 if(!empty($this->session->userdata('admin_data'))){
 
-                                      }
 
-                                      else
+             $this->load->helper(array('form', 'url'));
+             $this->load->library('form_validation');
+             $this->load->helper('security');
+             if($this->input->post())
+             {
+               // print_r($this->input->post());
+               // exit;
+  $this->form_validation->set_rules('productname', 'productname', 'required');
+  $this->form_validation->set_rules('category', 'category', 'required');
+  $this->form_validation->set_rules('sub_category', 'sub_category', 'required');
+  $this->form_validation->set_rules('mrp', 'mrp', 'required');
+  $this->form_validation->set_rules('productdescription', 'productdescription', 'required');
+  $this->form_validation->set_rules('modelno', 'modelno', 'required');
 
-                                      {
 
-                                	 $this->session->set_flashdata('emessage','Sorry error occured');
-                              		   redirect($_SERVER['HTTP_REFERER']);
 
 
-                                      }
 
+               if($this->form_validation->run()== TRUE)
+               {
+  $productname=$this->input->post('productname');
+  $category=$this->input->post('category');
+  $subcategory=$this->input->post('sub_category');
+  $mrp=$this->input->post('mrp');
+  $productdescription=$this->input->post('productdescription');
+  $modelno=$this->input->post('modelno');
 
-              }
-            else{
+                   $ip = $this->input->ip_address();
+                   date_default_timezone_set("Asia/Calcutta");
+                   $cur_date=date("Y-m-d H:i:s");
+                   $addedby=$this->session->userdata('admin_id');
 
-$this->session->set_flashdata('emessage',validation_errors());
-     redirect($_SERVER['HTTP_REFERER']);
+           $typ=base64_decode($t);
+           $last_id = 0;
+           if($typ==1){
 
-            }
 
-            }
-          else{
 
-$this->session->set_flashdata('emessage','Please insert some data, No data available');
-     redirect($_SERVER['HTTP_REFERER']);
+$img2='image';
 
-          }
-          }
-          else{
 
-			redirect("login/admin_login","refresh");
 
 
-          }
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img2))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
 
-          }
-
-					public function add_productstype($idd){
-
-					                 if(!empty($this->session->userdata('admin_data'))){
-
-
-					                   $data['user_name']=$this->load->get_var('user_name');
-
-					                   // echo SITE_NAME;
-					                   // echo $this->session->userdata('image');
-					                   // echo $this->session->userdata('position');
-					                   // exit;
-														 $id=base64_decode($idd);
-														$data['id']=$idd;
-
-														$this->db->select('*');
-																				$this->db->from('tbl_products');
-																				$this->db->where('id',$id);
-																				$dsa= $this->db->get();
-																				$data['product']=$dsa->row();
-																				 // print_r();
-
-
-					                   $this->load->view('admin/common/header_view',$data);
-					                   $this->load->view('admin/products/add_productstype');
-					                   $this->load->view('admin/common/footer_view');
-
-					               }
-					               else{
-
-					                  redirect("login/admin_login","refresh");
-					               }
-
-					               }
-
-					      			public function add_productstype_data($t,$iw="")
-
-					              {
-
-					                if(!empty($this->session->userdata('admin_data'))){
-
-
-					          	$this->load->helper(array('form', 'url'));
-					            $this->load->library('form_validation');
-					            $this->load->helper('security');
-					            if($this->input->post())
-					            {
-					              // print_r($this->input->post());
-					              // exit;
-					              $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
-					              $this->form_validation->set_rules('type', 'type', 'required|xss_clean|trim');
-												$this->form_validation->set_rules('gst_percentage', 'gst_percentage', 'required|xss_clean|trim');
-												$this->form_validation->set_rules('total_price', 'total_price', 'required|xss_clean|trim');
-
-					              if($this->form_validation->run()== TRUE)
-					              {
-													$prdctidd = base64_decode($this->input->post('product_id'));
-					                $product_id=$prdctidd;
-					                $type=$this->input->post('type');
-													$gst_percentage=$this->input->post('gst_percentage');
-													$total_price=$this->input->post('total_price');
-
-					                  $ip = $this->input->ip_address();
-					          date_default_timezone_set("Asia/Calcutta");
-					                  $cur_date=date("Y-m-d H:i:s");
-
-					                  $addedby=$this->session->userdata('admin_id');
-
-					          $typ=base64_decode($t);
-					          if($typ==1){
-
-					          $data_insert = array('product_id'=>$product_id,
-															'gst_percentage'=>$gst_percentage,
-															'total_price'=>$total_price,
-					                    'type'=>$type,
-															'ip'=>$ip,
-					                    'added_by' =>$addedby,
-					                    'is_active' =>1,
-					                    'date'=>$cur_date
-
-					                    );
-
-
-
-
-
-					          $last_id=$this->base_model->insert_table("tbl_productstype",$data_insert,1) ;
-
-					          }
-					          if($typ==2){
-
-					   $idw=base64_decode($iw);
-
-					// $this->db->select('*');
-					//     $this->db->from('tbl_minor_category');
-					//    $this->db->where('name',$name);
-					//     $damm= $this->db->get();
-					//    foreach($damm->result() as $da) {
-					//      $uid=$da->id;
-					// if($uid==$idw)
-					// {
-					//
-					//  }
-					// else{
-					//    echo "Multiple Entry of Same Name";
-					//       exit;
-					//  }
-					//     }
-
-					          $data_insert = array('product_id'=>$product_id,
-					                    'type'=>$type,
-															'total_price'=>$total_price,
-															'gst_percentage'=>$gst_percentage
-					                    );
-
-
-
-
-					          	$this->db->where('id', $idw);
-					            $last_id=$this->db->update('tbl_productstype', $data_insert);
-
-					          }
-
-
-					                              if($last_id!=0){
-
-					                              $this->session->set_flashdata('smessage','Data inserted successfully');
-
-					                              redirect("dcadmin/products/view_products","refresh");
-
-					                                      }
-
-					                                      else
-
-					                                      {
-
-					                                	 $this->session->set_flashdata('emessage','Sorry error occured');
-					                              		   redirect($_SERVER['HTTP_REFERER']);
-
-
-					                                      }
-
-
-					              }
-					            else{
-
-					$this->session->set_flashdata('emessage',validation_errors());
-					     redirect($_SERVER['HTTP_REFERER']);
-
-					            }
-
-					            }
-					          else{
-
-					$this->session->set_flashdata('emessage','Please insert some data, No data available');
-					     redirect($_SERVER['HTTP_REFERER']);
-
-					          }
-					          }
-					          else{
-
-								redirect("login/admin_login","refresh");
-
-
-					          }
-
-					          }
-
-
-public function add_inventory($ad_id){
-
-					                 if(!empty($this->session->userdata('admin_data'))){
-
-
-					                   $data['user_name']=$this->load->get_var('user_name');
-
-														 // $data['productt_id'] = $id;
-
-					                   // echo SITE_NAME;
-					                   // echo $this->session->userdata('image');
-					                   // echo $this->session->userdata('position');
-					                   // exit;
-														 $id=base64_decode($ad_id);
- 													 	$data['id']=$ad_id;
-
-
-					                   $this->load->view('admin/common/header_view',$data);
-					                   $this->load->view('admin/products/add_inventory');
-					                   $this->load->view('admin/common/footer_view');
-
-					               }
-					               else{
-
-					                  redirect("login/admin_login","refresh");
-					               }
-
-					               }
-
-public function add_inventory_data($t,$iw="")
-
-					              {
-
-					                if(!empty($this->session->userdata('admin_data'))){
-
-
-					          	$this->load->helper(array('form', 'url'));
-					            $this->load->library('form_validation');
-					            $this->load->helper('security');
-					            if($this->input->post())
-					            {
-					              // print_r($this->input->post());
-					              // exit;
-					              $this->form_validation->set_rules('stocks', 'stocks', 'required|xss_clean|trim');
-					              $this->form_validation->set_rules('model_no', 'model_no', 'required|xss_clean|trim');
-					              $this->form_validation->set_rules('colour', 'colour', 'required|xss_clean|trim');
-
-					              if($this->form_validation->run()== TRUE)
-					              {
-													$productttt_ids = base64_decode($this->input->post('product_id'));
-					                $stocks=$this->input->post('stocks');
-					                $model_no=$this->input->post('model_no');
-													$colour=$this->input->post('colour');
-													// $product_idds = $product_id;
-
-					                  $ip = $this->input->ip_address();
-					          date_default_timezone_set("Asia/Calcutta");
-					                  $cur_date=date("Y-m-d H:i:s");
-
-					                  $addedby=$this->session->userdata('admin_id');
-
-					          $typ=base64_decode($t);
-					          if($typ==1){
-
-					          $data_insert = array('stocks'=>$stocks,
-					                    'model_no'=>$model_no,
-															'colour'=>$colour,
-															'product_id'=>$productttt_ids,
-															'ip'=>$ip,
-					                    'added_by' =>$addedby,
-					                    'is_active' =>1,
-					                    'date'=>$cur_date
-
-					                    );
-
-
-					          $last_id=$this->base_model->insert_table("tbl_inventory",$data_insert,1) ;
-
-					          }
-					          if($typ==2){
-
-					   $idw=base64_decode($iw);
-
-					// $this->db->select('*');
-					//     $this->db->from('tbl_minor_category');
-					//    $this->db->where('name',$name);
-					//     $damm= $this->db->get();
-					//    foreach($damm->result() as $da) {
-					//      $uid=$da->id;
-					// if($uid==$idw)
-					// {
-					//
-					//  }
-					// else{
-					//    echo "Multiple Entry of Same Name";
-					//       exit;
-					//  }
-					//     }
-
-					          $data_insert = array('stocks'=>$stocks,
-					                    'model_no'=>$model_no,
-															'colour'=>$colour,
-					                    );
-
-
-
-
-					          	$this->db->where('id', $idw);
-					            $last_id=$this->db->update('tbl_inventory', $data_insert);
-
-					          }
-
-
-					                              if($last_id!=0){
-
-					                              $this->session->set_flashdata('smessage','Data inserted successfully');
-
-					                              redirect("dcadmin/products/view_products","refresh");
-
-					                                      }
-
-					                                      else
-
-					                                      {
-
-					                                	 $this->session->set_flashdata('emessage','Sorry error occured');
-					                              		   redirect($_SERVER['HTTP_REFERER']);
-
-
-					                                      }
-
-
-					              }
-					            else{
-
-					$this->session->set_flashdata('emessage',validation_errors());
-					     redirect($_SERVER['HTTP_REFERER']);
-
-					            }
-
-					            }
-					          else{
-
-					$this->session->set_flashdata('emessage','Please insert some data, No data available');
-					     redirect($_SERVER['HTTP_REFERER']);
-
-					          }
-					          }
-					          else{
-
-								redirect("login/admin_login","refresh");
-
-
-					          }
-
-					          }
-
-										public function update_inventory($idd){
-
-																		 if(!empty($this->session->userdata('admin_data'))){
-
-
-																			 $data['user_name']=$this->load->get_var('user_name');
-
-																			 // echo SITE_NAME;
-																			 // echo $this->session->userdata('image');
-																			 // echo $this->session->userdata('position');
-																			 // exit;
-
-																				$id=base64_decode($idd);
-																			 $data['id']=$idd;
-
-																			 $this->db->select('*');
-																									 $this->db->from('tbl_inventory');
-																									 $this->db->where('id',$id);
-																									 $dsa= $this->db->get();
-																									 $data['inventory']=$dsa->row();
-
-
-																			 $this->load->view('admin/common/header_view',$data);
-																			 $this->load->view('admin/products/update_inventory');
-																			 $this->load->view('admin/common/footer_view');
-
-																	 }
-																	 else{
-
-																			redirect("login/admin_login","refresh");
-																	 }
-
-																	 }
-
-
-					public function update_products($idd){
-
-					                 if(!empty($this->session->userdata('admin_data'))){
-
-
-					                   $data['user_name']=$this->load->get_var('user_name');
-
-					                   // echo SITE_NAME;
-					                   // echo $this->session->userdata('image');
-					                   // echo $this->session->userdata('position');
-					                   // exit;
-
-														  $id=base64_decode($idd);
-														 $data['id']=$idd;
-
-														 $this->db->select('*');
-														             $this->db->from('tbl_products');
-														             $this->db->where('id',$id);
-														             $dsa= $this->db->get();
-														             $data['product']=$dsa->row();
-
-                                         $this->db->select('*');
-                              $this->db->from('tbl_subcategory');
-                               //$this->db->where('id',$usr);
-                              $data['addsubcategories_data']= $this->db->get();
-
-
-					                   $this->load->view('admin/common/header_view',$data);
-					                   $this->load->view('admin/products/update_products');
-					                   $this->load->view('admin/common/footer_view');
-
-					               }
-					               else{
-
-					                  redirect("login/admin_login","refresh");
-					               }
-
-					               }
-
-public function delete_inventory($idd){
-
-
-
-												        if(!empty($this->session->userdata('admin_data'))){
-
-
-												          $data['user_name']=$this->load->get_var('user_name');
-
-												          // echo SITE_NAME;
-												          // echo $this->session->userdata('image');
-												          // echo $this->session->userdata('position');
-												          // exit;
-												                  									 $id=base64_decode($idd);
-
-												         if($this->load->get_var('position')=="Super Admin"){
-
-												             $zapak=$this->db->delete('tbl_inventory', array('id' => $id));
-												             if($zapak!=0){
-																			 redirect("dcadmin/products/view_products","refresh");
-												              }
-												               else
-												              {
-												                echo "Error";
-												                 exit;
-												               }
-												           		}
-												                else{
-												              			$data['e']="Sorry You Don't Have Permission To Delete Anything.";
-												             				// exit;
-												                    $this->load->view('errors/error500admin',$data);
-												               }
-
-												              }
-												              else{
-
-												                  $this->load->view('admin/login/index');
-												              }
-
-												              }
-
-
-
-public function delete_products($idd){
-
-
-
-       if(!empty($this->session->userdata('admin_data'))){
-
-
-         $data['user_name']=$this->load->get_var('user_name');
-
-         // echo SITE_NAME;
-         // echo $this->session->userdata('image');
-         // echo $this->session->userdata('position');
-         // exit;
-                 									 $id=base64_decode($idd);
-
-        if($this->load->get_var('position')=="Super Admin"){
-
-                         									 $zapak=$this->db->delete('tbl_products', array('id' => $id));
-                         									 if($zapak!=0){
-
-                         								 	redirect("dcadmin/products/view_products","refresh");
-                         								 					}
-                         								 					else
-                         								 					{
-                         								 						echo "Error";
-                         								 						exit;
-                         								 					}
-                       }
-                       else{
-                       $data['e']="Sorry You Don't Have Permission To Delete Anything.";
-                       	// exit;
-                       	$this->load->view('errors/error500admin',$data);
-                       }
-
-
-             }
-             else{
-
-                 $this->load->view('admin/login/index');
-             }
-
-             }
-
-						 public function delete_productstype($idd){
-
-
-
-						        if(!empty($this->session->userdata('admin_data'))){
-
-
-						          $data['user_name']=$this->load->get_var('user_name');
-
-						          // echo SITE_NAME;
-						          // echo $this->session->userdata('image');
-						          // echo $this->session->userdata('position');
-						          // exit;
-						                  									 $id=base64_decode($idd);
-
-						         if($this->load->get_var('position')=="Super Admin"){
-
-						                          									 $zapak=$this->db->delete('tbl_productstype', array('id' => $id));
-						                          									 if($zapak!=0){
-
-						                          								 	redirect("dcadmin/products/view_products","refresh");
-						                          								 					}
-						                          								 					else
-						                          								 					{
-						                          								 						echo "Error";
-						                          								 						exit;
-						                          								 					}
-						                        }
-						                        else{
-						                        $data['e']="Sorry You Don't Have Permission To Delete Anything.";
-						                        	// exit;
-						                        	$this->load->view('errors/error500admin',$data);
-						                        }
-
-
-						              }
-						              else{
-
-						                  $this->load->view('admin/login/index');
-						              }
-
-						              }
-
-public function updateproductsStatus($idd,$t){
-
-         if(!empty($this->session->userdata('admin_data'))){
-
-
-           $data['user_name']=$this->load->get_var('user_name');
-
-           // echo SITE_NAME;
-           // echo $this->session->userdata('image');
-           // echo $this->session->userdata('position');
-           // exit;
-           $id=base64_decode($idd);
-
-           if($t=="active"){
-
-             $data_update = array(
-         'is_active'=>1
-
-         );
-
-         $this->db->where('id', $id);
-        $zapak=$this->db->update('tbl_products', $data_update);
-
-             if($zapak!=0){
-             redirect("dcadmin/products/view_products","refresh");
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
-                       echo "Error";
-                       exit;
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn2=$videoNAmePath;
+
+                         // echo json_encode($file_info);
                      }
-           }
-           if($t=="inactive"){
-             $data_update = array(
-          'is_active'=>0
+
+
+
+
+$img3='image1';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products1".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img3))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn3=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+$img4='image2';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products2".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img4))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn4=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+$img5='image3';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products3".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img5))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn5=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+           $data_insert = array(
+                  'productname'=>$productname,
+                  'category'=>$category,
+  'subcategory'=>$subcategory,
+  'image'=>$nnnn2,
+  'image1'=>$nnnn3,
+  'image2'=>$nnnn4,
+  'image3'=>$nnnn5,
+  'mrp'=>$mrp,
+  'productdescription'=>$productdescription,
+  'modelno'=>$modelno,
+
+                     'ip' =>$ip,
+                     'added_by' =>$addedby,
+                     'is_active' =>1,
+                     'date'=>$cur_date
+                     );
+
+
+           $last_id=$this->base_model->insert_table("tbl_products",$data_insert,1) ;
+
+          $inventory_data = array(
+            'product_id'=> $last_id,
+            'quantity'=>0,
+            'ip'=>$ip,
+            'date'=>$addedby,
+            'added_by'=>$cur_date
 
           );
+          $last_id2=$this->base_model->insert_table("tbl_inventory",$inventory_data,1) ;
 
-          $this->db->where('id', $id);
-          $zapak=$this->db->update('tbl_products', $data_update);
+           }
+           if($typ==2){
 
-              if($zapak!=0){
-              redirect("dcadmin/products/view_products","refresh");
-                      }
-                      else
-                      {
+    $idw=base64_decode($iw);
 
-          $data['e']="Error Occured";
-                          	// exit;
-        	$this->load->view('errors/error500admin',$data);
-                      }
+
+ $this->db->select('*');
+ $this->db->from('tbl_products');
+ $this->db->where('id',$idw);
+ $dsa=$this->db->get();
+ $da=$dsa->row();
+
+
+
+$img2='image';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img2))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn2=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+$img3='image1';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products1".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img3))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn3=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+$img4='image2';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products2".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img4))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn4=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+$img5='image3';
+
+
+
+
+         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                     if (!file_exists($image_upload_folder))
+                     {
+                         mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                     }
+                     $new_file_name="products3".date("Ymdhms");
+                     $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                     $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img5))
+                     {
+                         $upload_error = $this->upload->display_errors();
+                         // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                     }
+                     else
+                     {
+
+                         $file_info = $this->upload->data();
+
+                         $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
+                         $file_info['new_name']=$videoNAmePath;
+                         // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                         $nnnn=$file_info['file_name'];
+                         $nnnn5=$videoNAmePath;
+
+                         // echo json_encode($file_info);
+                     }
+
+
+
+
+ if(!empty($da)){ $img = $da ->image;
+if(!empty($img)) { if(empty($nnnn2)){ $nnnn2 = $img; } }else{ if(empty($nnnn2)){ $nnnn2= ""; } } }if(!empty($da)){ $img = $da ->image1;
+if(!empty($img)) { if(empty($nnnn3)){ $nnnn3 = $img; } }else{ if(empty($nnnn3)){ $nnnn3= ""; } } }if(!empty($da)){ $img = $da ->image2;
+if(!empty($img)) { if(empty($nnnn4)){ $nnnn4 = $img; } }else{ if(empty($nnnn4)){ $nnnn4= ""; } } }if(!empty($da)){ $img = $da ->image3;
+if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){ $nnnn5= ""; } } }
+
+           $data_insert = array(
+                  'productname'=>$productname,
+                  'category'=>$category,
+  'subcategory'=>$subcategory,
+  'image'=>$nnnn2,
+  'image1'=>$nnnn3,
+  'image2'=>$nnnn4,
+  'image3'=>$nnnn5,
+  'mrp'=>$mrp,
+  'productdescription'=>$productdescription,
+  'modelno'=>$modelno,
+
+                     );
+             $this->db->where('id', $idw);
+             $last_id=$this->db->update('tbl_products', $data_insert);
+           }
+                       if($last_id!=0){
+                               $this->session->set_flashdata('smessage','Data inserted successfully');
+                               redirect("dcadmin/products/view_products","refresh");
+                              }
+                               else
+                                   {
+
+                                    $this->session->set_flashdata('emessage','Sorry error occured');
+                                    redirect($_SERVER['HTTP_REFERER']);
+                                  }
+               }
+             else{
+
+        $this->session->set_flashdata('emessage',validation_errors());
+      redirect($_SERVER['HTTP_REFERER']);
+
+             }
+
+             }
+           else{
+
+ $this->session->set_flashdata('emessage','Please insert some data, No data available');
+      redirect($_SERVER['HTTP_REFERER']);
+
+           }
+           }
+           else{
+
+       redirect("login/admin_login","refresh");
+
+
            }
 
+           }
+
+               public function updateproductsStatus($idd,$t){
+
+                        if(!empty($this->session->userdata('admin_data'))){
 
 
-       }
-       else{
+                          $data['user_name']=$this->load->get_var('user_name');
 
-           $this->load->view('admin/login/index');
-       }
+                          // echo SITE_NAME;
+                          // echo $this->session->userdata('image');
+                          // echo $this->session->userdata('position');
+                          // exit;
+                          $id=base64_decode($idd);
 
-       }
+                          if($t=="active"){
 
-			 public function updateproductsinventoryStatus($idd,$t){
+                            $data_update = array(
+                        'is_active'=>1
 
-			          if(!empty($this->session->userdata('admin_data'))){
+                        );
 
+                        $this->db->where('id', $id);
+                       $zapak=$this->db->update('tbl_products', $data_update);
 
-			            $data['user_name']=$this->load->get_var('user_name');
+                            if($zapak!=0){
+                            redirect("dcadmin/products/view_products","refresh");
+                                    }
+                                    else
+                                    {
+        $this->session->set_flashdata('emessage','Sorry error occured');
+          redirect($_SERVER['HTTP_REFERER']);
+                                    }
+                          }
+                          if($t=="inactive"){
+                            $data_update = array(
+                         'is_active'=>0
 
-			            // echo SITE_NAME;
-			            // echo $this->session->userdata('image');
-			            // echo $this->session->userdata('position');
-			            // exit;
-			            $id=base64_decode($idd);
+                         );
 
-			            if($t=="active"){
+                         $this->db->where('id', $id);
+                         $zapak=$this->db->update('tbl_products', $data_update);
 
-			              $data_update = array(
-			          'is_active'=>1
+                             if($zapak!=0){
+                             redirect("dcadmin/products/view_products","refresh");
+                                     }
+                                     else
+                                     {
 
-			          );
-
-			          $this->db->where('id', $id);
-			         $zapak=$this->db->update('tbl_inventory', $data_update);
-
-			              if($zapak!=0){
-			              redirect("dcadmin/products/view_products","refresh");
-			                      }
-			                      else
-			                      {
-			                        echo "Error";
-			                        exit;
-			                      }
-			            }
-			            if($t=="inactive"){
-			              $data_update = array(
-			           'is_active'=>0
-
-			           );
-
-			           $this->db->where('id', $id);
-			           $zapak=$this->db->update('tbl_inventory', $data_update);
-
-			               if($zapak!=0){
-			               redirect("dcadmin/products/view_products","refresh");
-			                       }
-			                       else
-			                       {
-
-			           $data['e']="Error Occured";
-			                           	// exit;
-			         	$this->load->view('errors/error500admin',$data);
-			                       }
-			            }
+                $this->session->set_flashdata('emessage','Sorry error occured');
+                  redirect($_SERVER['HTTP_REFERER']);
+                                     }
+                          }
 
 
 
-			        }
-			        else{
+                      }
+                      else{
 
-			            $this->load->view('admin/login/index');
-			        }
+                         redirect("login/admin_login","refresh");
 
-			        }
+                      }
 
-							public function updateproductstypeStatus($idd,$t){
-
-							         if(!empty($this->session->userdata('admin_data'))){
-
-
-							           $data['user_name']=$this->load->get_var('user_name');
-
-							           // echo SITE_NAME;
-							           // echo $this->session->userdata('image');
-							           // echo $this->session->userdata('position');
-							           // exit;
-							           $id=base64_decode($idd);
-
-							           if($t=="active"){
-
-							             $data_update = array(
-							         'is_active'=>1
-
-							         );
-
-							         $this->db->where('id', $id);
-							        $zapak=$this->db->update('tbl_productstype', $data_update);
-
-							             if($zapak!=0){
-							             redirect("dcadmin/products/view_products","refresh");
-							                     }
-							                     else
-							                     {
-							                       echo "Error";
-							                       exit;
-							                     }
-							           }
-							           if($t=="inactive"){
-							             $data_update = array(
-							          'is_active'=>0
-
-							          );
-
-							          $this->db->where('id', $id);
-							          $zapak=$this->db->update('tbl_productstype', $data_update);
-
-							              if($zapak!=0){
-							              redirect("dcadmin/products/view_products","refresh");
-							                      }
-							                      else
-							                      {
-
-							          $data['e']="Error Occured";
-							                          	// exit;
-							        	$this->load->view('errors/error500admin',$data);
-							                      }
-							           }
+                      }
 
 
 
-							       }
-							       else{
+               public function delete_products($idd){
 
-							           $this->load->view('admin/login/index');
-							       }
+                      if(!empty($this->session->userdata('admin_data'))){
 
-							       }
+                        $data['user_name']=$this->load->get_var('user_name');
 
-}
+                        // echo SITE_NAME;
+                        // echo $this->session->userdata('image');
+                        // echo $this->session->userdata('position');
+                        // exit;
+                        $id=base64_decode($idd);
+
+                       if($this->load->get_var('position')=="Super Admin"){
+
+                     $this->db->select('image');
+                     $this->db->from('tbl_products');
+                     $this->db->where('id',$id);
+                     $dsa= $this->db->get();
+                     $da=$dsa->row();
+                     $img=$da->image;
+
+ $zapak=$this->db->delete('tbl_products', array('id' => $id));
+ if($zapak!=0){
+        $path = FCPATH .$img;
+          unlink($path);
+        redirect("dcadmin/products/view_products","refresh");
+                }
+                else
+                {
+                   $this->session->set_flashdata('emessage','Sorry error occured');
+                   redirect($_SERVER['HTTP_REFERER']);
+                }
+            }
+            else{
+             $this->session->set_flashdata('emessage','Sorry you not a super admin you dont have permission to delete anything');
+               redirect($_SERVER['HTTP_REFERER']);
+            }
+
+
+                            }
+                            else{
+
+                        redirect("login/admin_login","refresh");
+
+                            }
+
+                            }
+                      }
+
+      ?>
