@@ -79,7 +79,7 @@ public function getSubcategory(){
 $id=$_GET['isl'];
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
-$this->db->where('category',$id);
+$this->db->where('category_id',$id);
 $dat= $this->db->get();
 
 $i=1; foreach($dat->result() as $data) {
@@ -145,12 +145,12 @@ echo json_encode($igt);
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('productname', 'productname', 'required');
-  $this->form_validation->set_rules('category', 'category', 'required');
-  $this->form_validation->set_rules('sub_category', 'sub_category', 'required');
-  $this->form_validation->set_rules('mrp', 'mrp', 'required');
-  $this->form_validation->set_rules('productdescription', 'productdescription', 'required');
-  $this->form_validation->set_rules('modelno', 'modelno', 'required');
+  $this->form_validation->set_rules('productname', 'productname', 'required|trim');
+  $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
+  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
+  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim');
+  $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
+  $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
 
 
 
@@ -159,8 +159,8 @@ echo json_encode($igt);
                if($this->form_validation->run()== TRUE)
                {
   $productname=$this->input->post('productname');
-  $category=$this->input->post('category');
-  $subcategory=$this->input->post('sub_category');
+  $category_id=$this->input->post('category_id');
+  $subcategory_id=$this->input->post('subcategory_id');
   $mrp=$this->input->post('mrp');
   $productdescription=$this->input->post('productdescription');
   $modelno=$this->input->post('modelno');
@@ -350,8 +350,8 @@ $img5='image3';
 
            $data_insert = array(
                   'productname'=>$productname,
-                  'category'=>$category,
-  'subcategory'=>$subcategory,
+                  'category_id'=>$category_id,
+  'subcategory_id'=>$subcategory_id,
   'image'=>$nnnn2,
   'image1'=>$nnnn3,
   'image2'=>$nnnn4,
@@ -573,8 +573,8 @@ if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){
 
            $data_insert = array(
                   'productname'=>$productname,
-                  'category'=>$category,
-  'subcategory'=>$subcategory,
+                  'category_id'=>$category_id,
+  'subcategory_id'=>$subcategory_id,
   'image'=>$nnnn2,
   'image1'=>$nnnn3,
   'image2'=>$nnnn4,
@@ -701,17 +701,17 @@ if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){
 
                        if($this->load->get_var('position')=="Super Admin"){
 
-                     $this->db->select('image');
+                     $this->db->select('*');
                      $this->db->from('tbl_products');
                      $this->db->where('id',$id);
                      $dsa= $this->db->get();
                      $da=$dsa->row();
-                     $img=$da->image;
+                     // $img=$da->image;
 
  $zapak=$this->db->delete('tbl_products', array('id' => $id));
  if($zapak!=0){
-        $path = FCPATH .$img;
-          unlink($path);
+        // $path = FCPATH .$img;
+        //   unlink($path);
         redirect("dcadmin/products/view_products","refresh");
                 }
                 else

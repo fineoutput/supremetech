@@ -175,12 +175,15 @@ public function add_slider(){
 //       exit;
 //  }
 //     }
-
+if(!empty($image)){
           $data_insert = array('title'=>$title,
                     'slider_image'=>$image,
                     );
 
-
+}else{
+	$data_insert = array('title'=>$title,
+						);
+}
 
 
           	$this->db->where('id', $idw);

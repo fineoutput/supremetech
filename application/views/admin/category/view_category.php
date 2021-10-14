@@ -42,8 +42,7 @@
                                               <tr>
                                                   <th>#</th>
                                                   <th>Image</th>
-                                                  <th>Title</th>
-                                                  <th>Sub Categories</th>
+                                                  <th>Category</th>
                                                   <th>Status</th>
                                                   <th>Action</th>
                                                     </tr>
@@ -59,9 +58,9 @@
                             Sorry No image Found
                             <?php } ?>
                               </td>
-                            <td><?php echo $data->title ?></td>
+                            <td><?php echo $data->category ?></td>
 
-                            <td><a href="<?php echo base_url() ?>dcadmin/category/view_subcategory/<?php echo $data->id ?>">Sub Categories</a></td>
+
 
                               <td><?php if($data->is_active==1){ ?>
         <p class="label bg-green" >Active</p>

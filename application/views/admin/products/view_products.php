@@ -65,15 +65,21 @@
  <?
             $this->db->select('*');
 $this->db->from('tbl_category');
-$this->db->where('id',$data->category);
+$this->db->where('id',$data->category_id);
+// print_r($data->category_id);
+// exit;
 $category_data= $this->db->get()->row();
-$category_name=$category_data->title;
+// print_r($category_data);
+// exit;
+$category_name=$category_data->category;
 ?>
  <?
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
-$this->db->where('id',$data->subcategory);
+$this->db->where('id',$data->subcategory_id);
 $subcategory_data= $this->db->get()->row();
+// print_r($subcategory_data);
+// exit;
 $subcategory_name=$subcategory_data->subcategory;
 ?>
  	 <td><?php echo $category_name?></td>

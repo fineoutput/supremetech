@@ -38,11 +38,11 @@
   <tr>
 <td> <strong>Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-    <select class="form-control" name="category">
+    <select class="form-control" name="category_id">
       <?
 
        foreach($category_data->result() as $value) {?>
-         <option value="<?=$value->id;?>"><?=$value->title;?></option>
+         <option value="<?=$value->id;?>"><?=$value->category;?></option>
        <? }?>
     </select>
 

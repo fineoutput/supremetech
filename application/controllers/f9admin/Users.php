@@ -81,14 +81,14 @@ public function add_users(){
               // exit;
               $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
               $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
-              $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
 							$this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
 
               if($this->form_validation->run()== TRUE)
               {
                 $name=$this->input->post('name');
                 $email=$this->input->post('email');
-								$phone=$this->input->post('phone');
+								$password=$this->input->post('password');
 								$address=$this->input->post('address');
 
                   $ip = $this->input->ip_address();
@@ -101,7 +101,7 @@ public function add_users(){
           if($typ==1){
 
           $data_insert = array('name'=>$name,
-                    'phone'=>$phone,
+                    'password'=>$password,
                     'address'=>$address,
                     'email'=>$email,
                     'ip' =>$ip,
@@ -139,7 +139,7 @@ public function add_users(){
 //     }
 
           $data_insert = array('name'=>$name,
-                    'phone'=>$phone,
+                    'password'=>$password,
                     'address'=>$address,
                     'email'=>$email
                     );

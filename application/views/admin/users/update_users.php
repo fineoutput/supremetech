@@ -53,9 +53,9 @@
                                                 </td>
                           </tr>
                           <tr>
-                                                    <td> <strong>Phone</strong>  <span style="color:red;">*</span></strong> </td>
+                                                    <td> <strong>password</strong>  <span style="color:red;">*</span></strong> </td>
                                                     <td>
-                              <input type="text" name="phone"  class="form-control" placeholder="" required value="<?= $user->phone; ?>" />
+                              <input type="password" name="password"  class="form-control" placeholder="" required value="<?= $user->password; ?>" />
                                                   </td>
                             </tr>
                             <tr>

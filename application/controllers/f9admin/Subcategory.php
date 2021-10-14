@@ -114,8 +114,8 @@ $data['category_data']= $this->db->get();
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('category', 'category', 'required|trim');
-  $this->form_validation->set_rules('subcategory', 'subcategory', 'required');
+  $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
+  $this->form_validation->set_rules('subcategory', 'subcategory', 'required|trim');
 
 
 
@@ -123,7 +123,7 @@ $data['category_data']= $this->db->get();
 
                if($this->form_validation->run()== TRUE)
                {
-  $category=$this->input->post('category');
+  $category_id=$this->input->post('category_id');
   $subcategory=$this->input->post('subcategory');
 
                    $ip = $this->input->ip_address();
@@ -138,7 +138,7 @@ $data['category_data']= $this->db->get();
 
 
            $data_insert = array(
-                  'category'=>$category,
+                  'category_id'=>$category_id,
   'subcategory'=>$subcategory,
 
                      'ip' =>$ip,
@@ -167,7 +167,7 @@ $data['category_data']= $this->db->get();
 
 
            $data_insert = array(
-                  'category'=>$category,
+                  'category_id'=>$category_id,
   'subcategory'=>$subcategory,
 
                      );

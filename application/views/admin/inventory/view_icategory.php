@@ -46,7 +46,7 @@
         <?php $i=1; foreach($inventory_data->result() as $data) { ?>
         <tr>
         <td><?php echo $i ?> </td>
- 	 <td><?php echo $data->title ?></td>
+ 	 <td><?php echo $data->category ?></td>
         </td>
         <td>
         <div class="btn-group" id="btns<?php echo $i ?>">

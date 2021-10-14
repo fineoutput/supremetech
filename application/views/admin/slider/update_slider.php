@@ -49,8 +49,10 @@
                             <tr>
                                                       <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
                                                       <td>
-                                <input type="file" name="slider_image"  class="form-control" placeholder="" required value="" />
+                                <input type="file" name="slider_image"  class="form-control" placeholder=""  value="<?= $slider->slider_image; ?>" />
                                                     </td>
+                                                
+
                                                     <td>
                                                         <?php if($slider->slider_image!=""){  ?>
                                   <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $slider->slider_image; ?>">
@@ -58,6 +60,7 @@
                                                     Sorry No image Found
                                                     <?php } ?>
                                                       </td>
+
                               </tr>
                           <tr>
                             <td colspan="2" >

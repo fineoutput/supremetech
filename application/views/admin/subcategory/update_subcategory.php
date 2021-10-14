@@ -38,10 +38,10 @@
 <tr>
 <td> <strong>Category </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-<select class="form-control" name="category">
+<select class="form-control" name="category_id">
 <?
 foreach($category_data->result() as $value) {?>
-  <option value="<?=$value->id;?>"<?php if($subcategory_data->category == $value->id){ echo "selected"; } ?>><?=$value->title;?></option>
+  <option value="<?=$value->id;?>"<?php if($subcategory_data->category_id == $value->id){ echo "selected"; } ?>><?=$value->category;?></option>
 <?}?>
 </select>
 </td>

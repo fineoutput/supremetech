@@ -53,7 +53,6 @@ public function view_iproducts($idd){
 
                  if(!empty($this->session->userdata('admin_data'))){
 
-
                    $data['user_name']=$this->load->get_var('user_name');
 
                    // echo SITE_NAME;
@@ -61,11 +60,11 @@ public function view_iproducts($idd){
                    // echo $this->session->userdata('position');
                    // exit;
                    $id=base64_decode($idd);
-                   // $data['id']=$idd;
+
 
             $this->db->select('*');
 $this->db->from('tbl_products');
-$this->db->where('category',$id);
+$this->db->where('category_id',$id);
 $data['product_list']= $this->db->get();
 
 
@@ -88,7 +87,9 @@ $data['product_list']= $this->db->get();
 
  $id=base64_decode($idd);
 $data['id']=$idd;
-                                  $data['user_name']=$this->load->get_var('user_name');
+// echo $id;
+// exit;
+//                                   $data['user_name']=$this->load->get_var('user_name');
 
                                   // echo SITE_NAME;
                                   // echo $this->session->userdata('image');
