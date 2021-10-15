@@ -54,6 +54,11 @@ $this->db->from('tbl_subcategory');
 //$this->db->where('id',$usr);
 $data['subcategory_data']= $this->db->get();
 
+            $this->db->select('*');
+$this->db->from('tbl_minorcategory');
+//$this->db->where('id',$usr);
+$data['minorcategory_data']= $this->db->get();
+
 
                    $this->load->view('admin/common/header_view',$data);
                    $this->load->view('admin/products/add_products');
@@ -88,10 +93,37 @@ $igt[] = array('sub_id' =>$data->id ,'sub_name'=>$data->subcategory);
 
 }
 
+
 echo json_encode($igt);
 
 
                }
+               public function getMinorcategory(){
+
+                                  // $data['user_name']=$this->load->get_var('user_name');
+
+                                  // echo SITE_NAME;
+                                  // echo $this->session->userdata('image');
+                                  // echo $this->session->userdata('position');
+                                  // exit;
+
+               $id=$_GET['isl'];
+                           $this->db->select('*');
+               $this->db->from('tbl_minorcategory');
+               $this->db->where('subcategory_id',$id);
+               $dat= $this->db->get();
+$igt1=[];
+               $i=1; foreach($dat->result() as $data) {
+
+               $igt1[] = array('min_id' =>$data->id ,'min_name'=>$data->minorcategoryname);
+
+               }
+
+
+               echo json_encode($igt1);
+
+
+                              }
 
                public function update_products($idd){
 
@@ -148,6 +180,7 @@ echo json_encode($igt);
   $this->form_validation->set_rules('productname', 'productname', 'required|trim');
   $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
+  $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
   $this->form_validation->set_rules('mrp', 'mrp', 'required|trim');
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
@@ -161,6 +194,7 @@ echo json_encode($igt);
   $productname=$this->input->post('productname');
   $category_id=$this->input->post('category_id');
   $subcategory_id=$this->input->post('subcategory_id');
+  $minorcategory_id=$this->input->post('minorcategory_id');
   $mrp=$this->input->post('mrp');
   $productdescription=$this->input->post('productdescription');
   $modelno=$this->input->post('modelno');
@@ -352,6 +386,7 @@ $img5='image3';
                   'productname'=>$productname,
                   'category_id'=>$category_id,
   'subcategory_id'=>$subcategory_id,
+  'minorcategory_id'=>$minorcategory_id,
   'image'=>$nnnn2,
   'image1'=>$nnnn3,
   'image2'=>$nnnn4,
@@ -575,6 +610,7 @@ if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){
                   'productname'=>$productname,
                   'category_id'=>$category_id,
   'subcategory_id'=>$subcategory_id,
+  'minorcategory_id'=>$minorcategory_id,
   'image'=>$nnnn2,
   'image1'=>$nnnn3,
   'image2'=>$nnnn4,

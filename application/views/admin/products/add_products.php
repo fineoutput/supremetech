@@ -43,7 +43,7 @@
 </tr>
 
   <tr>
-<td> <strong>Category Name</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Category </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
       <option value="">Please select category</option>
@@ -58,12 +58,26 @@
 </tr>
 
   <tr>
-<td> <strong>Subcategory Name</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Subcategory </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
   <select class="form-control" id="sid" name="subcategory_id">
   </select>
 
 
+  </td>
+</tr>
+  <tr>
+<td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
+<td>
+    <select class="form-control" id="mid" name="minorcategory_id">
+      <option value="">Please select minor category</option>
+
+      <?
+
+       foreach($minorcategory_data->result() as $value) {?>
+         <option value="<?=$value->id;?>"><?=$value->minorcategoryname;?></option>
+       <? }?>
+    </select>
   </td>
 </tr>
 
@@ -136,6 +150,7 @@ $(document).ready(function(){
 			  var opton="<option value=''>Please Select </option>";
 			$.ajax({
 				url:base_url+"dcadmin/products/getSubcategory?isl="+vf,
+				// url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
 				data : '',
 				type: "get",
 				success : function(html){
@@ -155,6 +170,51 @@ $(document).ready(function(){
 						else
 						{
 							alert('No Subcategory Found');
+							return false;
+						}
+
+					}
+
+				})
+		}
+
+
+	})
+  });
+</script>
+<script>
+$(document).ready(function(){
+  	$("#sid").change(function(){
+		var vf=$(this).val();
+    // var yr = $("#year_id option:selected").val();
+		if(vf==""){
+			return false;
+
+		}else{
+			$('#mid option').remove();
+			  var opton="<option value=''>Please Select </option>";
+			$.ajax({
+				url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+				// url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+				data : '',
+				type: "get",
+				success : function(html){
+						if(html!="NA")
+						{
+							var s = jQuery.parseJSON(html);
+							$.each(s, function(i) {
+							opton +='<option value="'+s[i]['min_id']+'">'+s[i]['min_name']+'</option>';
+							});
+							$('#mid').append(opton);
+							//$('#city').append("<option value=''>Please Select State</option>");
+
+                      //var json = $.parseJSON(html);
+                      //var ayy = json[0].name;
+                      //var ayys = json[0].pincode;
+						}
+						else
+						{
+							alert('No Minor category Found');
 							return false;
 						}
 
