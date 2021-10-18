@@ -140,7 +140,6 @@ $data['category_data']= $this->db->get();
            $data_insert = array(
                   'category_id'=>$category_id,
   'subcategory'=>$subcategory,
-
                      'ip' =>$ip,
                      'added_by' =>$addedby,
                      'is_active' =>1,

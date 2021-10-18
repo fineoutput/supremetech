@@ -61,6 +61,12 @@
 <td> <strong>Subcategory </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
   <select class="form-control" id="sid" name="subcategory_id">
+      <option value="">Please select subcategory</option>
+      <?
+
+       foreach($subcategory_data->result() as $value) {?>
+         <option value="<?=$value->id;?>"><?=$value->subcategory;?></option>
+       <? }?>
   </select>
 
 

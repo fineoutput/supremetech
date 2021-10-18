@@ -99,30 +99,30 @@ $res = array('message'=>"success",
 
 
 
-    					              $this->load->helper(array('form', 'url'));
-    					              $this->load->library('form_validation');
-    					              $this->load->helper('security');
-    					              if($this->input->post())
-    					              {
-    					                // print_r($this->input->post());
-    					                // exit;
-    					                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-    					                $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-    					                $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+			              $this->load->helper(array('form', 'url'));
+			              $this->load->library('form_validation');
+			              $this->load->helper('security');
+			              if($this->input->post())
+			              {
+			                // print_r($this->input->post());
+			                // exit;
+			                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+			                $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+			                $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
-    					                if($this->form_validation->run()== TRUE)
-    					                {
-    					                  $category_id=$this->input->post('category_id');
-    					                  $subcategory_id=$this->input->post('subcategory_id');
-    					                  $minorcategory_id=$this->input->post('minorcategory_id');
+			                if($this->form_validation->run()== TRUE)
+			                {
+			                  $category_id=$this->input->post('category_id');
+			                  $subcategory_id=$this->input->post('subcategory_id');
+			                  $minorcategory_id=$this->input->post('minorcategory_id');
 
-                                            $this->db->select('*');
-                                $this->db->from('tbl_products');
-                                $this->db->where('category_id',$category_id);
-                                $this->db->where('subcategory_id',$subcategory_id);
-                                $this->db->where('minorcategory_id',$minorcategory_id);
-                                $product_data= $this->db->get();
+                                    $this->db->select('*');
+                        $this->db->from('tbl_products');
+                        $this->db->where('category_id',$category_id);
+                        $this->db->where('subcategory_id',$subcategory_id);
+                        $this->db->where('minorcategory_id',$minorcategory_id);
+                        $product_data= $this->db->get();
 
                                  $product=[];
                                 foreach ($product_data->result() as $data) {
@@ -132,7 +132,8 @@ $res = array('message'=>"success",
                                       'product_name'=>$data->productname,
                                       'description'=> $data->productdescription,
                                       'mrp'=> $data->mrp,
-                                      'image'=>$data->image
+                                      'image'=>$data->image,
+                                      'image1'=>$data->image1
 
                                     );
 

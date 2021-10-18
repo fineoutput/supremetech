@@ -118,9 +118,14 @@ $data['subcategory_data']= $this->db->get();
                             //$this->db->where('id',$usr);
                             $data['category_data']= $this->db->get();
 
+                                        $this->db->select('*');
+                            $this->db->from('tbl_minorcategory');
+                            //$this->db->where('id',$usr);
+                            $data['minorcategory_data']= $this->db->get();
+
 
                      $this->load->view('admin/common/header_view',$data);
-                     $this->load->view('admin/subcategory/update_subcategory');
+                     $this->load->view('admin/minorcategory/update_minorcategory');
                      $this->load->view('admin/common/footer_view');
 
                  }
@@ -283,7 +288,7 @@ $data['subcategory_data']= $this->db->get();
                          );
 
                          $this->db->where('id', $id);
-                         $zapak=$this->db->update('tbl_minorcategoryy', $data_update);
+                         $zapak=$this->db->update('tbl_minorcategory', $data_update);
 
                              if($zapak!=0){
                              redirect("dcadmin/minorcategory/view_minorcategory","refresh");

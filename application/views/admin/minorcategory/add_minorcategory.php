@@ -39,6 +39,8 @@
 <td> <strong>Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
+      <option value="">Please select category</option>
+
       <?
 
        foreach($category_data->result() as $value) {?>
@@ -52,6 +54,8 @@
 <td> <strong>Sub-Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" id="sid" name="subcategory_id">
+  <option value="">Please select Subcategory</option>
+
   <?
 
    foreach($subcategory_data->result() as $value) {?>
@@ -138,4 +142,4 @@
      	})
        });
      </script>
-     <script>
+    

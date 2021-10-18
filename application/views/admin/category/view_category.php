@@ -78,9 +78,9 @@
 <ul class="dropdown-menu" role="menu">
 
 <?php if($data->is_active==1){ ?>
-<li><a href="<?php echo base_url() ?>dcadmin/category/updatesubcategoryStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
+<li><a href="<?php echo base_url() ?>dcadmin/category/updatecategoryStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
 <?php } else { ?>
-<li><a href="<?php echo base_url() ?>dcadmin/category/updatesubcategoryStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
+<li><a href="<?php echo base_url() ?>dcadmin/category/updatecategoryStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
 <li><a href="<?php echo base_url() ?>dcadmin/category/update_category/<?php echo base64_encode($data->id) ?>">Edit</a></li>
 <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
