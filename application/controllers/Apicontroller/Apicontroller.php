@@ -133,7 +133,7 @@ $res = array('message'=>"success",
                                       'description'=> $data->productdescription,
                                       'mrp'=> $data->mrp,
                                       'image'=>$data->image,
-                                      'image1'=>$data->image1
+                                      // 'image1'=>$data->image1
 
                                     );
 
@@ -164,9 +164,9 @@ $res = array('message'=>"success",
       'id'=> $data->id,
       'productname'=> $data->productname,
       'productimage'=> base_url().$data->image,
-      'productimage1'=> base_url().$data->image1,
-      'productimage2'=> base_url().$data->image2,
-      'productimage3'=> base_url().$data->image3,
+      // 'productimage1'=> base_url().$data->image1,
+      // 'productimage2'=> base_url().$data->image2,
+      // 'productimage3'=> base_url().$data->image3,
       'mrp'=> $data->mrp,
       'productdescription'=> $data->productdescription,
       'modelno'=> $data->modelno,
