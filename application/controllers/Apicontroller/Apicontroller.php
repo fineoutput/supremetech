@@ -193,7 +193,7 @@ $res = array('message'=>"success",
   $categorydata= $this->db->get();
   $category=[];
   foreach($categorydata->result() as $data) {
-
+    $c_id=$data->id;
     $this->db->select('*');
     $this->db->from('tbl_subcategory');
     $this->db->where('category_id',$data->id);
@@ -201,9 +201,25 @@ $res = array('message'=>"success",
     $subcategory=[];
     foreach($sub->result() as $data2) {
 
+      $this->db->select('*');
+                  $this->db->from('tbl_minorcategory');
+                  $this->db->where('category_id',$c_id);
+                  $this->db->where('subcategory_id',$data2->id);
+                  $minor_category= $this->db->get();
+                  $minorcategory=[];
+                foreach($minor_category->result() as $m_id){
+                  $minorcategory[]=array(
+                    'minor_id'=>$m_id->id,
+                    'minor_name' =>$m_id->minorcategoryname
+                  );
+                }
+
+
+
     $subcategory[] = array(
       'sub_id' => $data2->id,
-        'name'=> $data2->subcategory
+        'name'=> $data2->subcategory,
+        'minor_category'=>$minorcategory
 
 
 
