@@ -153,23 +153,25 @@ $res = array('message'=>"success",
 }
 
   // ========= Get Product Details =========================
-  public function get_productdetails(){
+  public function get_productdetails($id){
 
               $this->db->select('*');
   $this->db->from('tbl_products');
-  $productsdata= $this->db->get();
-  $products=[];
-  foreach($productsdata->result() as $data) {
+  $this->db->where('id',$id);
+  $productsdata= $this->db->get()->row();
+  if(!empty($productsdata)){
+
   $products[] = array(
-      'id'=> $data->id,
-      'productname'=> $data->productname,
-      'productimage'=> base_url().$data->image,
-      'mrp'=> $data->mrp,
-      'productdescription'=> $data->productdescription,
-      'modelno'=> $data->modelno,
+      'id'=> $productsdata->id,
+      'productname'=> $productsdata->productname,
+      'productimage'=> base_url().$productsdata->image,
+      'mrp'=> $productsdata->mrp,
+      'productdescription'=> $productsdata->productdescription,
+      'modelno'=> $productsdata->modelno,
       // 'inventory'=> $data->inventory
   );
-  }
+
+
 
   header('Access-Control-Allow-Origin: *');
   $res = array('message'=>"success",
@@ -179,6 +181,13 @@ $res = array('message'=>"success",
 
         echo json_encode($res);
 
+      }
+      else{
+        $res = array('message'=>"not valid",
+        'status'=>201,
+);
+echo json_encode($res);
+      }
 
   }
 
