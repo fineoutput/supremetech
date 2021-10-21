@@ -265,188 +265,213 @@ if($this->input->post())
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
-$this->form_validation->set_rules('email', 'email', 'required|trim');
-$this->form_validation->set_rules('password', 'password', 'required|trim');
+$this->form_validation->set_rules('email_id', 'email_id', 'valid_email|trim');
+$this->form_validation->set_rules('password', 'password', 'trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|trim');
 
 if($this->form_validation->run()== TRUE)
 {
   $product_id=$this->input->post('product_id');
   $quantity=$this->input->post('quantity');
-  $email=$this->input->post('email');
+  $email_id=$this->input->post('email_id');
   $password=$this->input->post('password');
   $token_id=$this->input->post('token_id');
 
-  if(!empty($email) || !empty($password)){
 
-  $this->db->select('*');
-              $this->db->from('tbl_users');
-              $this->db->where('email',$email);
-              $this->db->where('password',$password);
-              $dsa= $this->db->get();
-              $data=$dsa->row();
-            if(!empty($data)){
-              $user_id=$data->id;
-              $password=$data->password;
+  // --------------add to cart using email------------
 
 
+  if(!empty($email_id)){
 
-            }else{
-              $res = array('message'=>"Authentication error Occured",
-        'status'=>200
-        );
 
-        echo json_encode($res);
-        exit;
+                    $this->db->select('*');
+                                $this->db->from('tbl_users');
+                                $this->db->where('email',$email_id);
+                                $check_email= $this->db->get();
+                                $check_id=$check_email->row();
+                                if(!empty($check_id)){
+                                    if($check_id->password == $password){
+                                                              $this->db->select('*');
+                                                              $this->db->from('tbl_cart');
+                                                              $this->db->where('user_id',$check_id->id);
+                                                              $this->db->where('product_id',$product_id);
+                                                              $check_cart= $this->db->get();
+                                                              $cart=$check_cart->row();
+                                                              if(empty($cart)){
+                                                                     $ip = $this->input->ip_address();
+                                                                    date_default_timezone_set("Asia/Calcutta");
+                                                                    $cur_date=date("Y-m-d H:i:s");
 
+                                                                    //----check product_id in product table-------
+                                                                                $this->db->select('*');
+                                                                                $this->db->from('tbl_products');
+                                                                                $this->db->where('id',$product_id);
+                                                                                $check_product= $this->db->get();
+                                                                                $check_product_id=$check_product->row();
 
-                  }
-  $this->db->select('*');
-  $this->db->from('tbl_cart');
-  $this->db->where('product_id',$product_id);
+                                                                      if(!empty($check_product_id)){
+                                                                                  $data_insert = array('product_id'=>$product_id,
+                                                                                        'quantity'=>$quantity,
+                                                                                        'user_id'=>$check_id->id,
+                                                                                        'token_id'=>$token_id,
+                                                                                        'ip' =>$ip,
+                                                                                        'date'=>$cur_date
 
-  $this->db->where('user_id',$user_id);
+                                                                                        );
 
-  $dsa= $this->db->get();
-  $dat=$dsa->row();
-  if(!empty($dat)){
-  $res = array('message'=>"Already Existing in Cart",
-  'status'=>201
-  );
+                                                                                        $last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
 
-  echo json_encode($res);
-  exit();
-  }else{
 
+                                                                                        if(!empty($last_id)){
+                                                                                                    header('Access-Control-Allow-Origin: *');
+                                                                                                    $res = array('message'=>'success',
+                                                                                                    'status'=>200
+                                                                                                    );
 
+                                                                                                    echo json_encode($res);
+                                                                                        }else{
+                                                                                                header('Access-Control-Allow-Origin: *');
+                                                                                                $res = array('message'=>'Some error occured',
+                                                                                                'status'=>201
+                                                                                                );
 
-  $data_insert = array('product_id'=>$product_id,
-  'quantity'=>$quantity,
-  'user_id'=>$user_id,
-  'quantity'=>$quantity,
-  'token_id'=>$token_id
+                                                                                                echo json_encode($res);
+                                                                                              }
 
 
-  );
 
+                                                                                }else{
 
-  }
+                                                                                        header('Access-Control-Allow-Origin: *');
+                                                                                        $res = array('message'=>'product_id is not exist',
+                                                                                        'status'=>201
+                                                                                        );
 
+                                                                                        echo json_encode($res);
 
-$last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
+                                                                                     }
 
 
 
 
 
-if($last_id!=0){
 
-$res = array('message'=>"success",
-'status'=>200
-);
 
-echo json_encode($res);
+                                                                   }else{
 
-}
+                                                                           header('Access-Control-Allow-Origin: *');
+                                                                              $res = array('message'=>'Product is alredy in cart.',
+                                                                              'status'=>201
+                                                                              );
 
-else
+                                                                              echo json_encode($res);
 
-{
 
-$res = array('message'=>"Error Occured",
-'status'=>201
-);
 
-echo json_encode($res);
+                                                                       }
 
+                                            }else{
+                                                      header('Access-Control-Allow-Origin: *');
+                                                      $res = array('message'=>'password not exist',
+                                                      'status'=>201
+                                                      );
 
+                                                      echo json_encode($res);
 
 
-}
 
+                                                  }
+                                  }else{
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=>'email not exist ',
+                                        'status'=>201
+                                        );
 
-  }
-  else{
+                                        echo json_encode($res);
 
 
-if(empty($token_id)){
 
-$res = array('message'=>"Enter Token ",
-'status'=>201
-);
+                                        }
+            }
+//----------add to cart token_id-------------
 
-echo json_encode($res);
-exit;
-}
+      else{
+              $this->db->select('*');
+              $this->db->from('tbl_cart');
+              $this->db->where('token_id',$token_id);
+              $this->db->where('product_id',$product_id);
+              $check_cart= $this->db->get();
+              $cart=$check_cart->row();
+              if(empty($cart)){
+                     $ip = $this->input->ip_address();
+                    date_default_timezone_set("Asia/Calcutta");
+                    $cur_date=date("Y-m-d H:i:s");
 
+                    //----check product_id in product table-------
+                                $this->db->select('*');
+                                $this->db->from('tbl_products');
+                                $this->db->where('id',$product_id);
+                                $check_product= $this->db->get();
+                                $check_product_id=$check_product->row();
 
+                      if(!empty($check_product_id)){
+                                  $data_insert = array('product_id'=>$product_id,
+                                        'quantity'=>$quantity,
+                                        'token_id'=>$token_id,
+                                        'ip' =>$ip,
+                                        'date'=>$cur_date
 
+                                        );
 
-$this->db->select('*');
-  $this->db->from('tbl_cart');
-  $this->db->where('product_id',$product_id);
-  $this->db->where('type_id',$type_id);
+                                        $last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
 
 
-  $dsa= $this->db->get();
-  $da=$dsa->row();
-if(!empty($da)){
-$res = array('message'=>"Already exists in Cart",
-'status'=>201
-);
+                                        if(!empty($last_id)){
+                                                    header('Access-Control-Allow-Origin: *');
+                                                    $res = array('message'=>'success',
+                                                    'status'=>200
+                                                    );
 
-echo json_encode($res);
-exit();
-}else{
+                                                    echo json_encode($res);
+                                        }else{
+                                                header('Access-Control-Allow-Origin: *');
+                                                $res = array('message'=>'Some error occured',
+                                                'status'=>201
+                                                );
 
+                                                echo json_encode($res);
+                                              }
+                                }else{
+                                  header('Access-Control-Allow-Origin: *');
+                                     $res = array('message'=>'Product_id not exist.',
+                                     'status'=>201
+                                     );
 
+                                     echo json_encode($res);
 
-$data_insert = array('product_id'=>$product_id,
+                                }
 
-      'quantity'=>$quantity,
+                }else{
 
+                        header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'Product is alredy in cart.',
+                            'status'=>201
+                            );
 
+                            echo json_encode($res);
 
-      'token_id'=>$token_id
 
 
-      );
+                    }
 
 
-}
 
+          }
 
-$last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
 
 
 
 
-
-if($last_id!=0){
-
-$res = array('message'=>"success",
-'status'=>200
-);
-
-echo json_encode($res);
-
-                        }
-
-                        else
-
-                        {
-
-                          $res = array('message'=>" error occured",
-                                'status'=>201
-                                );
-
-                                echo json_encode($res);
-
-
-
-
-                        }
-                      }
 
 
 
