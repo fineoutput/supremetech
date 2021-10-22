@@ -66,7 +66,7 @@
 </tr>
   <tr>
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="" name="minorcategoryname"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="text" name="minorcategoryname"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
 
 
@@ -142,4 +142,3 @@
      	})
        });
      </script>
-    

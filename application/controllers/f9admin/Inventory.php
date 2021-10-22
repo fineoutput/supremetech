@@ -157,7 +157,7 @@ $this->db->select('*');
             $this->db->where('id',$typ);
             $dsa= $this->db->get();
             $da=$dsa->row();
-            $c=$da->category;
+            $c=$da->category_id;
 
                               if($last_id!=0){
 

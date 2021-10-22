@@ -62,15 +62,15 @@ $this->db->select('*');
 
 ?></td>
 <?
-$this->db->select('*');
-$this->db->from('tbl_products');
-// $this->db->where('id',$data->productname);
-$products_data = $this->db->get()->row();
-$product_name = $products_data->productname;
+// $this->db->select('*');
+// $this->db->from('tbl_products');
+// // $this->db->where('id',$data->productname);
+// $products_data = $this->db->get()->row();
+// $product_name = $products_data->productname;
 
 ?>
 
-<td><? echo $product_name ?>
+<td><? echo $data->productname; ?>
 </td>
 <td>
 <?php if($data->image!=""){  ?>

@@ -1,7 +1,7 @@
 <div class="content-wrapper">
                <section class="content-header">
                   <h1>
-                 Update minorcategory
+                 Add New minorcategory
                  </h1>
 
                </section>
@@ -11,7 +11,7 @@
 
                                <div class="panel panel-default">
                                    <div class="panel-heading">
-                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Update minorcategory</h3>
+                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New minorcategory</h3>
                                    </div>
 
                                             <? if(!empty($this->session->flashdata('smessage'))){  ?>
@@ -32,13 +32,15 @@
 
                                    <div class="panel-body">
                                        <div class="col-lg-10">
-                                          <form action=" <?php echo base_url()  ?>dcadmin/minorcategory/add_minorcategory_data/<? echo base64_encode(2); ?>/<?=$id; ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+                                          <form action=" <?php echo base_url()  ?>dcadmin/minorcategory/add_minorcategory_data/<? echo base64_encode(1);  ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                                        <div class="table-responsive">
                                            <table class="table table-hover">
   <tr>
 <td> <strong>Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
+      <option value="">Please select category</option>
+
       <?
 
        foreach($category_data->result() as $value) {?>
@@ -52,9 +54,11 @@
 <td> <strong>Sub-Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" id="sid" name="subcategory_id">
+  <option value="">Please select Subcategory</option>
+
   <?
 
-   foreach($subcategory_data->result() as $value) {?>
+   foreach($minorcategory_data->result() as $value) {?>
      <option value="<?=$value->id;?>"><?=$value->subcategory;?></option>
    <? }?>
 </select>
@@ -62,7 +66,7 @@
 </tr>
   <tr>
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="" name="minorcategoryname"  class="form-control" placeholder="" required value="<?=$minorcategory_data->minorcategoryname; ?>"/>  </td>
+<td> <input type="text" name="minorcategoryname"  class="form-control" placeholder="" required value="<?=$value->minorcategoryname?>" />  </td>
 </tr>
 
 
