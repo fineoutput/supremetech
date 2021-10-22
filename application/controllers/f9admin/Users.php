@@ -82,14 +82,14 @@ public function add_users(){
               $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
               $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
               $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
-							$this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
+							// $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
 
               if($this->form_validation->run()== TRUE)
               {
                 $name=$this->input->post('name');
                 $email=$this->input->post('email');
 								$password=$this->input->post('password');
-								$address=$this->input->post('address');
+								// $address=$this->input->post('address');
 
                   $ip = $this->input->ip_address();
           date_default_timezone_set("Asia/Calcutta");
@@ -102,7 +102,7 @@ public function add_users(){
 
           $data_insert = array('name'=>$name,
                     'password'=>$password,
-                    'address'=>$address,
+                    // 'address'=>$address,
                     'email'=>$email,
                     'ip' =>$ip,
                     'added_by' =>$addedby,

@@ -58,12 +58,12 @@
                               <input type="password" name="password"  class="form-control" placeholder="" required value="<?= $user->password; ?>" />
                                                   </td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                                       <td> <strong>Address</strong>  <span style="color:red;">*</span></strong> </td>
                                                       <td>
                                 <input type="text" name="address"  class="form-control" placeholder="" required value="<?= $user->address; ?>" />
                                                     </td>
-                              </tr>
+                              </tr> -->
                           <tr>
                             <td colspan="2" >
                               <input type="submit" class="btn btn-success" value="save">
