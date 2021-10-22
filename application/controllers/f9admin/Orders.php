@@ -40,6 +40,31 @@ function __construct()
 
                    }
 
+									 public function new_orders(){
+
+									 if(!empty($this->session->userdata('admin_data'))){
+
+									 $this->db->select('*');
+									 $this->db->from('tbl_order1');
+									 $this->db->where('order_status',1);
+									 $this->db->or_where('order_status',2);
+									 $this->db->order_by("id", "desc");
+									 $data['orders_data']= $this->db->get();
+
+									 $data['page_title'] = ' New Orders';
+
+									 $this->load->view('admin/common/header_view',$data);
+									 $this->load->view('admin/orders/view_orders');
+									 $this->load->view('admin/common/footer_view');
+
+									 }
+									 else{
+
+									 redirect("login/admin_login","refresh");
+									 }
+
+									 }
+
 									 public function view_productdetails($id){
 
 									 								 if(!empty($this->session->userdata('admin_data'))){
