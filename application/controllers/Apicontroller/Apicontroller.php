@@ -932,6 +932,166 @@ echo json_encode($res);
 
 }
 
+// ========== cart count==============
+
+public function cart_count(){
+
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('email_id', 'email_id', 'valid_email|xss_clean|trim');
+$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+
+if($this->form_validation->run()== TRUE)
+{
+
+$token_id=$this->input->post('token_id');
+$email_id=$this->input->post('email_id');
+$password=$this->input->post('password');
+
+if($token_id==NULL && $email_id==NULL && $password==NULL){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"data is not insert",
+'status'=>201,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+
+if(!empty($email_id) || !empty($password)){
+
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('email',$email_id);
+$this->db->where('password',$password);
+$dsa= $this->db->get();
+$user=$dsa->row();
+if(!empty($user)){
+$user_id=$user->id;
+$pass=$user->password;
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"email or password do not match",
+'status'=>201,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('user_id',$user_id);
+
+$counting=$this->db->count_all_results();
+if(!empty($counting)){
+
+
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$counting
+);
+
+echo json_encode($res);
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"no add product cart",
+'status'=>200,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+
+}else{
+
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('token_id',$token_id);
+$counting=$this->db->count_all_results();
+if(!empty($counting)){
+
+
+$fa= $counting;
+
+
+
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"token_id wrong",
+'status'=>201,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$fa
+);
+
+echo json_encode($res);
+
+
+
+
+
+
+}
+
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+
+
+
+}
+
 
 //------delete product cart-----
 public function delete_cart_data(){
