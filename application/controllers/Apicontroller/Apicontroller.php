@@ -14,7 +14,7 @@ function __construct()
 //.Slider
 
 
-// =============== Get Slider =============
+// ===============  Slider =============
 
 public function get_slider(){
 
@@ -39,7 +39,7 @@ $res = array('message'=>"success",
   }
 
 
-  // ======== Get Category =========
+  // ========  Category =========
 
   public function get_category(){
 
@@ -64,7 +64,7 @@ $res = array('message'=>"success",
 
   }
 
-  //============= get subcategory ================
+  //=============  subcategory ================
 
   public function get_subcategory(){
 
@@ -132,6 +132,7 @@ $res = array('message'=>"success",
                                       'product_name'=>$data->productname,
                                       'description'=> $data->productdescription,
                                       'mrp'=> $data->mrp,
+                                      'sellingprice'=>$data->sellingprice,
                                       'image'=>base_url().$data->image,
                                       // 'image1'=>$data->image1
 
@@ -166,6 +167,7 @@ $res = array('message'=>"success",
       'productname'=> $productsdata->productname,
       'productimage'=> base_url().$productsdata->image,
       'mrp'=> $productsdata->mrp,
+      'sellingprice'=> $productsdata->sellingprice,
       'productdescription'=> $productsdata->productdescription,
       'modelno'=> $productsdata->modelno,
       // 'inventory'=> $data->inventory
@@ -543,8 +545,193 @@ $res = array('message'=>"Insert data, No data Available",
 }
 }
 
+// =============view cart data ============
+public function view_cart_data(){
 
 
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
+$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+
+if($this->form_validation->run()== TRUE)
+{
+$email_id=$this->input->post('email_id');
+$password=$this->input->post('password');
+$token_id=$this->input->post('token_id');
+
+//-------add to cart with email----------
+
+if(!empty($email_id)){
+
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('email',$email_id);
+$dsa= $this->db->get();
+$user_data=$dsa->row();
+if(!empty($user_data)){
+
+if($user_data->password==$password){
+
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('user_id',$user_data->id);
+$cart_data= $this->db->get();
+$cart_check = $cart_data->row();
+
+if(!empty($cart_check)){
+$total=0;
+$sub_total=0;
+$cart_info = [];
+foreach($cart_data->result() as $data) {
+
+
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$dsa= $this->db->get();
+$product_data=$dsa->row();
+
+
+
+
+$cart_info[] = array('product_id'=>$data->product_id,
+'product_name'=>$product_data->productname,
+'product_image'=>base_url().$product_data->image,
+'quantity'=>$data->quantity,
+'price'=>$product_data->sellingprice,
+'total='=>$total = $product_data->sellingprice * $data->quantity
+
+);
+$sub_total= $sub_total + $total;
+}
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$cart_info,
+'subtotal'=>$sub_total
+);
+
+echo json_encode($res);
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>' Your cart is empty',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Passwod does not match',
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Email is not exist',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+}
+
+else{
+
+
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('token_id',$token_id);
+$cart_data= $this->db->get();
+$cart_check = $cart_data->row();
+// print_r($cart_check);
+// exit;
+if(!empty($cart_check)){
+$total=0;
+$sub_total=0;
+$cart_info= [];
+foreach($cart_data->result() as $data) {
+
+
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$dsa= $this->db->get();
+$product_data=$dsa->row();
+
+
+
+
+
+$cart_info[] = array('product_id'=>$data->product_id,
+'product_name'=>$product_data->productname,
+'product_image'=>base_url().$product_data->image,
+'quantity'=>$data->quantity,
+'price'=>$product_data->sellingprice,
+'total='=>$total = $product_data->sellingprice * $data->quantity
+
+);
+$sub_total= $sub_total + $total;
+}
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$cart_info,
+'subtotal'=>$sub_total
+);
+
+echo json_encode($res);
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Your cart is empty',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+}
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}
+else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Please insert some data, No data available",
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+
+}
 
 //------update product cart-----
 public function update_cart(){

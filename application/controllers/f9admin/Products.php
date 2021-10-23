@@ -182,6 +182,7 @@ $igt1=[];
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
   $this->form_validation->set_rules('mrp', 'mrp', 'required|trim');
+  $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
 
@@ -196,6 +197,7 @@ $igt1=[];
   $subcategory_id=$this->input->post('subcategory_id');
   $minorcategory_id=$this->input->post('minorcategory_id');
   $mrp=$this->input->post('mrp');
+  $sellingprice=$this->input->post('sellingprice');
   $productdescription=$this->input->post('productdescription');
   $modelno=$this->input->post('modelno');
 
@@ -392,6 +394,7 @@ $img5='image3';
   'image2'=>$nnnn4,
   'image3'=>$nnnn5,
   'mrp'=>$mrp,
+  'sellingprice'=>$sellingprice,
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
 
@@ -616,6 +619,7 @@ if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){
   'image2'=>$nnnn4,
   'image3'=>$nnnn5,
   'mrp'=>$mrp,
+  'sellingprice'=>$sellingprice,
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
 

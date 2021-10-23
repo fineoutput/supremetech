@@ -47,7 +47,8 @@
  	 <th>image1</th>
  	 <th>image2</th>
  	 <th>image3</th>
- 	 <th>mrp</th>
+ 	 <th>MRP</th>
+ 	 <th>Selling Price</th>
  	 <th>Product Description</th>
  	 <th>Model No.</th>
 
@@ -136,6 +137,7 @@ $minorcategory_name=$minorcategory_data->minorcategoryname;
         </td>
 
 	 <td><?php echo $data->mrp ?></td>
+	 <td><?php echo $data->sellingprice ?></td>
  	 <td><?php echo $data->productdescription ?></td>
  	 <td><?php echo $data->modelno ?></td>
 
