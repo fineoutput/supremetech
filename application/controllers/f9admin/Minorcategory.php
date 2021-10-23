@@ -207,7 +207,7 @@ $data['subcategory_data']= $this->db->get();
 
            $data_insert = array(
                   'category_id'=>$category_id,
-  'subcategory'=>$subcategory,
+  'subcategory_id'=>$subcategory_id,
   'minorcategoryname'=>$minorcategoryname,
 
                      );
