@@ -13,8 +13,7 @@ function __construct()
                 // String of all alphanumeric character
                 $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-                // Shufle the $str_result and returns substring
-                // of specified length
+
                 return substr(str_shuffle($str_result), 0, $length_of_string);
                 }
 
@@ -35,8 +34,6 @@ function __construct()
               $txnid= $this->random_strings(30);
             }
             else{
-              // echo "hi";
-              // exit;
               $ip = $this->input->ip_address();
             date_default_timezone_set("Asia/Calcutta");
               $cur_date=date("Y-m-d H:i:s");
@@ -68,7 +65,7 @@ function __construct()
 
 
             }
-            
+
 
 
 

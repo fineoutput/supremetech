@@ -78,7 +78,7 @@ public function add_banners(){
             if($this->input->post())
             {
 
-              $this->form_validation->set_rules('redirection_link', 'redirection_link', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('redirection_link', 'redirection_link', 'required|xss_clean|trim|customAlpha');
 
               if($this->form_validation->run()== TRUE)
               {

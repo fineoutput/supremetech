@@ -114,12 +114,38 @@
 </tr>
   <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="productdescription"  class="form-control" placeholder="" required value="" />  </td>
+<td> <textarea name="productdescription" id="editor1" rows="3" cols="80"></textarea>  </td>
 </tr>
   <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="text" name="modelno"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
+  <tr>
+<td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="Inventory"  class="form-control" placeholder="" required value="" />  </td>
+</tr>
+  <tr>
+<td> <strong>weight</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="weight"  class="form-control" placeholder="" required value="" />  </td>
+</tr>
+  <tr>
+<td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="featurepid" name="feature_product"> />
+     <option value="yes">Yes</option>
+     <option value="no">No</option>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Popular Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="popular_product"> />
+     <option value="yes">Yes</option>
+     <option value="no">No</option>
+     </select>
+ </td>
+</tr>
+
+
 
 
                                  <tr>
@@ -148,6 +174,7 @@
 
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>
      <link href=" <? echo base_url()  ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
+     <script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
 <script>
 $(document).ready(function(){
   	$("#cid").change(function(){
@@ -237,4 +264,14 @@ $(document).ready(function(){
 
 	})
   });
+</script>
+<script>
+// Replace the <textarea id="editor1"> with a CKEditor
+
+// instance, using default configuration.
+
+CKEDITOR.replace( 'editor1' );
+// CKEDITOR.replace( 'editor2' );
+// CKEDITOR.replace( 'editor3' );
+//
 </script>

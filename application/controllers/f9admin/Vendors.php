@@ -40,7 +40,7 @@ function __construct()
 
                    }
 
-public function add_sellers(){
+public function add_vendors(){
 
                  if(!empty($this->session->userdata('admin_data'))){
 
@@ -65,7 +65,7 @@ public function add_sellers(){
 
                }
 
-      			public function add_seller_data($t,$iw="")
+      			public function add_vendors_data($t,$iw="")
 
               {
 
@@ -79,17 +79,25 @@ public function add_sellers(){
             {
               // print_r($this->input->post());
               // exit;
-              $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('firstname', 'firstname', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('lastname', 'lastname', 'xss_clean|trim');
+              $this->form_validation->set_rules('dateofbirth', 'dateofbirth', 'required|xss_clean|trim');
               $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
-              $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('gstin', 'gstin', 'required|xss_clean|trim');
 							$this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
+							$this->form_validation->set_rules('cityname', 'cityname', 'required|xss_clean|trim');
 
               if($this->form_validation->run()== TRUE)
               {
-                $name=$this->input->post('name');
+                $firstname=$this->input->post('firstname');
+                $lastname=$this->input->post('lastname');
+                $dateofbirth=$this->input->post('dateofbirth');
                 $email=$this->input->post('email');
-								$phone=$this->input->post('phone');
+                $password=$this->input->post('password');
+								$gstin=$this->input->post('gstin');
 								$address=$this->input->post('address');
+								$cityname=$this->input->post('cityname');
 
                   $ip = $this->input->ip_address();
           date_default_timezone_set("Asia/Calcutta");
@@ -100,10 +108,14 @@ public function add_sellers(){
           $typ=base64_decode($t);
           if($typ==1){
 
-          $data_insert = array('name'=>$name,
-                    'phone'=>$phone,
-                    'address'=>$address,
+          $data_insert = array('firstname'=>$firstname,
+                    'lastname'=>$lastname,
+                    'dateofbirth'=>$dateofbirth,
                     'email'=>$email,
+                    'password'=>$password,
+                    'gstin'=>$gstin,
+                    'address'=>$address,
+                    'cityname'=>$cityname,
                     'ip' =>$ip,
                     'added_by' =>$addedby,
                     'is_active' =>1,
@@ -115,7 +127,7 @@ public function add_sellers(){
 
 
 
-          $last_id=$this->base_model->insert_table("tbl_sellers",$data_insert,1) ;
+          $last_id=$this->base_model->insert_table("tbl_vendors",$data_insert,1) ;
 
           }
           if($typ==2){
@@ -138,17 +150,21 @@ public function add_sellers(){
 //  }
 //     }
 
-          $data_insert = array('name'=>$name,
-                    'phone'=>$phone,
+          $data_insert = array('firstname'=>$firstname,
+                    'lastname'=>$lastname,
+                    'dateofbirth'=>$dateofbirth,
+                    'email'=>$email,
+                    'password'=>$password,
+                    'gstin'=>$gstin,
                     'address'=>$address,
-                    'email'=>$email
+                    'cityname'=>$cityname,
                     );
 
 
 
 
           	$this->db->where('id', $idw);
-            $last_id=$this->db->update('tbl_sellers', $data_insert);
+            $last_id=$this->db->update('tbl_vendors', $data_insert);
 
           }
 
@@ -157,7 +173,7 @@ public function add_sellers(){
 
                               $this->session->set_flashdata('smessage','Data inserted successfully');
 
-                              redirect("dcadmin/sellers/view_sellers","refresh");
+                              redirect("dcadmin/vendors/view_vendors","refresh");
 
                                       }
 
@@ -198,7 +214,7 @@ $this->session->set_flashdata('emessage','Please insert some data, No data avail
           }
 
 
-					public function update_sellers($idd){
+					public function update_vendors($idd){
 
 					                 if(!empty($this->session->userdata('admin_data'))){
 
@@ -210,7 +226,8 @@ $this->session->set_flashdata('emessage','Please insert some data, No data avail
 					                   // echo $this->session->userdata('position');
 					                   // exit;
 
-														  $id=base64_decode($idd);
+														   $id=base64_decode($idd);
+
 														 $data['id']=$idd;
 
 														 $this->db->select('*');

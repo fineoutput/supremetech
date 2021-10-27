@@ -73,7 +73,7 @@
                                 <tr>
                                                           <td> <strong>Discount Percentage</strong>  <span style="color:red;">*</span></strong> </td>
                                                           <td>
-                                    <input type="text" name="discount_percent"  class="form-control" placeholder="" required value="<?= $coupon->discount_percent; ?>" />
+                                    <input type="number" name="discount_percent"  class="form-control" placeholder="" required value="<?= $coupon->discount_percent; ?>" />
                                                         </td>
                                   </tr>
                           <tr>

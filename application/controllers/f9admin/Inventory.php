@@ -148,8 +148,22 @@ $data['inventory_data']= $this->db->get()->row();
 
 
 
+
             $this->db->where('product_id', $typ);
             $last_id=$this->db->update('tbl_inventory', $data_insert);
+            // echo $typ;
+            // exit;
+
+
+            $product_id = array(
+
+              'inventory'=>$quantity,
+
+
+            );
+            $this->db->where('id', $typ);
+            $last_id2=$this->db->update('tbl_products', $product_id);
+
 
 
 $this->db->select('*');
@@ -161,7 +175,7 @@ $this->db->select('*');
 
                               if($last_id!=0){
 
-                              $this->session->set_flashdata('emessage','Data inserted successfully');
+                              $this->session->set_flashdata('smessage','Data inserted successfully');
 
                               redirect("dcadmin/inventory/view_iproducts/".base64_encode($c),"refresh");
 

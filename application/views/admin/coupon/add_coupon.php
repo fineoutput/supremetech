@@ -49,13 +49,13 @@
                         <tr>
                                                   <td> <strong>Start Date</strong>  <span style="color:red;">*</span></strong> </td>
                                                   <td>
-                            <input type="date" name="start_date"  class="form-control" placeholder="" required value="" />
+                            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="" required value="" />
                                                 </td>
                           </tr>
                           <tr>
                                                     <td> <strong>End Date</strong>  <span style="color:red;">*</span></strong> </td>
                                                     <td>
-                              <input type="date" name="end_date"  class="form-control" placeholder="" required value="" />
+                              <input type="date" name="end_date" id="end_date" class="form-control" placeholder="" required value="" />
                                                   </td>
                             </tr>
                             <tr>
@@ -73,7 +73,7 @@
                                 <tr>
                                                           <td> <strong>Discount Percentage</strong>  <span style="color:red;">*</span></strong> </td>
                                                           <td>
-                                    <input type="text" name="discount_percent"  class="form-control" placeholder="" required value="" />
+                                    <input type="number" name="discount_percent"  class="form-control" placeholder="" required value="" />
                                                         </td>
                                   </tr>
                           <tr>
@@ -102,3 +102,22 @@
 
 <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href="<? echo base_url() ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
+
+<script>
+
+$(document).ready(function(){
+    $("#start_date").datepicker({
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+          $("#end_date").datepicker("option","minDate", selected)
+        }
+    });
+    $("#end_date").datepicker({
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+           $("#start_date").datepicker("option","maxDate", selected)
+        }
+    });
+});
+
+</script>

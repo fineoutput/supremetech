@@ -85,7 +85,7 @@ public function add_category(){
             if($this->input->post())
             {
 
-              $this->form_validation->set_rules('category', 'category', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('category', 'category', 'required|xss_clean|trim|customAlpha');
 
               if($this->form_validation->run()== TRUE)
               {

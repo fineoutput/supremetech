@@ -2,17 +2,17 @@
         <div class="content-wrapper">
         <section class="content-header">
         <h1>
-          View Subcategory
+          View App Banner
         </h1>
         </section>
         <section class="content">
         <div class="row">
         <div class="col-lg-12">
-        <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/subcategory/add_subcategory"
-        role="button" style="margin-bottom:12px;"> Add subcategory</a>
+        <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/appbanner/add_appbanner"
+        role="button" style="margin-bottom:12px;"> Add App Banner</a>
         <div class="panel panel-default">
         <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View subcategory</h3>
+        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View App Banner</h3>
         </div>
         <div class="panel panel-default">
 
@@ -39,28 +39,30 @@
         <tr>
         <th>#</th>
 
- 	 <th>Category </th>
- 	 <th>Sub-Category</th>
+ 	 <th>Banner Image</th>
+ 	 <th>Redirection Link</th>
+
+
         <th>Status</th>
         <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <?php $i=1; foreach($subcategory_data->result() as $data) { ?>
+        <?php $i=1; foreach($appbanner_data->result() as $data) { ?>
         <tr>
         <td><?php echo $i ?> </td>
 
-        <?
-                   $this->db->select('*');
-       $this->db->from('tbl_category');
-       $this->db->where('id',$data->category_id);
-       $category_data= $this->db->get()->row();
-       
-       $category_name=$category_data->category;
-       ?>
 
- 	 <td><?php echo $category_name ?></td>
- 	 <td><?php echo $data->subcategory ?></td>
+        <td>
+        <?php if($data->bimage!=""){ ?>
+        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->bimage
+        ?>" >
+        <?php }else { ?>
+        Sorry No File Found
+        <?php } ?>
+        </td>
+
+	 <td><?php echo $data->link ?></td>
 
 
 
@@ -83,13 +85,13 @@
         <ul class="dropdown-menu" role="menu">
 
         <?php if($data->is_active==1){ ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/subcategory/updatesubcategoryStatus/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/appbanner/updateappbannerStatus/<?php echo
         base64_encode($data->id) ?>/inactive">Inactive</a></li>
         <?php } else { ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/subcategory/updatesubcategoryStatus/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/appbanner/updateappbannerStatus/<?php echo
         base64_encode($data->id) ?>/active">Active</a></li>
         <?php } ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/subcategory/update_subcategory/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/appbanner/update_appbanner/<?php echo
         base64_encode($data->id) ?>">Edit</a></li>
         <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
         </ul>
@@ -98,7 +100,7 @@
 
         <div style="display:none" id="cnfbox<?php echo $i ?>">
         <p> Are you sure delete this </p>
-        <a href="<?php echo base_url() ?>dcadmin/subcategory/delete_subcategory/<?php echo
+        <a href="<?php echo base_url() ?>dcadmin/appbanner/delete_appbanner/<?php echo
         base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
         <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>" >No</a>
         </div>

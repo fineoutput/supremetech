@@ -79,9 +79,9 @@ public function add_users(){
             {
               // print_r($this->input->post());
               // exit;
-              $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim|customAlpha');
               $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
-              $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+              $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim|integer');
 							$this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
 
               if($this->form_validation->run()== TRUE)

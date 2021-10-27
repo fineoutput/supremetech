@@ -51,6 +51,10 @@
  	 <th>Selling Price</th>
  	 <th>Product Description</th>
  	 <th>Model No.</th>
+ 	 <th>Inventory</th>
+ 	 <th>weight</th>
+ 	 <th>feature_product</th>
+   <th>popular_product</th>
 
 
         <th>Status</th>
@@ -68,21 +72,17 @@
             $this->db->select('*');
 $this->db->from('tbl_category');
 $this->db->where('id',$data->category_id);
-// print_r($data->category_id);
-// exit;
 $category_data= $this->db->get()->row();
-// print_r($category_data);
-// exit;
 $category_name=$category_data->category;
+
 ?>
  <?
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
 $this->db->where('id',$data->subcategory_id);
 $subcategory_data= $this->db->get()->row();
-// print_r($subcategory_data);
-// exit;
 $subcategory_name=$subcategory_data->subcategory;
+
 ?>
  <?
             $this->db->select('*');
@@ -140,7 +140,31 @@ $minorcategory_name=$minorcategory_data->minorcategoryname;
 	 <td><?php echo $data->sellingprice ?></td>
  	 <td><?php echo $data->productdescription ?></td>
  	 <td><?php echo $data->modelno ?></td>
+   <!-- <?
+              $this->db->select('*');
+  $this->db->from('tbl_inventory');
+  $this->db->where('product_id',$data->id);
+  $inventory_data= $this->db->get()->row();
+  $inventory_dat=$inventory_data->quantity;
 
+  ?> -->
+ 	 <td><?php echo $inventory_dat ?></td>
+ 	 <td><?php echo $data->weight ?></td>
+ 	 <td><?php $feature_product= $data->feature_product;
+if($feature_product==1){
+  echo "yes";
+}else{
+  echo "no";
+}
+    ?></td>
+ 	 <td><?php $most_popular= $data->popular_product;
+        if( $most_popular==1){
+          echo "yes";
+        }else{
+          echo "no";
+        }
+
+    ?></td>
 
 
 
@@ -168,6 +192,7 @@ $minorcategory_name=$minorcategory_data->minorcategoryname;
         <li><a href="<?php echo base_url() ?>dcadmin/products/updateproductsStatus/<?php echo
         base64_encode($data->id) ?>/active">Active</a></li>
         <?php } ?>
+
         <li><a href="<?php echo base_url() ?>dcadmin/products/update_products/<?php echo
         base64_encode($data->id) ?>">Edit</a></li>
         <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>

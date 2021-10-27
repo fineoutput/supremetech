@@ -11,7 +11,7 @@
              $this->load->library('upload');
            }
 
-         public function view_products(){
+         public function view_products($idd){
 
             if(!empty($this->session->userdata('admin_data'))){
 
@@ -22,11 +22,18 @@
               // echo $this->session->userdata('image');
               // echo $this->session->userdata('position');
               // exit;
+               $id=base64_decode($idd);
+              $data['id']=$idd;
 
                            $this->db->select('*');
                $this->db->from('tbl_products');
-               //$this->db->where('id',$usr);
+               $this->db->where('category_id',$id);
                $data['products_data']= $this->db->get();
+
+               //             $this->db->select('*');
+               // $this->db->from('tbl_inventory');
+               // // $this->db->where('',$usr);
+               // $data['inventory_data']= $this->db->get();
 
               $this->load->view('admin/common/header_view',$data);
               $this->load->view('admin/products/view_products');
@@ -39,6 +46,27 @@
           }
 
           }
+          public function view_product_categories(){
+
+             if(!empty($this->session->userdata('admin_data'))){
+
+               $this->db->select('*');
+              $this->db->from('tbl_category');
+                // $this->db->where('id',$usr);
+                $data['category_data']= $this->db->get();
+
+
+               $this->load->view('admin/common/header_view',$data);
+               $this->load->view('admin/products/view_product_categories');
+               $this->load->view('admin/common/footer_view');
+
+           }
+           else{
+
+              redirect("login/admin_login","refresh");
+           }
+
+           }
 
               public function add_products(){
 
@@ -151,6 +179,16 @@ $igt1=[];
                             // $this->db->where('id',$id);
                             $data['category_data']= $this->db->get();
 
+                                        $this->db->select('*');
+                            $this->db->from('tbl_subcategory');
+                            //$this->db->where('id',$usr);
+                            $data['subcategory_data']= $this->db->get();
+
+                                        $this->db->select('*');
+                            $this->db->from('tbl_minorcategory');
+                            //$this->db->where('id',$usr);
+                            $data['minorcategory_data']= $this->db->get();
+
                      $this->load->view('admin/common/header_view',$data);
                      $this->load->view('admin/products/update_products');
                      $this->load->view('admin/common/footer_view');
@@ -177,14 +215,18 @@ $igt1=[];
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('productname', 'productname', 'required|trim');
+  $this->form_validation->set_rules('productname', 'productname', 'required|trim|customAlpha');
   $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
-  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim');
+  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim|integer');
   $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
+  $this->form_validation->set_rules('Inventory', 'Inventory', 'required|trim|integer');
+  $this->form_validation->set_rules('weight', 'weight', 'required|trim|integer');
+  $this->form_validation->set_rules('feature_product', 'feature_product', 'required|trim');
+  $this->form_validation->set_rules('popular_product', 'popular_product', 'required|trim');
 
 
 
@@ -200,6 +242,27 @@ $igt1=[];
   $sellingprice=$this->input->post('sellingprice');
   $productdescription=$this->input->post('productdescription');
   $modelno=$this->input->post('modelno');
+  $inventory=$this->input->post('Inventory');
+  $weight=$this->input->post('weight');
+  $feature_product=$this->input->post('feature_product');
+  $popular_product=$this->input->post('popular_product');
+
+
+
+  if($feature_product == 'yes'){
+     $feature_product=1;
+
+  }else{
+    $feature_product=0;
+  }
+
+  if($popular_product == 'yes'){
+     $popular_product=1;
+
+  }else{
+    $popular_product=0;
+  }
+
 
                    $ip = $this->input->ip_address();
                    date_default_timezone_set("Asia/Calcutta");
@@ -397,6 +460,10 @@ $img5='image3';
   'sellingprice'=>$sellingprice,
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
+  'weight'=>$weight,
+
+  'feature_product'=>$feature_product,
+  'popular_product'=>$popular_product,
 
                      'ip' =>$ip,
                      'added_by' =>$addedby,
@@ -409,7 +476,7 @@ $img5='image3';
 
           $inventory_data = array(
             'product_id'=> $last_id,
-            'quantity'=>0,
+            'quantity'=>$inventory,
             'ip'=>$ip,
             'date'=>$addedby,
             'added_by'=>$cur_date
@@ -609,23 +676,38 @@ if(!empty($img)) { if(empty($nnnn3)){ $nnnn3 = $img; } }else{ if(empty($nnnn3)){
 if(!empty($img)) { if(empty($nnnn4)){ $nnnn4 = $img; } }else{ if(empty($nnnn4)){ $nnnn4= ""; } } }if(!empty($da)){ $img = $da ->image3;
 if(!empty($img)) { if(empty($nnnn5)){ $nnnn5 = $img; } }else{ if(empty($nnnn5)){ $nnnn5= ""; } } }
 
-           $data_insert = array(
-                  'productname'=>$productname,
-                  'category_id'=>$category_id,
-  'subcategory_id'=>$subcategory_id,
-  'minorcategory_id'=>$minorcategory_id,
-  'image'=>$nnnn2,
-  'image1'=>$nnnn3,
-  'image2'=>$nnnn4,
-  'image3'=>$nnnn5,
-  'mrp'=>$mrp,
-  'sellingprice'=>$sellingprice,
-  'productdescription'=>$productdescription,
-  'modelno'=>$modelno,
+$data_insert = array(
+       'productname'=>$productname,
+       'category_id'=>$category_id,
+'subcategory_id'=>$subcategory_id,
+'minorcategory_id'=>$minorcategory_id,
+'image'=>$nnnn2,
+'image1'=>$nnnn3,
+'image2'=>$nnnn4,
+'image3'=>$nnnn5,
+'mrp'=>$mrp,
+'sellingprice'=>$sellingprice,
+'productdescription'=>$productdescription,
+'weight'=>$modelno,
+'inventory'=>$inventory,
+'weight'=>$weight,
+'feature_product'=>$feature_product,
+'popular_product'=>$popular_product
+
 
                      );
              $this->db->where('id', $idw);
              $last_id=$this->db->update('tbl_products', $data_insert);
+
+             $inventory_data = array(
+               'product_id'=> $last_id,
+               'quantity'=>$inventory,
+               'ip'=>$ip,
+               'date'=>$addedby,
+               'added_by'=>$cur_date
+
+             );
+             $last_id2=$this->db->update("tbl_inventory",$inventory_data) ;
            }
                        if($last_id!=0){
                                $this->session->set_flashdata('smessage','Data inserted successfully');

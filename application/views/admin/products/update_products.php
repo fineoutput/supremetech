@@ -42,14 +42,14 @@ Update Products
 <tr>
 <td> <strong>Category Name</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-<select class="form-control" id="cid" name="category_id">
-<option value="">Please select category</option>
+          <select class="form-control" id="cid" name="category_id">
+          <option value="">Please select category</option>
 
-<?
+          <?
 
-foreach($category_data->result() as $value) {?>
-<option value="<?=$value->id;?>"<?php if($products_data->category_id == $value->id){ echo "selected"; } ?>><?=$value->category;?></option>
-<? }?>
+          foreach($category_data->result() as $value) {?>
+          <option value="<?=$value->id;?>"<?php if($products_data->category_id == $value->id){ echo "selected"; } ?>><?=$value->category;?></option>
+          <? }?>
 </select>
 </td>
 </tr>
@@ -58,7 +58,11 @@ foreach($category_data->result() as $value) {?>
 <td> <strong>Subcategory Name</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" id="sid" name="subcategory_id">
+  <?
 
+  foreach($subcategory_data->result() as $value) {?>
+  <option value="<?=$value->id;?>"<?php if($products_data->subcategory_id == $value->id){ echo "selected"; } ?>><?=$value->subcategory;?></option>
+  <? }?>
 </select>
 
 
@@ -68,7 +72,11 @@ foreach($category_data->result() as $value) {?>
 <td> <strong>Minor Category Name</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" id="mid" name="minorcategory_id">
+  <?
 
+  foreach($minorcategory_data->result() as $value) {?>
+  <option value="<?=$value->id;?>"<?php if($products_data->minorcategory_id == $value->id){ echo "selected"; } ?>><?=$value->minorcategoryname;?></option>
+  <? }?>
 </select>
 
 
@@ -78,18 +86,46 @@ foreach($category_data->result() as $value) {?>
 <tr>
 <td> <strong>image</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="file" name="image"  class="form-control" placeholder="" required value="<?=$products_data->image?>" />  </td>
+<td>
+    <?php if($products_data->image!=""){  ?>
+<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image; ?>">
+<?php }else {  ?>
+Sorry No image Found
+<?php } ?>
+  </td>
 </tr>
 <tr>
 <td> <strong>image1</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="file" name="image1"  class="form-control" placeholder="" required value="<?=$products_data->image1?>" />  </td>
+<td>
+    <?php if($products_data->image1!=""){  ?>
+<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image1; ?>">
+<?php }else {  ?>
+Sorry No image Found
+<?php } ?>
+  </td>
 </tr>
 <tr>
 <td> <strong>image2</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="file" name="image2"  class="form-control" placeholder="" required value="<?=$products_data->image2?>" />  </td>
+<td>
+    <?php if($products_data->image2!=""){  ?>
+<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image2; ?>">
+<?php }else {  ?>
+Sorry No image Found
+<?php } ?>
+  </td>
 </tr>
 <tr>
 <td> <strong>image3</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="file" name="image3"  class="form-control" placeholder="" required value="<?=$products_data->image3?>" />  </td>
+<td>
+    <?php if($products_data->image3!=""){  ?>
+<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image3; ?>">
+<?php }else {  ?>
+Sorry No image Found
+<?php } ?>
+  </td>
 </tr>
 <tr>
 <td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
@@ -101,11 +137,34 @@ foreach($category_data->result() as $value) {?>
 </tr>
 <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="productdescription"  class="form-control" placeholder="" required value="<?=$products_data->productdescription?>" />  </td>
+<td> <textarea name="productdescription" id="editor1" rows="3" cols="80"><?=$products_data->productdescription?></textarea>  </td>
 </tr>
 <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="text" name="modelno"  class="form-control" placeholder="" required value="<?=$products_data->modelno?>" />  </td>
+</tr>
+<tr>
+<td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="Inventory"  class="form-control" placeholder="" required value="<?=$products_data->inventory?>" />  </td>
+</tr>
+<tr>
+<td> <strong>Weight</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="weight"  class="form-control" placeholder="" required value="<?=$products_data->weight?>" />  </td>
+</tr>
+<td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="featurepid" name="feature_product"  required value="<?=$products_data->feature_product?>"> />
+     <option value="yes">Yes</option>
+     <option value="no">No</option>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Popular Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="popular_product" required value="<?=$products_data->popular_product?>"> />
+     <option value="yes">Yes</option>
+     <option value="no">No</option>
+     </select>
+ </td>
 </tr>
 
 
@@ -135,6 +194,7 @@ foreach($category_data->result() as $value) {?>
 
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href=" <? echo base_url()  ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
+<script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
 <script>
 $(document).ready(function(){
 $("#cid").change(function(){
@@ -223,4 +283,14 @@ $(document).ready(function(){
 
 	})
   });
+</script>
+<script>
+// Replace the <textarea id="editor1"> with a CKEditor
+
+// instance, using default configuration.
+
+CKEDITOR.replace( 'editor1' );
+// CKEDITOR.replace( 'editor2' );
+// CKEDITOR.replace( 'editor3' );
+//
 </script>
