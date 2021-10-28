@@ -11,7 +11,7 @@
              $this->load->library('upload');
            }
 
-         public function view_products($idd){
+         public function view_products(){
 
             if(!empty($this->session->userdata('admin_data'))){
 
@@ -24,10 +24,11 @@
               // exit;
               //  $id=base64_decode($idd);
               // $data['id']=$idd;
- $id=base64_decode($idd);
+
+
                            $this->db->select('*');
                $this->db->from('tbl_products');
-               $this->db->where('category_id',$id);
+               //$this->db->where('category_id',$id);
                $data['products_data']= $this->db->get();
 
                //             $this->db->select('*');
@@ -467,7 +468,7 @@ $img5='image3';
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
   'weight'=>$weight,
-
+  'inventory'=>$inventory,
   'feature_product'=>$feature_product,
   'popular_product'=>$popular_product,
 
