@@ -85,7 +85,7 @@ Update Products
 
 <tr>
 <td> <strong>image</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image"  class="form-control" placeholder="" required value="<?=$products_data->image?>" />  </td>
+<td> <input type="file" name="image"  class="form-control" placeholder=""  value="<?=$products_data->image?>" />  </td>
 <td>
     <?php if($products_data->image!=""){  ?>
 <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image; ?>">
@@ -96,7 +96,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>image1</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image1"  class="form-control" placeholder="" required value="<?=$products_data->image1?>" />  </td>
+<td> <input type="file" name="image1"  class="form-control" placeholder=""  value="<?=$products_data->image1?>" />  </td>
 <td>
     <?php if($products_data->image1!=""){  ?>
 <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image1; ?>">
@@ -107,7 +107,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>image2</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image2"  class="form-control" placeholder="" required value="<?=$products_data->image2?>" />  </td>
+<td> <input type="file" name="image2"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
 <td>
     <?php if($products_data->image2!=""){  ?>
 <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image2; ?>">
@@ -118,7 +118,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>image3</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image3"  class="form-control" placeholder="" required value="<?=$products_data->image3?>" />  </td>
+<td> <input type="file" name="image3"  class="form-control" placeholder=""  value="<?=$products_data->image3?>" />  </td>
 <td>
     <?php if($products_data->image3!=""){  ?>
 <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image3; ?>">
@@ -129,11 +129,11 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="mrp"  class="form-control" placeholder="" required value="<?=$products_data->mrp?>" />  </td>
+<td> <input type="text" name="mrp"  class="form-control" placeholder=""  value="<?=$products_data->mrp?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="sellingprice"  class="form-control" placeholder="" required value="<?=$products_data->sellingprice?>" />  </td>
+<td> <input type="text" name="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
@@ -141,18 +141,18 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="modelno"  class="form-control" placeholder="" required value="<?=$products_data->modelno?>" />  </td>
+<td> <input type="text" name="modelno"  class="form-control" placeholder=""  value="<?=$products_data->modelno?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="Inventory"  class="form-control" placeholder="" required value="<?=$products_data->inventory?>" />  </td>
+<td> <input type="text" name="Inventory"  class="form-control" placeholder=""  value="<?=$inventory_data->quantity?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Weight</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="weight"  class="form-control" placeholder="" required value="<?=$products_data->weight?>" />  </td>
+<td> <input type="text" name="weight"  class="form-control" placeholder=""  value="<?=$products_data->weight?>" />  </td>
 </tr>
 <td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <select class="form-control" id="featurepid" name="feature_product"  required value="<?=$products_data->feature_product?>"> />
+<td> <select class="form-control" id="featurepid" name="feature_product"   value="<?=$products_data->feature_product?>"> />
      <option value="yes">Yes</option>
      <option value="no">No</option>
      </select>
@@ -160,7 +160,7 @@ Sorry No image Found
 </tr>
   <tr>
 <td> <strong>Popular Product</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <select class="form-control" id="polpularpid" name="popular_product" required value="<?=$products_data->popular_product?>"> />
+<td> <select class="form-control" id="polpularpid" name="popular_product"  value="<?=$products_data->popular_product?>"> />
      <option value="yes">Yes</option>
      <option value="no">No</option>
      </select>

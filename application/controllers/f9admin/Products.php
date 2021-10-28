@@ -22,9 +22,9 @@
               // echo $this->session->userdata('image');
               // echo $this->session->userdata('position');
               // exit;
-               $id=base64_decode($idd);
-              $data['id']=$idd;
-
+              //  $id=base64_decode($idd);
+              // $data['id']=$idd;
+ $id=base64_decode($idd);
                            $this->db->select('*');
                $this->db->from('tbl_products');
                $this->db->where('category_id',$id);
@@ -71,6 +71,7 @@
               public function add_products(){
 
                  if(!empty($this->session->userdata('admin_data'))){
+
 
             $this->db->select('*');
 $this->db->from('tbl_category');
@@ -188,6 +189,11 @@ $igt1=[];
                             $this->db->from('tbl_minorcategory');
                             //$this->db->where('id',$usr);
                             $data['minorcategory_data']= $this->db->get();
+
+                                        $this->db->select('*');
+                            $this->db->from('tbl_inventory');
+                            $this->db->where('product_id',$id);
+                            $data['inventory_data']= $this->db->get()->row();
 
                      $this->load->view('admin/common/header_view',$data);
                      $this->load->view('admin/products/update_products');
@@ -473,6 +479,7 @@ $img5='image3';
 
 
            $last_id=$this->base_model->insert_table("tbl_products",$data_insert,1) ;
+           $last_id3=$last_id;
 
           $inventory_data = array(
             'product_id'=> $last_id,
@@ -698,20 +705,31 @@ $data_insert = array(
                      );
              $this->db->where('id', $idw);
              $last_id=$this->db->update('tbl_products', $data_insert);
-
+$last_id3=$idw;
              $inventory_data = array(
-               'product_id'=> $last_id,
-               'quantity'=>$inventory,
-               'ip'=>$ip,
-               'date'=>$addedby,
-               'added_by'=>$cur_date
+               'product_id'=> $idw,
+               'quantity'=>$inventory
+               // 'ip'=>$ip,
+               // 'date'=>$addedby,
+               // 'added_by'=>$cur_date
 
              );
              $last_id2=$this->db->update("tbl_inventory",$inventory_data) ;
            }
+    $this->db->select('*');
+                $this->db->from('tbl_products');
+                $this->db->where('id',$last_id3);
+                $get_products= $this->db->get()->row();
+
+            $c_id= $get_products->category_id;
+           $id1=base64_encode($c_id);
+
+
+
+
                        if($last_id!=0){
                                $this->session->set_flashdata('smessage','Data inserted successfully');
-                               redirect("dcadmin/products/view_products","refresh");
+                               redirect("dcadmin/products/view_products/$id1","refresh");
                               }
                                else
                                    {
