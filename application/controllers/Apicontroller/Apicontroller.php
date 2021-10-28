@@ -352,23 +352,23 @@ echo json_encode($res);
 
 // ==================Biometric Api ================
 
-public function set_biometric(){
-
-              $this->db->select('*');
-  $this->db->from('tbl_biometric');
-  //$this->db->where('id',$usr);
-  $biometric_data= $this->db->get();
-  $biometric=[];
-
-  foreach($->result() as $data) {
-
-    $biometric[]= array(
-      'description'=>$data->description,
-      'image'=>base_url().$data->image
-    );
-}
-header('Access-Control-Allow_Origin: *');
-$res= array('message'=>succes)
+// public function set_biometric(){
+//
+//               $this->db->select('*');
+//   $this->db->from('tbl_biometric');
+//   //$this->db->where('id',$usr);
+//   $biometric_data= $this->db->get();
+//   $biometric=[];
+//
+//   foreach($->result() as $data) {
+//
+//     $biometric[]= array(
+//       'description'=>$data->description,
+//       'image'=>base_url().$data->image
+//     );
+// }
+// header('Access-Control-Allow_Origin: *');
+// $res= array('message'=>succes)
 
 
   // =========== Add Cart APi ===================
