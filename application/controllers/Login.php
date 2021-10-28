@@ -12,7 +12,7 @@ function __construct()
 if(!empty($this->session->userdata('admin_data'))){
 
 
-				redirect("admin/home","refresh");
+				redirect("dcadmin/home","refresh");
 }
 else{
 		$this->load->view('admin/login/index');

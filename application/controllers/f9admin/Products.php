@@ -11,7 +11,7 @@
              $this->load->library('upload');
            }
 
-         public function view_products(){
+         public function view_products($idd){
 
             if(!empty($this->session->userdata('admin_data'))){
 
@@ -24,11 +24,10 @@
               // exit;
               //  $id=base64_decode($idd);
               // $data['id']=$idd;
-
-
+ $id=base64_decode($idd);
                            $this->db->select('*');
                $this->db->from('tbl_products');
-               //$this->db->where('category_id',$id);
+               $this->db->where('category_id',$id);
                $data['products_data']= $this->db->get();
 
                //             $this->db->select('*');
@@ -468,7 +467,7 @@ $img5='image3';
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
   'weight'=>$weight,
-  'inventory'=>$inventory,
+
   'feature_product'=>$feature_product,
   'popular_product'=>$popular_product,
 
@@ -787,7 +786,8 @@ $last_id3=$idw;
                        $zapak=$this->db->update('tbl_products', $data_update);
 
                             if($zapak!=0){
-                            redirect("dcadmin/products/view_products","refresh");
+                              $this->session->set_flashdata('smessage','Update successfully');
+                                redirect($_SERVER['HTTP_REFERER']);
                                     }
                                     else
                                     {
@@ -805,7 +805,8 @@ $last_id3=$idw;
                          $zapak=$this->db->update('tbl_products', $data_update);
 
                              if($zapak!=0){
-                             redirect("dcadmin/products/view_products","refresh");
+                               $this->session->set_flashdata('smessage','Update successfully');
+                                 redirect($_SERVER['HTTP_REFERER']);
                                      }
                                      else
                                      {
@@ -853,7 +854,8 @@ $last_id3=$idw;
  if($zapak!=0){
         // $path = FCPATH .$img;
         //   unlink($path);
-        redirect("dcadmin/products/view_products","refresh");
+        $this->session->set_flashdata('smessage','Delete successfully');
+          redirect($_SERVER['HTTP_REFERER']);
                 }
                 else
                 {
