@@ -12,7 +12,7 @@
           <section class="content">
           <div class="row">
              <div class="col-lg-12">
-                 <!-- <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/vendors/add_vendors" role="button" style="margin-bottom:12px;"> Add Vendors </a> -->
+                 <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/vendors/add_vendors" role="button" style="margin-bottom:12px;"> Add Vendors </a>
                               <div class="panel panel-default">
                                   <div class="panel-heading">
                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Vendors</h3>
@@ -41,10 +41,14 @@
                                           <thead>
                                               <tr>
                                                   <th>#</th>
-                                                  <th>Name</th>
+                                                  <th>First Name</th>
+                                                  <th>Last Name</th>
+                                                  <th>Date Of Birth</th>
                                                   <th>Email</th>
-                                                  <th>Phone</th>
+                                                  <th>Password</th>
+                                                  <th>GST IN</th>
                                                   <th>Address</th>
+                                                  <th>City</th>
                                                   <th>Status</th>
                                                   <th>Request Status</th>
                                                   <th>Action</th>
@@ -54,10 +58,14 @@
                                                   <?php $i=1; foreach($vendors_data->result() as $data) { ?>
                         <tr>
                             <td><?php echo $i ?> </td>
-                            <td><?php echo $data->name ?></td>
+                            <td><?php echo $data->firstname ?></td>
+                            <td><?php echo $data->lastname ?></td>
+                            <td><?php echo $data->dateofbirth ?></td>
                             <td><?php echo $data->email ?></td>
-                            <td><?php echo $data->phone ?></td>
+                            <td><?php echo $data->password ?></td>
+                            <td><?php echo $data->gstin ?></td>
                             <td><?php echo $data->address ?></td>
+                            <td><?php echo $data->cityname ?></td>
 
                               <td><?php if($data->is_active==1){ ?>
         <p class="label bg-green" >Active</p>
@@ -98,7 +106,7 @@
 <li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/pending">Pending</a></li>
 <li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
 <?php		}   ?>
-<!-- <li><a href="<?php echo base_url() ?>dcadmin/vendors/update_vendors/<?php echo base64_encode($data->id) ?>">Edit</a></li> -->
+<li><a href="<?php echo base_url() ?>dcadmin/vendors/update_vendors/<?php echo base64_encode($data->id) ?>">Edit</a></li>
 <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
 </ul>
 </div>
