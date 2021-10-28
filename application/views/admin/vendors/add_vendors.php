@@ -74,7 +74,7 @@
                       <tr>
                                                 <td> <strong>GST IN</strong>  <span style="color:red;">*</span></strong> </td>
                                                 <td>
-													<input type="number" name="gstin"  class="form-control" placeholder="" required value="" />
+													<input type="text" name="gstin"  class="form-control" placeholder="" required value="" />
 	                                            </td>
     										</tr>
                       <tr>

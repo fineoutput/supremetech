@@ -288,8 +288,8 @@ public function delete_slider($idd){
 
                          									 $zapak=$this->db->delete('tbl_slider', array('id' => $id));
                          									 if($zapak!=0){
-
-                         								 	redirect("dcadmin/slider/view_slider","refresh");
+																						 $this->session->set_flashdata('smessage','Delete successfully');
+																														 redirect($_SERVER['HTTP_REFERER']);
                          								 					}
                          								 					else
                          								 					{
@@ -336,7 +336,8 @@ public function updatesliderStatus($idd,$t){
         $zapak=$this->db->update('tbl_slider', $data_update);
 
              if($zapak!=0){
-             redirect("dcadmin/slider/view_slider","refresh");
+							 $this->session->set_flashdata('smessage','Update successfully');
+															 redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -354,7 +355,8 @@ public function updatesliderStatus($idd,$t){
           $zapak=$this->db->update('tbl_slider', $data_update);
 
               if($zapak!=0){
-              redirect("dcadmin/slider/view_slider","refresh");
+								$this->session->set_flashdata('smessage','Update successfully');
+	 														 redirect($_SERVER['HTTP_REFERER']);
                       }
                       else
                       {
