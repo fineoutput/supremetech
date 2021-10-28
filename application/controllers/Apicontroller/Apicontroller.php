@@ -255,6 +255,122 @@ echo json_encode($res);
 
   }
 
+
+// ================= Most popular product ====================
+
+//
+// public function most_popular_product(){
+//
+//              $this->db->select('*');
+//  $this->db->from('tbl_most_popular_product');
+//  //$this->db->where('id',$usr);
+//  $popular_product_data= $this->db->get();
+//  $popular_product_data=[];
+//
+//  foreach($popular_product_data->result() as $data) {
+//
+//    $most_popular_product[]= array(
+//
+//   'p_id'=>$data->id,
+//   'image'=>base_url().$data->image,
+//   'image1'=>base_url().$data->image1,
+//   'image2'=>base_url().$data->image2,
+//   'image3'=>base_url().$data->image3,
+//   'productdescription'=>$data->productdescription
+// );
+//
+//
+// }
+//
+// header('Access-Control-Allow-Origin: *');
+// $res = array('message'=>"success",
+//       'status'=>200,
+//       'data'=>$most_popular_product
+//       );
+//
+//       echo json_encode($res);
+//
+//
+// }
+
+public function most_popular_product(){
+
+$this->db->select('*');
+$this->db->from('tbl_popular_products');
+$popular_product_data= $this->db->get();
+$product=[];
+foreach($popular_product_data->result() as $data) {
+$product[] = array(
+'image'=> base_url().$data->image,
+'image1'=> base_url().$data->image1,
+'image2'=> base_url().$data->image2,
+'image3'=> base_url().$data->image3,
+'productdescription'=>$data->productdescription,
+// 'image2'=> base_url().$data->Image2
+
+);
+}
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$product
+);
+
+echo json_encode($res);
+
+
+}
+
+
+//=============== surveillance  ==========
+
+public function surveillance(){
+
+$this->db->select('*');
+$this->db->from('tbl_surveillance');
+$surveillance_data= $this->db->get();
+$surveillance=[];
+foreach($surveillance_data->result() as $data) {
+$surveillance[] = array(
+'description'=>$data->description,
+'image'=> base_url().$data->image,
+// 'image2'=> base_url().$data->Image2
+
+);
+}
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$surveillance
+);
+
+echo json_encode($res);
+
+
+}
+
+
+// ==================Biometric Api ================
+
+public function set_biometric(){
+
+              $this->db->select('*');
+  $this->db->from('tbl_biometric');
+  //$this->db->where('id',$usr);
+  $biometric_data= $this->db->get();
+  $biometric=[];
+
+  foreach($->result() as $data) {
+
+    $biometric[]= array(
+      'description'=>$data->description,
+      'image'=>base_url().$data->image
+    );
+}
+header('Access-Control-Allow_Origin: *');
+$res= array('message'=>succes)
+
+
   // =========== Add Cart APi ===================
 
   public function add_to_cart(){
