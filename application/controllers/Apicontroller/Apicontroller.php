@@ -154,7 +154,7 @@
                 }
 
                   // ========= Get Product Details =========================
-                  public function get_productdetails($id){
+                    public function get_productdetails($id){
 
                               $this->db->select('*');
                   $this->db->from('tbl_products');
@@ -293,33 +293,7 @@
                 //
                 // }
 
-                public function most_popular_product(){
 
-                $this->db->select('*');
-                $this->db->from('tbl_popular_products');
-                $popular_product_data= $this->db->get();
-                $product=[];
-                foreach($popular_product_data->result() as $data) {
-                $product[] = array(
-                'image'=> base_url().$data->image,
-                'image1'=> base_url().$data->image1,
-                'image2'=> base_url().$data->image2,
-                'image3'=> base_url().$data->image3,
-                'productdescription'=>$data->productdescription,
-                // 'image2'=> base_url().$data->Image2
-
-                );
-                }
-                header('Access-Control-Allow-Origin: *');
-                $res = array('message'=>"success",
-                'status'=>200,
-                'data'=>$product
-                );
-
-                echo json_encode($res);
-
-
-                }
 
 
                 //=============== surveillance  ==========
@@ -433,6 +407,7 @@
                    $this->db->where('product_id',$product_id);
                    $check_inventory= $this->db->get();
                    $check_inventory_id=$check_inventory->row();
+
                    if($check_inventory_id->quantity >= $quantity){
 
                    }else{
@@ -564,6 +539,7 @@
                                                     $check_inventory= $this->db->get();
                                                     $check_inventory_id=$check_inventory->row();
 
+
                                                     if($check_inventory_id->quantity >= $quantity){
 
                                                     }else{
@@ -638,16 +614,16 @@
 
 
 
-                }
-                else{
-                $res = array('message'=>validation_errors(),
-                      'status'=>201
-                      );
+                              }
+                              else{
+                              $res = array('message'=>validation_errors(),
+                                    'status'=>201
+                                    );
 
-                      echo json_encode($res);
+                                    echo json_encode($res);
 
 
-                }
+                              }
 
                 }
                 else{
@@ -1353,7 +1329,115 @@
                 }
 
                 }
+          //-----------------most-popular product--------------
 
+
+                public function most_popular_products(){
+
+                $this->db->select('*');
+                $this->db->from('tbl_products');
+                $this->db->where('popular_product',1);
+                $productslimitdata= $this->db->get();
+                $products=[];
+                foreach($productslimitdata->result() as $limit) {
+
+                //category
+              //   $this->db->select('*');
+              //   $this->db->from('tbl_category');
+              //   $this->db->where('id',$limit->subcategory_id);
+              //   $cat= $this->db->get()->row();
+              //   if(!empty($cat)){
+              //   $c1=$cat->category;
+              //   }
+              //   else{
+              //   $c1="";
+              //   }
+              //
+              //
+              //   //subcategory
+              //   $this->db->select('*');
+              //   $this->db->from('tbl_subcategory');
+              //   $this->db->where('id',$limit->subcategory_id);
+              //   $sub= $this->db->get()->row();
+              //   if(!empty($sub)){
+              //   $s1=$sub->subcategory;
+              //   }else{
+              //   $s1="";
+              //   }
+              //
+              //   //type --
+              //   $this->db->select('*');
+              //   $this->db->from('tbl_minorcategory');
+              //     $this->db->where('id',$limit->minorcategory_id);
+              //   $minor= $this->db->get()->row();
+              //   if(!empty($minor)){
+              //     $m1=$minor->minorcategoryname;
+              // }else{
+              //   $m1="";
+              // }
+
+
+
+
+
+                $products[] = array(
+                'product_id'=>$limit->id,
+                'productname'=> $limit->productname,
+                // 'category'=> $c1,
+                // 'sucategory'=> $s1,
+                // 'minorcategory'=>$m1,
+                'productimage'=> base_url().$limit->image,
+                'productimage1'=> base_url().$limit->image1,
+                'productimage2'=> base_url().$limit->image2,
+                'productimage3'=> base_url().$limit->image3,
+                'mrp'=> $limit->mrp,
+                'productdescription'=> $limit->productdescription,
+                // 'colours'=> $limit->colours,
+                // 'inventory'=> $data->inventory
+                );
+            }
+
+                header('Access-Control-Allow-Origin: *');
+                $res = array('message'=>"success",
+                'status'=>200,
+                'data'=>$products
+                );
+
+                echo json_encode($res);
+
+
+                }
+        //--------------------stock_get----------------
+
+      public function stock_get(){
+
+                                   $this->db->select('*');
+                       $this->db->from('tbl_stock');
+                       //$this->db->where('is_active',1);
+                       $data= $this->db->get();
+                       $stock=[];
+                       foreach ($data->result() as $value) {
+                         $stock[]=array(
+                           'image'=>base_url().$value->image1,
+                           'name'=>$value->stockname,
+                           'message'=>$value->stockmessage
+
+                         );
+                       }
+                         header('Access-Control-Allow-Origin:*');
+                         $res=array(
+                           'message'=>"success",
+                           'status'=>200,
+                           'data'=>$stock
+                         );
+                         echo json_encode($res);
+
+
+
+
+
+                     }
+//------------------------------------------------
 
 
 
