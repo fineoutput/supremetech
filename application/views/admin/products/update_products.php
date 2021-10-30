@@ -39,7 +39,10 @@ Update Products
 <td> <strong>Product Name</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="text" name="productname"  class="form-control" placeholder="" required value="<?=$products_data->productname?>" />  </td>
 </tr>
-<tr>
+
+
+<input type="hidden" name="category_id" value="<?=base64_decode($id1)?>">
+<!-- <tr>
 <td> <strong>Category Name</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
           <select class="form-control" id="cid" name="category_id">
@@ -52,7 +55,7 @@ Update Products
           <? }?>
 </select>
 </td>
-</tr>
+</tr> -->
 
 <tr>
 <td> <strong>Subcategory Name</strong>  <span style="color:red;">*</span></strong> </td>
@@ -95,7 +98,7 @@ Sorry No image Found
   </td>
 </tr>
 <tr>
-<td> <strong>image1</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Image 1</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="file" name="image1"  class="form-control" placeholder=""  value="<?=$products_data->image1?>" />  </td>
 <td>
     <?php if($products_data->image1!=""){  ?>
@@ -106,22 +109,24 @@ Sorry No image Found
   </td>
 </tr>
 <tr>
-<td> <strong>image2</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image2"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
+<td> <strong>Video 1</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="video1"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
 <td>
     <?php if($products_data->image2!=""){  ?>
-<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image2; ?>">
+      <video id="slide_img_path"  height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->image2; ?>" autoplay poster="">
 <?php }else {  ?>
 Sorry No image Found
 <?php } ?>
   </td>
 </tr>
 <tr>
-<td> <strong>image3</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image3"  class="form-control" placeholder=""  value="<?=$products_data->image3?>" />  </td>
+<td> <strong>Video 2</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="video1"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
+
 <td>
     <?php if($products_data->image3!=""){  ?>
-<img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image3; ?>">
+<!-- <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->image3; ?>"> -->
+<video id="slide_img_path"  height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->image3; ?>" autoplay poster="">
 <?php }else {  ?>
 Sorry No image Found
 <?php } ?>
@@ -145,7 +150,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="Inventory"  class="form-control" placeholder=""  value="<?=$inventory_data->quantity?>" />  </td>
+<td> <input type="text" name="Inventory"  class="form-control" placeholder=""  value="<? if(!empty($inventory_data->quantity)){ echo $data1=$inventory_data->quantity;}else { echo $data1="";}?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Weight</strong>  <span style="color:red;">*</span></strong> </td>
@@ -159,7 +164,7 @@ Sorry No image Found
  </td>
 </tr>
   <tr>
-<td> <strong>Popular Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Most selling Product</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="popular_product"  value="<?=$products_data->popular_product?>"> />
      <option value="yes">Yes</option>
      <option value="no">No</option>

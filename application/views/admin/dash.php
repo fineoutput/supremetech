@@ -34,7 +34,24 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
-
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">APPROVED VENDORS</span>
+                  <span class="info-box-number">0</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">PENDING VENDORS</span>
+                  <span class="info-box-number">0</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
             <!-- fix for small devices only -->
             <div class="clearfix visible-sm-block"></div>
 
@@ -47,15 +64,43 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">ON Hold ORDER</span>
+                    <span class="info-box-number">0</span>
+                  </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+              </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">New Orders</span>
                   <span class="info-box-number">0</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-white"><i class="ion ion-ios-people-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">TOTAL PRODUCT</span>
+                  <span class="info-box-number">0</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-white"><i class="ion ion-ios-cart-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">OUT OF STOCK PRODUCT</span>
+                  <span class="info-box-number">0</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+
           </div><!-- /.row -->
 
 

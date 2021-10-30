@@ -42,7 +42,9 @@
 <td> <input type="text" name="productname"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
 
-  <tr>
+<input type="hidden" name="category_id" value="<?=base64_decode($id)?>">
+
+  <!-- <tr>
 <td> <strong>Category </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
@@ -55,7 +57,7 @@
        <? }?>
     </select>
   </td>
-</tr>
+</tr> -->
 
   <tr>
 <td> <strong>Subcategory </strong>  <span style="color:red;">*</span></strong> </td>
@@ -89,23 +91,23 @@
 
   <tr>
 <td> <strong>image</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="file" name="image"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
 <td> <strong>image1</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image1"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="file" name="image1"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>image2</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image2"  class="form-control" placeholder="" required value="" />  </td>
+<td> <strong>Video1</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>image3</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="image3"  class="form-control" placeholder="" required value="" />  </td>
+<td> <strong>Video2</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
 <td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="mrp"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="text" name="mrp"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
   <tr>
@@ -137,7 +139,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Popular Product</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Most selling Product</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="popular_product"> />
      <option value="yes">Yes</option>
      <option value="no">No</option>

@@ -1437,7 +1437,35 @@
 
 
                      }
-//------------------------------------------------
+//-----------------------------MOST POPULAR BRANDS-------------
+
+public function brands_view(){
+
+  $this->db->select('*');
+              $this->db->from('tbl_brands');
+              //$this->db->where('id',$id);
+              $brands= $this->db->get();
+              $brands_data[]="";
+              foreach($brands->result() as $value){
+                $brands_data[]=array(
+                  'name'=>$value->name,
+                  'message'=>$value->message,
+                  'image'=>base_url().$value->image
+
+                );
+              }
+              header('Access-Control-Allow-Origin:*');
+              $res=array(
+                'message'=>"success",
+                'status'=>200,
+                'data'=>$brands_data
+              );
+              echo json_encode($res);
+
+
+
+
+               }
 
 
 

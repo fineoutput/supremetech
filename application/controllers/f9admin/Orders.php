@@ -125,12 +125,12 @@ if(!empty($this->session->userdata('admin_data'))){
 $data['page_title'] = ' All Orders';
 $this->db->select('*');
 $this->db->from('tbl_order1');
-$this->db->order_by("id", "desc");
+//$this->db->order_by("id", "desc");
 //$this->db->where('id',$usr);
 $data['orders_data']= $this->db->get();
 
 $this->load->view('admin/common/header_view',$data);
-$this->load->view('admin/orders/view_orders');
+$this->load->view('admin/order/view_order');
 $this->load->view('admin/common/footer_view');
 
 }

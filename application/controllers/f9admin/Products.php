@@ -23,8 +23,10 @@
               // echo $this->session->userdata('position');
               // exit;
               //  $id=base64_decode($idd);
-              // $data['id']=$idd;
+
  $id=base64_decode($idd);
+ $data['id']=$idd;
+
                            $this->db->select('*');
                $this->db->from('tbl_products');
                $this->db->where('category_id',$id);
@@ -68,10 +70,12 @@
 
            }
 
-              public function add_products(){
+              public function add_products($idd){
 
                  if(!empty($this->session->userdata('admin_data'))){
 
+ $id=base64_decode($idd);
+$data['id']=$idd;
 
             $this->db->select('*');
 $this->db->from('tbl_category');
@@ -154,7 +158,7 @@ $igt1=[];
 
                               }
 
-               public function update_products($idd){
+               public function update_products($idd,$idd1){
 
                    if(!empty($this->session->userdata('admin_data'))){
 
@@ -168,6 +172,9 @@ $igt1=[];
 
                       $id=base64_decode($idd);
                      $data['id']=$idd;
+
+                     $id1=base64_decode($idd1);
+                    $data['id1']=$idd1;
 
                             $this->db->select('*');
                             $this->db->from('tbl_products');
@@ -225,7 +232,7 @@ $igt1=[];
   $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
-  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim|integer');
+  $this->form_validation->set_rules('mrp', 'mrp', 'trim|integer');
   $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
@@ -276,7 +283,7 @@ $igt1=[];
                    $addedby=$this->session->userdata('admin_id');
 
            $typ=base64_decode($t);
-           $last_id = 0;
+           // $last_id = 0;
            if($typ==1){
 
 
@@ -367,7 +374,7 @@ $img3='image1';
 
 
 
-$img4='image2';
+$img4='video1';
 
 
 
@@ -381,7 +388,7 @@ $img4='image2';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'mp4|MOV|WMV|FLV|AVI|WebM|MKV',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
@@ -410,7 +417,7 @@ $img4='image2';
 
 
 
-$img5='image3';
+$img5='video2';
 
 
 
@@ -424,7 +431,7 @@ $img5='image3';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'mp4|MOV|WMV|FLV|AVI|WebM|MKV',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
@@ -591,7 +598,7 @@ $img3='image1';
 
 
 
-$img4='image2';
+$img4='video1';
 
 
 
@@ -605,7 +612,7 @@ $img4='image2';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'mp4|MOV|WMV|FLV|AVI|WebM|MKV',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
@@ -634,7 +641,7 @@ $img4='image2';
 
 
 
-$img5='image3';
+$img5='video2';
 
 
 
@@ -648,7 +655,7 @@ $img5='image3';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'mp4|MOV|WMV|FLV|AVI|WebM|MKV',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
@@ -703,6 +710,7 @@ $data_insert = array(
 
 
                      );
+
              $this->db->where('id', $idw);
              $last_id=$this->db->update('tbl_products', $data_insert);
 $last_id3=$idw;
@@ -714,6 +722,7 @@ $last_id3=$idw;
                // 'added_by'=>$cur_date
 
              );
+             $this->db->where('product_id', $idw);
              $last_id2=$this->db->update("tbl_inventory",$inventory_data) ;
            }
     $this->db->select('*');
@@ -729,7 +738,7 @@ $last_id3=$idw;
 
                        if($last_id!=0){
                                $this->session->set_flashdata('smessage','Data inserted successfully');
-                               redirect("dcadmin/products/view_products/$id1","refresh");
+                                redirect("dcadmin/products/view_products/$id1","refresh");
                               }
                                else
                                    {
