@@ -1381,7 +1381,7 @@
 
 
                 $products[] = array(
-                'product_id'=>$limit->id,
+                // 'product_id'=>$limit->id,
                 'productname'=> $limit->productname,
                 // 'category'=> $c1,
                 // 'sucategory'=> $s1,
