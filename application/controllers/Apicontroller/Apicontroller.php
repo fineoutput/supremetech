@@ -781,7 +781,7 @@
 
                 );
                 $sub_total= $sub_total + $total;
-            
+
                 }
 
                 header('Access-Control-Allow-Origin: *');
@@ -1374,7 +1374,7 @@
 
 
                 $products[] = array(
-                // 'product_id'=>$limit->id,
+                'product_id'=>$limit->id,
                 'productname'=> $limit->productname,
                 // 'category'=> $c1,
                 // 'sucategory'=> $s1,
