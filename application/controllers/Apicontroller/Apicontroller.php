@@ -106,21 +106,21 @@
                 			              {
                 			                // print_r($this->input->post());
                 			                // exit;
-                			                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-                			                $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+                			                // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+                			                // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
                 			                $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
                 			                if($this->form_validation->run()== TRUE)
                 			                {
-                			                  $category_id=$this->input->post('category_id');
-                			                  $subcategory_id=$this->input->post('subcategory_id');
+                			                  // $category_id=$this->input->post('category_id');
+                			                  // $subcategory_id=$this->input->post('subcategory_id');
                 			                  $minorcategory_id=$this->input->post('minorcategory_id');
 
                                                     $this->db->select('*');
                                         $this->db->from('tbl_products');
-                                        $this->db->where('category_id',$category_id);
-                                        $this->db->where('subcategory_id',$subcategory_id);
+                                        // $this->db->where('category_id',$category_id);
+                                        // $this->db->where('subcategory_id',$subcategory_id);
                                         $this->db->where('minorcategory_id',$minorcategory_id);
                                         $product_data= $this->db->get();
 
