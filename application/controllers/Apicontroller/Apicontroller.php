@@ -757,17 +757,16 @@
                 $total=0;
                 $sub_total=0;
                 $cart_info= [];
-                $this->db->select('*');
-                $this->db->from('tbl_products');
-                $this->db->where('id',$cart_check->product_id);
-                $dsa= $this->db->get();
-                $product_data=$dsa->row();
 
-  if(!empty($product_data)){
+
+
                 foreach($cart_data->result() as $data) {
 
-
-
+                  $this->db->select('*');
+                  $this->db->from('tbl_products');
+                  $this->db->where('id',$data->product_id);
+                  $dsa= $this->db->get();
+                  $product_data=$dsa->row();
 
 
 
@@ -782,6 +781,7 @@
 
                 );
                 $sub_total= $sub_total + $total;
+            
                 }
 
                 header('Access-Control-Allow-Origin: *');
@@ -792,14 +792,7 @@
                 );
 
                 echo json_encode($res);
-        }else{
-          header('Access-Control-Allow-Origin: *');
-          $res = array('message'=>'product not exist',
-          'status'=>201
-          );
 
-          echo json_encode($res);
-        }
 
                 }else{
                 header('Access-Control-Allow-Origin: *');
