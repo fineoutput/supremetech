@@ -1,7 +1,7 @@
 <div class="content-wrapper">
                <section class="content-header">
                   <h1>
-                 Add New minorcategory
+                 Update minorcategory
                  </h1>
 
                </section>
@@ -11,7 +11,7 @@
 
                                <div class="panel panel-default">
                                    <div class="panel-heading">
-                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New minorcategory</h3>
+                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Update minorcategory</h3>
                                    </div>
 
                                             <? if(!empty($this->session->flashdata('smessage'))){  ?>
@@ -39,12 +39,12 @@
 <td> <strong>Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
-      <option value="">Please select category</option>
+
 
       <?
 
        foreach($category_data->result() as $value) {?>
-         <option value="<?=$value->id;?>"><?=$value->category;?></option>
+         <option value="<?=$value->id;?>" <?php if($minorcategory_data->category_id == $value->id){ echo "selected"; } ?>><?=$value->category;?></option>
        <? }?>
     </select>
 
@@ -54,19 +54,34 @@
 <td> <strong>Sub-Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" id="sid" name="subcategory_id">
-  <option value="">Please select Subcategory</option>
+
 
   <?
 
-   foreach($minorcategory_data->result() as $value) {?>
-     <option value="<?=$value->id;?>"><?=$value->subcategory;?></option>
+   foreach($subcategory_data->result() as $value1) {?>
+     <option value="<?=$value1->id;?>" <?php if($minorcategory_data->subcategory_id == $value1->id){ echo "selected"; } ?>><?=$value1->subcategory;?></option>
    <? }?>
 </select>
 </td>
 </tr>
   <tr>
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="minorcategoryname"  class="form-control" placeholder="" required value="<?=$value->minorcategoryname?>" />  </td>
+<td> <input type="text" name="minorcategoryname"  class="form-control" placeholder=""  value="<?=$minorcategory_data->minorcategoryname?>" />  </td>
+</tr>
+  <tr>
+<td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="fileToUpload1"  class="form-control" placeholder=""  value="" />
+
+  <?php if($value->image!=""){ ?>
+  <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$value->image
+  ?>" >
+  <?php }else { ?>
+  Sorry No File Found
+  <?php } ?>
+
+
+
+</td>
 </tr>
 
 

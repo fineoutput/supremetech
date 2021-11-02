@@ -38,13 +38,13 @@
   <tr>
 <td> <strong>Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-    <select class="form-control" id="cid" name="category_id">
+    <select class="form-control" id="cid" name="category_id" >
       <option value="">Please select category</option>
 
       <?
 
        foreach($category_data->result() as $value) {?>
-         <option value="<?=$value->id;?>"><?=$value->category;?></option>
+         <option value="<?=$value->id;?>" required><?=$value->category;?></option>
        <? }?>
     </select>
 
@@ -53,13 +53,13 @@
   <tr>
 <td> <strong>Sub-Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-<select class="form-control" id="sid" name="subcategory_id">
+<select class="form-control" id="sid" name="subcategory_id" >
   <option value="">Please select Subcategory</option>
 
   <?
 
    foreach($subcategory_data->result() as $value) {?>
-     <option value="<?=$value->id;?>"><?=$value->subcategory;?></option>
+     <option value="<?=$value->id;?>" required><?=$value->subcategory;?></option>
    <? }?>
 </select>
 </td>

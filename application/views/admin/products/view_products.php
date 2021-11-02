@@ -73,15 +73,22 @@
 $this->db->from('tbl_category');
 $this->db->where('id',$data->category_id);
 $category_data= $this->db->get()->row();
+if(!empty($category_data)){
 $category_name=$category_data->category;
-
+}else{
+$category_name="";
+}
 ?> -->
  <?
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
 $this->db->where('id',$data->subcategory_id);
 $subcategory_data= $this->db->get()->row();
+if(!empty($subcategory_data)){
 $subcategory_name=$subcategory_data->subcategory;
+}else{
+  $subcategory_name="";
+}
 
 ?>
  <?
@@ -91,7 +98,12 @@ $this->db->where('id',$data->minorcategory_id);
 $minorcategory_data= $this->db->get()->row();
 // print_r($subcategory_data);
 // exit;
-$minorcategory_name=$minorcategory_data->minorcategoryname;
+
+if(!empty($minorcategory_name)){
+  $minorcategory_name=$minorcategory_data->minorcategoryname;
+}else{
+  $minorcategory_name="";
+}
 ?>
  	 <!-- <td><?php echo $category_name?></td> -->
  	 <td><?php echo $subcategory_name?></td>
@@ -150,6 +162,11 @@ $minorcategory_name=$minorcategory_data->minorcategoryname;
   $this->db->where('product_id',$data->id);
   $inventory_data= $this->db->get()->row();
   $inventory_dat=$inventory_data->quantity;
+  if(!empty($inventory_data)){
+  $inventory_dat=$inventory_data->quantity;
+}else{
+   $inventory_dat="";
+}
 
 
   ?> -->

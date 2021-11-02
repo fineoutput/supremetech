@@ -1465,7 +1465,7 @@ public function brands_view(){
 
                        $this->db->select('*');
                                    $this->db->from('tbl_minorcategory');
-                                   // $this->db->where('id',$id);
+                                   $this->db->where('is_active',1);
                                    $minor_category= $this->db->get();
                                    $minorcategory=[];
                                   foreach ($minor_category->result() as $value) {
@@ -1476,7 +1476,7 @@ public function brands_view(){
                                        'image'=>base_url().$value->image
                                     );
                                 }
-                                header('Access-Control-Allow-Origin:*');
+                                header('Access-Control-Allow-Origin: *');
                                 $res=array(
                                   'message'=>"success",
                                   'status'=>200,
@@ -1484,39 +1484,9 @@ public function brands_view(){
                                 );
                                 echo json_encode($res);
 
-                                    //
-                                    // //category
-                                    // $this->db->select('*');
-                                    //             $this->db->from('tbl_category');
-                                    //             $this->db->where('id',$value->category_id);
-                                    //             $category_id= $this->db->get()->row();
-                                    //             if(!empty($category_id)){
-                                    //               $category_name=$category_id->category;
-                                    //               //subcategory
-                                    //               $this->db->select('*');
-                                    //                           $this->db->from('tbl_subcategory');
-                                    //                           $this->db->where('id',$value->subcategory_id);
-                                    //                           $subcategory_data= $this->db->get()->row();
-                                    //                           if(!empty($subcategory_data)){
-                                    //                             $subcategory_name=$subcategory_data->subcategory;
-                                    //                             $minorcategory[]=array(
-                                    //                               'id'=>$value->id,
-                                    //                                'minorcategory'=>$value->minorcategoryname,
-                                    //                                'image'=>base_url().$value->image
-                                    //                             );
-                                    //
-                                    //                           }else{
-                                    //
-                                    //                           }
-                                    //
-                                    //             }else{
-                                    //
-                                    //             }
-
-                                  // }
 
 
-                   }
+                }
 
 
 

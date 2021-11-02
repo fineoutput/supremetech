@@ -110,8 +110,8 @@ $data['subcategory_data']= $this->db->get();
 
                             $this->db->select('*');
                             $this->db->from('tbl_subcategory');
-                            $this->db->where('id',$id);
-                            $data['subcategory_data']= $this->db->get()->row();
+                            // $this->db->where('id',$id);
+                            $data['subcategory_data']= $this->db->get();
 
                                         $this->db->select('*');
                             $this->db->from('tbl_category');
@@ -121,7 +121,7 @@ $data['subcategory_data']= $this->db->get();
                                         $this->db->select('*');
                             $this->db->from('tbl_minorcategory');
                             //$this->db->where('id',$usr);
-                            $data['minorcategory_data']= $this->db->get();
+                            $data['minorcategory_data']= $this->db->get()->row();
 
 
                      $this->load->view('admin/common/header_view',$data);
@@ -150,9 +150,9 @@ $data['subcategory_data']= $this->db->get();
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
-  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
-  $this->form_validation->set_rules('minorcategoryname', 'minorcategoryname', 'required|trim');
+  $this->form_validation->set_rules('category_id', 'category_id', 'trim');
+  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'trim');
+  $this->form_validation->set_rules('minorcategoryname', 'minorcategoryname', 'trim');
 
 
 
