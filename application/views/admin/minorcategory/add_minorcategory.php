@@ -64,9 +64,13 @@
 </select>
 </td>
 </tr>
-  <tr>
+<tr>
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <input type="text" name="minorcategoryname"  class="form-control" placeholder="" required value="" />  </td>
+</tr>
+<tr>
+<td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="file" name="fileToUpload1"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
 
 

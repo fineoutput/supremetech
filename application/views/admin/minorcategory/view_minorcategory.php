@@ -42,6 +42,8 @@
  	 <th>Category </th>
  	 <th>Sub-Category</th>
  	 <th>Minor Category</th>
+ 	 <th>Image</th>
+
         <th>Status</th>
         <th>Action</th>
         </tr>
@@ -63,17 +65,29 @@
        ?>
 
  	 <td><?php echo $category_name ?></td>
+   <td>
    <?
               $this->db->select('*');
   $this->db->from('tbl_subcategory');
   $this->db->where('id',$data->subcategory_id);
   $subcategory_data= $this->db->get()->row();
+
   // print_r($category_data);
   // exit;
-  $subcategory_name=$subcategory_data->subcategory;
+$subcategory_name=$subcategory_data->subcategory;
+echo $subcategory_name ;
   ?>
- 	 <td><?php echo $subcategory_name ?></td>
+</td>
+
  	 <td><?php echo $data->minorcategoryname ?></td>
+   <td>
+   <?php if($data->image!=""){ ?>
+   <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image
+   ?>" >
+   <?php }else { ?>
+   Sorry No File Found
+   <?php } ?>
+   </td>
 
 
 

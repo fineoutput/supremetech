@@ -268,7 +268,7 @@ public function update_dispatch_status($idd,$t){
 
 
                                           $this->load->view('admin/common/header_view',$data);
-                                          $this->load->view('admin/order/view_product_status');
+                                          $this->load->view('admin/order/view_product_order');
                                           $this->load->view('admin/common/footer_view');
 
                                       }

@@ -90,23 +90,23 @@
 </tr>
 
   <tr>
-<td> <strong>image</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>image</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="file" name="image"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>image1</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>image1</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="file" name="image1"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>Video1</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Video1</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="file" name="video1"  class="form-control" placeholder=""  value="" />  </td>
+</tr>
+  <tr>
+<td> <strong>Video2</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>Video2</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
-</tr>
-  <tr>
-<td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>MRP</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="text" name="mrp"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
@@ -144,6 +144,149 @@
      <option value="yes">Yes</option>
      <option value="no">No</option>
      </select>
+ </td>
+</tr>
+
+
+
+
+  <tr>
+<td> <strong>Brand</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="brands"> />
+  <option value="" selected>Select Brand</option>
+  <?php foreach ($brand_data->result() as $brands) { ?>
+     <option value="<?=$brands->id;?>"><?=$brands->name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Resolution</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="resolution"> />
+  <option value="" selected>Select Resolution</option>
+  <?php foreach ($resolution_data->result() as $resolution) { ?>
+     <option value="<?=$resolution->id;?>"><?=$resolution->filtername;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Lens</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="lens"> />
+  <option value="" selected>Select Lens</option>
+  <?php foreach ($lens_data->result() as $lens) { ?>
+     <option value="<?=$lens->id;?>"><?=$lens->filtername;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>IR Distance</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="irdistance"> />
+  <option value="" selected>Select IR Distance</option>
+  <?php foreach ($distance_data->result() as $distance) { ?>
+     <option value="<?=$distance->id;?>"><?=$distance->filtername;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Camera type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="cameratype"> />
+  <option value="" selected>Select Camera type</option>
+  <?php foreach ($camera_data->result() as $camera) { ?>
+     <option value="<?=$camera->id;?>"><?=$camera->filtername;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Body Material</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="bodymaterial"> />
+  <option value="" selected>Select Body Material</option>
+  <?php foreach ($body_data->result() as $body) { ?>
+     <option value="<?=$body->id;?>"><?=$body->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Video Channel</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="videochannel"> />
+  <option value="" selected>Select Video Channel</option>
+  <?php foreach ($video_data->result() as $video) { ?>
+     <option value="<?=$video->id;?>"><?=$video->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>POE Ports</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="poeports"> />
+  <option value="" selected>Select POE Ports</option>
+  <?php foreach ($port_data->result() as $port) { ?>
+     <option value="<?=$port->id;?>"><?=$port->filter_name;?></option>
+   <? } ?>
+ </td>
+</tr>
+  <tr>
+<td> <strong>POE Type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="poetype"> />
+  <option value="" selected>Select POE Type</option>
+  <?php foreach ($port_data->result() as $port) { ?>
+     <option value="<?=$port->id;?>"><?=$port->filter_name;?></option>
+   <? } ?>
+ </td>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>SATA Ports</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="sataports"> />
+  <option value="" selected>Select SATA Ports</option>
+  <?php foreach ($sata_data->result() as $sata) { ?>
+     <option value="<?=$sata->id;?>"><?=$sata->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Length</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="length"> />
+  <option value="" selected>Select Length</option>
+  <?php foreach ($length_data->result() as $length) { ?>
+     <option value="<?=$length->id;?>"><?=$length->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Screen Size</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="screensize"> />
+  <option value="" selected>Select Screen Size</option>
+  <?php foreach ($screen_data->result() as $screen) { ?>
+     <option value="<?=$screen->id;?>"><?=$screen->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>LED Type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="ledtype"> />
+  <option value="" selected>Select LED Type</option>
+  <?php foreach ($led_data->result() as $led) { ?>
+     <option value="<?=$led->id;?>"><?=$led->filter_name;?></option>
+   <? } ?>
+     </select>
+ </td>
+</tr>
+  <tr>
+<td> <strong>Size</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <select class="form-control" id="polpularpid" name="size_data"> />
+  <option value="" selected>Select Size</option>
+  <?php foreach ($size_data->result() as $size) { ?>
+     <option value="<?=$size->id;?>"><?=$size->filter_name;?></option>
+   <? } ?>
  </td>
 </tr>
 

@@ -164,6 +164,43 @@ $data['subcategory_data']= $this->db->get();
   $subcategory_id=$this->input->post('subcategory_id');
   $minorcategoryname=$this->input->post('minorcategoryname');
 
+  $img1='fileToUpload1';
+
+              $file_check=($_FILES['fileToUpload1']['error']);
+              if($file_check!=4){
+            	$image_upload_folder = FCPATH . "assets/uploads/minorcategory/";
+    						if (!file_exists($image_upload_folder))
+    						{
+    							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+    						}
+    						$new_file_name="minorcategory".date("Ymdhms");
+    						$this->upload_config = array(
+    								'upload_path'   => $image_upload_folder,
+    								'file_name' => $new_file_name,
+    								'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+    								'max_size'      => 25000
+    						);
+    						$this->upload->initialize($this->upload_config);
+    						if (!$this->upload->do_upload($img1))
+    						{
+    							$upload_error = $this->upload->display_errors();
+    							// echo json_encode($upload_error);
+    							echo $upload_error;
+    						}
+    						else
+    						{
+
+    							$file_info = $this->upload->data();
+
+    							$videoNAmePath = "assets/uploads/minorcategory/".$new_file_name.$file_info['file_ext'];
+    							$file_info['new_name']=$videoNAmePath;
+    							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+    							//$nnnn=$file_info['file_name'];
+                  $nnnn1=$videoNAmePath;
+    							// echo json_encode($file_info);
+    						}
+              }
+
                    $ip = $this->input->ip_address();
                    date_default_timezone_set("Asia/Calcutta");
                    $cur_date=date("Y-m-d H:i:s");
@@ -179,6 +216,8 @@ $data['subcategory_data']= $this->db->get();
                   'category_id'=>$category_id,
   'subcategory_id'=>$subcategory_id,
   'minorcategoryname'=>$minorcategoryname,
+  'image'=>$nnnn1,
+
 
                      'ip' =>$ip,
                      'added_by' =>$addedby,
@@ -201,6 +240,11 @@ $data['subcategory_data']= $this->db->get();
  $dsa=$this->db->get();
  $da=$dsa->row();
 
+if(!empty($nnnn1)){
+  $n1=$nnnn1;
+}else{
+  $n1=$da->image;
+}
 
 
 
@@ -209,6 +253,7 @@ $data['subcategory_data']= $this->db->get();
                   'category_id'=>$category_id,
   'subcategory_id'=>$subcategory_id,
   'minorcategoryname'=>$minorcategoryname,
+  'image'=>$n1
 
                      );
              $this->db->where('id', $idw);

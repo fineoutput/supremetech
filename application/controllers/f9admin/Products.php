@@ -92,6 +92,75 @@ $this->db->from('tbl_minorcategory');
 //$this->db->where('id',$usr);
 $data['minorcategory_data']= $this->db->get();
 
+//Brands
+$this->db->select('*');
+            $this->db->from('tbl_brands');
+            //$this->db->where('_id',$id);
+            $data['brand_data']= $this->db->get();
+
+//resolution
+$this->db->select('*');
+            $this->db->from('tbl_resolution');
+            //$this->db->where('_id',$id);
+            $data['resolution_data']= $this->db->get();
+//Lens
+$this->db->select('*');
+            $this->db->from('tbl_lens');
+            //$this->db->where('_id',$id);
+            $data['lens_data']= $this->db->get();
+// ir Distance
+$this->db->select('*');
+            $this->db->from('tbl_irdistance');
+            //$this->db->where('_id',$id);
+            $data['distance_data']= $this->db->get();
+//camera type
+$this->db->select('*');
+            $this->db->from('tbl_cameratype');
+            //$this->db->where('_id',$id);
+            $data['camera_data']= $this->db->get();
+
+  // body Material
+  $this->db->select('*');
+              $this->db->from('tbl_bodymaterial');
+              //$this->db->where('_id',$id);
+              $data['body_data']= $this->db->get();
+  // video Channel
+  $this->db->select('*');
+              $this->db->from('tbl_videochannel');
+              //$this->db->where('_id',$id);
+              $data['video_data']= $this->db->get();
+// poe Ports
+$this->db->select('*');
+            $this->db->from('tbl_poeports');
+            //$this->db->where('_id',$id);
+            $data['port_data']= $this->db->get();
+  // SATA ports
+  $this->db->select('*');
+              $this->db->from('tbl_sataports');
+              //$this->db->where('_id',$id);
+              $data['sata_data']= $this->db->get();
+
+  //Length
+  $this->db->select('*');
+              $this->db->from('tbl_length');
+              //$this->db->where('_id',$id);
+              $data['length_data']= $this->db->get();
+//screen size
+$this->db->select('*');
+            $this->db->from('tbl_screensize');
+            //$this->db->where('_id',$id);
+            $data['screen_data']= $this->db->get();
+//led type
+$this->db->select('*');
+            $this->db->from('tbl_ledtype');
+            //$this->db->where('_id',$id);
+            $data['led_data']= $this->db->get();
+
+//size
+$this->db->select('*');
+            $this->db->from('tbl_size');
+            //$this->db->where('_id',$id);
+            $data['size_data']= $this->db->get();
 
                    $this->load->view('admin/common/header_view',$data);
                    $this->load->view('admin/products/add_products');
@@ -202,6 +271,79 @@ $igt1=[];
                             $this->db->where('product_id',$id);
                             $data['inventory_data']= $this->db->get()->row();
 
+                            //Brands
+                            $this->db->select('*');
+                                        $this->db->from('tbl_brands');
+                                        //$this->db->where('_id',$id);
+                                        $data['brand_data']= $this->db->get();
+
+                            //resolution
+                            $this->db->select('*');
+                                        $this->db->from('tbl_resolution');
+                                        //$this->db->where('_id',$id);
+                                        $data['resolution_data']= $this->db->get();
+                            //Lens
+                            $this->db->select('*');
+                                        $this->db->from('tbl_lens');
+                                        //$this->db->where('_id',$id);
+                                        $data['lens_data']= $this->db->get();
+                            // ir Distance
+                            $this->db->select('*');
+                                        $this->db->from('tbl_irdistance');
+                                        //$this->db->where('_id',$id);
+                                        $data['distance_data']= $this->db->get();
+                            //camera type
+                            $this->db->select('*');
+                                        $this->db->from('tbl_cameratype');
+                                        //$this->db->where('_id',$id);
+                                        $data['camera_data']= $this->db->get();
+
+                              // body Material
+                              $this->db->select('*');
+                                          $this->db->from('tbl_bodymaterial');
+                                          //$this->db->where('_id',$id);
+                                          $data['body_data']= $this->db->get();
+                              // video Channel
+                              $this->db->select('*');
+                                          $this->db->from('tbl_videochannel');
+                                          //$this->db->where('_id',$id);
+                                          $data['video_data']= $this->db->get();
+                            // poe Ports
+                            $this->db->select('*');
+                                        $this->db->from('tbl_poeports');
+                                        //$this->db->where('_id',$id);
+                                        $data['port_data']= $this->db->get();
+                              // SATA ports
+                              $this->db->select('*');
+                                          $this->db->from('tbl_sataports');
+                                          //$this->db->where('_id',$id);
+                                          $data['sata_data']= $this->db->get();
+
+                              //Length
+                              $this->db->select('*');
+                                          $this->db->from('tbl_length');
+                                          //$this->db->where('_id',$id);
+                                          $data['length_data']= $this->db->get();
+                            //screen size
+                            $this->db->select('*');
+                                        $this->db->from('tbl_screensize');
+                                        //$this->db->where('_id',$id);
+                                        $data['screen_data']= $this->db->get();
+                            //led type
+                            $this->db->select('*');
+                                        $this->db->from('tbl_ledtype');
+                                        //$this->db->where('_id',$id);
+                                        $data['led_data']= $this->db->get();
+
+                            //size
+                            $this->db->select('*');
+                                        $this->db->from('tbl_size');
+                                        //$this->db->where('_id',$id);
+                                        $data['size_data']= $this->db->get();
+
+                                  
+
+
                      $this->load->view('admin/common/header_view',$data);
                      $this->load->view('admin/products/update_products');
                      $this->load->view('admin/common/footer_view');
@@ -241,6 +383,21 @@ $igt1=[];
   $this->form_validation->set_rules('feature_product', 'feature_product', 'required|trim');
   $this->form_validation->set_rules('popular_product', 'popular_product', 'required|trim');
 
+  //filter
+  $this->form_validation->set_rules('brands', 'brands', 'required|trim');
+  $this->form_validation->set_rules('resolution', 'resolution', 'required|trim');
+  $this->form_validation->set_rules('lens', 'lens', 'required|trim');
+  $this->form_validation->set_rules('irdistance', 'irdistance', 'required|trim');
+  $this->form_validation->set_rules('cameratype', 'cameratype', 'required|trim');
+  $this->form_validation->set_rules('bodymaterial', 'bodymaterial', 'required|trim');
+  $this->form_validation->set_rules('videochannel', 'videochannel', 'required|trim');
+  $this->form_validation->set_rules('poeports', 'poeports', 'required|trim');
+  $this->form_validation->set_rules('poetype', 'poetype', 'required|trim');
+  $this->form_validation->set_rules('sataports', 'sataports', 'required|trim');
+  $this->form_validation->set_rules('length', 'length', 'required|trim');
+  $this->form_validation->set_rules('screensize', 'screensize', 'required|trim');
+  $this->form_validation->set_rules('ledtype', 'ledtype', 'required|trim');
+  $this->form_validation->set_rules('size_data', 'size_data', 'required|trim');
 
 
 
@@ -259,6 +416,22 @@ $igt1=[];
   $weight=$this->input->post('weight');
   $feature_product=$this->input->post('feature_product');
   $popular_product=$this->input->post('popular_product');
+
+  //filter
+  $brand=$this->input->post('brands');
+  $resolution=$this->input->post('resolution');
+  $lens=$this->input->post('lens');
+  $irdistance=$this->input->post('irdistance');
+  $cameratype=$this->input->post('cameratype');
+  $bodymaterial=$this->input->post('bodymaterial');
+  $videochannel=$this->input->post('videochannel');
+  $poeports=$this->input->post('poeports');
+  $poetype=$this->input->post('poetype');
+  $sataports=$this->input->post('sataports');
+  $length=$this->input->post('length');
+  $screensize=$this->input->post('screensize');
+  $ledtype=$this->input->post('ledtype');
+  $size_data=$this->input->post('size_data');
 
 
 
@@ -477,6 +650,22 @@ $img5='video2';
 
   'feature_product'=>$feature_product,
   'popular_product'=>$popular_product,
+  'brand'=>$brand,
+  'resolution'=>$resolution,
+  'irdistance'=>$irdistance,
+  'cameratype'=>$cameratype,
+  'bodymaterial'=>$bodymaterial,
+  'videochannel'=>$videochannel,
+  'poeports'=>$poeports,
+  'poetype'=>$poetype,
+  'sataports'=>$sataports,
+  'length'=>$length,
+  'screensize'=>$screensize,
+  'ledtype'=>$ledtype,
+  'size'=>$size_data,
+  'lens'=>$lens,
+
+
 
                      'ip' =>$ip,
                      'added_by' =>$addedby,
@@ -706,7 +895,22 @@ $data_insert = array(
 'inventory'=>$inventory,
 'weight'=>$weight,
 'feature_product'=>$feature_product,
-'popular_product'=>$popular_product
+'popular_product'=>$popular_product,
+
+'brand'=>$brand,
+'resolution'=>$resolution,
+'irdistance'=>$irdistance,
+'cameratype'=>$cameratype,
+'bodymaterial'=>$bodymaterial,
+'videochannel'=>$videochannel,
+'poeports'=>$poeports,
+'poetype'=>$poetype,
+'sataports'=>$sataports,
+'length'=>$length,
+'screensize'=>$screensize,
+'ledtype'=>$ledtype,
+'size'=>$size_data,
+'lens'=>$lens
 
 
                      );

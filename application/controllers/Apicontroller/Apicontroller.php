@@ -1384,6 +1384,7 @@
                 'productimage2'=> base_url().$limit->image2,
                 'productimage3'=> base_url().$limit->image3,
                 'mrp'=> $limit->mrp,
+                'price'=>$limit->sellingprice,
                 'productdescription'=> $limit->productdescription,
                 // 'colours'=> $limit->colours,
                 // 'inventory'=> $data->inventory
@@ -1459,6 +1460,64 @@ public function brands_view(){
 
 
                }
+    //-------------show minorcategory---------------------
+    public function show_minorcategory(){
+
+                       $this->db->select('*');
+                                   $this->db->from('tbl_minorcategory');
+                                   // $this->db->where('id',$id);
+                                   $minor_category= $this->db->get();
+                                   $minorcategory=[];
+                                  foreach ($minor_category->result() as $value) {
+
+                                    $minorcategory[]=array(
+                                      'id'=>$value->id,
+                                       'minorcategory'=>$value->minorcategoryname,
+                                       'image'=>base_url().$value->image
+                                    );
+                                }
+                                header('Access-Control-Allow-Origin:*');
+                                $res=array(
+                                  'message'=>"success",
+                                  'status'=>200,
+                                  'data'=>$minorcategory
+                                );
+                                echo json_encode($res);
+
+                                    //
+                                    // //category
+                                    // $this->db->select('*');
+                                    //             $this->db->from('tbl_category');
+                                    //             $this->db->where('id',$value->category_id);
+                                    //             $category_id= $this->db->get()->row();
+                                    //             if(!empty($category_id)){
+                                    //               $category_name=$category_id->category;
+                                    //               //subcategory
+                                    //               $this->db->select('*');
+                                    //                           $this->db->from('tbl_subcategory');
+                                    //                           $this->db->where('id',$value->subcategory_id);
+                                    //                           $subcategory_data= $this->db->get()->row();
+                                    //                           if(!empty($subcategory_data)){
+                                    //                             $subcategory_name=$subcategory_data->subcategory;
+                                    //                             $minorcategory[]=array(
+                                    //                               'id'=>$value->id,
+                                    //                                'minorcategory'=>$value->minorcategoryname,
+                                    //                                'image'=>base_url().$value->image
+                                    //                             );
+                                    //
+                                    //                           }else{
+                                    //
+                                    //                           }
+                                    //
+                                    //             }else{
+                                    //
+                                    //             }
+
+                                  // }
+
+
+                   }
+
 
 
 

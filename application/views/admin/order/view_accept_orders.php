@@ -1,12 +1,12 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-           Completed Order
+           Accepted Order
           </h1>
           <ol class="breadcrumb">
            <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Completed Order </a></li>
-            <li class="active">View Completed Order</li>
+            <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Accepted Order </a></li>
+            <li class="active">View Accepted Order</li>
           </ol>
         </section>
           <section class="content">
@@ -15,7 +15,7 @@
                  <!-- <a class="btn btn-info cticket" href="<?php echo base_url() ?>admin/home/add_team" role="button" style="margin-bottom:12px;"> Add Order</a> -->
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Completed Order</h3>
+                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Accepted Order</h3>
                                   </div>
                                      <div class="panel panel-default">
 
