@@ -134,11 +134,11 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="mrp"  class="form-control" placeholder=""  value="<?=$products_data->mrp?>" />  </td>
+<td> <input type="number" name="mrp"  class="form-control" placeholder=""  value="<?=$products_data->mrp?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
+<td> <input type="number" name="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
@@ -146,15 +146,15 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="modelno"  class="form-control" placeholder=""  value="<?=$products_data->modelno?>" />  </td>
+<td> <input type="number" name="modelno"  class="form-control" placeholder=""  value="<?=$products_data->modelno?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="Inventory"  class="form-control" placeholder=""  value="<? if(!empty($inventory_data->quantity)){ echo $data1=$inventory_data->quantity;}else { echo $data1="";}?>" />  </td>
+<td> <input type="number" name="Inventory"  class="form-control" placeholder=""  value="<? if(!empty($inventory_data->quantity)){ echo $data1=$inventory_data->quantity;}else { echo $data1="";}?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Weight</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="weight"  class="form-control" placeholder=""  value="<?=$products_data->weight?>" />  </td>
+<td> <input type="number" name="weight"  class="form-control" placeholder=""  value="<?=$products_data->weight?>" />  </td>
 </tr>
 <td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <select class="form-control" id="featurepid" name="feature_product"   value="<?=$products_data->feature_product?>"> />

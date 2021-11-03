@@ -62,7 +62,7 @@
   <tr>
 <td> <strong>Subcategory </strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-  <select class="form-control" id="sid" name="subcategory_id">
+  <select class="form-control" id="sid" name="subcategory_id" required>
       <option value="">Please select subcategory</option>
       <?
 
@@ -77,7 +77,7 @@
   <tr>
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
-    <select class="form-control" id="mid" name="minorcategory_id">
+    <select class="form-control" id="mid" name="minorcategory_id" required>
 
     </select>
   </td>
@@ -101,12 +101,12 @@
 </tr>
   <tr>
 <td> <strong>MRP</strong>  <span style="color:red;"></span></strong> </td>
-<td> <input type="text" name="mrp"  class="form-control" placeholder=""  value="" />  </td>
+<td> <input type="number" name="mrp"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
   <tr>
 <td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="sellingprice"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="number" name="sellingprice"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
@@ -114,15 +114,15 @@
 </tr>
   <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="modelno"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="number" name="modelno"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="Inventory"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="number" name="Inventory"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>weight</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="weight"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="number" name="weight"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>

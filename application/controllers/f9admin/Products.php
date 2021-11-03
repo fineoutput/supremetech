@@ -77,6 +77,7 @@
  $id=base64_decode($idd);
 $data['id']=$idd;
 
+
             $this->db->select('*');
 $this->db->from('tbl_category');
 //$this->db->where('id',$usr);
@@ -84,7 +85,7 @@ $data['category_data']= $this->db->get();
 
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
-//$this->db->where('id',$usr);
+$this->db->where('category_id',$id);
 $data['subcategory_data']= $this->db->get();
 
             $this->db->select('*');

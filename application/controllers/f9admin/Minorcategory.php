@@ -177,7 +177,7 @@ $data['subcategory_data']= $this->db->get();
     						$this->upload_config = array(
     								'upload_path'   => $image_upload_folder,
     								'file_name' => $new_file_name,
-    								'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+    								'allowed_types' =>'jpg|jpeg|png',
     								'max_size'      => 25000
     						);
     						$this->upload->initialize($this->upload_config);
