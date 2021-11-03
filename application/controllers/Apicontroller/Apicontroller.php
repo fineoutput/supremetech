@@ -20,6 +20,8 @@
 
                               $this->db->select('*');
                   $this->db->from('tbl_slider');
+                  $this->db->where('is_active',1);
+
                   $sliderdata= $this->db->get();
                   $slider=[];
                 foreach($sliderdata->result() as $data) {
@@ -45,6 +47,7 @@
 
                               $this->db->select('*');
                   $this->db->from('tbl_category');
+                  $this->db->where('is_active',1);
                   $categorydata= $this->db->get();
                   $category=[];
                   foreach($categorydata->result() as $data) {
@@ -72,6 +75,7 @@
                               $this->db->select('*');
                   $this->db->from('tbl_subcategory');
                   $this->db->where('category_id',$id);
+                  $this->db->where('is_active',1);
                   $subcategorydata= $this->db->get();
                   $subcategory=[];
                   foreach($subcategorydata->result() as $data) {
@@ -93,9 +97,9 @@
                   }
 
 
-                  //  ========== Product Api =============
+                  //  ========== Product Api minorcategory =============
 
-                  public function get_all_products(){
+                  public function get_minorcategory_products(){
 
 
 
@@ -132,7 +136,7 @@
                                                       'product_name'=>$data->productname,
                                                       'description'=> $data->productdescription,
                                                       'mrp'=> $data->mrp,
-                                                      'sellingprice'=>$data->sellingprice,
+                                                      'price'=>$data->sellingprice,
                                                       'image'=>base_url().$data->image,
                                                       // 'image1'=>$data->image1
 
@@ -153,12 +157,149 @@
                   }
                 }
 
+//-------------------product api category ----------------
+
+                  public function get_category_products(){
+
+
+
+                			              $this->load->helper(array('form', 'url'));
+                			              $this->load->library('form_validation');
+                			              $this->load->helper('security');
+                			              if($this->input->post())
+                			              {
+                			                // print_r($this->input->post());
+                			                // exit;
+                			                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+                			                // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+                			                // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+
+
+                			                if($this->form_validation->run()== TRUE)
+                			                {
+                			                  $category_id=$this->input->post('category_id');
+                			                  // $subcategory_id=$this->input->post('subcategory_id');
+                			                  // $minorcategory_id=$this->input->post('minorcategory_id');
+
+                                                    $this->db->select('*');
+                                        $this->db->from('tbl_products');
+                                        $this->db->where('category_id',$category_id);
+                                        $this->db->where('is_active',1);
+
+                                        // $this->db->where('subcategory_id',$subcategory_id);
+                                        // $this->db->where('minorcategory_id',$minorcategory_id);
+                                        $product_data= $this->db->get();
+
+                                                 $product=[];
+                                                foreach ($product_data->result() as $data) {
+
+                                                    $product[] = array(
+                                                      'product_id'=>$data->id,
+                                                      'product_name'=>$data->productname,
+                                                      'description'=> $data->productdescription,
+                                                      'mrp'=> $data->mrp,
+                                                      'price'=>$data->sellingprice,
+                                                      'image'=>base_url().$data->image,
+                                                      // 'image1'=>$data->image1
+
+                                                    );
+
+                                                }
+
+                                                header('Access-Control-Allow-Origin: *');
+                                      					$res = array('message'=>"success",
+                                      								'status'=>200,
+                                      					      'data'=>$product
+                                      								);
+
+                                      								echo json_encode($res);
+
+                                      					  }
+
+                  }
+                }
+
+
+
+
+
+//-------------
+
+//-------------------product api subcategory----------------
+
+
+public function get_subcategory_products(){
+
+
+
+                  $this->load->helper(array('form', 'url'));
+                  $this->load->library('form_validation');
+                  $this->load->helper('security');
+                  if($this->input->post())
+                  {
+                    // print_r($this->input->post());
+                    // exit;
+                    // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+                    // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+
+
+                    if($this->form_validation->run()== TRUE)
+                    {
+                      // $category_id=$this->input->post('category_id');
+                      $subcategory_id=$this->input->post('subcategory_id');
+                      // $minorcategory_id=$this->input->post('minorcategory_id');
+
+                                  $this->db->select('*');
+                      $this->db->from('tbl_products');
+                      // $this->db->where('category_id',$category_id);
+
+                      $this->db->where('subcategory_id',$subcategory_id);
+                      // $this->db->where('minorcategory_id',$minorcategory_id);
+                      $this->db->where('is_active',1);
+                      $product_data= $this->db->get();
+
+                               $product=[];
+                              foreach ($product_data->result() as $data) {
+
+                                  $product[] = array(
+                                    'product_id'=>$data->id,
+                                    'product_name'=>$data->productname,
+                                    'description'=> $data->productdescription,
+                                    'mrp'=> $data->mrp,
+                                    'price'=>$data->sellingprice,
+                                    'image'=>base_url().$data->image,
+                                    // 'image1'=>$data->image1
+
+                                  );
+
+                              }
+
+                              header('Access-Control-Allow-Origin: *');
+                              $res = array('message'=>"success",
+                                    'status'=>200,
+                                    'data'=>$product
+                                    );
+
+                                    echo json_encode($res);
+
+                                }
+
+}
+}
+
+
+
+
+//---------------------
+
                   // ========= Get Product Details =========================
                     public function get_productdetails($id){
 
                               $this->db->select('*');
                   $this->db->from('tbl_products');
                   $this->db->where('id',$id);
+                  $this->db->where('is_active',1);
                   $productsdata= $this->db->get()->row();
                   if(!empty($productsdata)){
 
@@ -167,7 +308,7 @@
                       'productname'=> $productsdata->productname,
                       'productimage'=> base_url().$productsdata->image,
                       'mrp'=> $productsdata->mrp,
-                      'sellingprice'=> $productsdata->sellingprice,
+                      'price'=> $productsdata->sellingprice,
                       'productdescription'=> $productsdata->productdescription,
                       'modelno'=> $productsdata->modelno,
                       // 'inventory'=> $data->inventory
@@ -198,6 +339,7 @@
 
                               $this->db->select('*');
                   $this->db->from('tbl_category');
+                  $this->db->where('is_active',1);
                   $categorydata= $this->db->get();
                   $category=[];
                   foreach($categorydata->result() as $data) {
@@ -1330,6 +1472,7 @@
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->where('popular_product',1);
+                $this->db->where('is_active',1);
                 $productslimitdata= $this->db->get();
                 $products=[];
                 foreach($productslimitdata->result() as $limit) {
@@ -1407,7 +1550,7 @@
 
                                    $this->db->select('*');
                        $this->db->from('tbl_stock');
-                       //$this->db->where('is_active',1);
+                       $this->db->where('is_active',1);
                        $data= $this->db->get();
                        $stock=[];
                        foreach ($data->result() as $value) {
@@ -1438,6 +1581,7 @@ public function brands_view(){
   $this->db->select('*');
               $this->db->from('tbl_brands');
               //$this->db->where('id',$id);
+              $this->db->where('is_active',1);
               $brands= $this->db->get();
               $brands_data=[];
               foreach($brands->result() as $value){
@@ -1449,12 +1593,12 @@ public function brands_view(){
 
                 );
               }
-              header('Access-Control-Allow-Origin:*');
-              $res=array(
-                'message'=>"success",
-                'status'=>200,
-                'data'=>$brands_data
+              header('Access-Control-Allow-Origin: *');
+              $res = array('message'=>"success",
+              'status'=>200,
+              'data'=>$brands_data
               );
+
               echo json_encode($res);
 
 
@@ -1488,6 +1632,50 @@ public function brands_view(){
 
 
                 }
+
+//-------------------related product------------
+
+public function related_products($id){
+
+            $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$id);
+$product_data= $this->db->get()->row();
+
+            $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('minorcategory_id',$product_data->minorcategory_id);
+$related_data= $this->db->get();
+
+$related_info = [];
+foreach($related_data->result() as $data) {
+
+if($data->id!=$id){
+
+
+}
+$related_info[]  = array(
+'product_id'=>$data->id,
+'productname'=>$data->productname,
+'productimage'=>base_url().$data->image,
+'productdescription'=>$data->productdescription,
+'mrp'=>$data->mrp,
+'price'=>$data->sellingprice
+);
+}
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$related_info
+
+);
+
+echo json_encode($res);
+exit();
+
+
+}
 
 
 

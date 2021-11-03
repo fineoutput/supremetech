@@ -54,7 +54,7 @@
 
                $this->db->select('*');
               $this->db->from('tbl_category');
-                // $this->db->where('id',$usr);
+               $this->db->where('is_active',1);
                 $data['category_data']= $this->db->get();
 
 
@@ -80,17 +80,18 @@ $data['id']=$idd;
 
             $this->db->select('*');
 $this->db->from('tbl_category');
-//$this->db->where('id',$usr);
+$this->db->where('is_active',1);
 $data['category_data']= $this->db->get();
 
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
 $this->db->where('category_id',$id);
+$this->db->where('is_active',1);
 $data['subcategory_data']= $this->db->get();
 
             $this->db->select('*');
 $this->db->from('tbl_minorcategory');
-//$this->db->where('id',$usr);
+$this->db->where('is_active',1);
 $data['minorcategory_data']= $this->db->get();
 
 //Brands
@@ -188,6 +189,8 @@ $id=$_GET['isl'];
             $this->db->select('*');
 $this->db->from('tbl_subcategory');
 $this->db->where('category_id',$id);
+$this->db->where('is_active',1);
+
 $dat= $this->db->get();
 
 $i=1; foreach($dat->result() as $data) {
@@ -255,17 +258,18 @@ $igt1=[];
 
                             $this->db->select('*');
                             $this->db->from('tbl_category');
-                            // $this->db->where('id',$id);
+                            $this->db->where('is_active',1);
                             $data['category_data']= $this->db->get();
 
                                         $this->db->select('*');
                             $this->db->from('tbl_subcategory');
                             $this->db->where('category_id',$id1);
+                            $this->db->where('is_active',1);
                             $data['subcategory_data']= $this->db->get();
 
                                         $this->db->select('*');
                             $this->db->from('tbl_minorcategory');
-                            //$this->db->where('id',$usr);
+                            $this->db->where('is_active',1);
                             $data['minorcategory_data']= $this->db->get();
 
                                         $this->db->select('*');
@@ -477,17 +481,17 @@ $img2='image';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'jpg|jpeg|png',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
                      if (!$this->upload->do_upload($img2))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -520,17 +524,17 @@ $img3='image1';
                      $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'jpg|jpeg|png',
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
                      if (!$this->upload->do_upload($img3))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -570,10 +574,10 @@ $img4='video1';
                      if (!$this->upload->do_upload($img4))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -613,10 +617,10 @@ $img5='video2';
                      if (!$this->upload->do_upload($img5))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -724,10 +728,10 @@ $img2='image';
                      if (!$this->upload->do_upload($img2))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -767,10 +771,10 @@ $img3='image1';
                      if (!$this->upload->do_upload($img3))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -810,10 +814,10 @@ $img4='video1';
                      if (!$this->upload->do_upload($img4))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                         echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+           $this->session->set_flashdata('emessage',$upload_error);
+             redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
@@ -853,10 +857,10 @@ $img5='video2';
                      if (!$this->upload->do_upload($img5))
                      {
                          $upload_error = $this->upload->display_errors();
-                         // echo json_encode($upload_error);
+                           echo json_encode($upload_error);
 
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
+             $this->session->set_flashdata('emessage',$upload_error);
+               redirect($_SERVER['HTTP_REFERER']);
                      }
                      else
                      {
