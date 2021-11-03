@@ -55,8 +55,11 @@
        $this->db->from('tbl_category');
        $this->db->where('id',$data->category_id);
        $category_data= $this->db->get()->row();
-       
+       if(!empty($category_data)){
        $category_name=$category_data->category;
+     }else{
+       $category_name="";
+     }
        ?>
 
  	 <td><?php echo $category_name ?></td>

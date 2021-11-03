@@ -41,7 +41,9 @@
                                           <thead>
                                               <tr>
                                                   <th>#</th>
-                                                  <th>Image</th>
+                                                  <th>Image1</th>
+                                                  <th>Image2</th>
+
                                                   <th>Category</th>
                                                   <th>Status</th>
                                                   <th>Action</th>
@@ -54,6 +56,13 @@
                             <td>
                                 <?php if($data->image!=""){  ?>
           <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $data->image; ?>">
+                            <?php }else {  ?>
+                            Sorry No image Found
+                            <?php } ?>
+                              </td>
+                            <td>
+                                <?php if($data->image2!=""){  ?>
+          <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $data->image2; ?>">
                             <?php }else {  ?>
                             Sorry No image Found
                             <?php } ?>

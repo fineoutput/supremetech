@@ -120,7 +120,7 @@ $data['subcategory_data']= $this->db->get();
 
                                         $this->db->select('*');
                             $this->db->from('tbl_minorcategory');
-                            //$this->db->where('id',$usr);
+                            $this->db->where('id',$id);
                             $data['minorcategory_data']= $this->db->get()->row();
 
 
@@ -150,8 +150,8 @@ $data['subcategory_data']= $this->db->get();
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('category_id', 'category_id', 'trim');
-  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'trim');
+  $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
+  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategoryname', 'minorcategoryname', 'trim');
 
 

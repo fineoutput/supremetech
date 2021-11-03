@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+  <div class="content-wrapper">
                <section class="content-header">
                   <h1>
                  Add New Products
@@ -78,13 +78,7 @@
 <td> <strong>Minor Category</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
     <select class="form-control" id="mid" name="minorcategory_id">
-      <option value="">Please select minor category</option>
 
-      <?
-
-       foreach($minorcategory_data->result() as $value) {?>
-         <option value="<?=$value->id;?>"><?=$value->minorcategoryname;?></option>
-       <? }?>
     </select>
   </td>
 </tr>
@@ -151,7 +145,7 @@
 
 
   <tr>
-<td> <strong>Brand</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Brand</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="brands"> />
   <option value="" selected>Select Brand</option>
   <?php foreach ($brand_data->result() as $brands) { ?>
@@ -161,7 +155,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Resolution</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Resolution</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="resolution"> />
   <option value="" selected>Select Resolution</option>
   <?php foreach ($resolution_data->result() as $resolution) { ?>
@@ -171,7 +165,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Lens</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Lens</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="lens"> />
   <option value="" selected>Select Lens</option>
   <?php foreach ($lens_data->result() as $lens) { ?>
@@ -181,7 +175,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>IR Distance</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>IR Distance</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="irdistance"> />
   <option value="" selected>Select IR Distance</option>
   <?php foreach ($distance_data->result() as $distance) { ?>
@@ -191,7 +185,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Camera type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Camera type</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="cameratype"> />
   <option value="" selected>Select Camera type</option>
   <?php foreach ($camera_data->result() as $camera) { ?>
@@ -201,7 +195,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Body Material</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Body Material</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="bodymaterial"> />
   <option value="" selected>Select Body Material</option>
   <?php foreach ($body_data->result() as $body) { ?>
@@ -211,7 +205,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Video Channel</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Video Channel</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="videochannel"> />
   <option value="" selected>Select Video Channel</option>
   <?php foreach ($video_data->result() as $video) { ?>
@@ -221,7 +215,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>POE Ports</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>POE Ports</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="poeports"> />
   <option value="" selected>Select POE Ports</option>
   <?php foreach ($port_data->result() as $port) { ?>
@@ -230,7 +224,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>POE Type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>POE Type</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="poetype"> />
   <option value="" selected>Select POE Type</option>
   <?php foreach ($port_data->result() as $port) { ?>
@@ -241,7 +235,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>SATA Ports</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>SATA Ports</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="sataports"> />
   <option value="" selected>Select SATA Ports</option>
   <?php foreach ($sata_data->result() as $sata) { ?>
@@ -251,7 +245,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Length</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Length</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="length"> />
   <option value="" selected>Select Length</option>
   <?php foreach ($length_data->result() as $length) { ?>
@@ -261,7 +255,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Screen Size</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Screen Size</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="screensize"> />
   <option value="" selected>Select Screen Size</option>
   <?php foreach ($screen_data->result() as $screen) { ?>
@@ -271,7 +265,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>LED Type</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>LED Type</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="ledtype"> />
   <option value="" selected>Select LED Type</option>
   <?php foreach ($led_data->result() as $led) { ?>
@@ -281,7 +275,7 @@
  </td>
 </tr>
   <tr>
-<td> <strong>Size</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Size</strong>  <span style="color:red;"></span></strong> </td>
 <td> <select class="form-control" id="polpularpid" name="size_data"> />
   <option value="" selected>Select Size</option>
   <?php foreach ($size_data->result() as $size) { ?>
@@ -320,51 +314,7 @@
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>
      <link href=" <? echo base_url()  ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
      <script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
-<script>
-$(document).ready(function(){
-  	$("#cid").change(function(){
-		var vf=$(this).val();
-    // var yr = $("#year_id option:selected").val();
-		if(vf==""){
-			return false;
 
-		}else{
-			$('#sid option').remove();
-			  var opton="<option value=''>Please Select </option>";
-			$.ajax({
-				url:base_url+"dcadmin/products/getSubcategory?isl="+vf,
-				// url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
-				data : '',
-				type: "get",
-				success : function(html){
-						if(html!="NA")
-						{
-							var s = jQuery.parseJSON(html);
-							$.each(s, function(i) {
-							opton +='<option value="'+s[i]['sub_id']+'">'+s[i]['sub_name']+'</option>';
-							});
-							$('#sid').append(opton);
-							//$('#city').append("<option value=''>Please Select State</option>");
-
-                      //var json = $.parseJSON(html);
-                      //var ayy = json[0].name;
-                      //var ayys = json[0].pincode;
-						}
-						else
-						{
-							alert('No Subcategory Found');
-							return false;
-						}
-
-					}
-
-				})
-		}
-
-
-	})
-  });
-</script>
 <script>
 $(document).ready(function(){
   	$("#sid").change(function(){

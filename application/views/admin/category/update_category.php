@@ -49,11 +49,24 @@ Update New Category
         <tr>
                                   <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
                                   <td>
-            <input type="file" name="image"  class="form-control" placeholder="" required value="" />
+            <input type="file" name="fileToUpload2"  class="form-control" placeholder=""  value="" />
                                 </td>
                                 <td>
                                     <?php if($category->image!=""){  ?>
               <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $category->image; ?>">
+                                <?php }else {  ?>
+                                Sorry No image Found
+                                <?php } ?>
+                                  </td>
+          </tr>
+        <tr>
+                                  <td> <strong>Image2</strong>  <span style="color:red;">*</span></strong> </td>
+                                  <td>
+            <input type="file" name="fileToUpload1"  class="form-control" placeholder=""  value="" />
+                                </td>
+                                <td>
+                                    <?php if($category->image2!=""){  ?>
+              <img id="slide_img_path" height=100 width=100  src="<?php echo base_url() ?><?php echo $category->image2; ?>">
                                 <?php }else {  ?>
                                 Sorry No image Found
                                 <?php } ?>

@@ -345,50 +345,7 @@ Sorry No image Found
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href=" <? echo base_url()  ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
 <script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
-<script>
-$(document).ready(function(){
-$("#cid").change(function(){
-var vf=$(this).val();
-// var yr = $("#year_id option:selected").val();
-if(vf==""){
-return false;
 
-}else{
-$('#sid option').remove();
-var opton="<option value=''>Please Select </option>";
-$.ajax({
-url:base_url+"dcadmin/products/getSubcategory?isl="+vf,
-data : '',
-type: "get",
-success : function(html){
-if(html!="NA")
-{
-var s = jQuery.parseJSON(html);
-$.each(s, function(i) {
-opton +='<option value="'+s[i]['sub_id']+'">'+s[i]['sub_name']+'</option>';
-});
-$('#sid').append(opton);
-//$('#city').append("<option value=''>Please Select State</option>");
-
-//var json = $.parseJSON(html);
-//var ayy = json[0].name;
-//var ayys = json[0].pincode;
-}
-else
-{
-alert('No Subcategory Found');
-return false;
-}
-
-}
-
-})
-}
-
-
-})
-});
-</script>
 <script>
 $(document).ready(function(){
   	$("#sid").change(function(){

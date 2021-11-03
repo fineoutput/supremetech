@@ -74,7 +74,14 @@
 
   // print_r($category_data);
   // exit;
+  if(!empty($subcategory_data)){
+
+
 $subcategory_name=$subcategory_data->subcategory;
+}
+else{
+  $subcategory_name="";
+}
 echo $subcategory_name ;
   ?>
 </td>

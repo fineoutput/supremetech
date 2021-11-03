@@ -1439,9 +1439,10 @@ public function brands_view(){
               $this->db->from('tbl_brands');
               //$this->db->where('id',$id);
               $brands= $this->db->get();
-              $brands_data[]="";
+              $brands_data=[];
               foreach($brands->result() as $value){
                 $brands_data[]=array(
+                  'id'=>$value->id,
                   'name'=>$value->name,
                   'message'=>$value->message,
                   'image'=>base_url().$value->image

@@ -213,6 +213,7 @@ echo json_encode($igt);
                            $this->db->select('*');
                $this->db->from('tbl_minorcategory');
                $this->db->where('subcategory_id',$id);
+               $this->db->where('is_active',1);
                $dat= $this->db->get();
 $igt1=[];
                $i=1; foreach($dat->result() as $data) {
@@ -341,7 +342,7 @@ $igt1=[];
                                         //$this->db->where('_id',$id);
                                         $data['size_data']= $this->db->get();
 
-                                  
+
 
 
                      $this->load->view('admin/common/header_view',$data);
@@ -384,20 +385,20 @@ $igt1=[];
   $this->form_validation->set_rules('popular_product', 'popular_product', 'required|trim');
 
   //filter
-  $this->form_validation->set_rules('brands', 'brands', 'required|trim');
-  $this->form_validation->set_rules('resolution', 'resolution', 'required|trim');
-  $this->form_validation->set_rules('lens', 'lens', 'required|trim');
-  $this->form_validation->set_rules('irdistance', 'irdistance', 'required|trim');
-  $this->form_validation->set_rules('cameratype', 'cameratype', 'required|trim');
-  $this->form_validation->set_rules('bodymaterial', 'bodymaterial', 'required|trim');
-  $this->form_validation->set_rules('videochannel', 'videochannel', 'required|trim');
-  $this->form_validation->set_rules('poeports', 'poeports', 'required|trim');
-  $this->form_validation->set_rules('poetype', 'poetype', 'required|trim');
-  $this->form_validation->set_rules('sataports', 'sataports', 'required|trim');
-  $this->form_validation->set_rules('length', 'length', 'required|trim');
-  $this->form_validation->set_rules('screensize', 'screensize', 'required|trim');
-  $this->form_validation->set_rules('ledtype', 'ledtype', 'required|trim');
-  $this->form_validation->set_rules('size_data', 'size_data', 'required|trim');
+  $this->form_validation->set_rules('brands', 'brands', 'trim');
+  $this->form_validation->set_rules('resolution', 'resolution', 'trim');
+  $this->form_validation->set_rules('lens', 'lens', 'rtrim');
+  $this->form_validation->set_rules('irdistance', 'irdistance', 'trim');
+  $this->form_validation->set_rules('cameratype', 'cameratype', 'trim');
+  $this->form_validation->set_rules('bodymaterial', 'bodymaterial', 'trim');
+  $this->form_validation->set_rules('videochannel', 'videochannel', 'trim');
+  $this->form_validation->set_rules('poeports', 'poeports', 'trim');
+  $this->form_validation->set_rules('poetype', 'poetype', 'trim');
+  $this->form_validation->set_rules('sataports', 'sataports', 'trim');
+  $this->form_validation->set_rules('length', 'length', 'trim');
+  $this->form_validation->set_rules('screensize', 'screensize', 'trim');
+  $this->form_validation->set_rules('ledtype', 'ledtype', 'trim');
+  $this->form_validation->set_rules('size_data', 'size_data', 'trim');
 
 
 
