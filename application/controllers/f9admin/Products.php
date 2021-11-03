@@ -260,7 +260,7 @@ $igt1=[];
 
                                         $this->db->select('*');
                             $this->db->from('tbl_subcategory');
-                            //$this->db->where('id',$usr);
+                            $this->db->where('category_id',$id1);
                             $data['subcategory_data']= $this->db->get();
 
                                         $this->db->select('*');
