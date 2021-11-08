@@ -121,7 +121,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>Video 2</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="file" name="video1"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
+<td> <input type="file" name="video2"  class="form-control" placeholder=""  value="<?=$products_data->image2?>" />  </td>
 
 <td>
     <?php if($products_data->image3!=""){  ?>

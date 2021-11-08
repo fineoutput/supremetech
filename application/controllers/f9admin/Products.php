@@ -380,7 +380,7 @@ $igt1=[];
   $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
-  $this->form_validation->set_rules('mrp', 'mrp', 'trim|integer');
+  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim|integer');
   $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
@@ -456,11 +456,6 @@ $igt1=[];
   }
 
 
-                   $ip = $this->input->ip_address();
-                   date_default_timezone_set("Asia/Calcutta");
-                   $cur_date=date("Y-m-d H:i:s");
-                   $addedby=$this->session->userdata('admin_id');
-
 
 
 
@@ -469,7 +464,7 @@ $img2='image';
 
 
 
-         $image_upload_folder = FCPATH . "assets/uploads/products/";
+                  $image_upload_folder = FCPATH . "assets/uploads/products/";
                      if (!file_exists($image_upload_folder))
                      {
                          mkdir($image_upload_folder, DIR_WRITE_MODE, true);
@@ -483,7 +478,13 @@ $img2='image';
                      );
                      $this->upload->initialize($this->upload_config);
 
+                         if (!$this->upload->do_upload($img2))
+                         {
+                           $nnnn2="";
 
+                         }
+                         else
+                         {
                          $file_info = $this->upload->data();
 
                          $videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
@@ -493,6 +494,11 @@ $img2='image';
                          $nnnn2=$videoNAmePath;
 
                          // echo json_encode($file_info);
+                       }
+
+
+
+//-------------
 
 
 
@@ -517,6 +523,14 @@ $img3='image1';
                      );
                      $this->upload->initialize($this->upload_config);
 
+                     if (!$this->upload->do_upload($img3))
+                     {
+                       $nnnn3="";
+
+                     }
+                     else
+                     {
+
 
                          $file_info = $this->upload->data();
 
@@ -527,6 +541,7 @@ $img3='image1';
                          $nnnn3=$videoNAmePath;
 
                          // echo json_encode($file_info);
+                       }
 
 
 
@@ -550,6 +565,13 @@ $img4='video1';
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img4))
+                     {
+                       $nnnn4="";
+
+                     }
+                     else
+                     {
 
 
                          $file_info = $this->upload->data();
@@ -561,6 +583,7 @@ $img4='video1';
                          $nnnn4=$videoNAmePath;
 
                          // echo json_encode($file_info);
+                       }
 
 
 
@@ -584,6 +607,13 @@ $img5='video2';
                              'max_size'      => 25000
                      );
                      $this->upload->initialize($this->upload_config);
+                     if (!$this->upload->do_upload($img5))
+                     {
+                       $nnnn5="";
+
+                     }
+                     else
+                     {
 
 
                          $file_info = $this->upload->data();
@@ -595,10 +625,19 @@ $img5='video2';
                          $nnnn5=$videoNAmePath;
 
                          // echo json_encode($file_info);
+                       }
 
 
                      $typ=base64_decode($t);
                      // $last_id = 0;
+
+
+
+                                        $ip = $this->input->ip_address();
+                                        date_default_timezone_set("Asia/Calcutta");
+                                        $cur_date=date("Y-m-d H:i:s");
+                                        $addedby=$this->session->userdata('admin_id');
+
                      if($typ==1){
 
 
@@ -672,7 +711,33 @@ $img5='video2';
  $da=$dsa->row();
 
 if(!empty($nnnn2)){
+  $n1=$nnnn2;
 
+}else{
+  $n1=$da->image;
+}
+
+
+if(!empty($nnnn3)){
+  $n2=$nnnn3;
+
+}else{
+  $n2=$da->image1;
+}
+
+
+if(!empty($nnnn4)){
+  $n3=$nnnn4;
+
+}else{
+  $n3=$da->image2;
+}
+
+if(!empty($nnnn5)){
+  $n4=$nnnn5;
+
+}else{
+  $n4=$da->image3;
 }
 
 
@@ -685,10 +750,10 @@ $data_insert = array(
        'category_id'=>$category_id,
 'subcategory_id'=>$subcategory_id,
 'minorcategory_id'=>$minorcategory_id,
-'image'=>$nnnn2,
-'image1'=>$nnnn3,
-'image2'=>$nnnn4,
-'image3'=>$nnnn5,
+'image'=>$n1,
+'image1'=>$n2,
+'image2'=>$n3,
+'image3'=>$n4,
 'mrp'=>$mrp,
 'sellingprice'=>$sellingprice,
 'productdescription'=>$productdescription,

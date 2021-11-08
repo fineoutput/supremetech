@@ -100,8 +100,8 @@
 <td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>MRP</strong>  <span style="color:red;"></span></strong> </td>
-<td> <input type="number" name="mrp"  class="form-control" placeholder=""  value="" />  </td>
+<td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="mrp"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
   <tr>
