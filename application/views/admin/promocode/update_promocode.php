@@ -46,10 +46,7 @@
 
   <option value="first time" <?php if(!empty($promocode_data->ptype)){ echo "selected" ; } ?>>first time</option>
   <option value="Every time">Every time</option>
-
 </select>
-
-
 </td>
 </tr>
 	 <tr>

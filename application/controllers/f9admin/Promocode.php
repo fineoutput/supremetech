@@ -108,12 +108,7 @@
 	 $this->form_validation->set_rules('giftpercent', 'giftpercent', 'required');
 	 $this->form_validation->set_rules('minorder', 'minorder', 'required');
 	 $this->form_validation->set_rules('max', 'max', 'required');
-
-
-
-
-
-                if($this->form_validation->run()== TRUE)
+      if($this->form_validation->run()== TRUE)
                 {
  	 $promocode=$this->input->post('promocode');
 	 $ptype=$this->input->post('ptype');
@@ -292,7 +287,7 @@
 
   $zapak=$this->db->delete('tbl_promocode', array('id' => $id));
   if($zapak!=0){
-        
+
          redirect("dcadmin/promocode/view_promocode","refresh");
                  }
                  else

@@ -46,10 +46,7 @@
     <option value="" selected>select type</option>
     <option value="first time">first time</option>
     <option value="Every time">Every time</option>
-
   </select>
-
-
   </td>
  </tr>
 	 <tr>

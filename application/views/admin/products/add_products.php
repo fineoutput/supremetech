@@ -400,14 +400,8 @@ $(document).ready(function(){
      var v3=v1 + v2;
      $('#sp').val(v3);
 
-
-
-
-
-
-
   });
-  
+
 });
 
 </script>

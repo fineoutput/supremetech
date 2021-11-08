@@ -44,9 +44,7 @@
  	 <th>giftpercent</th>
  	 <th>minorder</th>
  	 <th>max</th>
-
-
-        <th>Status</th>
+      <th>Status</th>
         <th>Action</th>
         </tr>
         </thead>
@@ -60,10 +58,6 @@
  	 <td><?php echo $data->giftpercent ?></td>
  	 <td><?php echo $data->minorder ?></td>
  	 <td><?php echo $data->max ?></td>
-
-
-
-
 
         <td><?php if($data->is_active==1){ ?>
         <p class="label bg-green" >Active</p>
@@ -153,7 +147,3 @@
         <!-- <script type="text/javascript" src="<?php echo base_url()
         ?>assets/slider/ajaxupload.3.5.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/rs.js"></script> -->
-
-
-
-        

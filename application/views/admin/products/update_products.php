@@ -436,11 +436,6 @@ $(document).ready(function(){
      $('#sp').val(v3);
 
 
-
-
-
-
-
   });
   $('#sellingprice').keyup(function(){
 
