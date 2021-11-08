@@ -651,8 +651,8 @@ $img5='video2';
   'minorcategory_id'=>$minorcategory_id,
   'image'=>$nnnn2,
   'image1'=>$nnnn3,
-  'image2'=>$nnnn4,
-  'image3'=>$nnnn5,
+  'video1'=>$nnnn4,
+  'video2'=>$nnnn5,
   'mrp'=>$mrp,
   'sellingprice'=>$sellingprice,
   'productdescription'=>$productdescription,
@@ -730,14 +730,14 @@ if(!empty($nnnn4)){
   $n3=$nnnn4;
 
 }else{
-  $n3=$da->image2;
+  $n3=$da->video1;
 }
 
 if(!empty($nnnn5)){
   $n4=$nnnn5;
 
 }else{
-  $n4=$da->image3;
+  $n4=$da->video2;
 }
 
 
@@ -752,8 +752,8 @@ $data_insert = array(
 'minorcategory_id'=>$minorcategory_id,
 'image'=>$n1,
 'image1'=>$n2,
-'image2'=>$n3,
-'image3'=>$n4,
+'video1'=>$n3,
+'video2'=>$n4,
 'mrp'=>$mrp,
 'sellingprice'=>$sellingprice,
 'productdescription'=>$productdescription,

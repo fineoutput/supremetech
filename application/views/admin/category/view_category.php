@@ -41,8 +41,8 @@
                                           <thead>
                                               <tr>
                                                   <th>#</th>
-                                                  <th>Image1</th>
-                                                  <th>Image2</th>
+                                                  <th>Web Image</th>
+                                                  <th>App Image</th>
 
                                                   <th>Category</th>
                                                   <th>Status</th>

@@ -99,7 +99,7 @@ $minorcategory_data= $this->db->get()->row();
 // print_r($subcategory_data);
 // exit;
 
-if(!empty($minorcategory_name)){
+if(!empty($minorcategory_data)){
   $minorcategory_name=$minorcategory_data->minorcategoryname;
 }else{
   $minorcategory_name="";
@@ -130,10 +130,10 @@ if(!empty($minorcategory_name)){
 
 
         <td>
-        <?php if($data->image2!=""){ ?>
-        <!-- <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image2
+        <?php if($data->video1!=""){ ?>
+        <!-- <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->video1
         ?>" > -->
-        <video id="slide_img_path"  height=50 width=100 src="<?php echo base_url().$data->image2
+        <video id="slide_img_path"  height=50 width=100 src="<?php echo base_url().$data->video1
         ?>" autoplay poster="">
 
         </video>
@@ -144,8 +144,8 @@ if(!empty($minorcategory_name)){
 
 
         <td>
-        <?php if($data->image3!=""){ ?>
-          <video id="slide_img_path"  height=50 width=100 src="<?php echo base_url().$data->image3
+        <?php if($data->video2!=""){ ?>
+          <video id="slide_img_path"  height=50 width=100 src="<?php echo base_url().$data->video2
           ?>" autoplay poster="">
         <?php }else { ?>
         Sorry No File Found

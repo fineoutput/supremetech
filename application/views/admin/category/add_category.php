@@ -47,13 +47,13 @@ Add New Category
                         </td>
   </tr>
       <tr>
-                                <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
+                                <td> <strong>Web Image</strong>  <span style="color:red;">*</span></strong> </td>
                                 <td>
           <input type="file" name="fileToUpload2"  class="form-control" placeholder="" required value="" />
                               </td>
         </tr>
       <tr>
-                                <td> <strong>Image2</strong>  <span style="color:red;">*</span></strong> </td>
+                                <td> <strong>App Image2</strong>  <span style="color:red;">*</span></strong> </td>
                                 <td>
           <input type="file" name="fileToUpload1"  class="form-control" placeholder="" required value="" />
                               </td>
