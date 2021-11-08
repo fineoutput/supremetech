@@ -326,6 +326,7 @@ $res = array('message'=>"success",
 
     }
     else{
+      header('Access-Control-Allow-Origin: *');
       $res = array('message'=>"not valid",
       'status'=>201,
 );
@@ -758,6 +759,7 @@ echo json_encode($res);
 
             }
             else{
+              header('Access-Control-Allow-Origin: *');
             $res = array('message'=>validation_errors(),
                   'status'=>201
                   );
@@ -770,6 +772,7 @@ echo json_encode($res);
 }
 else{
 
+  header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"Insert data, No data Available",
   'status'=>201
   );
@@ -1046,14 +1049,12 @@ $last_id=$this->db->update('tbl_cart', $data_insert);
 
 if(!empty($last_id)){
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'success',
 'status'=>200
 );
 
 echo json_encode($res);
 }else{
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'Some error occured',
 'status'=>201
@@ -1064,7 +1065,6 @@ echo json_encode($res);
 
 }else{
 
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'Passwod does not match',
 'status'=>201
@@ -1077,7 +1077,6 @@ echo json_encode($res);
 
 }else{
 
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'Email is not exist',
 'status'=>201
@@ -1126,14 +1125,12 @@ $last_id=$this->db->update('tbl_cart', $data_insert);
 
 if(!empty($last_id)){
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'success',
 'status'=>200
 );
 
 echo json_encode($res);
 }else{
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>'Some error occured',
 'status'=>201
@@ -1146,7 +1143,6 @@ echo json_encode($res);
 }
 }else{
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Origin: *');
 $res = array('message'=>validation_errors(),
 'status'=>201
 );
@@ -1158,7 +1154,6 @@ echo json_encode($res);
 
 }else{
 
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"please insert data",
 'status'=>201

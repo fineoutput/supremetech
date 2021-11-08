@@ -192,6 +192,7 @@ $this->db->from('tbl_users');
 $this->db->where('phone',$phone);
 $user_data= $this->db->get()->row();
 
+header('Access-Control-Allow-Origin: *');
       $res = array('message'=>'success',
             'status'=>200,
             'authentication'=>$user_data->authentication
@@ -200,6 +201,7 @@ $user_data= $this->db->get()->row();
       echo json_encode($res);
 
     }else{
+      header('Access-Control-Allow-Origin: *');
       $res = array('message'=>'some error occured! Please try again',
             'status'=>201
             );
@@ -207,6 +209,7 @@ $user_data= $this->db->get()->row();
       echo json_encode($res);
     }
   }else{
+    header('Access-Control-Allow-Origin: *');
     $res = array('message'=>'OTP is already used',
           'status'=>201
           );
@@ -216,6 +219,7 @@ $user_data= $this->db->get()->row();
 
           }  else{
 
+            header('Access-Control-Allow-Origin: *');
             $res = array('message'=>'Wrong Otp',
                   'status'=>201
                   );
@@ -227,6 +231,7 @@ $user_data= $this->db->get()->row();
 
 
            }else{
+             header('Access-Control-Allow-Origin: *');
              $res = array('message'=>'Otp is not valid',
                   'status'=>201
                   );
@@ -238,6 +243,7 @@ $user_data= $this->db->get()->row();
 
           }else{
 
+            header('Access-Control-Allow-Origin: *');
             $res = array('message'=>validation_errors(),
                 'status'=>201
                 );
@@ -248,6 +254,7 @@ $user_data= $this->db->get()->row();
 
         }else{
 
+          header('Access-Control-Allow-Origin: *');
             $res = array('message'=>'Please insert some data, No data available',
                 'status'=>201
                 );
