@@ -259,7 +259,7 @@ $user_data= $this->db->get()->row();
         }
 
 
-public function register(){
+public function user_register(){
 
 
                   $this->load->helper(array('form', 'url'));
