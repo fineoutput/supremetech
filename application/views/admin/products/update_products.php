@@ -137,9 +137,25 @@ Sorry No image Found
 <td> <input type="number" name="mrp"  class="form-control" placeholder=""  value="<?=$products_data->mrp?>" />  </td>
 </tr>
 <tr>
-<td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
+<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="sellingprice" id="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
 </tr>
+<tr>
+<td> <strong>Gst %</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder="" required value="<?=$products_data->gstrate?>" />  </td>
+</tr>
+<tr>
+<td> <strong>Gst Price</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder="" required value="<?=$products_data->gstprice?>" />  </td>
+</tr>
+<tr>
+<td> <strong>Selling price</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="sp" id="sp" class="form-control" placeholder="" required value="<?=$products_data->sellingpricegst?>" />  </td>
+</tr>
+
+
+
+
 <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
 <td> <textarea name="productdescription" id="editor1" rows="3" cols="80"><?=$products_data->productdescription?></textarea>  </td>
@@ -400,4 +416,49 @@ CKEDITOR.replace( 'editor1' );
 // CKEDITOR.replace( 'editor2' );
 // CKEDITOR.replace( 'editor3' );
 //
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#gst').keyup(function() {
+
+    var price=$('#sellingprice').val();
+    //alert("hello" + price);
+    var gst=$('#gst').val();
+    //alert('hello '+ price +"gst"+gst);
+
+        $('#gstprice').val(price * gst/100);
+
+      // var sprice=$('#gstprice').val();
+     var v1=parseInt($('#sellingprice').val());
+     var v2=parseInt($('#gstprice').val());
+     var v3=v1 + v2;
+     $('#sp').val(v3);
+
+
+
+
+
+
+
+  });
+  $('#sellingprice').keyup(function(){
+
+    var price=$('#sellingprice').val();
+    //alert("hello" + price);
+    var gst=$('#gst').val();
+    //alert('hello '+ price +"gst"+gst);
+
+        $('#gstprice').val(price * gst/100);
+
+      // var sprice=$('#gstprice').val();
+     var v1=parseInt($('#sellingprice').val());
+     var v2=parseInt($('#gstprice').val());
+     var v3=v1 + v2;
+     $('#sp').val(v3);
+
+
+  });
+});
+
 </script>
