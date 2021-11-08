@@ -46,8 +46,8 @@ public function login(){
 
 
 
-                                $OTP = random_int(100000, 999999);
-
+                                // $OTP = random_int(100000, 999999);
+                                $OTP = 123456;
                                                   $data_insert2 = array(
                                                             'phone'=>$phone,
                                                             'otp'=>$OTP,
@@ -61,38 +61,38 @@ public function login(){
                                                   $last_id2=$this->base_model->insert_table("tbl_otp",$data_insert2,1) ;
 
 
-                                                  						$msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
-
-                                                  											$curl = curl_init();
-
-                                                  											curl_setopt_array($curl, array(
-                                                  												// http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=919799655891&message=otp%20is%20320451&sender=FORNXT&route=4
-                                                  											  CURLOPT_URL => "http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=".$phone."&message=OTP%20is%20".$OTP."%20for%20login%20on%20CEMENTWALE%20and%20valid%20till%205min%20Do%20not%20share%20this%20OTP%20to%20anyone%20for%20security%20reasons.%20Fortunext%20Cementwala&sender=FORNXT&route=4&country=91&DLT_TE_ID=1307163093625759975",
-                                                  											 CURLOPT_RETURNTRANSFER => true,
-                                                  											 CURLOPT_ENCODING => "",
-                                                  											 CURLOPT_MAXREDIRS => 10,
-                                                  											 CURLOPT_TIMEOUT => 30,
-                                                  											 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                                  											 CURLOPT_CUSTOMREQUEST => "GET",
-                                                  											 CURLOPT_SSL_VERIFYHOST => 0,
-                                                  											 CURLOPT_SSL_VERIFYPEER => 0,
-                                                  											));
-
-                                                  											$response = curl_exec($curl);
-                                                  											$err = curl_error($curl);
-                                                  											curl_close($curl);
-
-                                                  											if ($err) {
-                                                  											 echo "cURL Error #:" . $err;
-                                                  											} else
-                                                  											{
-                                                  											// echo $response;
-                                                  											}
+                                                  						// $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
+                                                              //
+                                                  						// 					$curl = curl_init();
+                                                              //
+                                                  						// 					curl_setopt_array($curl, array(
+                                                  						// 						// http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=919799655891&message=otp%20is%20320451&sender=FORNXT&route=4
+                                                  						// 					  CURLOPT_URL => "http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=".$phone."&message=OTP%20is%20".$OTP."%20for%20login%20on%20CEMENTWALE%20and%20valid%20till%205min%20Do%20not%20share%20this%20OTP%20to%20anyone%20for%20security%20reasons.%20Fortunext%20Cementwala&sender=FORNXT&route=4&country=91&DLT_TE_ID=1307163093625759975",
+                                                  						// 					 CURLOPT_RETURNTRANSFER => true,
+                                                  						// 					 CURLOPT_ENCODING => "",
+                                                  						// 					 CURLOPT_MAXREDIRS => 10,
+                                                  						// 					 CURLOPT_TIMEOUT => 30,
+                                                  						// 					 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                  						// 					 CURLOPT_CUSTOMREQUEST => "GET",
+                                                  						// 					 CURLOPT_SSL_VERIFYHOST => 0,
+                                                  						// 					 CURLOPT_SSL_VERIFYPEER => 0,
+                                                  						// 					));
+                                                              //
+                                                  						// 					$response = curl_exec($curl);
+                                                  						// 					$err = curl_error($curl);
+                                                  						// 					curl_close($curl);
+                                                              //
+                                                  						// 					if ($err) {
+                                                  						// 					 echo "cURL Error #:" . $err;
+                                                  						// 					} else
+                                                  						// 					{
+                                                  						// 					// echo $response;
+                                                  						// 					}
                                                                         if(!empty($last_id2)){
                                                                           header('Access-Control-Allow-Origin: *');
                                 $res=array(
                                   'message'=>'success',
-                                  'code'=>201,
+                                  'code'=>200,
                                 );
                                 echo json_encode($res);
                               }else{
@@ -187,9 +187,14 @@ public function login(){
 
           if(!empty($last_id)) {
 
+            $this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
       $res = array('message'=>'success',
             'status'=>200,
+            'authentication'=>$user_data->authentication
             );
 
       echo json_encode($res);
@@ -398,8 +403,8 @@ if(empty($userdata1)){
 
                 if($last_id!=0){
 
-$OTP = random_int(100000, 999999);
-
+// $OTP = random_int(100000, 999999);
+$OTP = 123456;
                   $data_insert2 = array(
                             'phone'=>$phone,
                             'otp'=>$OTP,
@@ -414,33 +419,33 @@ $OTP = random_int(100000, 999999);
                   $last_id2=$this->base_model->insert_table("tbl_otp",$data_insert2,1) ;
 
 
-                  						$msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
-
-                  											$curl = curl_init();
-
-                  											curl_setopt_array($curl, array(
-                  												// http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=919799655891&message=otp%20is%20320451&sender=FORNXT&route=4
-                  											  CURLOPT_URL => "http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=".$phone."&message=OTP%20is%20".$OTP."%20for%20login%20on%20CEMENTWALE%20and%20valid%20till%205min%20Do%20not%20share%20this%20OTP%20to%20anyone%20for%20security%20reasons.%20Fortunext%20Cementwala&sender=FORNXT&route=4&country=91&DLT_TE_ID=1307163093625759975",
-                  											 CURLOPT_RETURNTRANSFER => true,
-                  											 CURLOPT_ENCODING => "",
-                  											 CURLOPT_MAXREDIRS => 10,
-                  											 CURLOPT_TIMEOUT => 30,
-                  											 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                  											 CURLOPT_CUSTOMREQUEST => "GET",
-                  											 CURLOPT_SSL_VERIFYHOST => 0,
-                  											 CURLOPT_SSL_VERIFYPEER => 0,
-                  											));
-
-                  											$response = curl_exec($curl);
-                  											$err = curl_error($curl);
-                  											curl_close($curl);
-
-                  											if ($err) {
-                  											 echo "cURL Error #:" . $err;
-                  											} else
-                  											{
-                  											// echo $response;
-                  											}
+                  						// $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
+                              //
+                  						// 					$curl = curl_init();
+                              //
+                  						// 					curl_setopt_array($curl, array(
+                  						// 						// http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=919799655891&message=otp%20is%20320451&sender=FORNXT&route=4
+                  						// 					  CURLOPT_URL => "http://www.smsguruonline.com/api/sendhttp.php?authkey=366782AviUbjnf61334546P1&mobiles=".$phone."&message=OTP%20is%20".$OTP."%20for%20login%20on%20CEMENTWALE%20and%20valid%20till%205min%20Do%20not%20share%20this%20OTP%20to%20anyone%20for%20security%20reasons.%20Fortunext%20Cementwala&sender=FORNXT&route=4&country=91&DLT_TE_ID=1307163093625759975",
+                  						// 					 CURLOPT_RETURNTRANSFER => true,
+                  						// 					 CURLOPT_ENCODING => "",
+                  						// 					 CURLOPT_MAXREDIRS => 10,
+                  						// 					 CURLOPT_TIMEOUT => 30,
+                  						// 					 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  						// 					 CURLOPT_CUSTOMREQUEST => "GET",
+                  						// 					 CURLOPT_SSL_VERIFYHOST => 0,
+                  						// 					 CURLOPT_SSL_VERIFYPEER => 0,
+                  						// 					));
+                              //
+                  						// 					$response = curl_exec($curl);
+                  						// 					$err = curl_error($curl);
+                  						// 					curl_close($curl);
+                              //
+                  						// 					if ($err) {
+                  						// 					 echo "cURL Error #:" . $err;
+                  						// 					} else
+                  						// 					{
+                  						// 					// echo $response;
+                  						// 					}
 
 
 
@@ -556,6 +561,8 @@ $OTP = random_int(100000, 999999);
     $this->db->where('id',$otp_data->temp_id);
     $temp_data= $this->db->get()->row();
 
+$authentication = bin2hex(random_bytes(12));
+
             $data_insert = array('name'=>$temp_data->name,
     			                       'email'=>$temp_data->email,
     			                       'dob'=>$temp_data->dob,
@@ -569,6 +576,7 @@ $OTP = random_int(100000, 999999);
     			                       'image1'=>$temp_data->image1,
     			                       'image2'=>$temp_data->image2,
     			                       'token_id'=>$temp_data->token_id,
+                                 'authentication'=>$authentication,
     			                       'ip' =>$ip,
     			                       'is_active' =>1,
     			                       'date'=>$cur_date
@@ -600,7 +608,8 @@ header('Access-Control-Allow-Origin: *');
 
     	$res = array('message'=>'success',
     				'status'=>200,
-    				'user_id'=>$last_id2
+    				'user_id'=>$last_id2,
+            'authentication'=>$authentication
     				);
 
     	echo json_encode($res);
