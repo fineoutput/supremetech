@@ -49,6 +49,10 @@
  	 <th>Video 2</th>
  	 <th>MRP</th>
  	 <th>Selling Price</th>
+ 	 <th>Gst %</th>
+ 	 <th>Gst price</th>
+ 	 <th>Selling Price(Gst)</th>
+
  	 <th>Product Description</th>
  	 <th>Model No.</th>
  	 <th>Inventory</th>
@@ -154,6 +158,10 @@ if(!empty($minorcategory_data)){
 
 	 <td><?php echo $data->mrp ?></td>
 	 <td><?php echo $data->sellingprice ?></td>
+	 <td><?php echo $data->gstrate ?></td>
+	 <td><?php echo $data->gstprice ?></td>
+	 <td><?php echo $data->sellingpricegst ?></td>
+
  	 <td><?php echo $data->productdescription ?></td>
  	 <td><?php echo $data->modelno ?></td>
    <!-- <?

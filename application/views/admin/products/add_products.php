@@ -101,12 +101,24 @@
 </tr>
   <tr>
 <td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="mrp"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="number" name="mrp"  class="form-control" id="mrp"  placeholder="" required value="" />  </td>
+</tr>
+  <!-- <tr> -->
+  <tr>
+<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="sellingprice"  class="form-control" id="sellingprice" placeholder="" required value="" />  </td>
 </tr>
   <tr>
+<td> <strong>Gst %</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder="" required value="" />  </td>
+</tr>
   <tr>
-<td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="sellingprice"  class="form-control" placeholder="" required value="" />  </td>
+<td> <strong>Gst Price</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder="" required value="" />  </td>
+</tr>
+  <tr>
+<td> <strong>Selling price</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" name="sp" id="sp" class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Product Description</strong>  <span style="color:red;">*</span></strong> </td>
@@ -369,4 +381,32 @@ CKEDITOR.replace( 'editor1' );
 // CKEDITOR.replace( 'editor2' );
 // CKEDITOR.replace( 'editor3' );
 //
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#gst').keyup(function() {
+
+    var price=$('#sellingprice').val();
+    // alert("hello" + price);
+    var gst=$('#gst').val();
+    //alert('hello '+ price +"gst"+gst);
+
+        $('#gstprice').val(price * gst/100);
+
+      // var sprice=$('#gstprice').val();
+     var v1=parseInt($('#sellingprice').val());
+     var v2=parseInt($('#gstprice').val());
+     var v3=v1 + v2;
+     $('#sp').val(v3);
+
+
+
+
+
+
+
+  });
+});
+
 </script>

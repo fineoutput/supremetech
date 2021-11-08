@@ -382,6 +382,10 @@ $igt1=[];
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
   $this->form_validation->set_rules('mrp', 'mrp', 'required|trim|integer');
   $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
+  $this->form_validation->set_rules('gst', 'gst', 'required|trim');
+  $this->form_validation->set_rules('gstprice', 'gstprice', 'required|trim');
+  $this->form_validation->set_rules('sp', 'sp', 'required|trim');
+
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
   $this->form_validation->set_rules('Inventory', 'Inventory', 'required|trim|integer');
@@ -416,6 +420,10 @@ $igt1=[];
   $minorcategory_id=$this->input->post('minorcategory_id');
   $mrp=$this->input->post('mrp');
   $sellingprice=$this->input->post('sellingprice');
+  $gst=$this->input->post('gst');
+  $gstprice=$this->input->post('gstprice');
+  $sp=$this->input->post('sp');
+
   $productdescription=$this->input->post('productdescription');
   $modelno=$this->input->post('modelno');
   $inventory=$this->input->post('Inventory');
@@ -655,6 +663,10 @@ $img5='video2';
   'video2'=>$nnnn5,
   'mrp'=>$mrp,
   'sellingprice'=>$sellingprice,
+  'gstrate'=>$gst,
+  'gstprice'=>$gstprice,
+  'sellingpricegst'=>$sp,
+
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
   'weight'=>$weight,
@@ -756,6 +768,9 @@ $data_insert = array(
 'video2'=>$n4,
 'mrp'=>$mrp,
 'sellingprice'=>$sellingprice,
+'gstrate'=>$gst,
+'gstprice'=>$gstprice,
+'sellingpricegst'=>$sp,
 'productdescription'=>$productdescription,
 'weight'=>$modelno,
 'inventory'=>$inventory,
