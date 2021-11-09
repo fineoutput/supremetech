@@ -195,6 +195,8 @@ $user_data= $this->db->get()->row();
 header('Access-Control-Allow-Origin: *');
       $res = array('message'=>'success',
             'status'=>200,
+            'name'=>$user_data->name,
+            'phone'=>$user_data->phone,
             'authentication'=>$user_data->authentication
             );
 
@@ -611,6 +613,8 @@ header('Access-Control-Allow-Origin: *');
     	$res = array('message'=>'success',
     				'status'=>200,
     				'user_id'=>$last_id2,
+            'name'=>$temp_data->name,
+            'phone'=>$temp_data->phone,
             'authentication'=>$authentication
     				);
 

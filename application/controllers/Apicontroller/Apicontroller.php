@@ -1795,12 +1795,30 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 
 }//end of foreach
 
-
+            $this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('user_id',$user_data->id);
+$this->db->where('payment_status',1);
+$this->db->order_by('id',"DESC");
+$address_data= $this->db->get()->row();
+$address = [];
+if(!empty($address_data)){
+  $address = array(
+    "name"=>$address_data->name,
+    "pincode"=>$address_data->pincode,
+    "house_no"=>$address_data->house_no,
+    "street_address"=>$address_data->street_address,
+    "city"=>$address_data->city,
+    "state"=>$address_data->state,
+    "phone"=>$address_data->phone,
+  );
+}
               header('Access-Control-Allow-Origin: *');
               $res = array('message'=>"success",
                     'status'=>200,
                     'subtotal'=>$sub_total,
-                    'txn_id'=>$txn_id
+                    'txn_id'=>$txn_id,
+                    'address'=>$address
                     );
 
                     echo json_encode($res);
