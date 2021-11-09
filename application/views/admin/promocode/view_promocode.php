@@ -39,12 +39,12 @@
         <tr>
         <th>#</th>
 
- 	 <th>promocode</th>
- 	 <th>ptype</th>
- 	 <th>giftpercent</th>
- 	 <th>minorder</th>
- 	 <th>max</th>
-      <th>Status</th>
+ 	 <th>Promocode</th>
+ 	 <th>Promocode type</th>
+ 	 <th>Giftpercent</th>
+ 	 <th>Minorder</th>
+ 	 <th>Max</th>
+    <th>Status</th>
         <th>Action</th>
         </tr>
         </thead>

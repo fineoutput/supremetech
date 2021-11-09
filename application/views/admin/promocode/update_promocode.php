@@ -36,11 +36,11 @@
                                 <div class="table-responsive">
                                     <table class="table table-hover">
 	 <tr>
- <td> <strong>promocode</strong>  <span style="color:red;">*</span></strong> </td>
+ <td> <strong>Promocode</strong>  <span style="color:red;">*</span></strong> </td>
  <td> <input type="text" name="promocode"  class="form-control" placeholder="" required value="<?=$promocode_data->promocode;?>" />  </td>
  </tr>
  <tr>
-<td> <strong>ptype</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Promocode Type</strong>  <span style="color:red;">*</span></strong> </td>
 <td>
 <select class="form-control" required name="ptype">
 
@@ -50,15 +50,15 @@
 </td>
 </tr>
 	 <tr>
- <td> <strong>giftpercent</strong>  <span style="color:red;">*</span></strong> </td>
+ <td> <strong>Giftpercent</strong>  <span style="color:red;">*</span></strong> </td>
  <td> <input type="number" name="giftpercent"  class="form-control" placeholder="" required value="<?=$promocode_data->giftpercent;?>" />  </td>
  </tr>
 	 <tr>
- <td> <strong>minorder</strong>  <span style="color:red;">*</span></strong> </td>
+ <td> <strong>Minorder</strong>  <span style="color:red;">*</span></strong> </td>
  <td> <input type="number" name="minorder"  class="form-control" placeholder="" required value="<?=$promocode_data->minorder;?>" />  </td>
  </tr>
 	 <tr>
- <td> <strong>max</strong>  <span style="color:red;">*</span></strong> </td>
+ <td> <strong>Max</strong>  <span style="color:red;">*</span></strong> </td>
  <td> <input type="number" name="max"  class="form-control" placeholder="" required value="<?=$promocode_data->max;?>" />  </td>
  </tr>
 
