@@ -470,7 +470,6 @@ $OTP = 123456;
 
                       {
                         header('Access-Control-Allow-Origin: *');
-
                         $res = array('message'=>"Sorry error occured",
                               'status'=>201
                               );
@@ -483,7 +482,6 @@ $OTP = 123456;
                       }
 }else{
   header('Access-Control-Allow-Origin: *');
-
   $res = array('message'=>'User already exist',
         'status'=>201
         );
@@ -497,7 +495,6 @@ $OTP = 123456;
                     }
                   else{
                     header('Access-Control-Allow-Origin: *');
-
                     $res = array('message'=>validation_errors(),
                           'status'=>201
                           );
@@ -510,7 +507,6 @@ $OTP = 123456;
                   }
                 else{
                   header('Access-Control-Allow-Origin: *');
-
                   $res = array('message'=>"Please insert some data, No data available",
                         'status'=>201
                         );
@@ -612,7 +608,6 @@ if(!empty($cart_check)){
 
 }
 header('Access-Control-Allow-Origin: *');
-
     	$res = array('message'=>'success',
     				'status'=>200,
     				'user_id'=>$last_id2,
