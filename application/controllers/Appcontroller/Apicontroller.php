@@ -1461,8 +1461,8 @@ $products[] = array(
 // 'minorcategory'=>$m1,
 'productimage'=> base_url().$limit->image,
 'productimage1'=> base_url().$limit->image1,
-'productimage2'=> base_url().$limit->image2,
-'productimage3'=> base_url().$limit->image3,
+'productimage2'=> base_url().$limit->video1,
+'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
@@ -1470,6 +1470,7 @@ $products[] = array(
 // 'inventory'=> $data->inventory
 );
 }
+
 
 $res = array('message'=>"success",
 'status'=>200,
