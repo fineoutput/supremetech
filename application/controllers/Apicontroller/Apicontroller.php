@@ -1717,6 +1717,7 @@ $sub_total=0;
                $this->db->select('*');
    $this->db->from('tbl_products');
    $this->db->where('id',$data->product_id);
+   $this->db->where('is_active',1);
    $product_data= $this->db->get()->row();
 
 if(!empty($product_data)){
@@ -1726,6 +1727,14 @@ $total = $product_data->sellingprice * $data->quantity;
 $sub_total = $sub_total + $total;
 
 
+
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"product not found",
+        'status'=>201,
+        );
+
+        echo json_encode($res);
 
 }
 
@@ -1781,10 +1790,18 @@ $order2_insert = array('main_id'=>$last_id,
 
 $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 
-}
 }else{
   header('Access-Control-Allow-Origin: *');
   $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
+        'status'=>201,
+        );
+
+        echo json_encode($res);
+        exit;
+}
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"Product is found.",
         'status'=>201,
         );
 
@@ -1822,12 +1839,33 @@ if(!empty($address_data)){
                     );
 
                     echo json_encode($res);
-                    }
-}
+                  }else{
+                    header('Access-Control-Allow-Origin: *');
+                    $res = array('message'=>"some error occured",
+                          'status'=>201,
+                          );
+
+                          echo json_encode($res);
+                  }
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"Cart is empty",
+        'status'=>201,
+        );
+
+        echo json_encode($res);
 }
 }else{
   header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"fail",
+  $res = array('message'=>"Wrong Authentication",
+        'status'=>201,
+        );
+
+        echo json_encode($res);
+}
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"No user found",
         'status'=>201,
         );
 

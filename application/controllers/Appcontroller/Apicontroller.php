@@ -1567,6 +1567,69 @@ public function show_minorcategory(){
 
 }
 
+//-----feature product--
+public function feature_product(){
+
+
+                   $this->db->select('*');
+       $this->db->from('tbl_products');
+       $this->db->where('feature_product',1);
+       $this->db->where('is_active',1);
+       $data= $this->db->get();
+       $feature=[];
+       foreach ($data->result() as $limit) {
+
+$feature[] = array(
+'product_id'=>$limit->id,
+'productname'=> $limit->productname,
+'productimage'=> base_url().$limit->image,
+'productimage1'=> base_url().$limit->image1,
+'productimage2'=> base_url().$limit->video1,
+'productimage3'=> base_url().$limit->video2,
+'mrp'=> $limit->mrp,
+'price'=>$limit->sellingprice,
+'productdescription'=> $limit->productdescription,
+);
+
+
+       }
+         $res=array(
+           'message'=>"success",
+           'status'=>200,
+           'data'=>$feature
+         );
+         echo json_encode($res);
+
+
+
+}
+
+//---home two images---
+public function home_two_image(){
+  $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('is_active',1);
+$data= $this->db->get()->row();
+$image=[];
+
+$image = array(
+'image1'=> base_url().$data->image,
+'image2'=> base_url().$data->image1,
+);
+
+$res=array(
+'message'=>"success",
+'status'=>200,
+'data'=>$image
+);
+echo json_encode($res);
+
+
+
+}
+
+
+
 //-------------------related product------------
 
 public function related_products($id){
