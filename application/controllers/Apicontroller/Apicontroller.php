@@ -628,7 +628,7 @@ echo json_encode($res);
 
 }else{
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'password not exist',
+$res = array('message'=>'Authentication not exist',
 'status'=>201
 );
 
@@ -878,7 +878,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Email is not exist',
+$res = array('message'=>'Phone is not exist',
 'status'=>201
 );
 
@@ -987,30 +987,30 @@ if($this->input->post())
 // exit;
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
-$email_id=$this->input->post('email_id');
+$phone=$this->input->post('phone');
 $password=$this->input->post('password');
 $token_id=$this->input->post('token_id');
 
 //-------update with email----------
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$phone);
 $dsa= $this->db->get();
 $user_data=$dsa->row();
 if(!empty($user_data)){
 
-if($user_data->password==$password){
+if($user_data->authentication==$authentication){
 
 
   $this->db->select('*');
@@ -1078,7 +1078,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Email is not exist',
+$res = array('message'=>'Phone is not exist',
 'status'=>201
 );
 
@@ -1177,128 +1177,74 @@ if($this->input->post())
 {
 
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'valid_email|xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 
 $token_id=$this->input->post('token_id');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
 
-if($token_id==NULL && $email_id==NULL && $password==NULL){
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"data is not insert",
-'status'=>201,
+//-----cart count check with phone
+if(!empty($phone)){
 
-);
-
-echo json_encode($res);
-exit();
-
-}
-
-
-if(!empty($email_id) || !empty($password)){
-
-$this->db->select('*');
+            $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
-$this->db->where('password',$password);
-$dsa= $this->db->get();
-$user=$dsa->row();
-if(!empty($user)){
-$user_id=$user->id;
-$pass=$user->password;
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-}else{
+if(!empty($user_data)){
 
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"email or password do not match",
-'status'=>201,
+if($user_data->authentication==$authentication){
 
-);
-
-echo json_encode($res);
-exit();
-
-}
-
-
-$this->db->select('*');
+            $this->db->select('*');
 $this->db->from('tbl_cart');
-$this->db->where('user_id',$user_id);
+$this->db->where('user_id',$user_data->id);
+$count= $this->db->count_all_results();
 
-$counting=$this->db->count_all_results();
-if(!empty($counting)){
-
-
-
+if(empty($count)){
+  $count = 0;
+}
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
 'status'=>200,
-'data'=>$counting
+'data'=>$count
 );
 
 echo json_encode($res);
 
 }else{
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"no add product cart",
-'status'=>200,
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"Wrong  Authentication",
+  'status'=>201
+  );
 
-);
-
-echo json_encode($res);
-exit();
-
+  echo json_encode($res);
 }
 
-
-}else{
-
-$this->db->select('*');
-$this->db->from('tbl_cart');
-$this->db->where('token_id',$token_id);
-$counting=$this->db->count_all_results();
-if(!empty($counting)){
-
-
-$fa= $counting;
-
-
-
-
-}else{
-
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"token_id wrong",
-'status'=>201,
-
-);
-
-echo json_encode($res);
-exit();
-
 }
-
-
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"success",
-'status'=>200,
-'data'=>$fa
-);
-
-echo json_encode($res);
-
-
-
-
-
-
 }
+//----cart check with token_id
+else{
 
+              $this->db->select('*');
+  $this->db->from('tbl_cart');
+  $this->db->where('token_id',$token_id);
+  $count= $this->db->count_all_results();
+
+  if(empty($count)){
+    $count = 0;
+  }
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"success",
+  'status'=>200,
+  'data'=>$count
+  );
+
+  echo json_encode($res);
+}
 }
 else{
 header('Access-Control-Allow-Origin: *');
@@ -2907,7 +2853,7 @@ if(!empty($order2_check)){
 
 
             $this->db->select('*');
-            $this->db->from('tbl_products');
+            $this->db->from('tbl_inventory');
             $this->db->where('id',$data->product_id);
             $product_data= $this->db->get()->row();
 
