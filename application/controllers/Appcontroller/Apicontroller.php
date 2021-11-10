@@ -51,6 +51,7 @@ $categorydata= $this->db->get();
 $category=[];
 foreach($categorydata->result() as $data) {
 $category[] = array(
+     'category_id'=>$data->id,
     'categoryname'=> $data->category
 
 );
@@ -488,19 +489,27 @@ $this->load->helper('security');
 if($this->input->post())
 {
 
+$headers=$this->input->request_headers();
+
+       $email_id=$headers['phone'];
+        $password=$headers['authentication'];
+				$token_id=$headers['token_id'];
+
+
+
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'valid_email|trim');
-$this->form_validation->set_rules('password', 'password', 'trim');
-$this->form_validation->set_rules('token_id', 'token_id', 'required|trim');
+// $this->form_validation->set_rules( $email, $email, 'valid_email|trim');
+// $this->form_validation->set_rules( $password, $password, 'trim');
+// $this->form_validation->set_rules( $token_id, $token_id, 'required|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
-$token_id=$this->input->post('token_id');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+// $token_id=$this->input->post('token_id');
 
 
 // --------------add to cart using email------------
@@ -511,11 +520,11 @@ if(!empty($email_id)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$email_id);
 $check_email= $this->db->get();
 $check_id=$check_email->row();
 if(!empty($check_id)){
-if($check_id->password == $password){
+if($check_id->authentication == $password){
 $this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('user_id',$check_id->id);
@@ -2194,6 +2203,80 @@ echo json_encode($res);
 
 
 }
+
+//=============  subcategory using category_id ================
+
+public function get_subcategory_id(){
+
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+
+    $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+
+
+
+    if($this->form_validation->run()== TRUE)
+    {
+
+       $category_id=$this->input->post('category_id');
+
+//---------
+                                        $this->db->select('*');
+                            $this->db->from('tbl_subcategory');
+                            $this->db->where('category_id',$category_id);
+                            $this->db->where('is_active',1);
+                            $subcategorydata= $this->db->get();
+                            $subcategory=[];
+                            foreach($subcategorydata->result() as $data) {
+                            $subcategory[] = array(
+                                'id'=>$data->id,
+                                'subcategory'=> $data->subcategory
+
+
+                            );
+                            }
+                            $res = array('message'=>"success",
+                                  'status'=>200,
+                                  'data'=>$subcategory
+                                  );
+
+                                  echo json_encode($res);
+
+
+
+
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"please insert category_id",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}
+
+
+
+
 
 
 
