@@ -332,23 +332,43 @@ echo json_encode($res);
 //get all category
 public function get_allcategory(){
 
-            $this->db->select('*');
-$this->db->from('tbl_category');
-$this->db->where('is_active',1);
-$categorydata= $this->db->get();
-$category=[];
-foreach($categorydata->result() as $data) {
-  $c_id=$data->id;
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+    // print_r($this->input->post());
+    // exit;
+    // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+    $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+    // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+
+
+    if($this->form_validation->run()== TRUE)
+    {
+      $category_id=$this->input->post('category_id');
+
+
+
+
+//
+//             $this->db->select('*');
+// $this->db->from('tbl_category');
+// $this->db->where('is_active',1);
+// $categorydata= $this->db->get();
+// $category=[];
+// foreach($categorydata->result() as $data) {
+//   $c_id=$data->id;
   $this->db->select('*');
   $this->db->from('tbl_subcategory');
-  $this->db->where('category_id',$data->id);
+  $this->db->where('category_id',$category_id);
   $sub= $this->db->get();
   $subcategory=[];
   foreach($sub->result() as $data2) {
 
     $this->db->select('*');
                 $this->db->from('tbl_minorcategory');
-                $this->db->where('category_id',$c_id);
+                $this->db->where('category_id',$category_id);
                 $this->db->where('subcategory_id',$data2->id);
                 $minor_category= $this->db->get();
                 $minorcategory=[];
@@ -372,24 +392,48 @@ foreach($categorydata->result() as $data) {
 }
 // $catt=array('name'=> $data->categoryname,'sub_name'=>$subcategory);
 
-  $cat[] = array(
-    'id' =>$data->id,
-    'name' =>$data->category,
-    
-    'sub_category' =>$subcategory
-
-);
-
-
-}
+//   $cat[] = array(
+//     'id' =>$data->id,
+//     'name' =>$data->category,
+//
+//     'sub_category' =>$subcategory
+//
+// );
+//
+//
+// }
 $res = array('message'=>"success",
       'status'=>200,
-      'data'=>$cat,
+      'data'=>$subcategory,
       );
 
       echo json_encode($res);
 
 
+
+
+
+}
+else{
+$res = array('message'=>validation_errors(),
+      'status'=>201
+      );
+
+      echo json_encode($res);
+
+
+}
+
+}
+else{
+
+$res = array('message'=>"Insert data, No data Available",
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
 }
 
 
@@ -492,7 +536,6 @@ if($this->input->post())
 {
 
 $headers=$this->input->request_headers();
-
        $phone=$headers['phone'];
         $password=$headers['authentication'];
 				$token_id=$headers['token_id'];
@@ -501,8 +544,6 @@ $headers=$this->input->request_headers();
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
-$this->form_validation->set_rules( $phone, 'phone', 'trim');
-$this->form_validation->set_rules( $password, 'password', 'trim');
 // $this->form_validation->set_rules( $token_id, 'token_id', 'required|trim');
 
 if($this->form_validation->run()== TRUE)
@@ -523,8 +564,8 @@ if(!empty($phone)){
 $this->db->select('*');
 $this->db->from('tbl_users');
 $this->db->where('phone',$phone);
-$check_email= $this->db->get();
-$check_id=$check_email->row();
+$check_phone= $this->db->get();
+$check_id=$check_phone->row();
 if(!empty($check_id)){
 if($check_id->authentication == $password){
 $this->db->select('*');
