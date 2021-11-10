@@ -375,6 +375,7 @@ foreach($categorydata->result() as $data) {
   $cat[] = array(
     'id' =>$data->id,
     'name' =>$data->category,
+    'image' =>base_url().$data->image2,
     'sub_category' =>$subcategory
 
 );
@@ -492,7 +493,7 @@ if($this->input->post())
 
 $headers=$this->input->request_headers();
 
-       $email_id=$headers['phone'];
+       $phone=$headers['phone'];
         $password=$headers['authentication'];
 				$token_id=$headers['token_id'];
 
@@ -500,9 +501,9 @@ $headers=$this->input->request_headers();
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
-// $this->form_validation->set_rules( $email, $email, 'valid_email|trim');
-// $this->form_validation->set_rules( $password, $password, 'trim');
-// $this->form_validation->set_rules( $token_id, $token_id, 'required|trim');
+$this->form_validation->set_rules( $phone, 'phone', 'trim');
+$this->form_validation->set_rules( $password, 'password', 'trim');
+// $this->form_validation->set_rules( $token_id, 'token_id', 'required|trim');
 
 if($this->form_validation->run()== TRUE)
 {
@@ -516,12 +517,12 @@ $quantity=$this->input->post('quantity');
 // --------------add to cart using email------------
 
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('phone',$email_id);
+$this->db->where('phone',$phone);
 $check_email= $this->db->get();
 $check_id=$check_email->row();
 if(!empty($check_id)){
@@ -2205,158 +2206,6 @@ echo json_encode($res);
 
 }
 
-//=============  subcategory using category_id ================
-
-public function get_subcategory_id(){
-
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
-
-    $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-
-
-
-    if($this->form_validation->run()== TRUE)
-    {
-
-       $category_id=$this->input->post('category_id');
-
-//---------
-                                        $this->db->select('*');
-                            $this->db->from('tbl_subcategory');
-                            $this->db->where('category_id',$category_id);
-                            $this->db->where('is_active',1);
-                            $subcategorydata= $this->db->get();
-                            $subcategory=[];
-                            foreach($subcategorydata->result() as $data) {
-                            $subcategory[] = array(
-                                'id'=>$data->id,
-                                'subcategory'=> $data->subcategory
-
-
-                            );
-                            }
-                            $res = array('message'=>"success",
-                                  'status'=>200,
-                                  'data'=>$subcategory
-                                  );
-
-                                  echo json_encode($res);
-
-
-
-
-
-}else{
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>validation_errors(),
-'status'=>201
-);
-
-echo json_encode($res);
-
-
-}
-
-}else{
-
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"please insert category_id",
-'status'=>201
-);
-
-echo json_encode($res);
-
-
-}
-
-}
-
-//-------------get minorcategory using id---------------------
-public function get_minorcategory(){
-
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
-
-    $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-
-
-
-    if($this->form_validation->run()== TRUE)
-    {
-
-      $category_id=$this->input->post('category_id');
-      $subcategory_id=$this->input->post('subcategory_id');
-
-
-
-     $this->db->select('*');
-                 $this->db->from('tbl_minorcategory');
-                 $this->db->where('category_id',$category_id);
-                 $this->db->where('subcategory_id',$subcategory_id);
-                 $this->db->where('is_active',1);
-                 $minor_category= $this->db->get();
-                 $minorcategory_d=$minor_category->row();
-                 $minorcategory=[];
-    if(!empty($minorcategory_d)){
-                foreach ($minor_category->result() as $value) {
-
-                  $minorcategory[]=array(
-                    'id'=>$value->id,
-                     'minorcategory'=>$value->minorcategoryname,
-                     'image'=>base_url().$value->image
-                  );
-              }
-              header('Access-Control-Allow-Origin: *');
-              $res=array(
-                'message'=>"success",
-                'status'=>200,
-                'data'=>$minorcategory
-              );
-              echo json_encode($res);
-
-        }
-        else{
-          header('Access-Control-Allow-Origin: *');
-          $res = array('message'=>"category_id or subcategory_id wrong.",
-          'status'=>201
-          );
-
-          echo json_encode($res);
-
-        }
-
-}else{
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>validation_errors(),
-'status'=>201
-);
-
-echo json_encode($res);
-
-
-}
-
-}else{
-
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>"please insert category_id",
-'status'=>201
-);
-
-echo json_encode($res);
-
-
-}
-
-}
 
 
 
