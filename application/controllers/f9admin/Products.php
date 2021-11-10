@@ -376,20 +376,20 @@ $igt1=[];
              {
                // print_r($this->input->post());
                // exit;
-  $this->form_validation->set_rules('productname', 'productname', 'required|trim|customAlpha');
+  $this->form_validation->set_rules('productname', 'productname', 'required|trim');
   $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
   $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
   $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
-  $this->form_validation->set_rules('mrp', 'mrp', 'required|trim|integer');
-  $this->form_validation->set_rules('sellingprice', 'sellingprice', 'required|trim');
-  $this->form_validation->set_rules('gst', 'gst', 'required|trim');
-  $this->form_validation->set_rules('gstprice', 'gstprice', 'required|trim');
+  $this->form_validation->set_rules('mrp', 'mrp', 'trim|integer');
+  $this->form_validation->set_rules('sellingprice', 'sellingprice', 'trim');
+  $this->form_validation->set_rules('gst', 'gst', 'trim');
+  $this->form_validation->set_rules('gstprice', 'gstprice', 'trim');
   $this->form_validation->set_rules('sp', 'sp', 'required|trim');
 
   $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
   $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
   $this->form_validation->set_rules('Inventory', 'Inventory', 'required|trim|integer');
-  $this->form_validation->set_rules('weight', 'weight', 'required|trim|integer');
+  $this->form_validation->set_rules('weight', 'weight', 'required|trim');
   $this->form_validation->set_rules('feature_product', 'feature_product', 'required|trim');
   $this->form_validation->set_rules('popular_product', 'popular_product', 'required|trim');
 

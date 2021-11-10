@@ -1,4 +1,4 @@
-  <div class="content-wrapper">
+<div class="content-wrapper">
                <section class="content-header">
                   <h1>
                  Add New Products
@@ -100,21 +100,21 @@
 <td> <input type="file" name="video2"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="mrp"  class="form-control" id="mrp"  placeholder="" required value="" />  </td>
+<td> <strong>MRP</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="number" name="mrp"  class="form-control" id="mrp"  placeholder=""  value="" />  </td>
 </tr>
   <!-- <tr> -->
   <tr>
-<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="sellingprice"  class="form-control" id="sellingprice" placeholder="" required value="" />  </td>
+<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="number" name="sellingprice"  class="form-control" id="sellingprice" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>Gst %</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder="" required value="" />  </td>
+<td> <strong>Gst %</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
-<td> <strong>Gst Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder="" required value="" />  </td>
+<td> <strong>Gst Price</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder=""  value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Selling price</strong>  <span style="color:red;">*</span></strong> </td>
@@ -126,7 +126,7 @@
 </tr>
   <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="modelno"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="text" name="modelno"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
@@ -134,7 +134,7 @@
 </tr>
   <tr>
 <td> <strong>weight</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="weight"  class="form-control" placeholder="" required value="" />  </td>
+<td> <input type="text" onkeypress="return valide_weight(event)" name="weight"  class="form-control" placeholder="" required value="" />  </td>
 </tr>
   <tr>
 <td> <strong>Feature Product</strong>  <span style="color:red;">*</span></strong> </td>
@@ -321,6 +321,19 @@
                                </div>
                    </section>
                  </div>
+
+                 <script type="text/javascript">
+                 function valide_weight(evt){
+                   var charCode = (evt.which) ? evt.which : evt.keyCode;
+                             if (charCode != 46 && charCode > 31
+                               && (charCode < 48 || charCode > 57))
+                                return false;
+
+                             return true;
+
+                 }
+
+                 </script>
 
 
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>

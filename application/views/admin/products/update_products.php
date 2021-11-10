@@ -133,20 +133,20 @@ Sorry No image Found
   </td>
 </tr>
 <tr>
-<td> <strong>MRP</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>MRP</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="number" name="mrp"  class="form-control" placeholder=""  value="<?=$products_data->mrp?>" />  </td>
 </tr>
 <tr>
-<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Selling Price(without Gst%)</strong>  <span style="color:red;"></span></strong> </td>
 <td> <input type="number" name="sellingprice" id="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
 </tr>
 <tr>
-<td> <strong>Gst %</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder="" required value="<?=$products_data->gstrate?>" />  </td>
+<td> <strong>Gst %</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="number" name="gst" id="gst"  class="form-control" placeholder=""  value="<?=$products_data->gstrate?>" />  </td>
 </tr>
 <tr>
-<td> <strong>Gst Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder="" required value="<?=$products_data->gstprice?>" />  </td>
+<td> <strong>Gst Price</strong>  <span style="color:red;"></span></strong> </td>
+<td> <input type="text" name="gstprice" id="gstprice"  class="form-control" placeholder=""  value="<?=$products_data->gstprice?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Selling price</strong>  <span style="color:red;">*</span></strong> </td>
@@ -162,7 +162,7 @@ Sorry No image Found
 </tr>
 <tr>
 <td> <strong>Model No.</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="modelno"  class="form-control" placeholder=""  value="<?=$products_data->modelno?>" />  </td>
+<td> <input type="text" name="modelno"  class="form-control" placeholder=""  value="<?=$products_data->modelno?>" />  </td>
 </tr>
 <tr>
 <td> <strong>Inventory</strong>  <span style="color:red;">*</span></strong> </td>
