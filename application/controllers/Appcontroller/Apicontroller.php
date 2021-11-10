@@ -375,7 +375,7 @@ foreach($categorydata->result() as $data) {
   $cat[] = array(
     'id' =>$data->id,
     'name' =>$data->category,
-    'image' =>base_url().$data->image2,
+    
     'sub_category' =>$subcategory
 
 );
@@ -2205,6 +2205,73 @@ echo json_encode($res);
 
 
 }
+
+
+//with image
+
+//get all category
+public function get_allcategory_image(){
+
+            $this->db->select('*');
+$this->db->from('tbl_category');
+$this->db->where('is_active',1);
+$categorydata= $this->db->get();
+$category=[];
+foreach($categorydata->result() as $data) {
+  $c_id=$data->id;
+  $this->db->select('*');
+  $this->db->from('tbl_subcategory');
+  $this->db->where('category_id',$data->id);
+  $sub= $this->db->get();
+  $subcategory=[];
+  foreach($sub->result() as $data2) {
+
+    $this->db->select('*');
+                $this->db->from('tbl_minorcategory');
+                $this->db->where('category_id',$c_id);
+                $this->db->where('subcategory_id',$data2->id);
+                $minor_category= $this->db->get();
+                $minorcategory=[];
+              foreach($minor_category->result() as $m_id){
+                $minorcategory[]=array(
+                  'minor_id'=>$m_id->id,
+                  'minor_name' =>$m_id->minorcategoryname
+                );
+              }
+
+
+
+  $subcategory[] = array(
+    'sub_id' => $data2->id,
+      'name'=> $data2->subcategory,
+      'minor_category'=>$minorcategory
+
+
+
+  );
+}
+// $catt=array('name'=> $data->categoryname,'sub_name'=>$subcategory);
+
+  $cat[] = array(
+    'id' =>$data->id,
+    'name' =>$data->category,
+    'image' =>base_url().$data->image2,
+    'sub_category' =>$subcategory
+
+);
+
+
+}
+$res = array('message'=>"success",
+      'status'=>200,
+      'data'=>$cat,
+      );
+
+      echo json_encode($res);
+
+
+}
+
 
 
 
