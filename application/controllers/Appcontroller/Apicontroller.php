@@ -52,7 +52,8 @@ $category=[];
 foreach($categorydata->result() as $data) {
 $category[] = array(
      'category_id'=>$data->id,
-    'categoryname'=> $data->category
+    'categoryname'=> $data->category,
+    'image'=>base_url().$data->image2
 
 );
 }
@@ -2248,6 +2249,89 @@ public function get_subcategory_id(){
 
 
 
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"please insert category_id",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}
+
+//-------------get minorcategory using id---------------------
+public function get_minorcategory(){
+
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+
+    $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+    $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+
+
+
+    if($this->form_validation->run()== TRUE)
+    {
+
+      $category_id=$this->input->post('category_id');
+      $subcategory_id=$this->input->post('subcategory_id');
+
+
+
+     $this->db->select('*');
+                 $this->db->from('tbl_minorcategory');
+                 $this->db->where('category_id',$category_id);
+                 $this->db->where('subcategory_id',$subcategory_id);
+                 $this->db->where('is_active',1);
+                 $minor_category= $this->db->get();
+                 $minorcategory_d=$minor_category->row();
+                 $minorcategory=[];
+    if(!empty($minorcategory_d)){
+                foreach ($minor_category->result() as $value) {
+
+                  $minorcategory[]=array(
+                    'id'=>$value->id,
+                     'minorcategory'=>$value->minorcategoryname,
+                     'image'=>base_url().$value->image
+                  );
+              }
+              header('Access-Control-Allow-Origin: *');
+              $res=array(
+                'message'=>"success",
+                'status'=>200,
+                'data'=>$minorcategory
+              );
+              echo json_encode($res);
+
+        }
+        else{
+          header('Access-Control-Allow-Origin: *');
+          $res = array('message'=>"category_id or subcategory_id wrong.",
+          'status'=>201
+          );
+
+          echo json_encode($res);
+
+        }
 
 }else{
 header('Access-Control-Allow-Origin: *');
