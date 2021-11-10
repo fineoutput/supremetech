@@ -1246,19 +1246,9 @@ $dsa= $this->db->get();
 $user=$dsa->row();
 if(!empty($user)){
 $user_id=$user->id;
-$pass=$user->password;
+// $pass=$user->password;
 
-}else{
 
-$res = array('message'=>"email or password do not match",
-'status'=>201,
-
-);
-
-echo json_encode($res);
-exit();
-
-}
 
 
 $this->db->select('*');
@@ -1280,6 +1270,18 @@ echo json_encode($res);
 }else{
 $res = array('message'=>"no add product cart",
 'status'=>200,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+}else{
+
+$res = array('message'=>"email or password do not match",
+'status'=>201,
 
 );
 
@@ -1366,30 +1368,38 @@ if($this->input->post())
 {
 // print_r($this->input->post());
 // exit;
+
+$headers=$this->input->request_headers();
+
+
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
+
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
-$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
+// $this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+// $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
-$token_id=$this->input->post('token_id');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+// $token_id=$this->input->post('token_id');
 
 //-------delete with email----------
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$phone);
 $dsa= $this->db->get();
 $user_data=$dsa->row();
 if(!empty($user_data)){
 
-if($user_data->password==$password){
+if($user_data->authentication==$password){
 
 //             $this->db->select('*');
 // $this->db->from('tbl_cart');
