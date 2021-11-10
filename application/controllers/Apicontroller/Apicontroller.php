@@ -1779,6 +1779,7 @@ if(!empty($address_data)){
               header('Access-Control-Allow-Origin: *');
               $res = array('message'=>"success",
                     'status'=>200,
+                    'total'=>$sub_total,
                     'subtotal'=>$sub_total,
                     'txn_id'=>$txn_id,
                     'address'=>$address
@@ -2681,6 +2682,7 @@ public function store_details(){
 foreach($store_data->result() as $data) {
 
 $store_info[]=array(
+  'id'=>$data->id,
   'name'=>$data->name,
   'address'=>$data->address,
   'pincode'=>$data->pincode,
@@ -2765,6 +2767,7 @@ public function checkout(){
           $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
           $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
           $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+          $this->form_validation->set_rules('store_id', 'store_id', '|xss_clean|trim');
 
           if($this->form_validation->run()== TRUE)
           {
