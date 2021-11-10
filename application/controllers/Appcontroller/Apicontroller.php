@@ -168,24 +168,25 @@ public function get_category_products(){
 		              {
 		                // print_r($this->input->post());
 		                // exit;
-		                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+		                //$this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
 		                // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-		                // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+		                 $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
 		                if($this->form_validation->run()== TRUE)
 		                {
-		                  $category_id=$this->input->post('category_id');
+		                  //$category_id=$this->input->post('category_id');
 		                  // $subcategory_id=$this->input->post('subcategory_id');
-		                  // $minorcategory_id=$this->input->post('minorcategory_id');
+		                   $minorcategory_id=$this->input->post('minorcategory_id');
 
                                   $this->db->select('*');
                       $this->db->from('tbl_products');
-                      $this->db->where('category_id',$category_id);
+                      //$this->db->where('category_id',$category_id);
+                      $this->db->where('minorcategory_id',$minorcategory_id);
                       $this->db->where('is_active',1);
 
                       // $this->db->where('subcategory_id',$subcategory_id);
-                      // $this->db->where('minorcategory_id',$minorcategory_id);
+
                       $product_data= $this->db->get();
 
                                $product=[];
@@ -674,7 +675,7 @@ echo json_encode($res);
 
 }
 }else{
-$res = array('message'=>'email not exist ',
+$res = array('message'=>'phone not exist ',
 'status'=>201
 );
 
@@ -817,30 +818,38 @@ public function view_cart_data(){
 $this->load->helper(array('form', 'url'));
 $this->load->library('form_validation');
 $this->load->helper('security');
-if($this->input->post())
-{
-$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
-$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+// if($this->input->post())
+// {
 
-if($this->form_validation->run()== TRUE)
-{
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
-$token_id=$this->input->post('token_id');
+  $headers=$this->input->request_headers();
+         $phone=$headers['phone'];
+          $password=$headers['authentication'];
+  				$token_id=$headers['token_id'];
+
+
+
+// $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
+// $this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+// $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+
+// if($this->form_validation->run()== TRUE)
+// {
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+// $token_id=$this->input->post('token_id');
 
 //-------add to cart with email----------
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$phone);
 $dsa= $this->db->get();
 $user_data=$dsa->row();
 if(!empty($user_data)){
 
-if($user_data->password==$password){
+if($user_data->authentication==$password){
 
 $this->db->select('*');
 $this->db->from('tbl_cart');
@@ -971,32 +980,34 @@ echo json_encode($res);
 }
 
 }
-}
-else{
-$res = array('message'=>validation_errors(),
-'status'=>201
-);
+// }
+// else{
+// $res = array('message'=>validation_errors(),
+// 'status'=>201
+// );
+//
+// echo json_encode($res);
+//
+//
+// }
 
-echo json_encode($res);
-
-
-}
-
-}
-else{
-
-$res = array('message'=>"Please insert some data, No data available",
-'status'=>201
-);
-
-echo json_encode($res);
-
-}
+// }
+// else{
+//
+// $res = array('message'=>"Please insert some data, No data available",
+// 'status'=>201
+// );
+//
+// echo json_encode($res);
+//
+// }
 
 }
 
 //------update product cart-----
 public function update_cart(){
+
+
 
 $this->load->helper(array('form', 'url'));
 $this->load->library('form_validation');
@@ -1005,19 +1016,27 @@ if($this->input->post())
 {
 // print_r($this->input->post());
 // exit;
+
+$headers=$this->input->request_headers();
+
+
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
+
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
-$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
+// $this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+// $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
-$token_id=$this->input->post('token_id');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+// $token_id=$this->input->post('token_id');
 
 //-------update with email----------
 
@@ -1025,12 +1044,12 @@ if(!empty($email_id)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$phone);
 $dsa= $this->db->get();
 $user_data=$dsa->row();
 if(!empty($user_data)){
 
-if($user_data->password==$password){
+if($user_data->authentication==$password){
 
 
   $this->db->select('*');
@@ -1093,7 +1112,7 @@ echo json_encode($res);
 
 }else{
 
-$res = array('message'=>'Email is not exist',
+$res = array('message'=>'phone is not exist',
 'status'=>201
 );
 
@@ -1183,21 +1202,29 @@ public function cart_count(){
 $this->load->helper(array('form', 'url'));
 $this->load->library('form_validation');
 $this->load->helper('security');
-if($this->input->post())
-{
+// if($this->input->post())
+// {
 
-$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'valid_email|xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+  $headers=$this->input->request_headers();
 
-if($this->form_validation->run()== TRUE)
-{
 
-$token_id=$this->input->post('token_id');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
+         $phone=$headers['phone'];
+          $password=$headers['authentication'];
+          $token_id=$headers['token_id'];
 
-if($token_id==NULL && $email_id==NULL && $password==NULL){
+
+// $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('email_id', 'email_id', 'valid_email|xss_clean|trim');
+// $this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+
+// if($this->form_validation->run()== TRUE)
+// {
+
+// $token_id=$this->input->post('token_id');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+
+if($token_id==NULL && $phone==NULL && $password==NULL){
 $res = array('message'=>"data is not insert",
 'status'=>201,
 
@@ -1209,12 +1236,12 @@ exit();
 }
 
 
-if(!empty($email_id) || !empty($password)){
+if(!empty($phone) || !empty($password)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
-$this->db->where('password',$password);
+$this->db->where('phone',$phone);
+$this->db->where('authentication',$password);
 $dsa= $this->db->get();
 $user=$dsa->row();
 if(!empty($user)){
@@ -1303,25 +1330,25 @@ echo json_encode($res);
 
 }
 
-}
-else{
-$res = array('message'=>validation_errors(),
-'status'=>201
-);
-
-echo json_encode($res);
-
-
-}
-
-}else{
-
-$res = array('message'=>'No data are available',
-'status'=>201
-);
-
-echo json_encode($res);
-}
+// }
+// else{
+// $res = array('message'=>validation_errors(),
+// 'status'=>201
+// );
+//
+// echo json_encode($res);
+//
+//
+// }
+//
+// }else{
+//
+// $res = array('message'=>'No data are available',
+// 'status'=>201
+// );
+//
+// echo json_encode($res);
+// }
 
 
 
