@@ -540,9 +540,9 @@ $headers=$this->input->request_headers();
 
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 
 
@@ -695,6 +695,7 @@ echo json_encode($res);
 
     else{
 
+          if(!empty($token_id)){
 
 
 
@@ -785,11 +786,19 @@ echo json_encode($res);
 
 
 
-        }
 
 
 
 
+}else{
+  $res = array('message'=>'Please insert data.',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
+  }
 
 
 
@@ -828,9 +837,9 @@ $this->load->helper('security');
 // {
 
   $headers=$this->input->request_headers();
-         $phone=$headers['phone'];
-          $password=$headers['authentication'];
-  				$token_id=$headers['token_id'];
+         $phone=$headers['Phone'];
+          $password=$headers['Authentication'];
+  				$token_id=$headers['Tokenid'];
 
 
 
@@ -1043,9 +1052,9 @@ if($this->input->post())
 $headers=$this->input->request_headers();
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|xss_clean|trim');
@@ -1239,9 +1248,9 @@ $this->load->helper('security');
   $headers=$this->input->request_headers();
 
 
-         $phone=$headers['phone'];
-          $password=$headers['authentication'];
-          $token_id=$headers['token_id'];
+         $phone=$headers['Phone'];
+          $password=$headers['Authentication'];
+          $token_id=$headers['Tokenid'];
 
 
 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -1416,9 +1425,9 @@ if($this->input->post())
 $headers=$this->input->request_headers();
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 // $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
@@ -1825,9 +1834,9 @@ public function calculate(){
   // {
 
     $headers=$this->input->request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
 
 
@@ -2018,9 +2027,9 @@ public function apply_promocode(){
   {
 
     $headers=$this->input->request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
@@ -2277,9 +2286,9 @@ public function promocode_remove(){
   if($this->input->post())
   {
     $headers=$this->input->request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
