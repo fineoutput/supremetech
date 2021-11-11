@@ -996,7 +996,7 @@ if($this->form_validation->run()== TRUE)
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
 $phone=$this->input->post('phone');
-$password=$this->input->post('password');
+$authentication=$this->input->post('authentication');
 $token_id=$this->input->post('token_id');
 
 //-------update with email----------
@@ -1066,7 +1066,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Passwod does not match',
+$res = array('message'=>'Authentication does not match',
 'status'=>201
 );
 
@@ -1284,29 +1284,29 @@ if($this->input->post())
 // print_r($this->input->post());
 // exit;
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
-$this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
-$this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
-$email_id=$this->input->post('email_id');
-$password=$this->input->post('password');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
 $token_id=$this->input->post('token_id');
 
 //-------delete with email----------
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
-$this->db->where('email',$email_id);
+$this->db->where('phone',$phone);
 $dsa= $this->db->get();
 $user_data=$dsa->row();
 if(!empty($user_data)){
 
-if($user_data->password==$password){
+if($user_data->authentication==$authentication){
 
 //             $this->db->select('*');
 // $this->db->from('tbl_cart');
@@ -2856,11 +2856,16 @@ if(!empty($order2_check)){
 
 
             $this->db->select('*');
-            $this->db->from('tbl_inventory');
+            $this->db->from('tbl_products');
             $this->db->where('id',$data->product_id);
             $product_data= $this->db->get()->row();
 
-        if($product_data->inventory >= $data->quantity){
+            $this->db->select('*');
+            $this->db->from('tbl_inventory');
+            $this->db->where('product_id',$data->product_id);
+            $inventory_data= $this->db->get()->row();
+
+        if($inventory_data->quantity >= $data->quantity){
 
 
         }else{
@@ -2916,17 +2921,17 @@ $data_insert = array('payment_type'=>$payment_type,
 
 
               $this->db->select('*');
-              $this->db->from('tbl_products');
-              $this->db->where('id',$data1->product_id);
+              $this->db->from('tbl_inventory');
+              $this->db->where('product_id',$data1->product_id);
               $product_data1= $this->db->get()->row();
 
-              $updated_inventory = $product_data1->inventory - $data1->quantity;
+              $updated_inventory = $product_data1->quantity - $data1->quantity;
 
 
-$data_update = array('inventory'=>$updated_inventory);
+$data_update = array('quantity'=>$updated_inventory);
 
   $this->db->where('id', $product_data1->id);
-  $last_id=$this->db->update('tbl_products', $data_update);
+  $last_id=$this->db->update('tbl_inventory', $data_update);
 
      }//end of foreach
   }//end of order2
