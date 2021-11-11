@@ -543,7 +543,7 @@ $headers=$this->input->request_headers();
        $phone=$headers['phone'];
         $password=$headers['authentication'];
         $token_id=$headers['token_id'];
-    
+
 
 
 
@@ -1826,8 +1826,13 @@ public function calculate(){
 
     $headers=$this->input->request_headers();
            $phone=$headers['phone'];
-            $password=$headers['authentication'];
+            $authentication=$headers['authentication'];
             $token_id=$headers['token_id'];
+
+
+
+if(!empty($phone) && !empty($authentication) && !empty($token_id) ){
+
 
     //
     // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
@@ -1953,6 +1958,13 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 
                     echo json_encode($res);
                     }
+}else{
+  $res = array('message'=>"cart is empty",
+        'status'=>201,
+        );
+
+        echo json_encode($res);
+
 }
 }
 }else{
@@ -1972,6 +1984,16 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
               //
               //
               // }
+
+
+            }else{
+              $res = array('message'=>"please insert data",
+                    'status'=>201,
+                    );
+
+                    echo json_encode($res);
+
+            }
               //
               // }else{
               //
@@ -1995,18 +2017,25 @@ public function apply_promocode(){
   if($this->input->post())
   {
 
-  $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+    $headers=$this->input->request_headers();
+           $phone=$headers['phone'];
+            $authentication=$headers['authentication'];
+            $token_id=$headers['token_id'];
+
+            if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+  // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+  // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+  // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
   $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
   $this->form_validation->set_rules('promocode', 'promocode', 'required|xss_clean|trim');
 
   if($this->form_validation->run()== TRUE)
   {
 
-  $phone=$this->input->post('phone');
-  $authentication=$this->input->post('authentication');
-  $token_id=$this->input->post('token_id');
+  // $phone=$this->input->post('phone');
+  // $authentication=$this->input->post('authentication');
+  // $token_id=$this->input->post('token_id');
   $txn_id=$this->input->post('txn_id');
   $promocode=$this->input->post('promocode');
 
@@ -2215,6 +2244,14 @@ if(!empty($last_id)){
 
   }
 
+}else{
+  $res = array('message'=>"please insert data",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
   }else{
 
   $res = array('message'=>'No data are available',
@@ -2239,19 +2276,25 @@ public function promocode_remove(){
   $this->load->helper('security');
   if($this->input->post())
   {
+    $headers=$this->input->request_headers();
+           $phone=$headers['phone'];
+            $authentication=$headers['authentication'];
+            $token_id=$headers['token_id'];
 
-  $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+            if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+  // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+  // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+  // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
   $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
   $this->form_validation->set_rules('promocode_id', 'promocode_id', 'required|xss_clean|trim');
 
   if($this->form_validation->run()== TRUE)
   {
 
-  $phone=$this->input->post('phone');
-  $authentication=$this->input->post('authentication');
-  $token_id=$this->input->post('token_id');
+  // $phone=$this->input->post('phone');
+  // $authentication=$this->input->post('authentication');
+  // $token_id=$this->input->post('token_id');
   $txn_id=$this->input->post('txn_id');
   $promocode=$this->input->post('promocode');
 
@@ -2329,6 +2372,13 @@ echo json_encode($res);
 
 
       }
+    }else{
+      $res = array('message'=>"please insert data",
+      'status'=>201
+      );
+
+      echo json_encode($res);
+    }
 
       }else{
 
