@@ -3247,6 +3247,365 @@ echo json_encode($res);
 
 }
 
+//footer subscription
+public function subscribe_us(){
+
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+
+$this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean');
+
+if($this->form_validation->run()== TRUE)
+{
+
+$email=$this->input->post('email');
+
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
+
+$this->db->select('*');
+$this->db->from('tbl_subscribe_us');
+$this->db->where('email_id',$email);
+$dsa= $this->db->get();
+$da=$dsa->row();
+if(!empty($da)){
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Already applied",
+'status'=>201
+);
+
+echo json_encode($res);
+exit;
+
+}
+
+$data_insert = array('email_id'=>$email,
+'ip' =>$ip,
+'date' =>$cur_date,
+
+
+);
+
+
+$last_id=$this->base_model->insert_table("tbl_subscribe_us",$data_insert,1) ;
+
+if($last_id!=0){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200
+);
+
+echo json_encode($res);
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"sorry error occured",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+}
+
+///cancel_order
+public function cancel_order(){
+
+
+
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if($this->input->post())
+        {
+
+          $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+          $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+          $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+          $this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
+
+        if($this->form_validation->run()== TRUE)
+        {
+
+        $phone=$this->input->post('phone');
+        $authentication=$this->input->post('authentication');
+        $token_id=$this->input->post('token_id');
+        $order_id=$this->input->post('order_id');
+
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('phone',$phone);
+        $user_data= $this->db->get()->row();
+
+        if(!empty($user_data)){
+
+        if($user_data->authentication==$authentication){
+
+
+                    $data_insert = array('order_status'=>5,
+                              );
+
+                      $this->db->where('id', $order_id);
+                      $last_id=$this->db->update('tbl_order1', $data_insert);
+
+    if(!empty($last_id)){
+      header('Access-Control-Allow-Origin: *');
+      $res = array('message'=>'success',
+      'status'=>200
+      );
+
+      echo json_encode($res);
+    }else{
+      header('Access-Control-Allow-Origin: *');
+      $res = array('message'=>'some error occured',
+      'status'=>201
+      );
+
+      echo json_encode($res);
+    }
+
+            }else{
+            header('Access-Control-Allow-Origin: *');
+            $res = array('message'=>'Wrong authantication',
+            'status'=>201
+            );
+
+            echo json_encode($res);
+            }
+            }else{
+            header('Access-Control-Allow-Origin: *');
+            $res = array('message'=>'user not found',
+            'status'=>201
+            );
+
+            echo json_encode($res);
+
+            }
+
+
+
+          }else{
+            header('Access-Control-Allow-Origin: *');
+
+            $res = array('message'=>validation_errors(),
+            'status'=>201
+            );
+
+            echo json_encode($res);
+
+
+            }
+
+            }else{
+            header('Access-Control-Allow-Origin: *');
+
+            $res = array('message'=>'No data are available',
+            'status'=>201
+            );
+
+            echo json_encode($res);
+            }
+
+
+
+}
+
+//------------filter-----
+public function filter(){
+
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+
+  $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+
+
+
+  if($this->form_validation->run()== TRUE)
+  {
+
+    $resolution_id=$this->input->post('resolution_id');
+    $irdistance_id=$this->input->post('irdistance_id');
+    $cameratype_id=$this->input->post('cameratype_id');
+    $bodymaterial_id=$this->input->post('bodymaterial_id');
+    $videochannel_id=$this->input->post('videochannel_id');
+    $poeports_id=$this->input->post('poeports_id');
+    $poetype_id=$this->input->post('poetype_id');
+
+    $sataports_id=$this->input->post('sataports_id');
+    $length_id=$this->input->post('length_id');
+    $screensize_id=$this->input->post('screensize_id');
+    $ledtype_id=$this->input->post('ledtype_id');
+    $size_id=$this->input->post('size_id');
+    $lens_id=$this->input->post('lens_id');
+
+$resolution_info = explode(',',$resolution_id);
+$irdistance_info = explode(',',$irdistance_id);
+$cameratype_info = explode(',',$cameratype_id);
+$bodymaterial_info = explode(',',$bodymaterial_id);
+$videochannel_info = explode(',',$videochannel_id);
+$poeports_info = explode(',',$poeports_id);
+$poetype_info = explode(',',$poetype_id);
+$sataports_info = explode(',',$sataports_id);
+$length_info = explode(',',$length_id);
+$screensize_info = explode(',',$screensize_id);
+$ledtype_info = explode(',',$ledtype_id);
+$size_info = explode(',',$size_id);
+$lens_info = explode(',',$lens_id);
+
+
+
+            $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('is_active',1);
+
+foreach($resolution_info as $data) {
+$this->db->or_where('resolution',$data);
+}
+foreach($irdistance_info as $data1) {
+$this->db->or_where('irdistance',$data1);
+}
+foreach($cameratype_info as $data2) {
+$this->db->or_where('cameratype',$data2);
+}
+foreach($bodymaterial_info as $data3) {
+$this->db->or_where('bodymaterial',$data3);
+}
+foreach($videochannel_info as $data4) {
+$this->db->or_where('videochannel',$data4);
+}
+foreach($poeports_info as $data4) {
+$this->db->or_where('poeports',$data4);
+}
+foreach($poetype_info as $data4) {
+$this->db->or_where('poetype',$data4);
+}
+foreach($sataports_info as $data4) {
+$this->db->or_where('sataports',$data4);
+}
+foreach($length_info as $data4) {
+$this->db->or_where('length',$data4);
+}
+foreach($screensize_info as $data4) {
+$this->db->or_where('screensize',$data4);
+}
+foreach($ledtype_info as $data4) {
+$this->db->or_where('ledtype',$data4);
+}
+foreach($size_info as $data4) {
+$this->db->or_where('size',$data4);
+}
+foreach($lens_info as $data4) {
+$this->db->or_where('lens',$data4);
+}
+
+
+$filter_data= $this->db->get();
+$filter_check = $filter_data->row();
+$filter_info = [];
+if(!empty($filter_check)){
+
+foreach($filter_data->result() as $data) {
+
+
+
+
+$filter_info[] = array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'product_image'=>base_url().$data->image,
+'productdescription'=>$data->productdescription,
+'price'=>$data->sellingpricegst,
+
+);
+
+}
+}
+
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$filter_info,
+);
+
+echo json_encode($res);
+
+
+            }else{
+              header('Access-Control-Allow-Origin: *');
+
+              $res = array('message'=>validation_errors(),
+              'status'=>201
+              );
+
+              echo json_encode($res);
+
+
+              }
+
+              }else{
+              header('Access-Control-Allow-Origin: *');
+
+              $res = array('message'=>'No data are available',
+              'status'=>201
+              );
+
+              echo json_encode($res);
+              }
+
+
+}
+
+
+
+
+
 
 
 }
