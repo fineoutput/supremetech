@@ -542,8 +542,11 @@ if(!empty($headers['phone'])){
 
        $phone=$headers['phone'];
         $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
+      }else{
+          $token_id=$headers['token_id'];
       }
-				$token_id=$headers['token_id'];
+
 
 
 
@@ -945,8 +948,7 @@ $cart_info= [];
 
 foreach($cart_data->result() as $data) {
 
-  echo $data->product_id;
-  exit;
+
 
 $this->db->select('*');
 $this->db->from('tbl_products');
