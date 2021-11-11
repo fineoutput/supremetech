@@ -160,6 +160,7 @@ public function get_minorcategory_products(){
 public function get_category_products(){
 
 
+
 		              $this->load->helper(array('form', 'url'));
 		              $this->load->library('form_validation');
 		              $this->load->helper('security');
@@ -535,30 +536,30 @@ $this->load->helper('security');
 if($this->input->post())
 {
 
+$headers=$this->input->request_headers();
 
-  $headers=$this->input->request_headers();
 
-//   if(!empty($headers['phone'])){
-// echo "hi";
-// exit;
-         $phone=$headers['phone'];
-          $password=$headers['authentication'];
-          $token_id=$headers['token_id'];
 
-        // }else{
-        //   echo "hi2";
-        //   exit;
-        //     $token_id=$headers['token_id'];
-        // }
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
+    
+
+
+
 
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
+// $this->form_validation->set_rules( $token_id, 'token_id', 'required|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+// $token_id=$this->input->post('token_id');
 
 
 // --------------add to cart using email------------
@@ -670,7 +671,7 @@ echo json_encode($res);
 }
 
 }else{
-$res = array('message'=>'Wrong Authnetication',
+$res = array('message'=>'password not exist',
 'status'=>201
 );
 
@@ -694,7 +695,7 @@ echo json_encode($res);
 
     else{
 
-if(!empty($token_id)){
+
 
 
             $this->db->select('*');
@@ -761,7 +762,6 @@ if(!empty($token_id)){
 
                                               echo json_encode($res);
                                             }
-
                               }else{
                                    $res = array('message'=>'Product_id not exist.',
                                    'status'=>201
@@ -770,7 +770,6 @@ if(!empty($token_id)){
                                    echo json_encode($res);
 
                               }
-
 
               }else{
 
@@ -784,17 +783,15 @@ if(!empty($token_id)){
 
                   }
 
-                }else{
-                  $res = array('message'=>'Please provide token_id',
-                  'status'=>201
-                  );
 
-                  echo json_encode($res);
-
-
-                }
 
         }
+
+
+
+
+
+
 
 
             }
@@ -931,6 +928,7 @@ echo json_encode($res);
 
 else{
 
+if(!empty($token_id)){
 
 $this->db->select('*');
 $this->db->from('tbl_cart');
@@ -945,17 +943,16 @@ $total=0;
 $sub_total=0;
 $cart_info= [];
 
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$cart_check->product_id);
+$dsa= $this->db->get();
+$product_data=$dsa->row();
+if(!empty($product_data)){
+
 
 
 foreach($cart_data->result() as $data) {
-
-
-
-$this->db->select('*');
-$this->db->from('tbl_products');
-$this->db->where('id',$data->product_id);
-$dsa= $this->db->get();
-$product_data=$dsa->row();
 
 
 
@@ -981,9 +978,24 @@ $res = array('message'=>'success',
 
 echo json_encode($res);
 
+}else{
+  $res = array('message'=>'product is not mention please check.',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
 
 }else{
 $res = array('message'=>'Your cart is empty',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+$res = array('message'=>'please insert data',
 'status'=>201
 );
 
@@ -1133,7 +1145,7 @@ echo json_encode($res);
 }
 //-----update with token id------
 else{
-
+ if(!empty($token_id)){
 
   $this->db->select('*');
   $this->db->from('tbl_inventory');
@@ -1179,6 +1191,14 @@ $res = array('message'=>'Some error occured',
 );
 
 echo json_encode($res);
+}
+}else{
+
+  $res = array('message'=>'please enter data',
+  'status'=>201
+  );
+
+  echo json_encode($res);
 }
 
 
@@ -1235,16 +1255,16 @@ $this->load->helper('security');
 // $email_id=$this->input->post('email_id');
 // $password=$this->input->post('password');
 
-if($token_id==NULL && $phone==NULL && $password==NULL){
-$res = array('message'=>"data is not insert",
-'status'=>201,
-
-);
-
-echo json_encode($res);
-exit();
-
-}
+// if($token_id==NULL && $phone==NULL && $password==NULL){
+// $res = array('message'=>"data is not insert",
+// 'status'=>201,
+//
+// );
+//
+// echo json_encode($res);
+// exit();
+//
+// }
 
 
 if(!empty($phone) || !empty($password)){
@@ -1304,6 +1324,9 @@ exit();
 
 }else{
 
+if(!empty($token_id)){
+
+
 $this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('token_id',$token_id);
@@ -1314,6 +1337,17 @@ if(!empty($counting)){
 $fa= $counting;
 
 
+
+
+
+
+
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$fa
+);
+
+echo json_encode($res);
 
 
 }else{
@@ -1329,18 +1363,17 @@ exit();
 }
 
 
-$res = array('message'=>"success",
-'status'=>200,
-'data'=>$fa
-);
-
-echo json_encode($res);
 
 
+}else{
 
+  $res = array('message'=>"Please insert data.",
+  'status'=>201,
 
+  );
 
-
+  echo json_encode($res);
+}
 }
 
 // }
@@ -1460,6 +1493,7 @@ echo json_encode($res);
 //-----delete with token id------
 else{
 
+if(!empty($token_id)){
 
 $zapak=$this->db->delete('tbl_cart', array('token_id' => $token_id,'product_id'=>$product_id));
 
@@ -1475,6 +1509,14 @@ $res = array('message'=>'Some error occured',
 );
 
 echo json_encode($res);
+}
+
+}else{
+  $res = array('message'=>'please insert data',
+  'status'=>201
+  );
+
+  echo json_encode($res);
 }
 
 
@@ -1779,18 +1821,25 @@ public function calculate(){
   $this->load->helper(array('form', 'url'));
   $this->load->library('form_validation');
   $this->load->helper('security');
-  if($this->input->post())
-  {
-    $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+  // if($this->input->post())
+  // {
+
+    $headers=$this->input->request_headers();
+           $phone=$headers['phone'];
+            $password=$headers['authentication'];
+            $token_id=$headers['token_id'];
+
+    //
+    // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+    // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+    // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 
-    if($this->form_validation->run()== TRUE)
-    {
-       $phone=$this->input->post('phone');
-       $authentication=$this->input->post('authentication');
-      $token_id=$this->input->post('token_id');
+    // if($this->form_validation->run()== TRUE)
+    // {
+      //  $phone=$this->input->post('phone');
+      //  $authentication=$this->input->post('authentication');
+      // $token_id=$this->input->post('token_id');
       $ip = $this->input->ip_address();
     date_default_timezone_set("Asia/Calcutta");
       $cur_date=date("Y-m-d H:i:s");
@@ -1914,26 +1963,26 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
         echo json_encode($res);
 }
 
-              }else{
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
-
-              echo json_encode($res);
-
-
-              }
-
-              }else{
-
-              $res = array('message'=>"please insert some data",
-              'status'=>201
-              );
-
-              echo json_encode($res);
-
-
-              }
+              // }else{
+              // $res = array('message'=>validation_errors(),
+              // 'status'=>201
+              // );
+              //
+              // echo json_encode($res);
+              //
+              //
+              // }
+              //
+              // }else{
+              //
+              // $res = array('message'=>"please insert some data",
+              // 'status'=>201
+              // );
+              //
+              // echo json_encode($res);
+              //
+              //
+              // }
 
 }
 
