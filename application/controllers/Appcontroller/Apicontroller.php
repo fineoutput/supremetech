@@ -160,7 +160,6 @@ public function get_minorcategory_products(){
 public function get_category_products(){
 
 
-
 		              $this->load->helper(array('form', 'url'));
 		              $this->load->library('form_validation');
 		              $this->load->helper('security');
@@ -536,32 +535,30 @@ $this->load->helper('security');
 if($this->input->post())
 {
 
-$headers=$this->input->request_headers();
 
-if(!empty($headers['phone'])){
+  $headers=$this->input->request_headers();
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
-      }else{
+//   if(!empty($headers['phone'])){
+// echo "hi";
+// exit;
+         $phone=$headers['phone'];
+          $password=$headers['authentication'];
           $token_id=$headers['token_id'];
-      }
 
-
-
+        // }else{
+        //   echo "hi2";
+        //   exit;
+        //     $token_id=$headers['token_id'];
+        // }
 
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
-// $this->form_validation->set_rules( $token_id, 'token_id', 'required|trim');
 
 if($this->form_validation->run()== TRUE)
 {
 $product_id=$this->input->post('product_id');
 $quantity=$this->input->post('quantity');
-// $email_id=$this->input->post('email_id');
-// $password=$this->input->post('password');
-// $token_id=$this->input->post('token_id');
 
 
 // --------------add to cart using email------------
@@ -673,7 +670,7 @@ echo json_encode($res);
 }
 
 }else{
-$res = array('message'=>'password not exist',
+$res = array('message'=>'Wrong Authnetication',
 'status'=>201
 );
 
@@ -697,7 +694,7 @@ echo json_encode($res);
 
     else{
 
-
+if(!empty($token_id)){
 
 
             $this->db->select('*');
@@ -764,6 +761,7 @@ echo json_encode($res);
 
                                               echo json_encode($res);
                                             }
+
                               }else{
                                    $res = array('message'=>'Product_id not exist.',
                                    'status'=>201
@@ -772,6 +770,7 @@ echo json_encode($res);
                                    echo json_encode($res);
 
                               }
+
 
               }else{
 
@@ -785,15 +784,17 @@ echo json_encode($res);
 
                   }
 
+                }else{
+                  $res = array('message'=>'Please provide token_id',
+                  'status'=>201
+                  );
 
+                  echo json_encode($res);
+
+
+                }
 
         }
-
-
-
-
-
-
 
 
             }
