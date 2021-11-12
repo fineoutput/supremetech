@@ -539,7 +539,7 @@ $this->load->helper('security');
 if($this->input->post())
 {
 
-$headers=$this->input->request_headers();
+$headers = apache_request_headers();
 
 
 
@@ -830,7 +830,7 @@ $this->load->helper('security');
 // if($this->input->post())
 // {
 
-  $headers=$this->input->request_headers();
+  $headers = apache_request_headers();
          $phone=$headers['phone'];
           $password=$headers['authentication'];
   				$token_id=$headers['token_id'];
@@ -1043,7 +1043,7 @@ if($this->input->post())
 // print_r($this->input->post());
 // exit;
 
-$headers=$this->input->request_headers();
+$headers = apache_request_headers();
 
 
        $phone=$headers['phone'];
@@ -1239,7 +1239,7 @@ $this->load->helper('security');
 // if($this->input->post())
 // {
 
-  $headers=$this->input->request_headers();
+  $headers = apache_request_headers();
 
 
          $phone=$headers['phone'];
@@ -1416,7 +1416,7 @@ if($this->input->post())
 // print_r($this->input->post());
 // exit;
 
-$headers=$this->input->request_headers();
+$headers = apache_request_headers();
 
 
        $phone=$headers['phone'];
@@ -1827,7 +1827,7 @@ public function calculate(){
   // if($this->input->post())
   // {
 
-    $headers=$this->input->request_headers();
+    $headers = apache_request_headers();
            $phone=$headers['phone'];
             $authentication=$headers['authentication'];
             $token_id=$headers['token_id'];
@@ -2020,7 +2020,7 @@ public function apply_promocode(){
   if($this->input->post())
   {
 
-    $headers=$this->input->request_headers();
+    $headers = apache_request_headers();
            $phone=$headers['phone'];
             $authentication=$headers['authentication'];
             $token_id=$headers['token_id'];
@@ -2279,7 +2279,7 @@ public function promocode_remove(){
   $this->load->helper('security');
   if($this->input->post())
   {
-    $headers=$this->input->request_headers();
+    $headers = apache_request_headers();
            $phone=$headers['phone'];
             $authentication=$headers['authentication'];
             $token_id=$headers['token_id'];
@@ -2472,7 +2472,7 @@ public function view_order(){
   $this->load->helper('security');
   // if($this->input->post())
   // {
-          $headers=$this->input->request_headers();
+          $headers = apache_request_headers();
               $phone=$headers['Phone'];
                $authentication=$headers['Authentication'];
                $token_id=$headers['Tokenid'];
@@ -2613,7 +2613,7 @@ public function orderdetail(){
   if($this->input->post())
   {
 
-    $headers=$this->input->request_headers();
+    $headers = apache_request_headers();
         $phone=$headers['Phone'];
          $authentication=$headers['Authentication'];
          $token_id=$headers['Tokenid'];
@@ -2741,7 +2741,7 @@ if($this->input->post())
 {
 // print_r($this->input->post());
 // exit;
-$headers=$this->input->request_headers();
+$headers = apache_request_headers();
     $phone=$headers['Phone'];
      $authentication=$headers['Authentication'];
      $token_id=$headers['Tokenid'];
@@ -2777,7 +2777,7 @@ foreach($search_string->result() as $data){
 
 
 }
-header('Access-Control-Allow-Origin: *');
+
 $res = array('message'=>"success",
 'status'=>200,
 'data'=>$search_data
@@ -2788,7 +2788,7 @@ echo json_encode($res);
 
 }
 else{
-header('Access-Control-Allow-Origin: *');
+
 $res = array('message'=>validation_errors(),
 'status'=>201
 );
@@ -2799,7 +2799,7 @@ echo json_encode($res);
 }
 
 }else{
-header('Access-Control-Allow-Origin: *');
+
 
 $res = array('message'=>'No data are available',
 'status'=>201
@@ -2823,7 +2823,7 @@ if($this->input->post())
 {
 // print_r($this->input->post());
 // exit;
-$headers=$this->input->request_headers();
+$headers = apache_request_headers();
     $phone=$headers['Phone'];
      $authentication=$headers['Authentication'];
      $token_id=$headers['Tokenid'];
