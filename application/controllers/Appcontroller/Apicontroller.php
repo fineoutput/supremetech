@@ -1828,9 +1828,9 @@ public function calculate(){
   // {
 
     $headers = apache_request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
 
 
@@ -2021,16 +2021,16 @@ public function apply_promocode(){
   {
 
     $headers = apache_request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
   // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
   // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
   // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+    $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
   $this->form_validation->set_rules('promocode', 'promocode', 'required|xss_clean|trim');
 
   if($this->form_validation->run()== TRUE)
@@ -2280,9 +2280,9 @@ public function promocode_remove(){
   if($this->input->post())
   {
     $headers = apache_request_headers();
-           $phone=$headers['phone'];
-            $authentication=$headers['authentication'];
-            $token_id=$headers['token_id'];
+           $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
@@ -3453,7 +3453,7 @@ echo json_encode($res);
 
 }
 //-------------------state api--------------------
-                  
+
       public function all_state_get(){
 
                                    $this->db->select('*');
