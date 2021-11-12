@@ -831,9 +831,9 @@ $this->load->helper('security');
 // {
 
   $headers = apache_request_headers();
-         $phone=$headers['phone'];
-          $password=$headers['authentication'];
-  				$token_id=$headers['token_id'];
+         $phone=$headers['Phone'];
+          $password=$headers['Authentication'];
+  				$token_id=$headers['Tokenid'];
 
 
 
