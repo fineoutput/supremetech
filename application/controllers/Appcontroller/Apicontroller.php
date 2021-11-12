@@ -3490,5 +3490,27 @@ echo json_encode($res);
                   }
                 }
 
+  public function promocode_list(){
+    $this->db->select('*');
+                $this->db->from('tbl_promocode');
+                $this->db->where('is_active',1);
+                $promocode= $this->db->get();
+                $view_promo=$promocode->row();
+                $promocode_data=[];
+                foreach($promocode->result() as $value){
+                          $promocode_data[]=array(
+                            'id'=>$value->id,
+                            'type'=>$value->ptype,
+                            'name'=>$value->promocode
+                          );
+                }
+                $res = array('message'=>'success',
+                'status'=>201,
+                'data'=>$promocode_data
+
+                );
+
+                echo json_encode($res);
+}
 
 }
