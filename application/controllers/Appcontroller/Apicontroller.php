@@ -2689,7 +2689,7 @@ $order2[]=array(
 'product_image' =>base_url().$product_data->image1,
 'quantity'=> $data->quantity,
 'price'=>$data->product_mrp,
-'total amount'=>$data->total_amount,
+'total_amount'=>$data->total_amount,
 'weight'=>$product_data->weight,
 
 
