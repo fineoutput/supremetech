@@ -3452,6 +3452,43 @@ echo json_encode($res);
 
 
 }
+//-------------------state api--------------------
+                  
+      public function all_state_get(){
+
+                                   $this->db->select('*');
+                       $this->db->from('all_states');
+                       //$this->db->where('id',$usr);
+                       $data= $this->db->get();
+                       if(!empty($data)){
+                        $address=[];
+                       foreach($data->result() as $value){
+                         $address[]=array(
+                           'state_id'=>$value->id,
+                           'state'=>$value->state_name,
+                         );
+                       }
+
+
+
+                       $res = array('message'=>'success',
+                       'status'=>200,
+                       'data'=>$address,
+                       );
+
+                       echo json_encode($res);
+                  }else{
+
+
+
+                                           $res = array('message'=>'some error occured',
+                                           'status'=>201,
+
+                                           );
+
+                                           echo json_encode($res);
+                  }
+                }
 
 
 }
