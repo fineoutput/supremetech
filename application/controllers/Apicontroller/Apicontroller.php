@@ -3450,6 +3450,8 @@ public function filter(){
   if($this->input->post())
   {
 
+
+  $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
   $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
   $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
   $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
@@ -3469,6 +3471,7 @@ public function filter(){
   if($this->form_validation->run()== TRUE)
   {
 
+    $brand_id=$this->input->post('brand_id');
     $resolution_id=$this->input->post('resolution_id');
     $irdistance_id=$this->input->post('irdistance_id');
     $cameratype_id=$this->input->post('cameratype_id');
@@ -3484,6 +3487,8 @@ public function filter(){
     $size_id=$this->input->post('size_id');
     $lens_id=$this->input->post('lens_id');
 
+
+$brand_info = explode(',',$brand_id);
 $resolution_info = explode(',',$resolution_id);
 $irdistance_info = explode(',',$irdistance_id);
 $cameratype_info = explode(',',$cameratype_id);
@@ -3504,6 +3509,10 @@ $lens_info = explode(',',$lens_id);
 $this->db->from('tbl_products');
 $this->db->where('is_active',1);
 
+
+foreach($brand_info as $data0) {
+$this->db->or_where('brand',$data0);
+}
 foreach($resolution_info as $data) {
 $this->db->or_where('resolution',$data);
 }

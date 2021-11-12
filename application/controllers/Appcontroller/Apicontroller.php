@@ -303,7 +303,10 @@ if(!empty($productsdata)){
 $products[] = array(
     'id'=> $productsdata->id,
     'productname'=> $productsdata->productname,
-    'productimage'=> base_url().$productsdata->image,
+    'productimage1'=> base_url().$productsdata->image,
+    'productimage2'=> base_url().$productsdata->image1,
+    'video1'=> base_url().$productsdata->video1,
+    'video2'=> base_url().$productsdata->video2,
     'mrp'=> $productsdata->mrp,
     'price'=> $productsdata->sellingprice,
     'productdescription'=> $productsdata->productdescription,
@@ -540,9 +543,9 @@ $headers=$this->input->request_headers();
 
 
 
-       $phone=$headers['Phone'];
-        $password=$headers['Authentication'];
-        $token_id=$headers['Tokenid'];
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
 
 
 
@@ -582,7 +585,7 @@ $this->db->where('product_id',$product_id);
 $check_cart= $this->db->get();
 $cart=$check_cart->row();
 if(empty($cart)){
-$ip = $this->input->ip_address();
+$ip = $this->input->ip_ssss();
 date_default_timezone_set("Asia/Calcutta");
 $cur_date=date("Y-m-d H:i:s");
 
@@ -695,7 +698,6 @@ echo json_encode($res);
 
     else{
 
-          if(!empty($token_id)){
 
 
 
@@ -786,19 +788,11 @@ echo json_encode($res);
 
 
 
+        }
 
 
 
 
-}else{
-  $res = array('message'=>'Please insert data.',
-  'status'=>201
-  );
-
-  echo json_encode($res);
-}
-
-  }
 
 
 
@@ -837,9 +831,9 @@ $this->load->helper('security');
 // {
 
   $headers=$this->input->request_headers();
-         $phone=$headers['Phone'];
-          $password=$headers['Authentication'];
-  				$token_id=$headers['Tokenid'];
+         $phone=$headers['phone'];
+          $password=$headers['authentication'];
+  				$token_id=$headers['token_id'];
 
 
 
@@ -1052,9 +1046,9 @@ if($this->input->post())
 $headers=$this->input->request_headers();
 
 
-       $phone=$headers['Phone'];
-        $password=$headers['Authentication'];
-        $token_id=$headers['Tokenid'];
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|xss_clean|trim');
@@ -1248,9 +1242,9 @@ $this->load->helper('security');
   $headers=$this->input->request_headers();
 
 
-         $phone=$headers['Phone'];
-          $password=$headers['Authentication'];
-          $token_id=$headers['Tokenid'];
+         $phone=$headers['phone'];
+          $password=$headers['authentication'];
+          $token_id=$headers['token_id'];
 
 
 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -1425,9 +1419,9 @@ if($this->input->post())
 $headers=$this->input->request_headers();
 
 
-       $phone=$headers['Phone'];
-        $password=$headers['Authentication'];
-        $token_id=$headers['Tokenid'];
+       $phone=$headers['phone'];
+        $password=$headers['authentication'];
+        $token_id=$headers['token_id'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 // $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
@@ -1834,9 +1828,9 @@ public function calculate(){
   // {
 
     $headers=$this->input->request_headers();
-           $phone=$headers['Phone'];
-            $authentication=$headers['Authentication'];
-            $token_id=$headers['Tokenid'];
+           $phone=$headers['phone'];
+            $authentication=$headers['authentication'];
+            $token_id=$headers['token_id'];
 
 
 
@@ -2027,9 +2021,9 @@ public function apply_promocode(){
   {
 
     $headers=$this->input->request_headers();
-           $phone=$headers['Phone'];
-            $authentication=$headers['Authentication'];
-            $token_id=$headers['Tokenid'];
+           $phone=$headers['phone'];
+            $authentication=$headers['authentication'];
+            $token_id=$headers['token_id'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
@@ -2286,9 +2280,9 @@ public function promocode_remove(){
   if($this->input->post())
   {
     $headers=$this->input->request_headers();
-           $phone=$headers['Phone'];
-            $authentication=$headers['Authentication'];
-            $token_id=$headers['Tokenid'];
+           $phone=$headers['phone'];
+            $authentication=$headers['authentication'];
+            $token_id=$headers['token_id'];
 
             if(!empty($phone) && !empty($authentication) && !empty($token_id)){
 
@@ -2469,9 +2463,485 @@ $res = array('message'=>"success",
 
 }
 
+//view order---------------------------------
+
+
+public function view_order(){
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  // if($this->input->post())
+  // {
+          $headers=$this->input->request_headers();
+              $phone=$headers['Phone'];
+               $authentication=$headers['Authentication'];
+               $token_id=$headers['Tokenid'];
+               if(!empty($phone) && !empty($authentication) && !empty($token_id))
+               {
+
+            //
+            // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+            // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+            // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+
+  // if($this->form_validation->run()== TRUE)
+  // {
+      //
+      // $phone=$this->input->post('phone');
+      // $authentication=$this->input->post('authentication');
+      // $token_id=$this->input->post('token_id');
+
+
+                $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone',$phone);
+            $user_data= $this->db->get()->row();
+
+            if(!empty($user_data)){
+
+            if($user_data->authentication==$authentication){
+
+$this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('user_id',$user_data->id);
+$this->db->where('payment_status',1);
+$this->db->or_where('order_status',5);
+$data= $this->db->get();
+
+$viewcart=[];
+foreach ($data->result() as $value) {
+
+if($value->payment_type == 1){
+$payment_type="Bank Tranfer";
+}else if($value->payment_type == 2){
+  $payment_type="Pay at store";
+}else{
+  $payment_type = "NA";
+}
+
+if($value->order_status==1 || $value->order_status==2){
+  $cancel_status = 1;
+}else{
+    $cancel_status =0;
+}
+
+if($value->order_status==1){
+  $order_status= "Placed";
+}else if($value->order_status==2){
+  $order_status= "Confirmed";
+}else if($value->order_status==3){
+  $order_status= "Dispatched";
+}else if($value->order_status==4){
+  $order_status= "Delivered";
+}else if($value->order_status==5){
+  $order_status= "Canceled";
+}
+
+$newdate = new DateTime($value->date);
+$d2=$newdate->format('d-m-Y');   #d-m-Y  // March 10, 2001, 5:16 pm
+
+
+$viewcart[]=array(
+'order_id'=>$value->id,
+'order_date'=>$d2,
+'total_amount'=>$value->final_amount,
+'payment_type'=> $payment_type,
+'discount'=>$value->discount,
+'order_status'=>$order_status,
+'cancel_status'=>$cancel_status,
+);
+
+}
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$viewcart
+);
+
+echo json_encode($res);
+}else{
+$res = array('message'=>'Wrong authentication',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+$res = array('message'=>'user not found',
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+
+}else{
+  $res = array('message'=>'please insert data',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+
+  }
+}
+// }else{
+//   header('Access-Control-Allow-Origin: *');
+//   $res = array('message'=>validation_errors(),
+//   'status'=>201
+//   );
+//
+//   echo json_encode($res);
+//
+// }
+// }else{
+//   header('Access-Control-Allow-Origin: *');
+//   $res = array('message'=>"Please insert some data",
+//   'status'=>201
+//   );
+//
+//   echo json_encode($res);
+//
+// }
 
 
 
+//------------------------------------
+public function orderdetail(){
+
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+
+    $headers=$this->input->request_headers();
+        $phone=$headers['Phone'];
+         $authentication=$headers['Authentication'];
+         $token_id=$headers['Tokenid'];
+
+         if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+
+
+            // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+            // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+            // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+            $this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
+
+  if($this->form_validation->run()== TRUE)
+  {
+
+          // $phone=$this->input->post('phone');
+          // $authentication=$this->input->post('authentication');
+          // $token_id=$this->input->post('token_id');
+          $order_id=$this->input->post('order_id');
+
+
+                  $this->db->select('*');
+              $this->db->from('tbl_users');
+              $this->db->where('phone',$phone);
+              $user_data= $this->db->get()->row();
+
+              if(!empty($user_data)){
+
+              if($user_data->authentication==$authentication){
+
+$this->db->select('*');
+$this->db->from('tbl_order2');
+$this->db->where('main_id',$order_id);
+$dsa= $this->db->get();
+$da=$dsa->row();
+$order2 = [] ;
+$subtotal= 0 ;
+foreach($dsa->result() as $data) {
+
+            $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$product_data= $this->db->get()->row();
+
+
+$order2[]=array(
+'product_id' =>$product_data->id,
+'product_name' =>$product_data->productname,
+'product_image' =>base_url().$product_data->image1,
+'quantity'=> $data->quantity,
+'price'=>$data->product_mrp,
+'total amount'=>$data->total_amount,
+'weight'=>$product_data->weight,
+
+
+
+);
+$subtotal = $subtotal + $data->total_amount;
+
+}
+
+
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$order2,
+'subtotal'=>$subtotal
+);
+
+echo json_encode($res);
+}else{
+
+$res = array('message'=>'Wrong authentication',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+
+$res = array('message'=>'user not found',
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+}else{
+
+  $res = array('message'=>validation_errors(),
+  'status'=>201
+  );
+
+  echo json_encode($res);
+
+}
+
+}else{
+  $res = array('message'=>"header part required",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+}else{
+
+  $res = array('message'=>"Please insert some data",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+
+}
+
+}
+
+//---------------search api --------------
+public function search_product(){
+
+
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+// print_r($this->input->post());
+// exit;
+$headers=$this->input->request_headers();
+    $phone=$headers['Phone'];
+     $authentication=$headers['Authentication'];
+     $token_id=$headers['Tokenid'];
+
+$this->form_validation->set_rules('string', 'string', 'required|xss_clean|trim');
+
+if($this->form_validation->run()== TRUE)
+{
+
+$string=$this->input->post('string');
+
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->like('productname',$string);
+$this->db->where('is_active',1);
+$search_string= $this->db->get();
+// print_r ($string_check);
+// exit;
+$search_data=[];
+foreach($search_string->result() as $data){
+
+                     $search_data[]=array(
+                       'product_id'=>$data->id,
+                       'product_name'=>$data->productname,
+                       'produt_image'=>base_url().$data->image,
+                       'productdescription'=>$data->productdescription,
+                       'product_mrp'=>$data->mrp,
+                       'product_selling_price'=>$data->sellingprice,
+
+
+
+   );
+
+
+}
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$search_data
+);
+
+echo json_encode($res);
+
+
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+
+
+}
+
+public function addressadd(){
+
+
+
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+// print_r($this->input->post());
+// exit;
+$headers=$this->input->request_headers();
+    $phone=$headers['Phone'];
+     $authentication=$headers['Authentication'];
+     $token_id=$headers['Tokenid'];
+
+     if(!empty($phone) && !empty($authentication)){
+
+$this->form_validation->set_rules('address', 'address', 'required|customTextbox|xss_clean');
+$this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean');
+$this->form_validation->set_rules('state', 'state', 'required|xss_clean');
+$this->form_validation->set_rules('city', 'city', 'required|xss_clean');
+// $this->form_validation->set_rules('email_id', 'email_id', 'required|xss_clean');
+// $this->form_validation->set_rules('password', 'password', 'required|xss_clean');
+
+if($this->form_validation->run()== TRUE)
+{
+$address=$this->input->post('address');
+$pincode=$this->input->post('pincode');
+$state=$this->input->post('state');
+$city=$this->input->post('city');
+// $email_id=$this->input->post('email_id');
+// $password=$this->input->post('password');
+
+
+
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
+
+$addedby=$this->session->userdata('admin_id');
+
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$this->db->where('authentication',$authentication);
+$data= $this->db->get();
+$da=$data->row();
+
+if(!empty($da)){
+
+
+
+$data_insert = array('address'=>$address,
+'pincode'=>$pincode,
+'state'=>$state,
+'city'=>$city,
+'user_id'=>$da->id,
+'ip' =>$ip
+
+
+);
+
+
+
+
+
+$last_id=$this->base_model->insert_table("tbl_address",$data_insert,1) ;
+
+if($last_id!=0){
+
+$res = array('message'=>"success",
+'status'=>200
+);
+
+echo json_encode($res);
+
+}else{
+
+
+$res = array('message'=>"sorry error occured",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+
+
+}else{
+  $res = array('message'=>'email_id and password not match',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+  exit;
+}
+
+}
+else{
+
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+}else{
+  $res = array('message'=>"phone or authentication required",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
+}else{
+
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+}
 
 
 
