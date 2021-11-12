@@ -2943,8 +2943,106 @@ echo json_encode($res);
 
 }
 
+//view address------------------------
+
+public function view_address(){
 
 
+
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+
+$headers = apache_request_headers();
+    $phone=$headers['Phone'];
+     $authentication=$headers['Authentication'];
+     $token_id=$headers['Tokenid'];
+
+     if(!empty($phone) && !empty($authentication)){
+
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+//$this->db->where('authentication',$authentication);
+$data= $this->db->get();
+$da=$data->row();
+
+if(!empty($da)){
+
+     if($da->authentication == $authentication){
+
+   $this->db->select('*');
+               $this->db->from('tbl_address');
+               $this->db->where('user_id',$da->id);
+               $address_data= $this->db->get();
+               $address=$address_data->row();
+               $address_view=[];
+
+      if(!empty($address)){
+               foreach($address_data->result() as $value){
+
+                $address_view[]=array(
+                  'address'=>$value->address,
+                  'pincode'=>$value->pincode,
+                  'state'=>$value->state,
+                  'city'=>$value->city
+                );
+
+
+
+
+               }
+
+
+
+
+
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$address_view
+);
+
+echo json_encode($res);
+
+}else{
+
+
+$res = array('message'=>"Address not found.",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+}else{
+  $res = array('message'=>"Authentication not match.",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+}else{
+  $res = array('message'=>"User detail not match.",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
+
+
+}else{
+  $res = array('message'=>'phone or authentication required.',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
+
+
+}
 
 
 }
