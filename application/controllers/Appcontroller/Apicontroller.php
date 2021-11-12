@@ -107,6 +107,7 @@ public function get_minorcategory_products(){
 		              $this->load->helper('security');
 		              if($this->input->post())
 		              {
+
 		                // print_r($this->input->post());
 		                // exit;
 		                // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
@@ -543,9 +544,9 @@ $headers = apache_request_headers();
 
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 
 
@@ -1046,9 +1047,9 @@ if($this->input->post())
 $headers = apache_request_headers();
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 $this->form_validation->set_rules('quantity', 'quantity', 'required|xss_clean|trim');
@@ -1242,9 +1243,9 @@ $this->load->helper('security');
   $headers = apache_request_headers();
 
 
-         $phone=$headers['phone'];
-          $password=$headers['authentication'];
-          $token_id=$headers['token_id'];
+         $phone=$headers['Phone'];
+          $password=$headers['Authentication'];
+          $token_id=$headers['Tokenid'];
 
 
 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -1419,9 +1420,9 @@ if($this->input->post())
 $headers = apache_request_headers();
 
 
-       $phone=$headers['phone'];
-        $password=$headers['authentication'];
-        $token_id=$headers['token_id'];
+       $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
 
 $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 // $this->form_validation->set_rules('email_id', 'email_id', 'xss_clean|trim');
