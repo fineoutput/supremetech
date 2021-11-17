@@ -1806,6 +1806,7 @@ $related_info[]  = array(
 'productname'=>$data->productname,
 'productimage'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
+'minorcategory_id'=>$data->minorcategory_id,
 'mrp'=>$data->mrp,
 'price'=>$data->sellingprice
 );
