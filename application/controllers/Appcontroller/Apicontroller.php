@@ -292,45 +292,49 @@ if($this->input->post())
 //---------------------
 
 // ========= Get Product Details =========================
-  public function get_productdetails($id){
+public function get_productdetails($id){
 
-            $this->db->select('*');
+          $this->db->select('*');
 $this->db->from('tbl_products');
 $this->db->where('id',$id);
 $this->db->where('is_active',1);
 $productsdata= $this->db->get()->row();
 if(!empty($productsdata)){
 
-$products[] = array(
-    'id'=> $productsdata->id,
-    'productname'=> $productsdata->productname,
-    'productimage1'=> base_url().$productsdata->image,
-    'productimage2'=> base_url().$productsdata->image1,
-    'video1'=> base_url().$productsdata->video1,
-    'video2'=> base_url().$productsdata->video2,
-    'mrp'=> $productsdata->mrp,
-    'price'=> $productsdata->sellingprice,
-    'productdescription'=> $productsdata->productdescription,
-    'modelno'=> $productsdata->modelno,
-    // 'inventory'=> $data->inventory
+$image=array(base_url().$productsdata->image,base_url().$productsdata->image1,base_url().$productsdata->video1,base_url().$productsdata->video2);
+
+$products = array(
+  'id'=> $productsdata->id,
+  'productname'=> $productsdata->productname,
+  // 'productimage1'=> base_url().$productsdata->image,
+  // 'productimage2'=> base_url().$productsdata->image1,
+  // 'image'=> $image,
+  // 'video1'=> base_url().$productsdata->video1,
+  // 'video2'=> base_url().$productsdata->video2,
+  'mrp'=> $productsdata->mrp,
+  'price'=> $productsdata->sellingprice,
+  'productdescription'=> $productsdata->productdescription,
+  'modelno'=> $productsdata->modelno,
+  // 'inventory'=> $data->inventory
 );
 
 
 
 $res = array('message'=>"success",
-      'status'=>200,
-      'data'=>$products
-      );
+    'status'=>200,
+    'image'=>$image,
+    'data'=>$products
+    );
 
-      echo json_encode($res);
+    echo json_encode($res);
 
-    }
-    else{
-      $res = array('message'=>"not valid",
-      'status'=>201,
+  }
+  else{
+    $res = array('message'=>"not valid",
+    'status'=>201,
 );
 echo json_encode($res);
-    }
+  }
 
 }
 

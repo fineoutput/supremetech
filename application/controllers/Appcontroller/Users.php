@@ -24,15 +24,20 @@ public function login(){
                   $this->load->helper(array('form', 'url'));
                   $this->load->library('form_validation');
                   $this->load->helper('security');
-                  if($this->input->post())
-                  {
+
                     // print_r($this->input->post());
                     // exit;
-                    $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+                    $headers = apache_request_headers();
 
-                    if($this->form_validation->run()== TRUE)
-                    {
-                      $phone=$this->input->post('phone');
+
+                           $phone=$headers['Phone'];
+                            // $password=$headers['Authentication'];
+                            // $token_id=$headers['Tokenid'];
+
+                    //$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+if(!empty($phone)){
+
+                      // $phone=$this->input->post('phone');
                       $ip = $this->input->ip_address();
               date_default_timezone_set("Asia/Calcutta");
                       $cur_date=date("Y-m-d H:i:s");
@@ -113,31 +118,37 @@ public function login(){
                                 echo json_encode($res);
                                 exit;
                               }
+}else{
+  $res=array(
+    'message'=>'phone no required',
+    'code'=>201,
+  );
+  echo json_encode($res);
+}
 
 
-
-                    }
-                  else{
-
-                    $res = array('message'=>validation_errors(),
-                          'status'=>201
-                          );
-
-                          echo json_encode($res);
-
-
-                  }
-
-                  }
-                else{
-
-                  $res = array('message'=>"Please insert some data, No data available",
-                        'status'=>201
-                        );
-
-                        echo json_encode($res);
-
-                }
+                //     }
+                //   else{
+                //
+                //     $res = array('message'=>validation_errors(),
+                //           'status'=>201
+                //           );
+                //
+                //           echo json_encode($res);
+                //
+                //
+                //   }
+                //
+                //   }
+                // else{
+                //
+                //   $res = array('message'=>"Please insert some data, No data available",
+                //         'status'=>201
+                //         );
+                //
+                //         echo json_encode($res);
+                //
+                // }
 
 
 
