@@ -590,7 +590,8 @@ $this->db->where('product_id',$product_id);
 $check_cart= $this->db->get();
 $cart=$check_cart->row();
 if(empty($cart)){
-$ip = $this->input->ip_ssss();
+
+$ip = $this->input->ip_address();
 date_default_timezone_set("Asia/Calcutta");
 $cur_date=date("Y-m-d H:i:s");
 
