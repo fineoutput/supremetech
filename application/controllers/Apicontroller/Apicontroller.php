@@ -2844,8 +2844,8 @@ if(!empty($img1)){
             						if (!$this->upload->do_upload($img1))
             						{
             							$upload_error = $this->upload->display_errors();
-            							// echo json_encode($upload_error);
-            							echo $upload_error;
+            							echo json_encode($upload_error);
+            							// echo $upload_error;
             						}
             						else
             						{
