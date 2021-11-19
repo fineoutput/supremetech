@@ -128,8 +128,19 @@ public function get_minorcategory_products(){
                       $this->db->where('minorcategory_id',$minorcategory_id);
                       $product_data= $this->db->get();
 
+
+                      $this->db->select('*');
+                    $this->db->from('tbl_minorcategory');
+                    $this->db->where('id',$minorcategory_id);
+                    $get_minorcategory= $this->db->get()->row();
+                    if(!empty($get_minorcategory)){
+                      $minor_name=$get_minorcategory->minorcategoryname;
+                    }
+
                                $product=[];
                               foreach ($product_data->result() as $data) {
+
+
 
                                   $product[] = array(
                                     'product_id'=>$data->id,
@@ -147,7 +158,8 @@ public function get_minorcategory_products(){
                               header('Access-Control-Allow-Origin: *');
                     					$res = array('message'=>"success",
                     								'status'=>200,
-                    					      'data'=>$product
+                    					      'data'=>$product,
+                                    'minorcategory_name'=>$minor_name
                     								);
 
                     								echo json_encode($res);
@@ -190,6 +202,15 @@ public function get_category_products(){
                       // $this->db->where('minorcategory_id',$minorcategory_id);
                       $product_data= $this->db->get();
 
+                           $this->db->select('*');
+                                       $this->db->from('tbl_category');
+                                       $this->db->where('id',$category_id);
+                                       $get_category_id= $this->db->get()->row();
+                                       if(!empty($get_category_id)){
+                                         $category_name=$get_category_id->category;
+                                       }
+
+
                                $product=[];
                               foreach ($product_data->result() as $data) {
 
@@ -209,7 +230,8 @@ public function get_category_products(){
                               header('Access-Control-Allow-Origin: *');
                     					$res = array('message'=>"success",
                     								'status'=>200,
-                    					      'data'=>$product
+                    					      'data'=>$product,
+                                    'category'=>$category_name
                     								);
 
                     								echo json_encode($res);
@@ -259,6 +281,15 @@ if($this->input->post())
     $this->db->where('is_active',1);
     $product_data= $this->db->get();
 
+    $this->db->select('*');
+                $this->db->from('tbl_subcategory');
+                $this->db->where('id',$subcategory_id);
+                $get_subcategory_data= $this->db->get()->row();
+
+                if(!empty($get_subcategory_data)){
+                  $subcategory_name=$get_subcategory_data->subcategory;
+                }
+
              $product=[];
             foreach ($product_data->result() as $data) {
 
@@ -278,7 +309,8 @@ if($this->input->post())
             header('Access-Control-Allow-Origin: *');
             $res = array('message'=>"success",
                   'status'=>200,
-                  'data'=>$product
+                  'data'=>$product,
+                  'subcategory_name'=>$subcategory_name
                   );
 
                   echo json_encode($res);
@@ -306,7 +338,10 @@ if(!empty($productsdata)){
 $products[] = array(
     'id'=> $productsdata->id,
     'productname'=> $productsdata->productname,
-    'productimage'=> base_url().$productsdata->image,
+    'productimage1'=> base_url().$productsdata->image,
+    'productimage2'=> base_url().$productsdata->image1,
+    'productvideo1'=> base_url().$productsdata->video1,
+    'productvideo2'=> base_url().$productsdata->video2,
     'mrp'=> $productsdata->mrp,
     'price'=> $productsdata->sellingprice,
     'productdescription'=> $productsdata->productdescription,
@@ -2767,7 +2802,7 @@ public function checkout(){
           $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
           $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
           $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('store_id', 'store_id', '|xss_clean|trim');
+          $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
           if($this->form_validation->run()== TRUE)
           {
@@ -3784,7 +3819,7 @@ foreach($size->result() as $value11){
       'poeports'=>$poeports_data,
       'poetype'=>$poetype_data,
       'sataports'=>$sataports_data,
-      'length'=>$length_data,
+      'lengths'=>$length_data,
       'screensize'=>$screensize_data,
       'ledtype'=>$ledtype_data,
       'size'=>$size_data,
