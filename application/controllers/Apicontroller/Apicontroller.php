@@ -2823,9 +2823,9 @@ public function checkout(){
 
           $this->load->library('upload');
 
-          $img1='image';
           $image="";
-if(!empty($img1)){
+          if($payment_type == 1){
+          $img1='image';
                       $file_check=($_FILES['image']['error']);
                       if($file_check!=4){
                     	$image_upload_folder = FCPATH . "assets/uploads/bank_receipts/";
