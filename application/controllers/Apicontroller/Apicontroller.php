@@ -1748,7 +1748,7 @@ if(!empty($cart_check1)){
 
 
                $this->db->select('*');
-   $this->db->from('tbl_products');
+   $this->db->from('tbl_inventory');
    $this->db->where('id',$data1->product_id);
    $product_data1= $this->db->get()->row();
 
