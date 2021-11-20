@@ -1754,7 +1754,7 @@ if(!empty($cart_check1)){
 
 if(!empty($product_data1)){
 
-if($product_data1->inventory >= $data1->quantity){
+if($product_data1->quantity >= $data1->quantity){
 
 $total2 = $product_data1->sellingprice * $data1->quantity ;
 $order2_insert = array('main_id'=>$last_id,
@@ -1782,7 +1782,7 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 }
 }else{
   header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Product is found.",
+  $res = array('message'=>"Out of stock",
         'status'=>201,
         );
 
