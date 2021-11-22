@@ -1744,17 +1744,24 @@ $cart_check1=$cart_data->row();
 
 if(!empty($cart_check1)){
   $total2=0;
- foreach($cart_data1->result() as $data1) {
+   foreach($cart_data1->result() as $data1) {
 
 
                $this->db->select('*');
    $this->db->from('tbl_inventory');
-   $this->db->where('id',$data1->product_id);
-   $product_data1= $this->db->get()->row();
+   $this->db->where('product_id',$data1->product_id);
+   $inventory_data1= $this->db->get()->row();
+
+if(!empty($inventory_data1)){
+
+                  $this->db->select('*');
+      $this->db->from('tbl_products');
+      $this->db->where('id',$data1->product_id);
+      $product_data1= $this->db->get()->row();
 
 if(!empty($product_data1)){
 
-if($product_data1->quantity >= $data1->quantity){
+if($inventory_data1->quantity >= $data1->quantity){
 
 $total2 = $product_data1->sellingprice * $data1->quantity ;
 $order2_insert = array('main_id'=>$last_id,
@@ -1783,6 +1790,16 @@ $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 }else{
   header('Access-Control-Allow-Origin: *');
   $res = array('message'=>"Out of stock",
+        'status'=>201,
+        );
+
+        echo json_encode($res);
+        exit;
+        }
+
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>"product Not found",
         'status'=>201,
         );
 
