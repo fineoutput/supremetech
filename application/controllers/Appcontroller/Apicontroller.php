@@ -1254,28 +1254,6 @@ $this->load->helper('security');
           $token_id=$headers['Tokenid'];
 
 
-// $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-// $this->form_validation->set_rules('email_id', 'email_id', 'valid_email|xss_clean|trim');
-// $this->form_validation->set_rules('password', 'password', 'xss_clean|trim');
-
-// if($this->form_validation->run()== TRUE)
-// {
-
-// $token_id=$this->input->post('token_id');
-// $email_id=$this->input->post('email_id');
-// $password=$this->input->post('password');
-
-// if($token_id==NULL && $phone==NULL && $password==NULL){
-// $res = array('message'=>"data is not insert",
-// 'status'=>201,
-//
-// );
-//
-// echo json_encode($res);
-// exit();
-//
-// }
-
 
 if(!empty($phone) || !empty($password)){
 
@@ -1386,30 +1364,70 @@ exit();
 }
 }
 
-// }
-// else{
-// $res = array('message'=>validation_errors(),
-// 'status'=>201
-// );
-//
-// echo json_encode($res);
-//
-//
-// }
-//
-// }else{
-//
-// $res = array('message'=>'No data are available',
-// 'status'=>201
-// );
-//
-// echo json_encode($res);
-// }
-
-
-
 
 }
+// ========== User name==============
+
+public function user_name(){
+
+
+  $headers = apache_request_headers();
+
+
+         $phone=$headers['Phone'];
+          $password=$headers['Authentication'];
+          $token_id=$headers['Tokenid'];
+
+
+
+if(!empty($phone) || !empty($password)){
+
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$this->db->where('authentication',$password);
+$dsa= $this->db->get();
+$user=$dsa->row();
+if(!empty($user)){
+$user_name=$user->name;
+
+
+
+$res = array('message'=>"success",
+'status'=>200,
+'user_name'=>$user_name
+);
+
+echo json_encode($res);
+
+
+}else{
+
+$res = array('message'=>"Wrong credentials",
+'status'=>201,
+
+);
+
+echo json_encode($res);
+exit();
+
+}
+
+
+
+
+}else{
+
+  $res = array('message'=>"Please insert data.",
+  'status'=>201,
+
+  );
+
+  echo json_encode($res);
+}
+}
+
+
 
 
 //------delete product cart-----
