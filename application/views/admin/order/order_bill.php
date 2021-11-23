@@ -83,7 +83,7 @@ User: <?=$user_name;?>
     $address=$order1_data->street_address;
     $state=$order1_data->state;
     $city=$order1_data->city;
-    $zipcode=$order1_data->post_code;
+    $zipcode=$order1_data->pincode;
   }
 
       ?>
