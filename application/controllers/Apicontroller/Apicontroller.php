@@ -2965,25 +2965,25 @@ $data_insert = array('payment_type'=>$payment_type,
 
 //----------------inventory update---------
 
-  if(!empty($order2_check)){
-
-
-     foreach($order2_data->result() as $data1) {
-
-
-
-              $this->db->select('*');
-              $this->db->from('tbl_inventory');
-              $this->db->where('product_id',$data1->product_id);
-              $product_data1= $this->db->get()->row();
-
-              $updated_inventory = $product_data1->quantity - $data1->quantity;
-
-
-$data_update = array('quantity'=>$updated_inventory);
-
-  $this->db->where('id', $product_data1->id);
-  $last_id=$this->db->update('tbl_inventory', $data_update);
+//   if(!empty($order2_check)){
+//
+//
+//      foreach($order2_data->result() as $data1) {
+//
+//
+//
+//               $this->db->select('*');
+//               $this->db->from('tbl_inventory');
+//               $this->db->where('product_id',$data1->product_id);
+//               $product_data1= $this->db->get()->row();
+//
+//               $updated_inventory = $product_data1->quantity - $data1->quantity;
+//
+//
+// $data_update = array('quantity'=>$updated_inventory);
+//
+//   $this->db->where('id', $product_data1->id);
+//   $last_id=$this->db->update('tbl_inventory', $data_update);
 
      }//end of foreach
   }//end of order2
@@ -3431,6 +3431,29 @@ public function cancel_order(){
                       $this->db->where('id', $order_id);
                       $last_id=$this->db->update('tbl_order1', $data_insert);
 
+            $this->db->select('*');
+$this->db->from('tbl_order2');
+$this->db->where('id',$order_id);
+$data_order1= $this->db->get()-row();
+
+if(!empty($data_order1)){
+                $this->db->select('*');
+                            $this->db->from('tbl_inventory');
+                            $this->db->where('product_id',$data_order1->product_id);
+                            $data_inventory= $this->db->get()->row();
+
+                          $total_quantity=$data_order1->quantity + $data_inventory->quantity;
+
+
+
+                          $data_update=array(
+                                   'quantity'=>$total_quantity
+                          );
+                          $this->db->where('product_id', $data_order1->product_id);
+                          $last_id2=$this->db->update('tbl_inventory', $data_update);
+
+
+
     if(!empty($last_id)){
       header('Access-Control-Allow-Origin: *');
       $res = array('message'=>'success',
@@ -3446,6 +3469,15 @@ public function cancel_order(){
 
       echo json_encode($res);
     }
+  }
+  else{
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=>'Order id not found',
+    'status'=>201
+    );
+
+    echo json_encode($res);
+  }
 
             }else{
             header('Access-Control-Allow-Origin: *');

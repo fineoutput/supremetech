@@ -100,7 +100,7 @@
                             <td><?php echo $data->phone  ?></td>
                             <td><?php echo $data->city  ?></td>
                             <td><?php echo $data->state  ?></td>
-                            <td><?php echo $data->post_code  ?></td>
+                            <td><?php echo $data->pincode  ?></td>
                             <td><?php $type=$data->payment_type;
                             $n1="";
                             if($type==1){
