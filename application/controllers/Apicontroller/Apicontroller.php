@@ -2965,25 +2965,25 @@ $data_insert = array('payment_type'=>$payment_type,
 
 //----------------inventory update---------
 
-//   if(!empty($order2_check)){
-//
-//
-//      foreach($order2_data->result() as $data1) {
-//
-//
-//
-//               $this->db->select('*');
-//               $this->db->from('tbl_inventory');
-//               $this->db->where('product_id',$data1->product_id);
-//               $product_data1= $this->db->get()->row();
-//
-//               $updated_inventory = $product_data1->quantity - $data1->quantity;
-//
-//
-// $data_update = array('quantity'=>$updated_inventory);
-//
-//   $this->db->where('id', $product_data1->id);
-//   $last_id=$this->db->update('tbl_inventory', $data_update);
+  if(!empty($order2_check)){
+
+
+     foreach($order2_data->result() as $data1) {
+
+
+
+              $this->db->select('*');
+              $this->db->from('tbl_inventory');
+              $this->db->where('product_id',$data1->product_id);
+              $product_data1= $this->db->get()->row();
+
+              $updated_inventory = $product_data1->quantity - $data1->quantity;
+
+
+$data_update = array('quantity'=>$updated_inventory);
+
+  $this->db->where('id', $product_data1->id);
+  $last_id=$this->db->update('tbl_inventory', $data_update);
 
      }//end of foreach
   }//end of order2
