@@ -67,6 +67,20 @@
                         </td>
                                               </td>
                         </tr>
+                      <tr>
+                                                <td> <strong>Background Image</strong>  <span style="color:red;">*</span></strong> </td>
+                                                <td>
+                          <input type="file" name="fileToUpload2"  class="form-control" placeholder=""  value="" />
+
+                              <?php if($data->image2!=""){  ?>
+        <img id="slide_img_path" height=50 width=100  src="<?php echo base_url().$data->image2 ?>" >
+                          <?php }else {  ?>
+                          Sorry No image Found
+                          <?php } ?>
+
+                        </td>
+                                              </td>
+                        </tr>
                           <tr>
                             <td colspan="2" >
                               <input type="submit" class="btn btn-success" value="save">

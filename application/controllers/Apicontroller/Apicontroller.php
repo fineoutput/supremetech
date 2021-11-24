@@ -1532,6 +1532,7 @@ public function stock_get(){
      foreach ($data->result() as $value) {
        $stock[]=array(
          'image'=>base_url().$value->image1,
+         'background_image'=>base_url().$value->image2,
          'name'=>$value->stockname,
          'message'=>$value->stockmessage
 

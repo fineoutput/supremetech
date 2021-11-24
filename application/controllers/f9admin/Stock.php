@@ -120,6 +120,43 @@ function __construct()
                             						}
                                       }
 
+																			$img2='fileToUpload2';
+
+						                                      $file_check=($_FILES['fileToUpload2']['error']);
+						                                      if($file_check!=4){
+						                                    	$image_upload_folder = FCPATH . "assets/uploads/stock/";
+						                            						if (!file_exists($image_upload_folder))
+						                            						{
+						                            							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+						                            						}
+						                            						$new_file_name="stock2".date("Ymdhms");
+						                            						$this->upload_config = array(
+						                            								'upload_path'   => $image_upload_folder,
+						                            								'file_name' => $new_file_name,
+						                            								'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+						                            								'max_size'      => 25000
+						                            						);
+						                            						$this->upload->initialize($this->upload_config);
+						                            						if (!$this->upload->do_upload($img2))
+						                            						{
+						                            							$upload_error = $this->upload->display_errors();
+						                            							// echo json_encode($upload_error);
+						                            							echo $upload_error;
+						                            						}
+						                            						else
+						                            						{
+
+						                            							$file_info = $this->upload->data();
+
+						                            							$videoNAmePath = "assets/uploads/stock/".$new_file_name.$file_info['file_ext'];
+						                            							$file_info['new_name']=$videoNAmePath;
+						                            							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+						                            							//$nnnn=$file_info['file_name'];
+						                                          $nnnn2=$videoNAmePath;
+						                            							// echo json_encode($file_info);
+						                            						}
+						                                      }
+
                                         $ip = $this->input->ip_address();
                                 date_default_timezone_set("Asia/Calcutta");
                                         $cur_date=date("Y-m-d H:i:s");
@@ -132,7 +169,7 @@ function __construct()
                                 $data_insert = array('stockname'=>$name,
                                           'stockmessage'=>$message,
                                           'image1'=>$nnnn,
-
+                                          'image2'=>$nnnn2,
                                           'ip' =>$ip,
                                           'added_by' =>$addedby,
                                           'is_active' =>1,
@@ -176,10 +213,17 @@ function __construct()
                           }else{
                             $n1=$da->image1;
                           }
+                          if(!empty($nnnn2)){
+                            $n2=$nnnn2;
+                          }else{
+                            $n2=$da->image2;
+                          }
 
-                          $data_insert = array('stockname'=>$name,
-                                    'stockmessage'=>$message,
-                                    'image1'=>$n1,
+
+													$data_insert = array('stockname'=>$name,
+																		'stockmessage'=>$message,
+																		'image1'=>$n1,
+																		'image2'=>$n2,
 
 
                                           );

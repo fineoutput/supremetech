@@ -2542,6 +2542,14 @@ $this->db->select('*');
             $this->db->where('main_id',$data_id->id);
             $data_mrp= $this->db->get()->row();
 if(!empty($data_mrp)){
+  $this->db->select('*');
+              $this->db->from('tbl_products');
+              $this->db->where('id',$data_mrp->product_id);
+              $data_product= $this->db->get()->row();
+              if(!empty($data_product)){
+                 $data_result=$data_product->sellingprice;
+
+              }
 
 foreach ($data->result() as $value) {
 
@@ -2582,7 +2590,7 @@ $d2=$newdate->format('d-m-Y');   #d-m-Y  // March 10, 2001, 5:16 pm
 $viewcart[]=array(
 'order_id'=>$value->id,
 'order_date'=>$d2,
-'product_mrp'=>$data_mrp->product_mrp,
+'product_mrp'=>$data_result,
 'total_amount'=>$value->final_amount,
 'quantity'=>$data_mrp->quantity,
 'payment_type'=> $payment_type,

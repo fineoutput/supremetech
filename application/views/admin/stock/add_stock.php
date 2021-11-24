@@ -59,6 +59,12 @@
                           													<input type="file" name="fileToUpload1"  class="form-control" placeholder="" required value="" />
                           	                                            </td>
                               										</tr>
+                          											<tr>
+                                                                          <td> <strong>Background-Image</strong>  <span style="color:red;">*</span></strong> </td>
+                                                                          <td>
+                          													<input type="file" name="fileToUpload2"  class="form-control" placeholder="" required value="" />
+                          	                                            </td>
+                              										</tr>
                                                   	<tr>
                               												<td colspan="2" >
                               													<input type="submit" class="btn btn-success" value="save">
