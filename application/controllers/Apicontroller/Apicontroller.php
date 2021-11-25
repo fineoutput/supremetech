@@ -3434,8 +3434,8 @@ public function cancel_order(){
 
             $this->db->select('*');
 $this->db->from('tbl_order2');
-$this->db->where('id',$order_id);
-$data_order1= $this->db->get()-row();
+$this->db->where('main_id',$order_id);
+$data_order1= $this->db->get()->row();
 
 if(!empty($data_order1)){
                 $this->db->select('*');
