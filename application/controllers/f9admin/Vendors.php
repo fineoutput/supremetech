@@ -311,7 +311,7 @@ public function updatevendorsStatus($idd,$t){
          );
 
          $this->db->where('id', $id);
-        $zapak=$this->db->update('tbl_vendors', $data_update);
+        $zapak=$this->db->update('tbl_user_temp', $data_update);
 
              if($zapak!=0){
              redirect("dcadmin/vendors/view_vendors","refresh");
@@ -329,7 +329,7 @@ public function updatevendorsStatus($idd,$t){
           );
 
           $this->db->where('id', $id);
-          $zapak=$this->db->update('tbl_vendors', $data_update);
+          $zapak=$this->db->update('tbl_user_temp', $data_update);
 
               if($zapak!=0){
               redirect("dcadmin/vendors/view_vendors","refresh");
@@ -374,7 +374,7 @@ public function updateVendorRequestStatus($idd,$stat){
          );
 
          $this->db->where('id', $id);
-        $zapak=$this->db->update('tbl_vendors', $data_update);
+        $zapak=$this->db->update('tbl_user_temp', $data_update);
 
              if($zapak!=0){
              redirect("dcadmin/vendors/view_vendors","refresh");
@@ -392,7 +392,7 @@ public function updateVendorRequestStatus($idd,$stat){
           );
 
           $this->db->where('id', $id);
-          $zapak=$this->db->update('tbl_vendors', $data_update);
+          $zapak=$this->db->update('tbl_user_temp', $data_update);
 
               if($zapak!=0){
               redirect("dcadmin/vendors/view_vendors","refresh");
