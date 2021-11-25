@@ -23,7 +23,7 @@ function __construct()
                        // exit;
 
 											       			$this->db->select('*');
-											 $this->db->from('tbl_vendors');
+											 $this->db->from('tbl_user_temp');
 											 //$this->db->where('id',$usr);
 											 $data['vendors_data']= $this->db->get();
 
