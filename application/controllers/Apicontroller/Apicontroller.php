@@ -3654,6 +3654,7 @@ $filter_info[] = array(
 'product_name'=>$data->productname,
 'product_image'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
+'MRP'=>$data->mrp,
 'price'=>$data->sellingpricegst,
 
 );
