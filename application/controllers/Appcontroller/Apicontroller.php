@@ -19,7 +19,7 @@ function __construct()
 public function get_slider(){
 
             $this->db->select('*');
-$this->db->from('tbl_slider');
+$this->db->from('tbl_appslider');
 $this->db->where('is_active',1);
 
 $sliderdata= $this->db->get();
@@ -27,7 +27,7 @@ $slider=[];
 foreach($sliderdata->result() as $data) {
 $slider[] = array(
     'name'=> $data->title,
-    'image'=> base_url().$data->slider_image
+    'image'=> base_url().$data->image
 );
 }
 $res = array('message'=>"success",
@@ -1073,7 +1073,7 @@ $quantity=$this->input->post('quantity');
 
 //-------update with email----------
 
-if(!empty($email_id)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
@@ -1380,14 +1380,14 @@ public function user_name(){
 
 
 
-if(!empty($phone) || !empty($password)){
+if(!empty($phone)){
 
 $this->db->select('*');
 $this->db->from('tbl_users');
 $this->db->where('phone',$phone);
-$this->db->where('authentication',$password);
 $dsa= $this->db->get();
 $user=$dsa->row();
+if($user->authentication == $password){
 if(!empty($user)){
 $user_name=$user->name;
 
@@ -1411,6 +1411,15 @@ $res = array('message'=>"Wrong credentials",
 echo json_encode($res);
 exit();
 
+}
+}else{
+  $res = array('message'=>"wrong authentication",
+  'status'=>201,
+
+  );
+
+  echo json_encode($res);
+  exit();
 }
 
 
