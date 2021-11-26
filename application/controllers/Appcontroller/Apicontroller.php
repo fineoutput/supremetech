@@ -3581,13 +3581,13 @@ public function checkout(){
           // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
           $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
           $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+          $this->form_validation->set_rules('name', 'name', 'xss_clean|trim');
+          $this->form_validation->set_rules('contact', 'contact', 'xss_clean|trim');
+          $this->form_validation->set_rules('pincode', 'pincode', 'xss_clean|trim');
+          $this->form_validation->set_rules('state', 'state', 'xss_clean|trim');
+          $this->form_validation->set_rules('city', 'city', 'xss_clean|trim');
+          $this->form_validation->set_rules('house_no', 'house_no', 'xss_clean|trim');
+          $this->form_validation->set_rules('street_address', 'street_address', 'xss_clean|trim');
           $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
           if($this->form_validation->run()== TRUE)
@@ -3645,7 +3645,7 @@ public function checkout(){
             							// echo json_encode($file_info);
             						}
                       }
-}
+
           $this->db->select('*');
       $this->db->from('tbl_users');
       $this->db->where('phone',$phone);
@@ -3800,7 +3800,181 @@ echo json_encode($res);
 
               }
 
+}else{
+  $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
+  $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+  if($this->form_validation->run()== TRUE){
+    $this->db->select('*');
+  $this->db->from('tbl_users');
+  $this->db->where('phone',$phone);
+  $user_data= $this->db->get()->row();
 
+  if(!empty($user_data)){
+
+  if($user_data->authentication==$authentication){
+
+      $this->db->select('*');
+  $this->db->from('tbl_order1');
+  $this->db->where('txnid',$txn_id);
+  $order1_data= $this->db->get()->row();
+
+  if(!empty($order1_data)){
+
+      $this->db->select('*');
+  $this->db->from('tbl_order2');
+  $this->db->where('main_id',$order1_data->id);
+  $order2_data= $this->db->get();
+  $order2_check= $order2_data->row();
+
+  if(!empty($order2_check)){
+
+
+  //----------------inventory check---------
+  foreach($order2_data->result() as $data) {
+
+
+
+      $this->db->select('*');
+      $this->db->from('tbl_products');
+      $this->db->where('id',$data->product_id);
+      $product_data= $this->db->get()->row();
+
+      $this->db->select('*');
+      $this->db->from('tbl_inventory');
+      $this->db->where('product_id',$data->product_id);
+      $inventory_data= $this->db->get()->row();
+
+  if($inventory_data->quantity >= $data->quantity){
+
+
+  }else{
+    $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
+    'status'=>201
+    );
+
+    echo json_encode($res);
+    exit;
+  }
+
+
+  }//end of foreach
+  }//end of order2
+  $total = $order1_data->total_amount;
+  $discount = $order1_data->discount;
+
+  if(empty($discount)){
+  $discount=0;
+  }
+  $final_amount = $total - $discount;
+
+  //----------order1 entry-------
+
+  $data_insert = array('payment_type'=>$payment_type,
+    'name'=>$name,
+    'phone'=>$contact,
+    'pincode'=>$pincode,
+    'state'=>$state,
+    'city'=>$city,
+    'house_no'=>$house_no,
+    'street_address'=>$street_address,
+    'final_amount'=>$final_amount,
+    'bank_receipt'=>$image,
+    'store_id'=>$store_id,
+    'payment_status'=>1,
+    'order_status'=>1,
+
+    );
+
+  $this->db->where('txnid', $txn_id);
+  $last_id=$this->db->update('tbl_order1', $data_insert);
+
+
+  //----------------inventory update---------
+
+  if(!empty($order2_check)){
+
+
+  foreach($order2_data->result() as $data1) {
+
+
+
+        $this->db->select('*');
+        $this->db->from('tbl_inventory');
+        $this->db->where('product_id',$data1->product_id);
+        $product_data1= $this->db->get()->row();
+
+        $updated_inventory = $product_data1->quantity - $data1->quantity;
+
+
+  $data_update = array('quantity'=>$updated_inventory);
+
+  $this->db->where('id', $product_data1->id);
+  $last_id=$this->db->update('tbl_inventory', $data_update);
+
+  }//end of foreach
+  }//end of order2
+
+  //------------cart clear--------------
+      $this->db->select('*');
+  $this->db->from('tbl_cart');
+  $this->db->where('user_id',$user_data->id);
+  $cart_data= $this->db->get();
+  $cart_check= $cart_data->row();
+
+  if(!empty($cart_check)){
+  foreach($cart_data->result() as $cart) {
+
+  $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
+
+  }
+  }
+
+  }// end of order1
+
+  $res = array('message'=>'success',
+  'status'=>200,
+  'order_id'=>$order1_data->id,
+  'amount'=>$final_amount,
+  );
+
+  echo json_encode($res);
+
+
+  }else{
+
+        $res = array('message'=>'Wrong Authentication',
+        'status'=>201
+        );
+
+        echo json_encode($res);
+        }
+        }else{
+
+        $res = array('message'=>'user not found',
+        'status'=>201
+        );
+
+        echo json_encode($res);
+
+        }
+
+
+  }else{
+    $res = array('message'=>validation_errors(),
+    'status'=>201
+    );
+
+    echo json_encode($res);
+
+  }
+
+
+}
 
             }else{
 
