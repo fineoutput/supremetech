@@ -302,7 +302,20 @@ $productsdata= $this->db->get()->row();
 if(!empty($productsdata)){
 
 $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,base_url().$productsdata->video1,base_url().$productsdata->video2);
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$productsdata->id);
+$inventory_data= $this->db->get()->row();
 
+if(!empty($inventory_data)){
+if($inventory_data->quantity>0){
+$stock = "In Stock";
+}else{
+$stock ="Out of stock";
+}
+}else{
+$stock ="Out of stock";
+}
 $products = array(
   'id'=> $productsdata->id,
   'productname'=> $productsdata->productname,
@@ -315,7 +328,7 @@ $products = array(
   'price'=> $productsdata->sellingprice,
   'productdescription'=> $productsdata->productdescription,
   'modelno'=> $productsdata->modelno,
-  // 'inventory'=> $data->inventory
+  'stock'=> $stock
 );
 
 
