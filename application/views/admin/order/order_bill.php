@@ -15,7 +15,7 @@
 <div class="container main_container">
 	<div class="row">
 		<div class="col-sm-6 oswal_logo">
-		<img src="<?=base_url()?>assets/frontend/assets/img/logo.png" class="img-fluid" style="width:150px;">
+		<img src="https://www.supremetechnocom.com/application/views/website/themes/supreme/assets/img/logo.png" class="img-fluid" style="width:150px;">
 		</div>
 		<div class="col-sm-6 content_part">Tax Invoice/Bill of Supply/Cash Memo
 			<p>(Original for Recipient)</p>
@@ -27,7 +27,7 @@
 		<div class="col-sm-6"><span class="font-weight-bold ">Sold By</span><br>
 <span class="seller_details">Supremetech <br>
 
- PO Box 283577<br>Dubai, UAE
+Rajasthan<br>India
 <br><br>
 		www.Supremetech.com<br></span>
 		</div>
@@ -44,7 +44,7 @@ $usr_dat= $this->db->get()->row();
 if(!empty($usr_dat)){
   $user_name= $usr_dat->name;
   $user_email= $usr_dat->email;
-  $user_contact="";
+  $user_contact= $usr_dat->phone;
 }else{
   $user_name="";
   $user_email="";
@@ -144,7 +144,7 @@ Zipcode: <?php echo $zipcode;?><br>
         <th>SNo.</th>
         <th>Product</th>
         <!-- <th>HSN Code</th> -->
-        <th>Unit Name</th>
+        <!-- <th>Unit Name</th> -->
         <th>Unit Price</th>
         <th>Qty</th>
 
@@ -169,42 +169,24 @@ if(!empty($product_data)){
   // $hsn_code= $product_data->hsn_code;
 echo $product_name= $product_data->productname;
 }else{
-  $hsn_code= "";
+  $product_name= "";
 }
 
         ?></td>
 
 
+        <td>
+          <?
+          if(!empty($product_data)){
+            // $hsn_code= $product_data->hsn_code;
+          echo "Rs.".$product_price= $product_data->sellingprice;
+          }else{
+            $product_price= "";
+          }
 
-        <td> <?php
+?>
 
-
-        // $this->db->select('*');
-        // $this->db->from('tbl_type');
-        // $this->db->where('id',$data->type_id);
-        // $type_data= $this->db->get()->row();
-        // if(!empty($type_data)){
-        // echo $type_name= $type_data->name;
-        //  echo $type_mrp= $type_data->mrp;
-        //  // $type_gst_percentage= $type_data->gst_percentage;
-        //   // $type_gst_percentage_price= $type_data->gst_percentage_price;
-        //  //$type_selling_price= $type_data->selling_price;
-        //  // $type_weight= $type_data->weight;
-        //  // $type_qty_weight= $type_weight * $data->quantity;
-        //
-        // }
-        // else{
-        // echo  $type_name= "";
-        //    echo $type_mrp= "";
-        //    $type_weight= 0;
-        //    $type_gst_percentage= 0;
-        //    $type_gst_percentage_price= 0;
-        // }
-
-
-
-        ?></td>
-        <td ></td>
+        </td>
         <td ><?php echo $data->quantity;?></td>
         <!-- <td>9%</td>
         <td>CGST</td>
@@ -219,7 +201,7 @@ echo $product_name= $product_data->productname;
         ?>
 
 
-        <td><?php echo "AED. ".$data->total_amount;?></td>
+        <td><?php echo "Rs. ".$data->total_amount;?></td>
       </tr>
   <?php $i++;} }?>
 
@@ -227,9 +209,9 @@ echo $product_name= $product_data->productname;
       <tr>
         <th>Total</th>
         <th class="product_table" ><?php if(!empty($order1_data)){ echo ""; }?></th>
-        <th class="product_table" colspan="3"><?php if(!empty($order1_data)){ echo ""; }?></th>
+        <th class="product_table" colspan="2"><?php if(!empty($order1_data)){ echo ""; }?></th>
 
-        <th class="product_table"><?php if(!empty($order1_data)){ echo "AED. ".$order1_data->total_amount; }?></th>
+        <th class="product_table"><?php if(!empty($order1_data)){ echo "Rs. ".$order1_data->total_amount; }?></th>
       </tr>
 
       <tr>
@@ -278,11 +260,11 @@ echo $product_name= $product_data->productname;
           }else{
             $promo_discount= 0;
           }
-             "- AED. ".$promo_discount; }else{ echo "-AED. 0"; }?>
+             "- Rs. ".$promo_discount; }else{ echo "-Rs. 0"; }?>
 
 <!-- from table order1  start-->
 
-<?php if(!empty($order1_data)){ echo "- AED. ".$order1_data->promo_deduction_amount; }else{ echo "-AED. 0"; }?>
+<?php if(!empty($order1_data)){ echo "- Rs. ".$order1_data->promo_deduction_amount; }else{ echo "-Rs. 0"; }?>
 
 <!-- from table order1  end-->
 
@@ -293,8 +275,8 @@ echo $product_name= $product_data->productname;
 
 
       <tr>
-        <th colspan="5">SubTotal</th>
-        <th class="product_table"><?php if(!empty($order1_data)){ echo "AED. ".$order1_data->total_amount; }?></th>
+        <th colspan="4">SubTotal</th>
+        <th class="product_table"><?php if(!empty($order1_data)){ echo "Rs. ".$order1_data->total_amount; }?></th>
 
       </tr>
 

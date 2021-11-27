@@ -42,7 +42,7 @@
                                               <tr>
                                                   <th>#</th>
                                                   <th>Product</th>
-                                            
+
                                                   <th>Quantity</th>
                                                   <th>Amount</th>
                                                   <th>date</th>
@@ -72,8 +72,13 @@
 
 
                             <td><?php echo $data->quantity; ?> </td>
-                              <td><?php echo $data->type_amt; ?> </td>
-                              <td><?php echo $data->date; ?> </td>
+                              <td><?php echo $data->total_amount; ?> </td>
+                                <td>
+                              <?
+                                $newdate = new DateTime($data->date);
+                                echo $newdate->format('d/m/Y');   #d-m-Y  // March 10, 2001, 5:16 pm
+                                ?>
+                              </td>
 
 
 
