@@ -335,6 +335,21 @@ $this->db->where('is_active',1);
 $productsdata= $this->db->get()->row();
 if(!empty($productsdata)){
 
+            $this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$productsdata->id);
+$inventory_data= $this->db->get()->row();
+
+if(!empty($inventory_data)){
+if($inventory_data->quantity>0){
+  $stock = 1;
+}else{
+  $stock =0;
+}
+}else{
+  $stock =0;
+}
+
 $products[] = array(
     'id'=> $productsdata->id,
     'productname'=> $productsdata->productname,
@@ -346,7 +361,7 @@ $products[] = array(
     'price'=> $productsdata->sellingprice,
     'productdescription'=> $productsdata->productdescription,
     'modelno'=> $productsdata->modelno,
-    // 'inventory'=> $data->inventory
+    'stock'=> $stock
 );
 
 
@@ -3091,14 +3106,22 @@ public function view_order(){
 
             if($user_data->authentication==$authentication){
 
+
+            $this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('user_id',$user_data->id);
+$check_data= $this->db->get()->row();
+$viewcart=[];
+
+
+if(!empty($check_data)){
 $this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('payment_status',1);
-$this->db->or_where('order_status',5);
 $data= $this->db->get();
 
-$viewcart=[];
+
 foreach ($data->result() as $value) {
 
 if($value->payment_type == 1){
@@ -3141,6 +3164,7 @@ $viewcart[]=array(
 'cancel_status'=>$cancel_status,
 );
 
+}
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
