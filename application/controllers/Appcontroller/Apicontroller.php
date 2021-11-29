@@ -138,6 +138,7 @@ public function get_minorcategory_products(){
                                     'mrp'=> $data->mrp,
                                     'price'=>$data->sellingprice,
                                     'image'=>base_url().$data->image,
+                                    'wishlist'=>$data->wishlist
                                     // 'image1'=>$data->image1
 
                                   );
@@ -4086,6 +4087,22 @@ if(empty($wishlist_data)){
 
 
       $last_id=$this->base_model->insert_table("tbl_wishlist",$data_insert,1) ;
+
+      $this->db->select('*');
+                  $this->db->from('tbl_products');
+                  $this->db->where('id',$product_id);
+                  $check_wishlist= $this->db->get()->row();
+                  if(!empty($check_wishlist)){
+                    $data_insert1 = array('wishlist'=>1
+
+
+                              );
+                              $this->db->where('id', $product_id);
+                              $last_id=$this->db->update('tbl_products', $data_insert1);
+
+
+                  }
+
 if(!empty($last_id)){
   $res = array('message'=>'success',
   'status'=>200
@@ -4199,6 +4216,22 @@ public function remove_wishlist_product(){
 
 
         $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $user_data->id,'product_id' => $product_id));
+
+        $this->db->select('*');
+                    $this->db->from('tbl_products');
+                    $this->db->where('id',$product_id);
+                    $check_wishlist= $this->db->get()->row();
+                    if(!empty($check_wishlist)){
+                      $data_insert1 = array('wishlist'=>0
+
+
+                                );
+                                $this->db->where('id', $product_id);
+                                $last_id=$this->db->update('tbl_products', $data_insert1);
+
+
+                    }
+
 
   if(!empty($zapak)){
     $res = array('message'=>'success',
@@ -4347,7 +4380,7 @@ echo json_encode($res);
               echo json_encode($res);
               }
               }else{
-      
+
               $res = array('message'=>'user not found',
               'status'=>201
               );
