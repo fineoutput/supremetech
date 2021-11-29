@@ -2539,7 +2539,6 @@ public function view_order(){
       // $authentication=$this->input->post('authentication');
       // $token_id=$this->input->post('token_id');
 
-
                 $this->db->select('*');
             $this->db->from('tbl_users');
             $this->db->where('phone',$phone);
