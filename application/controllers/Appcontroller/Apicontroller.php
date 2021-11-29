@@ -2553,11 +2553,12 @@ $this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('payment_status',1);
-$this->db->or_where('order_status',5);
+$this->db->where('order_status',5);
 $data= $this->db->get();
 $data_id=$data->row();
 
 $viewcart=[];
+if(!empty($data_id)){
 
 $this->db->select('*');
             $this->db->from('tbl_order2');
@@ -2632,6 +2633,13 @@ echo json_encode($res);
 
 }else{
   $res = array('message'=>'Order id error',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+}else{
+  $res = array('message'=>'No order',
   'status'=>201
   );
 
