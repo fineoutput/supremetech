@@ -4424,7 +4424,367 @@ echo json_encode($res);
 
 
 }
+//------------filter-----
+public function filter(){
 
+  $this->load->helper(array('form', 'url'));
+  $this->load->library('form_validation');
+  $this->load->helper('security');
+  if($this->input->post())
+  {
+
+
+  $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
+  $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+
+
+
+  if($this->form_validation->run()== TRUE)
+  {
+
+    $brand_id=$this->input->post('brand_id');
+    $resolution_id=$this->input->post('resolution_id');
+    $irdistance_id=$this->input->post('irdistance_id');
+    $cameratype_id=$this->input->post('cameratype_id');
+    $bodymaterial_id=$this->input->post('bodymaterial_id');
+    $videochannel_id=$this->input->post('videochannel_id');
+    $poeports_id=$this->input->post('poeports_id');
+    $poetype_id=$this->input->post('poetype_id');
+
+    $sataports_id=$this->input->post('sataports_id');
+    $length_id=$this->input->post('length_id');
+    $screensize_id=$this->input->post('screensize_id');
+    $ledtype_id=$this->input->post('ledtype_id');
+    $size_id=$this->input->post('size_id');
+    $lens_id=$this->input->post('lens_id');
+
+
+$brand_info = explode(',',$brand_id);
+$resolution_info = explode(',',$resolution_id);
+$irdistance_info = explode(',',$irdistance_id);
+$cameratype_info = explode(',',$cameratype_id);
+$bodymaterial_info = explode(',',$bodymaterial_id);
+$videochannel_info = explode(',',$videochannel_id);
+$poeports_info = explode(',',$poeports_id);
+$poetype_info = explode(',',$poetype_id);
+$sataports_info = explode(',',$sataports_id);
+$length_info = explode(',',$length_id);
+$screensize_info = explode(',',$screensize_id);
+$ledtype_info = explode(',',$ledtype_id);
+$size_info = explode(',',$size_id);
+$lens_info = explode(',',$lens_id);
+
+
+
+            $this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('is_active',1);
+
+
+foreach($brand_info as $data0) {
+$this->db->or_where('brand',$data0);
+}
+foreach($resolution_info as $data) {
+$this->db->or_where('resolution',$data);
+}
+foreach($irdistance_info as $data1) {
+$this->db->or_where('irdistance',$data1);
+}
+foreach($cameratype_info as $data2) {
+$this->db->or_where('cameratype',$data2);
+}
+foreach($bodymaterial_info as $data3) {
+$this->db->or_where('bodymaterial',$data3);
+}
+foreach($videochannel_info as $data4) {
+$this->db->or_where('videochannel',$data4);
+}
+foreach($poeports_info as $data4) {
+$this->db->or_where('poeports',$data4);
+}
+foreach($poetype_info as $data4) {
+$this->db->or_where('poetype',$data4);
+}
+foreach($sataports_info as $data4) {
+$this->db->or_where('sataports',$data4);
+}
+foreach($length_info as $data4) {
+$this->db->or_where('length',$data4);
+}
+foreach($screensize_info as $data4) {
+$this->db->or_where('screensize',$data4);
+}
+foreach($ledtype_info as $data4) {
+$this->db->or_where('ledtype',$data4);
+}
+foreach($size_info as $data4) {
+$this->db->or_where('size',$data4);
+}
+foreach($lens_info as $data4) {
+$this->db->or_where('lens',$data4);
+}
+
+
+$filter_data= $this->db->get();
+$filter_check = $filter_data->row();
+$filter_info = [];
+if(!empty($filter_check)){
+
+foreach($filter_data->result() as $data) {
+
+
+
+
+$filter_info[] = array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'product_image'=>base_url().$data->image,
+'productdescription'=>$data->productdescription,
+'MRP'=>$data->mrp,
+'price'=>$data->sellingpricegst,
+
+);
+
+}
+}
+
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$filter_info,
+);
+
+echo json_encode($res);
+
+
+            }else{
+              header('Access-Control-Allow-Origin: *');
+
+              $res = array('message'=>validation_errors(),
+              'status'=>201
+              );
+
+              echo json_encode($res);
+
+
+              }
+
+              }else{
+              header('Access-Control-Allow-Origin: *');
+
+              $res = array('message'=>'No data are available',
+              'status'=>201
+              );
+
+              echo json_encode($res);
+              }
+
+
+}
+
+//-----------filter_data-------------------
+
+public function view_filter(){
+
+$this->db->select('*');
+//resoultation
+            $this->db->from('tbl_resolution');
+            //$this->db->where('id',$id);
+            $resoulation_id= $this->db->get();
+                         //$resoulation=$resoulation_id->row();
+                         $resolution_data=[];
+                         foreach($resoulation_id->result() as $value)
+                         {
+              $resolution_data[]=array(
+                'name'=>$value->filtername
+              );
+            }
+//brands
+$this->db->from('tbl_brands');
+//$this->db->where('id',$id);
+$brands= $this->db->get();
+$brands_data=[];
+foreach($brands->result() as $value1){
+  $brands_data[]=array(
+    'name'=>$value1->name
+  );
+}
+//irdistance
+$this->db->from('tbl_irdistance');
+//$this->db->where('id',$id);
+$irdistance= $this->db->get();
+$irdistance_data=[];
+foreach($irdistance->result() as $value2){
+
+  $irdistance_data[]=array(
+    'name'=>$value2->filtername
+  );
+}
+
+//cameratype
+$this->db->from('tbl_cameratype');
+//$this->db->where('id',$id);
+$cameratype= $this->db->get();
+$cameratype_data=[];
+foreach($cameratype->result() as $value3){
+
+  $cameratype_data[]=array(
+    'name'=>$value3->filtername
+  );
+}
+
+//bodymaterial
+$this->db->from('tbl_bodymaterial');
+//$this->db->where('id',$id);
+$bodymaterial= $this->db->get();
+$bodymaterial_data=[];
+foreach($bodymaterial->result() as $value13){
+
+  $bodymaterial_data[]=array(
+    'name'=>$value13->filter_name
+  );
+}
+
+//videochannel
+$this->db->from('tbl_videochannel');
+//$this->db->where('id',$id);
+$videochannel= $this->db->get();
+$videochannel_data=[];
+foreach($videochannel->result() as $value4){
+
+  $videochannel_data[]=array(
+    'name'=>$value4->filter_name
+  );
+}
+//poeports
+$this->db->from('tbl_poeports');
+//$this->db->where('id',$id);
+$poeports= $this->db->get();
+$poeports_data=[];
+foreach($poeports->result() as $value5){
+
+  $poeports_data[]=array(
+    'name'=>$value5->filter_name
+  );
+}
+  //poetype
+  $this->db->from('tbl_poetype');
+  //$this->db->where('id',$id);
+  $poetype= $this->db->get();
+  $poetype_data=[];
+  foreach($poetype->result() as $value6){
+
+    $poetype_data[]=array(
+      'name'=>$value6->filter_name
+    );
+  }
+//sataports
+$this->db->from('tbl_sataports');
+//$this->db->where('id',$id);
+$sataports= $this->db->get();
+$sataports_data=[];
+foreach($sataports->result() as $value7){
+
+  $sataports_data[]=array(
+    'name'=>$value7->filter_name
+  );
+}
+//length
+$this->db->from('tbl_length');
+//$this->db->where('id',$id);
+$length= $this->db->get();
+$length_data=[];
+foreach($length->result() as $value8){
+
+  $length_data[]=array(
+    'name'=>$value8->filter_name
+  );
+}
+//screensize
+$this->db->from('tbl_screensize');
+//$this->db->where('id',$id);
+$screensize= $this->db->get();
+$screensize_data=[];
+foreach($screensize->result() as $value9){
+
+  $screensize_data[]=array(
+    'name'=>$value9->filter_name
+  );
+}
+//ledtype
+$this->db->from('tbl_ledtype');
+//$this->db->where('id',$id);
+$ledtype= $this->db->get();
+$ledtype_data=[];
+foreach($ledtype->result() as $value10){
+
+  $ledtype_data[]=array(
+    'name'=>$value10->filter_name
+  );
+}
+//size
+$this->db->from('tbl_size');
+//$this->db->where('id',$id);
+$size= $this->db->get();
+$size_data=[];
+foreach($size->result() as $value11){
+
+  $size_data[]=array(
+    'name'=>$value11->filter_name
+  );
+}
+  //lens
+  $this->db->from('tbl_lens');
+  //$this->db->where('id',$id);
+  $lens= $this->db->get();
+  $lens_data=[];
+  foreach($lens->result() as $value12){
+
+    $lens_data[]=array(
+      'name'=>$value12->filtername
+    );
+}
+    $filter_name=[];
+    $filter_name[]=array(
+      'brand'=>$brands_data,
+      'resoulation'=>$resolution_data,
+      'irdistance'=>$irdistance_data,
+      'cameratype'=>$cameratype_data,
+      'bodymaterial'=>$bodymaterial_data,
+      'videochannel'=>$videochannel_data,
+      'poeports'=>$poeports_data,
+      'poetype'=>$poetype_data,
+      'sataports'=>$sataports_data,
+      'lengths'=>$length_data,
+      'screensize'=>$screensize_data,
+      'ledtype'=>$ledtype_data,
+      'size'=>$size_data,
+      'lens'=>$lens_data,
+    );
+
+    header('Access-Control-Allow-Origin: *');
+
+    $res = array('message'=>'success',
+    'status'=>200,
+    'data'=>$filter_name,
+    );
+
+    echo json_encode($res);
+
+}
 
 
 
