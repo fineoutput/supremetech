@@ -2552,10 +2552,8 @@ $this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('payment_status',1);
-
 $data= $this->db->get();
 $data_id=$data->row();
-
 $viewcart=[];
 if(!empty($data_id)){
 
@@ -4029,6 +4027,371 @@ echo json_encode($res);
 
 
 }
+
+//----add to wishlist--------
+public function add_to_wishlist(){
+
+
+
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    $this->load->helper('security');
+
+
+      $headers = apache_request_headers();
+
+
+
+             $phone=$headers['Phone'];
+              $authentication=$headers['Authentication'];
+              $token_id=$headers['Tokenid'];
+
+    if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+    $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
+
+    if($this->form_validation->run()== TRUE)
+    {
+
+    // $phone=$this->input->post('phone');
+    // $authentication=$this->input->post('authentication');
+    // $token_id=$this->input->post('token_id');
+    $product_id=$this->input->post('product_id');
+    $ip = $this->input->ip_address();
+    date_default_timezone_set("Asia/Calcutta");
+    $cur_date=date("Y-m-d H:i:s");
+
+    $this->db->select('*');
+    $this->db->from('tbl_users');
+    $this->db->where('phone',$phone);
+    $user_data= $this->db->get()->row();
+
+    if(!empty($user_data)){
+
+    if($user_data->authentication==$authentication){
+
+            $this->db->select('*');
+$this->db->from('tbl_wishlist');
+$this->db->where('user_id',$user_data->id);
+$this->db->where('product_id',$product_id);
+$wishlist_data= $this->db->get()->row();
+
+if(empty($wishlist_data)){
+      $data_insert = array('user_id'=>$user_data->id,
+                'product_id'=>$product_id,
+                'ip' =>$ip,
+                'date'=>$cur_date
+
+                );
+
+
+      $last_id=$this->base_model->insert_table("tbl_wishlist",$data_insert,1) ;
+if(!empty($last_id)){
+  $res = array('message'=>'success',
+  'status'=>200
+  );
+
+  echo json_encode($res);
+}else{
+  $res = array('message'=>'some error occured',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
+
+}else{
+  $res = array('message'=>'product is already in your wishist',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+
+
+}
+
+        }else{
+        $res = array('message'=>'Wrong Authentication',
+        'status'=>201
+        );
+
+        echo json_encode($res);
+        }
+        }else{
+        $res = array('message'=>'user not found',
+        'status'=>201
+        );
+
+        echo json_encode($res);
+
+        }
+
+
+
+      }else{
+
+
+        $res = array('message'=>validation_errors(),
+        'status'=>201
+        );
+
+        echo json_encode($res);
+
+
+        }
+      }else{
+        $res = array('message'=>'header required',
+        'status'=>201
+        );
+
+        echo json_encode($res);
+
+
+      }
+
+
+
+
+
+
+
+}
+
+//----remove wishlist product-----
+public function remove_wishlist_product(){
+
+
+      $this->load->helper(array('form', 'url'));
+      $this->load->library('form_validation');
+      $this->load->helper('security');
+
+        $headers = apache_request_headers();
+
+
+
+               $phone=$headers['Phone'];
+                $authentication=$headers['Authentication'];
+                $token_id=$headers['Tokenid'];
+
+                  if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+                  $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
+
+      if($this->form_validation->run()== TRUE)
+      {
+
+      //   $phone=$this->input->post('phone');
+      //   $authentication=$this->input->post('authentication');
+      // $token_id=$this->input->post('token_id');
+      $product_id=$this->input->post('product_id');
+      $ip = $this->input->ip_address();
+      date_default_timezone_set("Asia/Calcutta");
+      $cur_date=date("Y-m-d H:i:s");
+
+      $this->db->select('*');
+      $this->db->from('tbl_users');
+      $this->db->where('phone',$phone);
+      $user_data= $this->db->get()->row();
+
+      if(!empty($user_data)){
+
+      if($user_data->authentication==$authentication){
+
+
+        $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $user_data->id,'product_id' => $product_id));
+
+  if(!empty($zapak)){
+    $res = array('message'=>'success',
+    'status'=>200
+    );
+
+    echo json_encode($res);
+  }else{
+    $res = array('message'=>'some error occured',
+    'status'=>201
+    );
+
+    echo json_encode($res);
+  }
+
+          }else{
+
+          $res = array('message'=>'Wrong Authentication',
+          'status'=>201
+          );
+
+          echo json_encode($res);
+          }
+          }else{
+          $res = array('message'=>'user not found',
+          'status'=>201
+          );
+
+          echo json_encode($res);
+
+          }
+
+
+
+        }else{
+
+          $res = array('message'=>validation_errors(),
+          'status'=>201
+          );
+
+          echo json_encode($res);
+
+
+          }
+        }else{
+
+          $res = array('message'=>'header part required',
+          'status'=>201
+          );
+
+          echo json_encode($res);
+
+        }
+
+
+
+
+
+
+
+
+}
+//----view wishlist-------
+public function view_wishlist(){
+
+
+
+
+          $this->load->helper(array('form', 'url'));
+          $this->load->library('form_validation');
+          $this->load->helper('security');
+
+                  $headers = apache_request_headers();
+
+
+
+                         $phone=$headers['Phone'];
+                          $authentication=$headers['Authentication'];
+                          $token_id=$headers['Tokenid'];
+
+                            if(!empty($phone) && !empty($authentication) && !empty($token_id)){
+
+      //     if($this->input->post())
+      //     {
+      //
+      //       $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+      //       $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+      //     $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+      //
+      //     if($this->form_validation->run()== TRUE)
+      //     {
+      //
+      //       $phone=$this->input->post('phone');
+      // $authentication=$this->input->post('authentication');
+      //     $token_id=$this->input->post('token_id');
+
+          $this->db->select('*');
+      $this->db->from('tbl_users');
+      $this->db->where('phone',$phone);
+      $user_data= $this->db->get()->row();
+
+      if(!empty($user_data)){
+
+      if($user_data->authentication==$authentication){
+
+
+                      $this->db->select('*');
+          $this->db->from('tbl_wishlist');
+          $this->db->where('user_id',$user_data->id);
+          $wishlist_data= $this->db->get();
+          $wishlist_check= $wishlist_data->row();
+  $wishlist_info = [];
+foreach($wishlist_data->result() as $data) {
+
+$this->db->select('*');
+            $this->db->from('tbl_products');
+            $this->db->where('id',$data->product_id);
+            $dsa= $this->db->get();
+            $product_data=$dsa->row();
+
+
+$wishlist_info[]=array(
+  'product_id'=>$product_data->id,
+  'product_name'=>$product_data->productname,
+  'product_image'=>base_url().$product_data->image1,
+  'product_mrp'=>$product_data->mrp,
+  'product_selling_price'=>$product_data->sellingprice,
+);
+
+}
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$wishlist_info,
+);
+
+echo json_encode($res);
+
+
+        }else{
+
+              $res = array('message'=>'Wrong Authentication',
+              'status'=>201
+              );
+
+              echo json_encode($res);
+              }
+              }else{
+      
+              $res = array('message'=>'user not found',
+              'status'=>201
+              );
+
+              echo json_encode($res);
+
+              }
+
+
+}else{
+  $res = array('message'=>'phone authentication or token_id required',
+   'status'=>201
+   );
+
+   echo json_encode($res);
+
+
+}
+            // }else{
+            //   header('Access-Control-Allow-Origin: *');
+            //
+            //   $res = array('message'=>validation_errors(),
+            //   'status'=>201
+            //   );
+            //
+            //   echo json_encode($res);
+            //
+            //
+            //   }
+            //
+            //   }else{
+            //   header('Access-Control-Allow-Origin: *');
+            //
+            //   $res = array('message'=>'No data are available',
+            //   'status'=>201
+            //   );
+            //
+            //   echo json_encode($res);
+            //   }
+
+
+
+}
+
 
 
 
