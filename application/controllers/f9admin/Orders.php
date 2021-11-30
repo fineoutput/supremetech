@@ -104,6 +104,25 @@ echo "Error";
 exit;
 }
 }
+if($t=="hold"){
+
+$data_update = array(
+'order_status'=>6
+
+);
+
+$this->db->where('id', $id);
+$zapak=$this->db->update('tbl_order1', $data_update);
+
+if($zapak!=0){
+redirect("dcadmin/Orders/view_accept_order","refresh");
+}
+else
+{
+echo "Error";
+exit;
+}
+}
 
 
 
@@ -419,7 +438,33 @@ redirect("login/admin_login","refresh");
 
 }
 
+//---view hold orders///
+public function view_hold_orders(){
 
+                 if(!empty($this->session->userdata('admin_data'))){
+
+
+                   $data['user_name']=$this->load->get_var('user_name');
+
+
+                          $this->db->select('*');
+              $this->db->from('tbl_order1');
+              $this->db->where('order_status',6);
+              $this->db->order_by("id", "desc");
+              $data['order_data']= $this->db->get();
+
+
+                   $this->load->view('admin/common/header_view',$data);
+                   $this->load->view('admin/order/hold_orders');
+                   $this->load->view('admin/common/footer_view');
+
+               }
+               else{
+
+                  redirect("login/admin_login","refresh");
+               }
+
+               }
 
 
 }

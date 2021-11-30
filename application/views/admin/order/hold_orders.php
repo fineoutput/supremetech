@@ -1,7 +1,7 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-           Order
+          View Hold Order
           </h1>
           <ol class="breadcrumb">
            <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -12,10 +12,10 @@
           <section class="content">
           <div class="row">
              <div class="col-lg-12">
-                 <a class="btn btn-info cticket" href="<?php echo base_url() ?>admin/home/add_team" role="button" style="margin-bottom:12px;"> Add Order</a>
+
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View order</h3>
+                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Hold order</h3>
                                   </div>
                                      <div class="panel panel-default">
 
@@ -156,6 +156,10 @@
                               $status="Cancel order";
 
                             }
+                            if($status==6){
+                              $status="On Hold";
+
+                            }
                         echo $status;
 
 
@@ -176,8 +180,6 @@
 <li><a href="<?php echo base_url() ?>dcadmin/Orders/update_order_status/<?php echo
 base64_encode($data->id) ?>/accept">Accept order</a></li>
 
-<li><a href="<?php echo base_url() ?>dcadmin/Orders/update_order_status/<?php echo
-base64_encode($data->id) ?>/hold">Hold order</a></li>
 
 <!-- <li><a href="<?php echo base_url() ?>dcadmin/Neworder/update_dispatch_status/<?php echo
 base64_encode($data->id) ?>/dispatch">Dispatch order</a></li> -->
