@@ -4606,7 +4606,7 @@ foreach($size->result() as $value11){
       'lens'=>$lens_data,
     );
 
-    header('Access-Control-Allow-Origin: *');
+  
 
     $res = array('message'=>'success',
     'status'=>200,
