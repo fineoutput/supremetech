@@ -120,16 +120,10 @@
 <?php } else { ?>
 <li><a href="<?php echo base_url() ?>dcadmin/vendors/updatevendorsStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
-<?php if($data->status==1){ ?>
-<li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/pending">Pending</a></li>
-<li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
-<?php } elseif($data->status==2){ ?>
+<?php if($data->status==2){ ?>
 <li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
 <li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
-<?php	}elseif($data->status==3){ ?>
-<li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/pending">Pending</a></li>
-<li><a href="<?php echo base_url() ?>dcadmin/vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
-<?php		}   ?>
+<?php	}  ?>
 <!-- <li><a href="dcadmin/vendors/update_vendors/">Edit</a></li>
 <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
 </ul>

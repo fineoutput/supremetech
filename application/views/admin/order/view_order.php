@@ -53,6 +53,7 @@
                                                   <th>payment type</th>
                                                   <th>Last updated date</th>
                                                   <th>order date</th>
+                                                  <th>Bank Receipt</th>
                                                   <th>order status</th>
                                                 <th>Action</th>
 
@@ -129,6 +130,15 @@
 
 
                               ?></td>
+                              <td>
+                                <?
+                                if($data->bank_receipt){?>
+                                  <img src="<?=base_url().$data->bank_receipt?>" width="500" height="500">
+                                <?}else{
+                                  echo  "NA";
+                                }
+                                ?>
+                              </td>
                             <td><?php $status=$data->order_status;
                             if( $status==1){
                               $status="New Order";

@@ -4591,7 +4591,7 @@ foreach($size->result() as $value11){
     );
 }
     $filter_name=[];
-    $filter_name[]=array(
+    $filter_name=array(
       'brand'=>$brands_data,
       'resoulation'=>$resolution_data,
       'irdistance'=>$irdistance_data,
