@@ -1737,7 +1737,8 @@ echo json_encode($res);
 public function show_minorcategory(){
 
      $this->db->select('*');
-                 $this->db->from('tbl_minorcategory');
+                 // $this->db->from('tbl_minorcategory');
+                 $this->db->from('tbl_category');
                  $this->db->where('is_active',1);
                  $minor_category= $this->db->get();
                  $minorcategory=[];
@@ -1745,7 +1746,8 @@ public function show_minorcategory(){
 
                   $minorcategory[]=array(
                     'id'=>$value->id,
-                     'minorcategory'=>$value->minorcategoryname,
+                     // 'minorcategory'=>$value->minorcategoryname,
+                     'minorcategory'=>$value->category,
                      'image'=>base_url().$value->image
                   );
               }
@@ -4606,7 +4608,7 @@ foreach($size->result() as $value11){
       'lens'=>$lens_data,
     );
 
-  
+
 
     $res = array('message'=>'success',
     'status'=>200,
