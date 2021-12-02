@@ -4442,7 +4442,8 @@ $this->db->select('*');
                          foreach($resoulation_id->result() as $value)
                          {
               $resolution_data[]=array(
-                'name'=>$value->filtername
+                'id'=>$value->id,
+                'name'=>$value->filtername,
               );
             }
 //brands
@@ -4452,6 +4453,7 @@ $brands= $this->db->get();
 $brands_data=[];
 foreach($brands->result() as $value1){
   $brands_data[]=array(
+    'id'=>$value1->id,
     'name'=>$value1->name
   );
 }
@@ -4463,6 +4465,7 @@ $irdistance_data=[];
 foreach($irdistance->result() as $value2){
 
   $irdistance_data[]=array(
+    'id'=>$value2->id,
     'name'=>$value2->filtername
   );
 }
@@ -4475,6 +4478,7 @@ $cameratype_data=[];
 foreach($cameratype->result() as $value3){
 
   $cameratype_data[]=array(
+    'id'=>$value3->id,
     'name'=>$value3->filtername
   );
 }
@@ -4487,6 +4491,7 @@ $bodymaterial_data=[];
 foreach($bodymaterial->result() as $value13){
 
   $bodymaterial_data[]=array(
+  'id'=>$value13->id,
     'name'=>$value13->filter_name
   );
 }
@@ -4499,6 +4504,7 @@ $videochannel_data=[];
 foreach($videochannel->result() as $value4){
 
   $videochannel_data[]=array(
+    'id'=>$value4->id,
     'name'=>$value4->filter_name
   );
 }
@@ -4510,6 +4516,7 @@ $poeports_data=[];
 foreach($poeports->result() as $value5){
 
   $poeports_data[]=array(
+    'id'=>$value5->id,
     'name'=>$value5->filter_name
   );
 }
@@ -4521,6 +4528,7 @@ foreach($poeports->result() as $value5){
   foreach($poetype->result() as $value6){
 
     $poetype_data[]=array(
+      'id'=>$value6->id,
       'name'=>$value6->filter_name
     );
   }
@@ -4532,6 +4540,7 @@ $sataports_data=[];
 foreach($sataports->result() as $value7){
 
   $sataports_data[]=array(
+    'id'=>$value7->id,
     'name'=>$value7->filter_name
   );
 }
@@ -4543,6 +4552,7 @@ $length_data=[];
 foreach($length->result() as $value8){
 
   $length_data[]=array(
+    'id'=>$value8->id,
     'name'=>$value8->filter_name
   );
 }
@@ -4554,6 +4564,7 @@ $screensize_data=[];
 foreach($screensize->result() as $value9){
 
   $screensize_data[]=array(
+    'id'=>$value9->id,
     'name'=>$value9->filter_name
   );
 }
@@ -4565,6 +4576,7 @@ $ledtype_data=[];
 foreach($ledtype->result() as $value10){
 
   $ledtype_data[]=array(
+    'id'=>$value10->id,
     'name'=>$value10->filter_name
   );
 }
@@ -4576,6 +4588,7 @@ $size_data=[];
 foreach($size->result() as $value11){
 
   $size_data[]=array(
+    'id'=>$value11->id,
     'name'=>$value11->filter_name
   );
 }
@@ -4587,6 +4600,7 @@ foreach($size->result() as $value11){
   foreach($lens->result() as $value12){
 
     $lens_data[]=array(
+      'id'=>$value12->id,
       'name'=>$value12->filtername
     );
 }
