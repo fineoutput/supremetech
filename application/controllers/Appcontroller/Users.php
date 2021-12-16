@@ -31,7 +31,7 @@ public function login(){
 
 
                     $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-                    
+
                     if($this->form_validation->run()== TRUE)
                     {
 
@@ -270,7 +270,7 @@ public function user_register(){
                     // exit;
                     $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
                     $this->form_validation->set_rules('email', 'email', 'required|xss_clean|trim|valid_email');
-                    $this->form_validation->set_rules('dob', 'dob', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('dob', 'dob', 'xss_clean|trim');
                     $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
                     $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
                     $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
