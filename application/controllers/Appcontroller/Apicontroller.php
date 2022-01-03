@@ -3234,19 +3234,17 @@ echo json_encode($res);
 public function cancel_order(){
 
 
-
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        $this->load->helper('security');
-        if($this->input->post())
-        {
           $headers = apache_request_headers();
               $phone=$headers['Phone'];
                $authentication=$headers['Authentication'];
                $token_id=$headers['Tokenid'];
 
-               if(!empty($phone) && !empty($Authentication) && !empty($token_id)){
-
+               // if(!empty($phone) && !empty($Authentication) && !empty($token_id)){
+                 $this->load->helper(array('form', 'url'));
+                 $this->load->library('form_validation');
+                 $this->load->helper('security');
+                 if($this->input->post())
+                 {
           $this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
 
         if($this->form_validation->run()== TRUE)
@@ -3326,15 +3324,15 @@ public function cancel_order(){
             echo json_encode($res);
           }
 
-            }else{
-
-
-            $res = array('message'=>'No data are available',
-            'status'=>201
-            );
-
-            echo json_encode($res);
-            }
+            // }else{
+            //
+            //
+            // $res = array('message'=>'No data are available',
+            // 'status'=>201
+            // );
+            //
+            // echo json_encode($res);
+            // }
 
 
 
