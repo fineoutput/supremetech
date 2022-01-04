@@ -4298,17 +4298,12 @@ public function remove_wishlist_product(){
 public function view_wishlist(){
 
 
-
-
           $this->load->helper(array('form', 'url'));
           $this->load->library('form_validation');
           $this->load->helper('security');
 
                   $headers = apache_request_headers();
-
-
-
-                         $phone=$headers['Phone'];
+                  $phone=$headers['Phone'];
                           $authentication=$headers['Authentication'];
                           $token_id=$headers['Tokenid'];
 
@@ -4358,7 +4353,7 @@ $wishlist_info[]=array(
   'product_name'=>$product_data->productname,
   'product_image'=>base_url().$product_data->image1,
   'product_mrp'=>$product_data->mrp,
-  'product_selling_price'=>$product_data->sellingprice,
+  'product_selling_price'=>$product_data->sellingpricegst,
 );
 
 }

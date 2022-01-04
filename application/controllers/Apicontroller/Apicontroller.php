@@ -365,7 +365,6 @@ $products[] = array(
 );
 
 
-
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
       'status'=>200,
