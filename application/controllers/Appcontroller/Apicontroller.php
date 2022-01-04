@@ -136,7 +136,7 @@ public function get_minorcategory_products(){
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingprice,
+                                    'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
                                     'wishlist'=>$data->wishlist
                                     // 'image1'=>$data->image1
@@ -199,7 +199,7 @@ public function get_category_products(){
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingprice,
+                                    'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
                                     // 'image1'=>$data->image1
 
@@ -267,7 +267,7 @@ if($this->input->post())
                   'product_name'=>$data->productname,
                   'description'=> $data->productdescription,
                   'mrp'=> $data->mrp,
-                  'price'=>$data->sellingprice,
+                  'price'=>$data->sellingpricegst,
                   'image'=>base_url().$data->image,
                   // 'image1'=>$data->image1
 
@@ -326,7 +326,7 @@ $products = array(
   // 'video1'=> base_url().$productsdata->video1,
   // 'video2'=> base_url().$productsdata->video2,
   'mrp'=> $productsdata->mrp,
-  'price'=> $productsdata->sellingprice,
+  'price'=> $productsdata->sellingpricegst,
   'productdescription'=> $productsdata->productdescription,
   'modelno'=> $productsdata->modelno,
   'stock'=> $stock
@@ -907,8 +907,8 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity
+'price'=>$product_data->sellingpricegst,
+'total='=>$total = $product_data->sellingpricegst * $data->quantity
 
 );
 $sub_total= $sub_total + $total;
@@ -986,8 +986,8 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity
+'price'=>$product_data->sellingpricegst,
+'total='=>$total = $product_data->sellingpricegst * $data->quantity
 
 );
 $sub_total= $sub_total + $total;
@@ -1657,7 +1657,7 @@ $products[] = array(
 'productimage2'=> base_url().$limit->video1,
 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
-'price'=>$limit->sellingprice,
+'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
 // 'colours'=> $limit->colours,
 // 'inventory'=> $data->inventory
@@ -1782,7 +1782,7 @@ $feature[] = array(
 'productimage2'=> base_url().$limit->video1,
 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
-'price'=>$limit->sellingprice,
+'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
 );
 
@@ -1853,7 +1853,7 @@ $related_info[]  = array(
 'productdescription'=>$data->productdescription,
 'minorcategory_id'=>$data->minorcategory_id,
 'mrp'=>$data->mrp,
-'price'=>$data->sellingprice
+'price'=>$data->sellingpricegst
 );
 }
 
@@ -1930,7 +1930,7 @@ $sub_total=0;
 
 if(!empty($product_data)){
 
-$total = $product_data->sellingprice * $data->quantity;
+$total = $product_data->sellingpricegst * $data->quantity;
 
 $sub_total = $sub_total + $total;
 
@@ -1975,7 +1975,7 @@ if(!empty($product_data1)){
 
 if($product_data1->inventory >= $data1->quantity){
 
-$total2 = $product_data1->sellingprice * $data1->quantity ;
+$total2 = $product_data1->sellingpricegst * $data1->quantity ;
 $order2_insert = array('main_id'=>$last_id,
           'product_id'=>$data1->product_id,
           'quantity'=>$data1->quantity,
@@ -2570,7 +2570,7 @@ if(!empty($data_mrp)){
               $this->db->where('id',$data_mrp->product_id);
               $data_product= $this->db->get()->row();
               if(!empty($data_product)){
-                 $data_result=$data_product->sellingprice;
+                 $data_result=$data_product->sellingpricegst;
 
               }
 
@@ -2856,7 +2856,7 @@ foreach($search_string->result() as $data){
                        'produt_image'=>base_url().$data->image,
                        'productdescription'=>$data->productdescription,
                        'product_mrp'=>$data->mrp,
-                       'product_selling_price'=>$data->sellingprice,
+                       'product_selling_price'=>$data->sellingpricegst,
 
 
 

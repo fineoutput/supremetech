@@ -147,7 +147,7 @@ public function get_minorcategory_products(){
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingprice,
+                                    'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
                                     // 'image1'=>$data->image1
 
@@ -219,7 +219,7 @@ public function get_category_products(){
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingprice,
+                                    'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
                                     // 'image1'=>$data->image1
 
@@ -298,7 +298,7 @@ if($this->input->post())
                   'product_name'=>$data->productname,
                   'description'=> $data->productdescription,
                   'mrp'=> $data->mrp,
-                  'price'=>$data->sellingprice,
+                  'price'=>$data->sellingpricegst,
                   'image'=>base_url().$data->image,
                   // 'image1'=>$data->image1
 
@@ -889,8 +889,8 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity
+'price'=>$product_data->sellingpricegst,
+'total='=>$total = $product_data->sellingpricegst * $data->quantity
 
 );
 $sub_total= $sub_total + $total;
@@ -970,8 +970,8 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity
+'price'=>$product_data->sellingpricegst,
+'total='=>$total = $product_data->sellingpricegst * $data->quantity
 
 );
 $sub_total= $sub_total + $total;
@@ -1517,7 +1517,7 @@ $products[] = array(
 'productimage2'=> base_url().$limit->video1,
 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
-'price'=>$limit->sellingprice,
+'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
 // 'colours'=> $limit->colours,
 // 'inventory'=> $data->inventory
@@ -1651,7 +1651,7 @@ $related_info[]  = array(
 'productimage'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
 'mrp'=>$data->mrp,
-'price'=>$data->sellingprice
+'price'=>$data->sellingpricegst
 );
 }
 
@@ -1718,7 +1718,7 @@ $sub_total=0;
 
 if(!empty($product_data)){
 
-$total = $product_data->sellingprice * $data->quantity;
+$total = $product_data->sellingpricegst * $data->quantity;
 
 $sub_total = $sub_total + $total;
 
@@ -1778,7 +1778,7 @@ if(!empty($product_data1)){
 
 if($inventory_data1->quantity >= $data1->quantity){
 
-$total2 = $product_data1->sellingprice * $data1->quantity ;
+$total2 = $product_data1->sellingpricegst * $data1->quantity ;
 $order2_insert = array('main_id'=>$last_id,
           'product_id'=>$data1->product_id,
           'quantity'=>$data1->quantity,
@@ -2570,7 +2570,7 @@ $wishlist_info[]=array(
   'product_name'=>$product_data->productname,
   'product_image'=>base_url().$product_data->image1,
   'product_mrp'=>$product_data->mrp,
-  'product_selling_price'=>$product_data->sellingprice,
+  'product_selling_price'=>$product_data->sellingpricegst,
 );
 
 }
@@ -2665,7 +2665,7 @@ foreach($search_string->result() as $data){
                        'produt_image'=>base_url().$data->image,
                        'productdescription'=>$data->productdescription,
                        'product_mrp'=>$data->mrp,
-                       'product_selling_price'=>$data->sellingprice,
+                       'product_selling_price'=>$data->sellingpricegst,
 
 
 
