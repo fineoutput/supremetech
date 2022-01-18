@@ -3483,7 +3483,7 @@ if($data->is_active==1){
 $filter_info[] = array(
 'product_id'=>$data->id,
 'product_name'=>$data->productname,
-'product_image'=>base_url().$data->image,
+'image'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
 'price'=>$data->sellingpricegst,
 
