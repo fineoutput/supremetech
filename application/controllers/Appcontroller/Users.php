@@ -332,9 +332,8 @@ $img1='image1';
   							// echo json_encode($file_info);
   						}
             }
-$img2='image2';
-$image2="";
-if(!empty($img2)){
+          $image2="";
+            $img2='image2';
             $file_check=($_FILES['image2']['error']);
             if($file_check!=4){
           	$image_upload_folder = FCPATH . "assets/uploads/users/";
@@ -367,7 +366,7 @@ if(!empty($img2)){
   							$image2=$videoNAmePath;
   							// echo json_encode($file_info);
   						}
-            }}
+            }
 
             $this->db->select('*');
 $this->db->from('tbl_users');
