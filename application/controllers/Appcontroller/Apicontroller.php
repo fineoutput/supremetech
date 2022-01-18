@@ -3411,51 +3411,63 @@ $lens_info = explode(',',$lens_id);
 
             $this->db->select('*');
 $this->db->from('tbl_products');
-$this->db->where('is_active',1);
 
-
+if(!empty($brand_info[0])){
 foreach($brand_info as $data0) {
-$this->db->or_where('brand',$data0);
-}
+$this->db->or_where('brand',$data0, NULL, FALSE);
+}}
+if(!empty($resolution_info[0])){
 foreach($resolution_info as $data) {
-$this->db->or_where('resolution',$data);
-}
+$this->db->or_where('resolution',$data, NULL, FALSE);
+}}
+if(!empty($irdistance_info[0])){
 foreach($irdistance_info as $data1) {
-$this->db->or_where('irdistance',$data1);
-}
+$this->db->or_where('irdistance',$data1, NULL, FALSE);
+}}
+if(!empty($cameratype_info[0])){
 foreach($cameratype_info as $data2) {
-$this->db->or_where('cameratype',$data2);
-}
+$this->db->or_where('cameratype',$data2, NULL, FALSE);
+}}
+if(!empty($bodymaterial_info[0])){
 foreach($bodymaterial_info as $data3) {
-$this->db->or_where('bodymaterial',$data3);
-}
+$this->db->or_where('bodymaterial',$data3, NULL, FALSE);
+}}
+if(!empty($videochannel_info[0])){
 foreach($videochannel_info as $data4) {
-$this->db->or_where('videochannel',$data4);
-}
-foreach($poeports_info as $data4) {
-$this->db->or_where('poeports',$data4);
-}
-foreach($poetype_info as $data4) {
-$this->db->or_where('poetype',$data4);
-}
-foreach($sataports_info as $data4) {
-$this->db->or_where('sataports',$data4);
-}
-foreach($length_info as $data4) {
-$this->db->or_where('length',$data4);
-}
-foreach($screensize_info as $data4) {
-$this->db->or_where('screensize',$data4);
-}
-foreach($ledtype_info as $data4) {
-$this->db->or_where('ledtype',$data4);
-}
-foreach($size_info as $data4) {
-$this->db->or_where('size',$data4);
-}
-foreach($lens_info as $data4) {
-$this->db->or_where('lens',$data4);
-}
+$this->db->or_where('videochannel',$data4, NULL, FALSE);
+}}
+if(!empty($poeports_info[0])){
+foreach($poeports_info as $data5) {
+$this->db->or_where('poeports',$data5, NULL, FALSE);
+}}
+if(!empty($poetype_info[0])){
+foreach($poetype_info as $data6) {
+$this->db->or_where('poetype',$data6, NULL, FALSE);
+}}
+if(!empty($sataports_info[0])){
+foreach($sataports_info as $data7) {
+$this->db->or_where('sataports',$data7, NULL, FALSE);
+}}
+if(!empty($length_info[0])){
+foreach($length_info as $data8) {
+$this->db->or_where('length',$data8, NULL, FALSE);
+}}
+if(!empty($screensize_info[0])){
+foreach($screensize_info as $data9) {
+$this->db->or_where('screensize',$data9, NULL, FALSE);
+}}
+if(!empty($ledtype_info[0])){
+foreach($ledtype_info as $data10) {
+$this->db->or_where('ledtype',$data10, NULL, FALSE);
+}}
+if(!empty($size_info[0])){
+foreach($size_info as $data11) {
+$this->db->or_where('size',$data11, NULL, FALSE);
+}}
+if(!empty($lens_info[0])){
+foreach($lens_info as $data12) {
+$this->db->or_where('lens',$data12, NULL, FALSE);
+}}
 
 
 $filter_data= $this->db->get();
@@ -3464,7 +3476,7 @@ $filter_info = [];
 if(!empty($filter_check)){
 
 foreach($filter_data->result() as $data) {
-
+if($data->is_active==1){
 
 
 
@@ -3477,6 +3489,7 @@ $filter_info[] = array(
 
 );
 
+}
 }
 }
 
