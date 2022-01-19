@@ -390,76 +390,76 @@ class Apicontroller extends CI_Controller
       echo json_encode($res);
 
     }
-//     public function get_allcategory()
-//     {
-//         $this->load->helper(array('form', 'url'));
-//         $this->load->library('form_validation');
-//         $this->load->helper('security');
-//         if ($this->input->post()) {
-//             $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-//
-//
-//             if ($this->form_validation->run()== true) {
-//                 $category_id=$this->input->post('category_id');
-//
-//                 $this->db->select('*');
-//                 $this->db->from('tbl_subcategory');
-//                 $this->db->where('category_id', $category_id);
-//                 $sub= $this->db->get();
-//                 if(!empty($sub->row())){
-//                   $is_sub = "True";
-//                 }else{
-//                   $is_sub ="False";
-//                 }
-//                 $subcategory=[];
-//                 foreach ($sub->result() as $data2) {
-//                     $this->db->select('*');
-//                     $this->db->from('tbl_minorcategory');
-//                     $this->db->where('category_id', $category_id);
-//                     $this->db->where('subcategory_id', $data2->id);
-//                     $minor_category= $this->db->get();
-//                     $minorcategory=[];
-//                     foreach ($minor_category->result() as $m_id) {
-//                         $minorcategory[]=array(
-//                   'minor_id'=>$m_id->id,
-//                   'minor_name' =>$m_id->minorcategoryname
-//                 );
-//                     }
-//
-//
-//
-//                     $subcategory[] = array(
-//     'sub_id' => $data2->id,
-//       'name'=> $data2->subcategory,
-//       'minor_category'=>$minorcategory
-//
-//
-//
-//   );
-//                 }
-//
-//                 $res = array('message'=>"success",
-//       'status'=>200,
-//       'is_sub'=>$is_sub,
-//       'data'=>$subcategory,
-//       );
-//
-//                 echo json_encode($res);
-//             } else {
-//                 $res = array('message'=>validation_errors(),
-//       'status'=>201
-//       );
-//
-//                 echo json_encode($res);
-//             }
-//         } else {
-//             $res = array('message'=>"Insert data, No data Available",
-// 'status'=>201
-// );
-//
-//             echo json_encode($res);
-//         }
-//     }
+    public function get_allcategory2()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+
+
+            if ($this->form_validation->run()== true) {
+                $category_id=$this->input->post('category_id');
+
+                $this->db->select('*');
+                $this->db->from('tbl_subcategory');
+                $this->db->where('category_id', $category_id);
+                $sub= $this->db->get();
+                if(!empty($sub->row())){
+                  $is_sub = "True";
+                }else{
+                  $is_sub ="False";
+                }
+                $subcategory=[];
+                foreach ($sub->result() as $data2) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_minorcategory');
+                    $this->db->where('category_id', $category_id);
+                    $this->db->where('subcategory_id', $data2->id);
+                    $minor_category= $this->db->get();
+                    $minorcategory=[];
+                    foreach ($minor_category->result() as $m_id) {
+                        $minorcategory[]=array(
+                  'minor_id'=>$m_id->id,
+                  'minor_name' =>$m_id->minorcategoryname
+                );
+                    }
+
+
+
+                    $subcategory[] = array(
+    'sub_id' => $data2->id,
+      'name'=> $data2->subcategory,
+      'minor_category'=>$minorcategory
+
+
+
+  );
+                }
+
+                $res = array('message'=>"success",
+      'status'=>200,
+      'is_sub'=>$is_sub,
+      'data'=>$subcategory,
+      );
+
+                echo json_encode($res);
+            } else {
+                $res = array('message'=>validation_errors(),
+      'status'=>201
+      );
+
+                echo json_encode($res);
+            }
+        } else {
+            $res = array('message'=>"Insert data, No data Available",
+'status'=>201
+);
+
+            echo json_encode($res);
+        }
+    }
 
 
     // ================= Most popular product ====================
