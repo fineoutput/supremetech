@@ -334,6 +334,7 @@ $img1='image1';
             }
           $image2="";
             $img2='image2';
+            if (!empty($_FILES['image2'])) {
             $file_check=($_FILES['image2']['error']);
             if($file_check!=4){
           	$image_upload_folder = FCPATH . "assets/uploads/users/";
@@ -367,6 +368,7 @@ $img1='image1';
   							// echo json_encode($file_info);
   						}
             }
+          }
 
             $this->db->select('*');
 $this->db->from('tbl_users');
