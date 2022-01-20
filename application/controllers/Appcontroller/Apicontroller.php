@@ -591,6 +591,7 @@ class Apicontroller extends CI_Controller
                     $check_phone= $this->db->get();
                     $check_id=$check_phone->row();
                     if (!empty($check_id)) {
+
                         if ($check_id->authentication == $password) {
                             $this->db->select('*');
                             $this->db->from('tbl_cart');
@@ -670,7 +671,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             }
                         } else {
-                            $res = array('message'=>'password not exist',
+                            $res = array('message'=>'Wrong Pasword',
 'status'=>201
 );
 
@@ -1674,18 +1675,6 @@ class Apicontroller extends CI_Controller
 
         if (!empty($phone) && !empty($authentication) && !empty($token_id)) {
 
-
-    //
-            // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-            // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-
-
-            // if($this->form_validation->run()== TRUE)
-            // {
-            //  $phone=$this->input->post('phone');
-            //  $authentication=$this->input->post('authentication');
-            // $token_id=$this->input->post('token_id');
             $ip = $this->input->ip_address();
             date_default_timezone_set("Asia/Calcutta");
             $cur_date=date("Y-m-d H:i:s");
@@ -1747,8 +1736,13 @@ class Apicontroller extends CI_Controller
                                     $this->db->where('id', $data1->product_id);
                                     $product_data1= $this->db->get()->row();
 
-                                    if (!empty($product_data1)) {
-                                        if ($product_data1->inventory >= $data1->quantity) {
+                                      $this->db->select('*');
+                                      $this->db->from('tbl_inventory');
+                                      $this->db->where('product_id', $product_data1->id);
+                                      $check_inventory= $this->db->get();
+                                      $check_inventory_id=$check_inventory->row();
+                                      if (!empty($check_inventory_id)) {
+                                        if ($check_inventory_id->quantity >= $data1->quantity) {
                                             $total2 = $product_data1->sellingpricegst * $data1->quantity ;
                                             $order2_insert = array('main_id'=>$last_id,
           'product_id'=>$data1->product_id,
@@ -1763,15 +1757,22 @@ class Apicontroller extends CI_Controller
           );
 
                                             $last_id2=$this->base_model->insert_table("tbl_order2", $order2_insert, 1) ;
-                                        }
+
                                     } else {
                                         $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
-        'status'=>201,
-        );
+                                        'status'=>201,
+                                      );
 
                                         echo json_encode($res);
                                         exit;
                                     }
+                                }else{
+                                  $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
+                                  'status'=>201,
+                                );
+
+                                  echo json_encode($res);
+                                  exit;
                                 }
                             }//end of foreach
 
@@ -1783,7 +1784,7 @@ class Apicontroller extends CI_Controller
                     );
 
                             echo json_encode($res);
-                        }
+
                     } else {
                         $res = array('message'=>"cart is empty",
         'status'=>201,
@@ -1791,42 +1792,36 @@ class Apicontroller extends CI_Controller
 
                         echo json_encode($res);
                     }
-                }
+
             } else {
-                $res = array('message'=>"fail",
+                $res = array('message'=>"Some erro occured",
         'status'=>201,
         );
 
                 echo json_encode($res);
             }
+}
+}else{
+  $res = array('message'=>"Wromg Password",
+          'status'=>201,
+          );
 
-            // }else{
-              // $res = array('message'=>validation_errors(),
-              // 'status'=>201
-              // );
-              //
-              // echo json_encode($res);
-              //
-              //
-              // }
+  echo json_encode($res);
+}
+}else{
+  $res = array('message'=>"User does not exist",
+          'status'=>201,
+          );
+
+  echo json_encode($res);
+}
         } else {
-            $res = array('message'=>"please insert data",
+            $res = array('message'=>"Please insert some data",
                     'status'=>201,
                     );
 
             echo json_encode($res);
         }
-        //
-              // }else{
-              //
-              // $res = array('message'=>"please insert some data",
-              // 'status'=>201
-              // );
-              //
-              // echo json_encode($res);
-              //
-              //
-              // }
     }
 
     //----promocode---
