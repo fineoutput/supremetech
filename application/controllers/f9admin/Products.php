@@ -408,6 +408,7 @@ $igt1=[];
   $this->form_validation->set_rules('screensize', 'screensize', 'trim');
   $this->form_validation->set_rules('ledtype', 'ledtype', 'trim');
   $this->form_validation->set_rules('size_data', 'size_data', 'trim');
+  $this->form_validation->set_rules('max', 'max', 'trim');
 
 
 
@@ -446,6 +447,7 @@ $igt1=[];
   $screensize=$this->input->post('screensize');
   $ledtype=$this->input->post('ledtype');
   $size_data=$this->input->post('size_data');
+  $max=$this->input->post('max');
 
 
 
@@ -687,6 +689,7 @@ $img5='video2';
   'ledtype'=>$ledtype,
   'size'=>$size_data,
   'lens'=>$lens,
+  'max'=>$max,
 
 
 
@@ -791,7 +794,8 @@ $data_insert = array(
 'screensize'=>$screensize,
 'ledtype'=>$ledtype,
 'size'=>$size_data,
-'lens'=>$lens
+'lens'=>$lens,
+'max'=>$max
 
 
                      );

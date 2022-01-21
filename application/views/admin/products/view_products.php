@@ -59,6 +59,7 @@
  	 <th>weight</th>
  	 <th>feature_product</th>
    <th>popular_product</th>
+   <th>Max Limit</th>
 
 
         <th>Status</th>
@@ -196,7 +197,7 @@ if($feature_product==1){
 
     ?></td>
 
-
+<td><?php echo $data->max ?></td>
 
 
         <td><?php if($data->is_active==1){ ?>

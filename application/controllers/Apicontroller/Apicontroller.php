@@ -3458,24 +3458,25 @@ public function cancel_order(){
             $this->db->select('*');
 $this->db->from('tbl_order2');
 $this->db->where('main_id',$order_id);
-$data_order1= $this->db->get()->row();
+$data_order1= $this->db->get();
 
 if(!empty($data_order1)){
+ foreach($data_order1->result() as $data) {
                 $this->db->select('*');
                             $this->db->from('tbl_inventory');
-                            $this->db->where('product_id',$data_order1->product_id);
+                            $this->db->where('product_id',$data->product_id);
                             $data_inventory= $this->db->get()->row();
 
-                          $total_quantity=$data_order1->quantity + $data_inventory->quantity;
+                          $total_quantity=$data->quantity + $data_inventory->quantity;
 
 
 
                           $data_update=array(
                                    'quantity'=>$total_quantity
                           );
-                          $this->db->where('product_id', $data_order1->product_id);
+                          $this->db->where('product_id', $data->product_id);
                           $last_id2=$this->db->update('tbl_inventory', $data_update);
-
+}
 
 
     if(!empty($last_id)){

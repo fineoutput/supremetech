@@ -147,32 +147,33 @@ $data['user_name']=$this->load->get_var('user_name');
 // echo $this->session->userdata('position');
 // exit;
 $id=base64_decode($idd);
+if($t=="Cancel"){
 
 $this->db->select('*');
 $this->db->from('tbl_order2');
 $this->db->where('main_id',$id);
-$data_order1= $this->db->get()->row();
+$data_order1= $this->db->get();
 
 if(!empty($data_order1)){
-    $this->db->select('*');
-                $this->db->from('tbl_inventory');
-                $this->db->where('product_id',$data_order1->product_id);
-                $data_inventory= $this->db->get()->row();
+  foreach($data_order1->result() as $data) {
+                 $this->db->select('*');
+                             $this->db->from('tbl_inventory');
+                             $this->db->where('product_id',$data->product_id);
+                             $data_inventory= $this->db->get()->row();
 
-              $total_quantity=$data_order1->quantity + $data_inventory->quantity;
+                           $total_quantity=$data->quantity + $data_inventory->quantity;
 
 
 
-              $data_update=array(
-                       'quantity'=>$total_quantity
-              );
-              $this->db->where('product_id', $data_order1->product_id);
-              $last_id2=$this->db->update('tbl_inventory', $data_update);
-
+                           $data_update=array(
+                                    'quantity'=>$total_quantity
+                           );
+                           $this->db->where('product_id', $data->product_id);
+                           $last_id2=$this->db->update('tbl_inventory', $data_update);
+ }
 }
 
 
-if($t=="Cancel"){
 
 $data_update = array(
 'order_status'=>5
@@ -183,7 +184,8 @@ $this->db->where('id', $id);
 $zapak=$this->db->update('tbl_order1', $data_update);
 
 if($zapak!=0){
-redirect("dcadmin/Orders/view_cancel_orders","refresh");
+$this->session->set_flashdata('smessage', 'Successfully Updated');
+redirect($_SERVER['HTTP_REFERER']);
 }
 else
 {

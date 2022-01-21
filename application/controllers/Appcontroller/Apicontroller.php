@@ -132,8 +132,8 @@ class Apicontroller extends CI_Controller
                                     'mrp'=> $data->mrp,
                                     'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
-                                    'wishlist'=>$data->wishlist
-                                    // 'image1'=>$data->image1
+                                    'wishlist'=>$data->wishlist,
+                                    'max'=>$data->max
 
                                   );
                 }
@@ -187,7 +187,8 @@ class Apicontroller extends CI_Controller
                                     'mrp'=> $data->mrp,
                                     'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
-                                    // 'image1'=>$data->image1
+                                    'max'=>$data->max
+
 
                                   );
                 }
@@ -247,7 +248,8 @@ class Apicontroller extends CI_Controller
                   'mrp'=> $data->mrp,
                   'price'=>$data->sellingpricegst,
                   'image'=>base_url().$data->image,
-                  // 'image1'=>$data->image1
+                  'max'=>$data->max
+
 
                 );
                 }
@@ -303,7 +305,9 @@ class Apicontroller extends CI_Controller
   'price'=> $productsdata->sellingpricegst,
   'productdescription'=> $productsdata->productdescription,
   'modelno'=> $productsdata->modelno,
-  'stock'=> $stock
+  'stock'=> $stock,
+  'max'=>$productsdata->max
+
 );
 
 
@@ -1478,6 +1482,8 @@ class Apicontroller extends CI_Controller
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
+'max'=>$limit->max
+
 // 'colours'=> $limit->colours,
 // 'inventory'=> $data->inventory
 );
@@ -1586,6 +1592,8 @@ class Apicontroller extends CI_Controller
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
+'max'=>$limit->max
+
 );
         }
         $res=array(
@@ -1645,7 +1653,9 @@ class Apicontroller extends CI_Controller
 'productdescription'=>$data->productdescription,
 'minorcategory_id'=>$data->minorcategory_id,
 'mrp'=>$data->mrp,
-'price'=>$data->sellingpricegst
+'price'=>$data->sellingpricegst,
+'max'=>$data->max
+
 );
         }
 
@@ -2510,6 +2520,8 @@ class Apicontroller extends CI_Controller
                        'productdescription'=>$data->productdescription,
                        'product_mrp'=>$data->mrp,
                        'product_selling_price'=>$data->sellingpricegst,
+                       'max'=>$data->max
+
 
 
 
@@ -2831,19 +2843,52 @@ class Apicontroller extends CI_Controller
                         $this->db->where('id', $order_id);
                         $last_id=$this->db->update('tbl_order1', $data_insert);
 
-                        if (!empty($last_id)) {
-                            $res = array('message'=>'success',
-      'status'=>200
-      );
+                        $this->db->select('*');
+            $this->db->from('tbl_order2');
+            $this->db->where('main_id',$order_id);
+            $data_order1= $this->db->get();
 
-                            echo json_encode($res);
-                        } else {
-                            $res = array('message'=>'some error occured',
-      'status'=>201
-      );
+            if(!empty($data_order1)){
+              foreach($data_order1->result() as $data) {
+                             $this->db->select('*');
+                                         $this->db->from('tbl_inventory');
+                                         $this->db->where('product_id',$data->product_id);
+                                         $data_inventory= $this->db->get()->row();
 
-                            echo json_encode($res);
-                        }
+                                       $total_quantity=$data->quantity + $data_inventory->quantity;
+
+
+
+                                       $data_update=array(
+                                                'quantity'=>$total_quantity
+                                       );
+                                       $this->db->where('product_id', $data->product_id);
+                                       $last_id2=$this->db->update('tbl_inventory', $data_update);
+             }
+
+                if(!empty($last_id)){
+                  header('Access-Control-Allow-Origin: *');
+                  $res = array('message'=>'success',
+                  'status'=>200
+                  );
+
+                  echo json_encode($res);
+                }else{
+                  header('Access-Control-Allow-Origin: *');
+                  $res = array('message'=>'some error occured',
+                  'status'=>201
+                  );
+
+                  echo json_encode($res);
+                }
+              }else{
+                header('Access-Control-Allow-Origin: *');
+                $res = array('message'=>'Order id not found',
+                'status'=>201
+                );
+
+                echo json_encode($res);
+              }
                     } else {
                         $res = array('message'=>'Wrong authantication',
             'status'=>201
@@ -3038,6 +3083,8 @@ class Apicontroller extends CI_Controller
 'image'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
 'price'=>$data->sellingpricegst,
+'max'=>$data->max
+
 
 );
                         }
@@ -3152,6 +3199,7 @@ class Apicontroller extends CI_Controller
           //   $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
                 //   $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+                if($this->input->post('payment_type')==1){
                 $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('name', 'name', 'xss_clean|trim');
@@ -3162,7 +3210,17 @@ class Apicontroller extends CI_Controller
                 $this->form_validation->set_rules('house_no', 'house_no', 'xss_clean|trim');
                 $this->form_validation->set_rules('street_address', 'street_address', 'xss_clean|trim');
                 $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
-
+              }else{
+                $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+              }
                 if ($this->form_validation->run()== true) {
 
       //       $phone=$this->input->post('phone');
@@ -3343,14 +3401,8 @@ $total = $order1_data->total_amount;
                             echo json_encode($res);
                         }
                     } else {
-                        $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
-                        $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-                        if ($this->form_validation->run()== true) {
+
+
                             $this->db->select('*');
                             $this->db->from('tbl_users');
                             $this->db->where('phone', $phone);
@@ -3480,13 +3532,7 @@ $total = $order1_data->total_amount;
 
                                 echo json_encode($res);
                             }
-                        } else {
-                            $res = array('message'=>validation_errors(),
-    'status'=>201
-    );
 
-                            echo json_encode($res);
-                        }
                     }
                 } else {
                     $res = array('message'=>validation_errors(),

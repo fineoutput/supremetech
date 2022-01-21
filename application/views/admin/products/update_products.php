@@ -331,7 +331,12 @@ Sorry No image Found
    <? } ?>
  </td>
 </tr>
-
+<tr>
+<td> <strong>Max Limit</strong>  <span style="color:red;">*</span></strong> </td>
+<td>
+<input type="text" name="max" class="form-control" value="<?=$products_data->max?>" required>
+</td>
+</tr>
 
 
 <tr>

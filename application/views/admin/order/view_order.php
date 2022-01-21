@@ -105,10 +105,10 @@
                             <td><?php $type=$data->payment_type;
                             $n1="";
                             if($type==1){
-                              $n1="COD";
+                              $n1="Pay at store";
                             }
                             if($type==2){
-                              $n1="online payment";
+                              $n1="Bank Transfer";
                             }
                             echo $n1;
 
