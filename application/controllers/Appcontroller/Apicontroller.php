@@ -3562,19 +3562,6 @@ $total = $order1_data->total_amount;
 
                             $last_id=$this->base_model->insert_table("tbl_wishlist", $data_insert, 1) ;
 
-                            $this->db->select('*');
-                            $this->db->from('tbl_products');
-                            $this->db->where('id', $product_id);
-                            $check_wishlist= $this->db->get()->row();
-                            if (!empty($check_wishlist)) {
-                                $data_insert1 = array('wishlist'=>1
-
-
-                              );
-                                $this->db->where('id', $product_id);
-                                $last_id=$this->db->update('tbl_products', $data_insert1);
-                            }
-
                             if (!empty($last_id)) {
                                 $res = array('message'=>'Product succesfully addded in your wishist',
   'status'=>200
@@ -3661,19 +3648,6 @@ $total = $order1_data->total_amount;
                 if (!empty($user_data)) {
                     if ($user_data->authentication==$authentication) {
                         $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $user_data->id,'product_id' => $product_id));
-
-                        $this->db->select('*');
-                        $this->db->from('tbl_products');
-                        $this->db->where('id', $product_id);
-                        $check_wishlist= $this->db->get()->row();
-                        if (!empty($check_wishlist)) {
-                            $data_insert1 = array('wishlist'=>0
-
-
-                                );
-                            $this->db->where('id', $product_id);
-                            $last_id=$this->db->update('tbl_products', $data_insert1);
-                        }
 
 
                         if (!empty($zapak)) {
