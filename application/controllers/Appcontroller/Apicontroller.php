@@ -645,7 +645,8 @@ class Apicontroller extends CI_Controller
 
                                     if (!empty($last_id)) {
                                         $res = array('message'=>'success',
-        'status'=>200
+        'status'=>200,
+        'product_id'=>$product_id,
         );
 
                                         echo json_encode($res);
@@ -736,7 +737,8 @@ class Apicontroller extends CI_Controller
 
                             if (!empty($last_id)) {
                                 $res = array('message'=>'success',
-                                                  'status'=>200
+                                                  'status'=>200,
+                                                  'product_id'=>$product_id,
                                                   );
 
                                 echo json_encode($res);
