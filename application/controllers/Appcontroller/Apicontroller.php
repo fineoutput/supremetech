@@ -2283,7 +2283,7 @@ class Apicontroller extends CI_Controller
                                 if ($value->order_status==1) {
                                     $order_status= "Placed";
                                 } elseif ($value->order_status==2) {
-                                    $order_status= "Confirmed";
+                                    $order_status= "Accepted";
                                 } elseif ($value->order_status==3) {
                                     $order_status= "Dispatched";
                                 } elseif ($value->order_status==4) {
