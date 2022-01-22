@@ -845,7 +845,9 @@ class Apicontroller extends CI_Controller
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
 'price'=>$product_data->sellingpricegst,
-'total='=>$total = $product_data->sellingpricegst * $data->quantity
+'total='=>$total = $product_data->sellingpricegst * $data->quantity,
+'max'=>$product_data->max,
+
 
 );
                             $sub_total= $sub_total + $total;
