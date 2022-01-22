@@ -4026,4 +4026,23 @@ $total = $order1_data->total_amount;
 
         echo json_encode($res);
     }
+
+    public function popup(){
+      
+      $this->db->select('*');
+      $this->db->from('tbl_popup');
+      $this->db->where('is_active',1);
+      $popup_data= $this->db->get()->row();
+
+      $poopup = [];
+      $popoup = array('image'=>base_url().$popup_data->image);
+
+      $res = array('message'=>'success',
+      'status'=>200,
+      'data'=>$popoup,
+      );
+
+      echo json_encode($res);
+
+    }
 }
