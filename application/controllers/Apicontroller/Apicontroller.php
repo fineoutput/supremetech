@@ -149,7 +149,7 @@ public function get_minorcategory_products(){
                                     'mrp'=> $data->mrp,
                                     'price'=>$data->sellingpricegst,
                                     'image'=>base_url().$data->image,
-                                    // 'image1'=>$data->image1
+                                    'max'=>$data->max
 
                                   );
 
@@ -300,7 +300,7 @@ if($this->input->post())
                   'mrp'=> $data->mrp,
                   'price'=>$data->sellingpricegst,
                   'image'=>base_url().$data->image,
-                  // 'image1'=>$data->image1
+                  'max'=>$data->max
 
                 );
 
@@ -361,7 +361,8 @@ $products[] = array(
     'price'=> $productsdata->sellingpricegst,
     'productdescription'=> $productsdata->productdescription,
     'modelno'=> $productsdata->modelno,
-    'stock'=> $stock
+    'stock'=> $stock,
+    'max'=>$productsdata->max
 );
 
 
@@ -890,7 +891,8 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
 'price'=>$product_data->sellingpricegst,
-'total='=>$total = $product_data->sellingpricegst * $data->quantity
+'total='=>$total = $product_data->sellingpricegst * $data->quantity,
+'max'=>$product_data->max,
 
 );
 $sub_total= $sub_total + $total;
@@ -1519,7 +1521,7 @@ $products[] = array(
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingpricegst,
 'productdescription'=> $limit->productdescription,
-// 'colours'=> $limit->colours,
+'max'=>$limit->max,
 // 'inventory'=> $data->inventory
 );
 }
@@ -1651,7 +1653,8 @@ $related_info[]  = array(
 'productimage'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
 'mrp'=>$data->mrp,
-'price'=>$data->sellingpricegst
+'price'=>$data->sellingpricegst,
+'max'=>$data->max
 );
 }
 
@@ -2666,6 +2669,7 @@ foreach($search_string->result() as $data){
                        'productdescription'=>$data->productdescription,
                        'product_mrp'=>$data->mrp,
                        'product_selling_price'=>$data->sellingpricegst,
+                       'max'=>$data->max
 
 
 
@@ -3688,6 +3692,7 @@ $filter_info[] = array(
 'productdescription'=>$data->productdescription,
 'MRP'=>$data->mrp,
 'price'=>$data->sellingpricegst,
+'max'=>$data->max
 
 );
 }
