@@ -104,10 +104,10 @@
                             <td><?php echo $data->pincode  ?></td>
                             <td><?php $type=$data->payment_type;
                             $n1="";
-                            if($type==1){
+                            if($type==2){
                               $n1="Pay at store";
                             }
-                            if($type==2){
+                            if($type==1){
                               $n1="Bank Transfer";
                             }
                             echo $n1;
