@@ -108,7 +108,7 @@
                               $this->db->from('all_states');
                               $this->db->where('id',$data->state);
                               $state_data= $this->db->get()->row();
-                               echo $state_data->state  ?></td>
+                               echo $state_data->state_name  ?></td>
                             <td><?php echo $data->pincode  ?></td>
                             <td><?php $type=$data->payment_type;
                             $n1="";
