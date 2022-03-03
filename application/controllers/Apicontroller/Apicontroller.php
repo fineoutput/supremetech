@@ -2965,7 +2965,7 @@ $final_amount = $total - $discount;
 $data_insert = array('payment_type'=>$payment_type,
           'name'=>$user_data->name,
           'phone'=>$user_data->phone,
-          'pincode'=>$user_data->pincode,
+          'pincode'=>$user_data->zipcode,
           'state'=>$user_data->state,
           'city'=>$user_data->city,
           'house_no'=>$user_data->house_no,
