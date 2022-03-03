@@ -45,8 +45,9 @@
                                                   <th>User</th>
                                                   <th>Total Amount</th>
                                                   <th>promocode</th>
-                                                  <th>Address</th>
                                                   <th>User mob.</th>
+                                                  <th>House No.</th>
+                                                  <th>Address</th>
                                                   <th>City</th>
                                                   <th>State</th>
                                                   <th>pincode</th>
@@ -97,10 +98,16 @@
 
 
                               ?></td>
-                            <td><?php echo $data->street_address ?></td>
                             <td><?php echo $data->phone  ?></td>
-                            <td><?php echo $data->city  ?></td>
-                            <td><?php echo $data->state  ?></td>
+                            <td><?php echo $data->house_no  ?></td>
+                              <td><?php echo $data->street_address  ?></td>
+                              <td><?php echo $data->city  ?></td>
+                              <td><?php
+                                          $this->db->select('*');
+                              $this->db->from('all_states');
+                              $this->db->where('id',$data->state);
+                              $state_data= $this->db->get()->row();
+                               echo $state_data->state  ?></td>
                             <td><?php echo $data->pincode  ?></td>
                             <td><?php $type=$data->payment_type;
                             $n1="";

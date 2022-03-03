@@ -3122,6 +3122,7 @@ $this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('payment_status',1);
+$this->db->order_by('id',"desc");
 $data= $this->db->get();
 
 
