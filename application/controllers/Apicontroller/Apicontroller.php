@@ -2831,13 +2831,13 @@ public function checkout(){
           $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
           $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
           $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
+          // $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
           $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
           if($this->form_validation->run()== TRUE)
@@ -2848,13 +2848,13 @@ public function checkout(){
           $token_id=$this->input->post('token_id');
           $txn_id=$this->input->post('txn_id');
           $payment_type=$this->input->post('payment_type');
-          $name=$this->input->post('name');
-          $contact=$this->input->post('contact');
-          $pincode=$this->input->post('pincode');
-          $state=$this->input->post('state');
-          $city=$this->input->post('city');
-          $house_no=$this->input->post('house_no');
-          $street_address=$this->input->post('street_address');
+          // $name=$this->input->post('name');
+          // $contact=$this->input->post('contact');
+          // $pincode=$this->input->post('pincode');
+          // $state=$this->input->post('state');
+          // $city=$this->input->post('city');
+          // $house_no=$this->input->post('house_no');
+          // $street_address=$this->input->post('street_address');
           $store_id=$this->input->post('store_id');
 
           $this->load->library('upload');
@@ -2963,13 +2963,13 @@ $final_amount = $total - $discount;
 //----------order1 entry-------
 
 $data_insert = array('payment_type'=>$payment_type,
-          'name'=>$name,
-          'phone'=>$contact,
-          'pincode'=>$pincode,
-          'state'=>$state,
-          'city'=>$city,
-          'house_no'=>$house_no,
-          'street_address'=>$street_address,
+          'name'=>$user_data->name,
+          'phone'=>$user_data->contact,
+          'pincode'=>$user_data->pincode,
+          'state'=>$user_data->state,
+          'city'=>$user_data->city,
+          'house_no'=>$user_data->house_no,
+          'street_address'=>$user_data->street_address,
           'final_amount'=>$final_amount,
           'bank_receipt'=>$image,
           'store_id'=>$store_id,
