@@ -45,8 +45,8 @@ $this->db->where('phone', $phone);
 $dsa= $this->db->get();
 $da=$dsa->row();
 if (!empty($da)) {
-    $OTP = random_int(100000, 999999);
-    // $OTP = 123456;
+    // $OTP = random_int(100000, 999999);
+    $OTP = 123456;
     $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
 
     $curl = curl_init();
@@ -369,8 +369,8 @@ if (empty($userdata1)) {
     $last_id=$this->base_model->insert_table("tbl_user_temp", $data_insert, 1) ;
 
     if ($last_id!=0) {
-        $OTP = random_int(100000, 999999);
-        // $OTP = 123456;
+        // $OTP = random_int(100000, 999999);
+        $OTP = 123456;
         $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Registering Into your account is ".$OTP."." ;
 
         $curl = curl_init();
