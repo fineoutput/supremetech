@@ -508,6 +508,8 @@ if (!empty($otp_data)) {
                        'zipcode'=>$temp_data->zipcode,
                        'company_name'=>$temp_data->company_name,
                        'gstin'=>$temp_data->gstin,
+                       'city'=>$temp_data->city,
+                       'house_no'=>$temp_data->house_no,
                        'image1'=>$temp_data->image1,
                        'image2'=>$temp_data->image2,
                        'token_id'=>$temp_data->token_id,
