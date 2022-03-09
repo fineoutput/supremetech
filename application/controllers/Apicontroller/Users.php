@@ -302,38 +302,38 @@ if ($file_check!=4) {
         // echo json_encode($file_info);
     }
 }
-$img2='image2';
-$image2="";
-if (!empty($img2)) {
-    $file_check=($_FILES['image2']['error']);
-    if ($file_check!=4) {
-        $image_upload_folder = FCPATH . "assets/uploads/users/";
-        if (!file_exists($image_upload_folder)) {
-            mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-        }
-        $new_file_name="users".date("Ymdhms");
-        $this->upload_config = array(
-                'upload_path'   => $image_upload_folder,
-                'file_name' => $new_file_name,
-                'allowed_types' =>'jpg|jpeg|png',
-                'max_size'      => 25000
-        );
-        $this->upload->initialize($this->upload_config);
-        if (!$this->upload->do_upload($img2)) {
-            $upload_error = $this->upload->display_errors();
-            // echo json_encode($upload_error);
-            echo $upload_error;
-        } else {
-            $file_info = $this->upload->data();
-
-            $videoNAmePath = "assets/uploads/users/".$new_file_name.$file_info['file_ext'];
-            $file_info['new_name']=$videoNAmePath;
-            // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-            $image2=$videoNAmePath;
-            // echo json_encode($file_info);
-        }
-    }
-}
+// $img2='image2';
+// $image2="";
+// if (!empty($img2)) {
+//     $file_check=($_FILES['image2']['error']);
+//     if ($file_check!=4) {
+//         $image_upload_folder = FCPATH . "assets/uploads/users/";
+//         if (!file_exists($image_upload_folder)) {
+//             mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+//         }
+//         $new_file_name="users".date("Ymdhms");
+//         $this->upload_config = array(
+//                 'upload_path'   => $image_upload_folder,
+//                 'file_name' => $new_file_name,
+//                 'allowed_types' =>'jpg|jpeg|png',
+//                 'max_size'      => 25000
+//         );
+//         $this->upload->initialize($this->upload_config);
+//         if (!$this->upload->do_upload($img2)) {
+//             $upload_error = $this->upload->display_errors();
+//             // echo json_encode($upload_error);
+//             echo $upload_error;
+//         } else {
+//             $file_info = $this->upload->data();
+//
+//             $videoNAmePath = "assets/uploads/users/".$new_file_name.$file_info['file_ext'];
+//             $file_info['new_name']=$videoNAmePath;
+//             // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+//             $image2=$videoNAmePath;
+//             // echo json_encode($file_info);
+//         }
+//     }
+// }
 
 $this->db->select('*');
 $this->db->from('tbl_users');
@@ -355,7 +355,7 @@ if (empty($userdata1)) {
           'city'=>$city,
           // 'house_no'=>$house_no,
           'image1'=>$image1,
-          'image2'=>$image2,
+          // 'image2'=>$image2,
           'token_id'=>$token_id,
           'ip' =>$ip,
           'date'=>$cur_date
@@ -500,7 +500,7 @@ if (!empty($otp_data)) {
 
                 $data_insert = array('name'=>$temp_data->name,
                        'email'=>$temp_data->email,
-                       'dob'=>$temp_data->dob,
+                       // 'dob'=>$temp_data->dob,
                        'phone'=>$temp_data->phone,
                        'address'=>$temp_data->address,
                        'state'=>$temp_data->state,
@@ -509,11 +509,11 @@ if (!empty($otp_data)) {
                        'company_name'=>$temp_data->company_name,
                        'gstin'=>$temp_data->gstin,
                        'city'=>$temp_data->city,
-                       'house_no'=>$temp_data->house_no,
+                       // 'house_no'=>$temp_data->house_no,
                        'image1'=>$temp_data->image1,
-                       'image2'=>$temp_data->image2,
+                       // 'image2'=>$temp_data->image2,
                        'token_id'=>$temp_data->token_id,
-                 'authentication'=>$authentication,
+                       'authentication'=>$authentication,
                        'ip' =>$ip,
                        'is_active' =>1,
                        'date'=>$cur_date
