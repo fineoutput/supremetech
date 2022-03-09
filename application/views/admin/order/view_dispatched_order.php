@@ -47,7 +47,6 @@
                                                   <th>promocode</th>
                                                   <th>Address</th>
                                                   <th>User mob.</th>
-                                                  <th>House No.</th>
                                                   <th>Address</th>
                                                   <th>City</th>
                                                   <th>State</th>
@@ -100,7 +99,6 @@
 
                               ?></td>
                             <td><?php echo $data->phone  ?></td>
-                            <td><?php echo $data->house_no  ?></td>
                               <td><?php echo $data->street_address  ?></td>
                               <td><?php echo $data->city  ?></td>
                               <td><?php
