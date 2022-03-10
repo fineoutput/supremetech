@@ -42,6 +42,26 @@ class Apicontroller extends CI_Controller
 
         echo json_encode($res);
     }
+    public function two_images()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_two_images');
+        $this->db->where('is_active', 1);
+        $imagesdata= $this->db->get();
+        $two_images=[];
+        foreach ($imagesdata->result() as $data) {
+            $two_images[] = array(
+    'image1'=> base_url().$data->image1,
+    'image2'=> base_url().$data->image2
+);
+        }
+        $res = array('message'=>"success",
+    'status'=>200,
+    'data'=>$two_images
+    );
+
+        echo json_encode($res);
+    }
 
 
     // ========  Category =========
@@ -4028,7 +4048,7 @@ $total = $order1_data->total_amount;
     }
 
     public function popup(){
-      
+
       $this->db->select('*');
       $this->db->from('tbl_popup');
       $this->db->where('is_active',1);
