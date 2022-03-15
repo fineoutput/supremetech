@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Apicontroller extends CI_Controller{
 function __construct()
-  {
-    parent::__construct();
-    $this->load->model("admin/login_model");
-    $this->load->model("admin/base_model");
-  }
+{
+parent::__construct();
+$this->load->model("admin/login_model");
+$this->load->model("admin/base_model");
+}
 
 
 // ==================================== Home Components =========================================================
@@ -18,7 +18,7 @@ function __construct()
 
 public function get_slider(){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_slider');
 $this->db->where('is_active',1);
 
@@ -26,17 +26,17 @@ $sliderdata= $this->db->get();
 $slider=[];
 foreach($sliderdata->result() as $data) {
 $slider[] = array(
-    'name'=> $data->title,
-    'image'=> base_url().$data->slider_image
+'name'=> $data->title,
+'image'=> base_url().$data->slider_image
 );
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
-    'status'=>200,
-    'data'=>$slider
-    );
+'status'=>200,
+'data'=>$slider
+);
 
-    echo json_encode($res);
+echo json_encode($res);
 
 }
 
@@ -45,24 +45,24 @@ $res = array('message'=>"success",
 
 public function get_category(){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_category');
 $this->db->where('is_active',1);
 $categorydata= $this->db->get();
 $category=[];
 foreach($categorydata->result() as $data) {
 $category[] = array(
-    'categoryname'=> $data->category
+'categoryname'=> $data->category
 
 );
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
-      'status'=>200,
-      'data'=>$category
-      );
+'status'=>200,
+'data'=>$category
+);
 
-      echo json_encode($res);
+echo json_encode($res);
 
 
 }
@@ -72,7 +72,7 @@ $res = array('message'=>"success",
 public function get_subcategory(){
 
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_subcategory');
 $this->db->where('category_id',$id);
 $this->db->where('is_active',1);
@@ -80,18 +80,18 @@ $subcategorydata= $this->db->get();
 $subcategory=[];
 foreach($subcategorydata->result() as $data) {
 $subcategory[] = array(
-    'subcategory'=> $data->subcategory,
+'subcategory'=> $data->subcategory,
 
 
 );
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
-      'status'=>200,
-      'data'=>$subcategory
-      );
+'status'=>200,
+'data'=>$subcategory
+);
 
-      echo json_encode($res);
+echo json_encode($res);
 
 
 }
@@ -103,68 +103,68 @@ public function get_minorcategory_products(){
 
 
 
-		              $this->load->helper(array('form', 'url'));
-		              $this->load->library('form_validation');
-		              $this->load->helper('security');
-		              if($this->input->post())
-		              {
-		                // print_r($this->input->post());
-		                // exit;
-		                // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-		                // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-		                $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+// print_r($this->input->post());
+// exit;
+// $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
-		                if($this->form_validation->run()== TRUE)
-		                {
-		                  // $category_id=$this->input->post('category_id');
-		                  // $subcategory_id=$this->input->post('subcategory_id');
-		                  $minorcategory_id=$this->input->post('minorcategory_id');
+if($this->form_validation->run()== TRUE)
+{
+// $category_id=$this->input->post('category_id');
+// $subcategory_id=$this->input->post('subcategory_id');
+$minorcategory_id=$this->input->post('minorcategory_id');
 
-                                  $this->db->select('*');
-                      $this->db->from('tbl_products');
-                      // $this->db->where('category_id',$category_id);
-                      // $this->db->where('subcategory_id',$subcategory_id);
-                      $this->db->where('minorcategory_id',$minorcategory_id);
-                      $product_data= $this->db->get();
-
-
-                      $this->db->select('*');
-                    $this->db->from('tbl_minorcategory');
-                    $this->db->where('id',$minorcategory_id);
-                    $get_minorcategory= $this->db->get()->row();
-                    if(!empty($get_minorcategory)){
-                      $minor_name=$get_minorcategory->minorcategoryname;
-                    }
-
-                               $product=[];
-                              foreach ($product_data->result() as $data) {
+$this->db->select('*');
+$this->db->from('tbl_products');
+// $this->db->where('category_id',$category_id);
+// $this->db->where('subcategory_id',$subcategory_id);
+$this->db->where('minorcategory_id',$minorcategory_id);
+$product_data= $this->db->get();
 
 
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('id',$minorcategory_id);
+$get_minorcategory= $this->db->get()->row();
+if(!empty($get_minorcategory)){
+$minor_name=$get_minorcategory->minorcategoryname;
+}
 
-                                  $product[] = array(
-                                    'product_id'=>$data->id,
-                                    'product_name'=>$data->productname,
-                                    'description'=> $data->productdescription,
-                                    'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingpricegst,
-                                    'image'=>base_url().$data->image,
-                                    'max'=>$data->max
+$product=[];
+foreach ($product_data->result() as $data) {
 
-                                  );
 
-                              }
 
-                              header('Access-Control-Allow-Origin: *');
-                    					$res = array('message'=>"success",
-                    								'status'=>200,
-                    					      'data'=>$product,
-                                    'minorcategory_name'=>$minor_name
-                    								);
+$product[] = array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'description'=> $data->productdescription,
+'mrp'=> $data->mrp,
+'price'=>$data->sellingpricegst,
+'image'=>base_url().$data->image,
+'max'=>$data->max
 
-                    								echo json_encode($res);
+);
 
-                    					  }
+}
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$product,
+'minorcategory_name'=>$minor_name
+);
+
+echo json_encode($res);
+
+}
 
 }
 }
@@ -175,68 +175,68 @@ public function get_category_products(){
 
 
 
-		              $this->load->helper(array('form', 'url'));
-		              $this->load->library('form_validation');
-		              $this->load->helper('security');
-		              if($this->input->post())
-		              {
-		                // print_r($this->input->post());
-		                // exit;
-		                $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-		                // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-		                // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+// print_r($this->input->post());
+// exit;
+$this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
-		                if($this->form_validation->run()== TRUE)
-		                {
-		                  $category_id=$this->input->post('category_id');
-		                  // $subcategory_id=$this->input->post('subcategory_id');
-		                  // $minorcategory_id=$this->input->post('minorcategory_id');
+if($this->form_validation->run()== TRUE)
+{
+$category_id=$this->input->post('category_id');
+// $subcategory_id=$this->input->post('subcategory_id');
+// $minorcategory_id=$this->input->post('minorcategory_id');
 
-                                  $this->db->select('*');
-                      $this->db->from('tbl_products');
-                      $this->db->where('category_id',$category_id);
-                      $this->db->where('is_active',1);
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('category_id',$category_id);
+$this->db->where('is_active',1);
 
-                      // $this->db->where('subcategory_id',$subcategory_id);
-                      // $this->db->where('minorcategory_id',$minorcategory_id);
-                      $product_data= $this->db->get();
+// $this->db->where('subcategory_id',$subcategory_id);
+// $this->db->where('minorcategory_id',$minorcategory_id);
+$product_data= $this->db->get();
 
-                           $this->db->select('*');
-                                       $this->db->from('tbl_category');
-                                       $this->db->where('id',$category_id);
-                                       $get_category_id= $this->db->get()->row();
-                                       if(!empty($get_category_id)){
-                                         $category_name=$get_category_id->category;
-                                       }
+$this->db->select('*');
+$this->db->from('tbl_category');
+$this->db->where('id',$category_id);
+$get_category_id= $this->db->get()->row();
+if(!empty($get_category_id)){
+$category_name=$get_category_id->category;
+}
 
 
-                               $product=[];
-                              foreach ($product_data->result() as $data) {
+$product=[];
+foreach ($product_data->result() as $data) {
 
-                                  $product[] = array(
-                                    'product_id'=>$data->id,
-                                    'product_name'=>$data->productname,
-                                    'description'=> $data->productdescription,
-                                    'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingpricegst,
-                                    'image'=>base_url().$data->image,
-                                    // 'image1'=>$data->image1
+$product[] = array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'description'=> $data->productdescription,
+'mrp'=> $data->mrp,
+'price'=>$data->sellingpricegst,
+'image'=>base_url().$data->image,
+// 'image1'=>$data->image1
 
-                                  );
+);
 
-                              }
+}
 
-                              header('Access-Control-Allow-Origin: *');
-                    					$res = array('message'=>"success",
-                    								'status'=>200,
-                    					      'data'=>$product,
-                                    'category'=>$category_name
-                    								);
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$product,
+'category'=>$category_name
+);
 
-                    								echo json_encode($res);
+echo json_encode($res);
 
-                    					  }
+}
 
 }
 }
@@ -259,63 +259,63 @@ $this->load->library('form_validation');
 $this->load->helper('security');
 if($this->input->post())
 {
-  // print_r($this->input->post());
-  // exit;
-  // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
-  // $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+// print_r($this->input->post());
+// exit;
+// $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
-  if($this->form_validation->run()== TRUE)
-  {
-    // $category_id=$this->input->post('category_id');
-    $subcategory_id=$this->input->post('subcategory_id');
-    // $minorcategory_id=$this->input->post('minorcategory_id');
+if($this->form_validation->run()== TRUE)
+{
+// $category_id=$this->input->post('category_id');
+$subcategory_id=$this->input->post('subcategory_id');
+// $minorcategory_id=$this->input->post('minorcategory_id');
 
-                $this->db->select('*');
-    $this->db->from('tbl_products');
-    // $this->db->where('category_id',$category_id);
+$this->db->select('*');
+$this->db->from('tbl_products');
+// $this->db->where('category_id',$category_id);
 
-    $this->db->where('subcategory_id',$subcategory_id);
-    // $this->db->where('minorcategory_id',$minorcategory_id);
-    $this->db->where('is_active',1);
-    $product_data= $this->db->get();
+$this->db->where('subcategory_id',$subcategory_id);
+// $this->db->where('minorcategory_id',$minorcategory_id);
+$this->db->where('is_active',1);
+$product_data= $this->db->get();
 
-    $this->db->select('*');
-                $this->db->from('tbl_subcategory');
-                $this->db->where('id',$subcategory_id);
-                $get_subcategory_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_subcategory');
+$this->db->where('id',$subcategory_id);
+$get_subcategory_data= $this->db->get()->row();
 
-                if(!empty($get_subcategory_data)){
-                  $subcategory_name=$get_subcategory_data->subcategory;
-                }
+if(!empty($get_subcategory_data)){
+$subcategory_name=$get_subcategory_data->subcategory;
+}
 
-             $product=[];
-            foreach ($product_data->result() as $data) {
+$product=[];
+foreach ($product_data->result() as $data) {
 
-                $product[] = array(
-                  'product_id'=>$data->id,
-                  'product_name'=>$data->productname,
-                  'description'=> $data->productdescription,
-                  'mrp'=> $data->mrp,
-                  'price'=>$data->sellingpricegst,
-                  'image'=>base_url().$data->image,
-                  'max'=>$data->max
+$product[] = array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'description'=> $data->productdescription,
+'mrp'=> $data->mrp,
+'price'=>$data->sellingpricegst,
+'image'=>base_url().$data->image,
+'max'=>$data->max
 
-                );
+);
 
-            }
+}
 
-            header('Access-Control-Allow-Origin: *');
-            $res = array('message'=>"success",
-                  'status'=>200,
-                  'data'=>$product,
-                  'subcategory_name'=>$subcategory_name
-                  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$product,
+'subcategory_name'=>$subcategory_name
+);
 
-                  echo json_encode($res);
+echo json_encode($res);
 
-              }
+}
 
 }
 }
@@ -326,112 +326,112 @@ if($this->input->post())
 //---------------------
 
 // ========= Get Product Details =========================
-  public function get_productdetails($id){
+public function get_productdetails($id){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_products');
 $this->db->where('id',$id);
 $this->db->where('is_active',1);
 $productsdata= $this->db->get()->row();
 if(!empty($productsdata)){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_inventory');
 $this->db->where('product_id',$productsdata->id);
 $inventory_data= $this->db->get()->row();
 
 if(!empty($inventory_data)){
 if($inventory_data->quantity>0){
-  $stock = 1;
+$stock = 1;
 }else{
-  $stock =0;
+$stock =0;
 }
 }else{
-  $stock =0;
+$stock =0;
 }
 
 $products[] = array(
-    'id'=> $productsdata->id,
-    'productname'=> $productsdata->productname,
-    'productimage1'=> base_url().$productsdata->image,
-    'productimage2'=> base_url().$productsdata->image1,
-    'productvideo1'=> base_url().$productsdata->video1,
-    'productvideo2'=> base_url().$productsdata->video2,
-    'mrp'=> $productsdata->mrp,
-    'price'=> $productsdata->sellingpricegst,
-    'productdescription'=> $productsdata->productdescription,
-    'modelno'=> $productsdata->modelno,
-    'stock'=> $stock,
-    'max'=>$productsdata->max
+'id'=> $productsdata->id,
+'productname'=> $productsdata->productname,
+'productimage1'=> base_url().$productsdata->image,
+'productimage2'=> base_url().$productsdata->image1,
+'productvideo1'=> base_url().$productsdata->video1,
+'productvideo2'=> base_url().$productsdata->video2,
+'mrp'=> $productsdata->mrp,
+'price'=> $productsdata->sellingpricegst,
+'productdescription'=> $productsdata->productdescription,
+'modelno'=> $productsdata->modelno,
+'stock'=> $stock,
+'max'=>$productsdata->max
 );
 
 
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
-      'status'=>200,
-      'data'=>$products
-      );
+'status'=>200,
+'data'=>$products
+);
 
-      echo json_encode($res);
+echo json_encode($res);
 
-    }
-    else{
-      header('Access-Control-Allow-Origin: *');
-      $res = array('message'=>"not valid",
-      'status'=>201,
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"not valid",
+'status'=>201,
 );
 echo json_encode($res);
-    }
+}
 
 }
 
 //get all category
 public function get_allcategory(){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_category');
 $this->db->where('is_active',1);
 $categorydata= $this->db->get();
 $category=[];
 foreach($categorydata->result() as $data) {
-  $c_id=$data->id;
-  $this->db->select('*');
-  $this->db->from('tbl_subcategory');
-  $this->db->where('category_id',$data->id);
-  $sub= $this->db->get();
-  $subcategory=[];
-  foreach($sub->result() as $data2) {
+$c_id=$data->id;
+$this->db->select('*');
+$this->db->from('tbl_subcategory');
+$this->db->where('category_id',$data->id);
+$sub= $this->db->get();
+$subcategory=[];
+foreach($sub->result() as $data2) {
 
-    $this->db->select('*');
-                $this->db->from('tbl_minorcategory');
-                $this->db->where('category_id',$c_id);
-                $this->db->where('subcategory_id',$data2->id);
-                $minor_category= $this->db->get();
-                $minorcategory=[];
-              foreach($minor_category->result() as $m_id){
-                $minorcategory[]=array(
-                  'minor_id'=>$m_id->id,
-                  'minor_name' =>$m_id->minorcategoryname
-                );
-              }
-
-
-
-  $subcategory[] = array(
-    'sub_id' => $data2->id,
-      'name'=> $data2->subcategory,
-      'minor_category'=>$minorcategory
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('category_id',$c_id);
+$this->db->where('subcategory_id',$data2->id);
+$minor_category= $this->db->get();
+$minorcategory=[];
+foreach($minor_category->result() as $m_id){
+$minorcategory[]=array(
+'minor_id'=>$m_id->id,
+'minor_name' =>$m_id->minorcategoryname
+);
+}
 
 
 
-  );
+$subcategory[] = array(
+'sub_id' => $data2->id,
+'name'=> $data2->subcategory,
+'minor_category'=>$minorcategory
+
+
+
+);
 }
 // $catt=array('name'=> $data->categoryname,'sub_name'=>$subcategory);
 
-  $cat[] = array(
-    'id' =>$data->id,
-    'name' =>$data->category,
-    'sub_category' =>$subcategory
+$cat[] = array(
+'id' =>$data->id,
+'name' =>$data->category,
+'sub_category' =>$subcategory
 
 );
 
@@ -439,11 +439,11 @@ foreach($categorydata->result() as $data) {
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
-      'status'=>200,
-      'data'=>$cat,
-      );
+'status'=>200,
+'data'=>$cat,
+);
 
-      echo json_encode($res);
+echo json_encode($res);
 
 
 }
@@ -596,22 +596,22 @@ $check_product_id=$check_product->row();
 
 if(!empty($check_product_id)){
 $this->db->select('*');
- $this->db->from('tbl_inventory');
- $this->db->where('product_id',$product_id);
- $check_inventory= $this->db->get();
- $check_inventory_id=$check_inventory->row();
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$product_id);
+$check_inventory= $this->db->get();
+$check_inventory_id=$check_inventory->row();
 
- if($check_inventory_id->quantity >= $quantity){
+if($check_inventory_id->quantity >= $quantity){
 
- }else{
-   header('Access-Control-Allow-Origin: *');
-    $res = array('message'=> "$check_product_id->productname Product is out of stock",
-    'status'=>201
-    );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=> "$check_product_id->productname Product is out of stock",
+'status'=>201
+);
 
-    echo json_encode($res);
-    exit;
- }
+echo json_encode($res);
+exit;
+}
 
 
 
@@ -629,20 +629,20 @@ $last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
 
 
 if(!empty($last_id)){
-        header('Access-Control-Allow-Origin: *');
-        $res = array('message'=>'success',
-        'status'=>200
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
 
-        echo json_encode($res);
+echo json_encode($res);
 }else{
-    header('Access-Control-Allow-Origin: *');
-    $res = array('message'=>'Some error occured',
-    'status'=>201
-    );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Some error occured',
+'status'=>201
+);
 
-    echo json_encode($res);
-  }
+echo json_encode($res);
+}
 
 
 
@@ -701,133 +701,133 @@ echo json_encode($res);
 }
 
 
-    else{
+else{
 
 
 
 
-            $this->db->select('*');
-            $this->db->from('tbl_cart');
-            $this->db->where('token_id',$token_id);
-            $this->db->where('product_id',$product_id);
-            $check_cart= $this->db->get();
-            $cart=$check_cart->row();
-            if(empty($cart)){
-                   $ip = $this->input->ip_address();
-                  date_default_timezone_set("Asia/Calcutta");
-                  $cur_date=date("Y-m-d H:i:s");
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('token_id',$token_id);
+$this->db->where('product_id',$product_id);
+$check_cart= $this->db->get();
+$cart=$check_cart->row();
+if(empty($cart)){
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
 
-                  //----check product_id in product table-------
-                              $this->db->select('*');
-                              $this->db->from('tbl_products');
-                              $this->db->where('id',$product_id);
-                              $check_product= $this->db->get();
-                              $check_product_id=$check_product->row();
+//----check product_id in product table-------
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$product_id);
+$check_product= $this->db->get();
+$check_product_id=$check_product->row();
 
-                    if(!empty($check_product_id)){
+if(!empty($check_product_id)){
 
-                      $this->db->select('*');
-                                  $this->db->from('tbl_inventory');
-                                  $this->db->where('product_id',$product_id);
-                                  $check_inventory= $this->db->get();
-                                  $check_inventory_id=$check_inventory->row();
-
-
-                                  if($check_inventory_id->quantity >= $quantity){
-
-                                  }else{
-                                    header('Access-Control-Allow-Origin: *');
-                                     $res = array('message'=> "$check_product_id->productname Product is out of stock",
-                                     'status'=>201
-                                     );
-
-                                     echo json_encode($res);
-                                     exit;
-                                  }
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$product_id);
+$check_inventory= $this->db->get();
+$check_inventory_id=$check_inventory->row();
 
 
+if($check_inventory_id->quantity >= $quantity){
 
-                                $data_insert = array('product_id'=>$product_id,
-                                      'quantity'=>$quantity,
-                                      'token_id'=>$token_id,
-                                      'ip' =>$ip,
-                                      'date'=>$cur_date
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=> "$check_product_id->productname Product is out of stock",
+'status'=>201
+);
 
-                                      );
-
-                                      $last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
-
-
-                                      if(!empty($last_id)){
-                                                  header('Access-Control-Allow-Origin: *');
-                                                  $res = array('message'=>'success',
-                                                  'status'=>200
-                                                  );
-
-                                                  echo json_encode($res);
-                                      }else{
-                                              header('Access-Control-Allow-Origin: *');
-                                              $res = array('message'=>'Some error occured',
-                                              'status'=>201
-                                              );
-
-                                              echo json_encode($res);
-                                            }
-                              }else{
-                                header('Access-Control-Allow-Origin: *');
-                                   $res = array('message'=>'Product_id not exist.',
-                                   'status'=>201
-                                   );
-
-                                   echo json_encode($res);
-
-                              }
-
-              }else{
-
-                      header('Access-Control-Allow-Origin: *');
-                          $res = array('message'=>'Product is alredy in cart.',
-                          'status'=>201
-                          );
-
-                          echo json_encode($res);
+echo json_encode($res);
+exit;
+}
 
 
 
-                  }
+$data_insert = array('product_id'=>$product_id,
+'quantity'=>$quantity,
+'token_id'=>$token_id,
+'ip' =>$ip,
+'date'=>$cur_date
+
+);
+
+$last_id=$this->base_model->insert_table("tbl_cart",$data_insert,1) ;
+
+
+if(!empty($last_id)){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
+
+echo json_encode($res);
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Some error occured',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Product_id not exist.',
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Product is alredy in cart.',
+'status'=>201
+);
+
+echo json_encode($res);
 
 
 
-        }
+}
 
 
+
+}
 
 
 
 
 
 
-            }
-            else{
-              header('Access-Control-Allow-Origin: *');
-            $res = array('message'=>validation_errors(),
-                  'status'=>201
-                  );
-
-                  echo json_encode($res);
 
 
-            }
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
 
 }
 else{
 
-  header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"Insert data, No data Available",
-  'status'=>201
-  );
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 }
 }
@@ -1064,27 +1064,27 @@ if(!empty($user_data)){
 if($user_data->authentication==$authentication){
 
 
-  $this->db->select('*');
-  $this->db->from('tbl_inventory');
-  $this->db->where('product_id',$product_id);
-  $inventory_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$product_id);
+$inventory_data= $this->db->get()->row();
 
-  // echo $inventory_data->quantity;
-  // exit;
-  //----inventory_check----------
+// echo $inventory_data->quantity;
+// exit;
+//----inventory_check----------
 
-  if($inventory_data->quantity >= $quantity){
+if($inventory_data->quantity >= $quantity){
 
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=> " Product is out of stock",
-  'status'=>201
-  );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=> " Product is out of stock",
+'status'=>201
+);
 
-  echo json_encode($res);
-  exit;
+echo json_encode($res);
+exit;
 
-  }
+}
 
 
 
@@ -1141,27 +1141,27 @@ echo json_encode($res);
 else{
 
 
-  $this->db->select('*');
-  $this->db->from('tbl_inventory');
-  $this->db->where('product_id',$product_id);
-  $inventory_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$product_id);
+$inventory_data= $this->db->get()->row();
 
-  // echo $inventory_data->quantity;
-  // exit;
-  //----inventory_check----------
+// echo $inventory_data->quantity;
+// exit;
+//----inventory_check----------
 
-  if($inventory_data->quantity >= $quantity){
+if($inventory_data->quantity >= $quantity){
 
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=> "Product is out of stock",
-  'status'=>201
-  );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=> "Product is out of stock",
+'status'=>201
+);
 
-  echo json_encode($res);
-  exit;
+echo json_encode($res);
+exit;
 
-  }
+}
 
 
 
@@ -1241,7 +1241,7 @@ $authentication=$this->input->post('authentication');
 //-----cart count check with phone
 if(!empty($phone)){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_users');
 $this->db->where('phone',$phone);
 $user_data= $this->db->get()->row();
@@ -1250,13 +1250,13 @@ if(!empty($user_data)){
 
 if($user_data->authentication==$authentication){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('user_id',$user_data->id);
 $count= $this->db->count_all_results();
 
 if(empty($count)){
-  $count = 0;
+$count = 0;
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
@@ -1267,12 +1267,12 @@ $res = array('message'=>"success",
 echo json_encode($res);
 
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Wrong  Authentication",
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Wrong  Authentication",
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 }
 
 }
@@ -1280,21 +1280,21 @@ echo json_encode($res);
 //----cart check with token_id
 else{
 
-              $this->db->select('*');
-  $this->db->from('tbl_cart');
-  $this->db->where('token_id',$token_id);
-  $count= $this->db->count_all_results();
+$this->db->select('*');
+$this->db->from('tbl_cart');
+$this->db->where('token_id',$token_id);
+$count= $this->db->count_all_results();
 
-  if(empty($count)){
-    $count = 0;
-  }
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"success",
-  'status'=>200,
-  'data'=>$count
-  );
+if(empty($count)){
+$count = 0;
+}
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'data'=>$count
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 }
 }
 else{
@@ -1540,33 +1540,33 @@ echo json_encode($res);
 
 public function stock_get(){
 
-                 $this->db->select('*');
-     $this->db->from('tbl_stock');
-     $this->db->where('is_active',1);
-     $data= $this->db->get();
-     $stock=[];
-     foreach ($data->result() as $value) {
-       $stock[]=array(
-         'image'=>base_url().$value->image1,
-         'background_image'=>base_url().$value->image2,
-         'name'=>$value->stockname,
-         'message'=>$value->stockmessage
+$this->db->select('*');
+$this->db->from('tbl_stock');
+$this->db->where('is_active',1);
+$data= $this->db->get();
+$stock=[];
+foreach ($data->result() as $value) {
+$stock[]=array(
+'image'=>base_url().$value->image1,
+'background_image'=>base_url().$value->image2,
+'name'=>$value->stockname,
+'message'=>$value->stockmessage
 
-       );
-     }
-       header('Access-Control-Allow-Origin:*');
-       $res=array(
-         'message'=>"success",
-         'status'=>200,
-         'data'=>$stock
-       );
-       echo json_encode($res);
-
-
+);
+}
+header('Access-Control-Allow-Origin:*');
+$res=array(
+'message'=>"success",
+'status'=>200,
+'data'=>$stock
+);
+echo json_encode($res);
 
 
 
-   }
+
+
+}
 //-----------------------------MOST POPULAR BRANDS-------------
 
 public function brands_view(){
@@ -1601,26 +1601,26 @@ echo json_encode($res);
 //-------------show minorcategory---------------------
 public function show_minorcategory(){
 
-     $this->db->select('*');
-                 $this->db->from('tbl_minorcategory');
-                 $this->db->where('is_active',1);
-                 $minor_category= $this->db->get();
-                 $minorcategory=[];
-                foreach ($minor_category->result() as $value) {
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('is_active',1);
+$minor_category= $this->db->get();
+$minorcategory=[];
+foreach ($minor_category->result() as $value) {
 
-                  $minorcategory[]=array(
-                    'id'=>$value->id,
-                     'minorcategory'=>$value->minorcategoryname,
-                     'image'=>base_url().$value->image
-                  );
-              }
-              header('Access-Control-Allow-Origin: *');
-              $res=array(
-                'message'=>"success",
-                'status'=>200,
-                'data'=>$minorcategory
-              );
-              echo json_encode($res);
+$minorcategory[]=array(
+'id'=>$value->id,
+'minorcategory'=>$value->minorcategoryname,
+'image'=>base_url().$value->image
+);
+}
+header('Access-Control-Allow-Origin: *');
+$res=array(
+'message'=>"success",
+'status'=>200,
+'data'=>$minorcategory
+);
+echo json_encode($res);
 
 
 
@@ -1674,26 +1674,26 @@ exit();
 //------calculate------------
 public function calculate(){
 
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
-    $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
 
-    if($this->form_validation->run()== TRUE)
-    {
-       $phone=$this->input->post('phone');
-       $authentication=$this->input->post('authentication');
-      $token_id=$this->input->post('token_id');
-      $ip = $this->input->ip_address();
-    date_default_timezone_set("Asia/Calcutta");
-      $cur_date=date("Y-m-d H:i:s");
+if($this->form_validation->run()== TRUE)
+{
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_users');
 $this->db->where('phone',$phone);
 $user_data= $this->db->get()->row();
@@ -1702,7 +1702,7 @@ if(!empty($user_data)){
 
 if($authentication==$user_data->authentication)
 {
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('user_id',$user_data->id);
 $cart_data= $this->db->get();
@@ -1711,13 +1711,13 @@ $cart_check=$cart_data->row();
 if(!empty($cart_check)){
 $total=0;
 $sub_total=0;
- foreach($cart_data->result() as  $data) {
+foreach($cart_data->result() as  $data) {
 
-               $this->db->select('*');
-   $this->db->from('tbl_products');
-   $this->db->where('id',$data->product_id);
-   $this->db->where('is_active',1);
-   $product_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$this->db->where('is_active',1);
+$product_data= $this->db->get()->row();
 
 if(!empty($product_data)){
 
@@ -1728,54 +1728,54 @@ $sub_total = $sub_total + $total;
 
 
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"product not found",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"product not found",
+'status'=>201,
+);
 
-        echo json_encode($res);
+echo json_encode($res);
 
 }
 
 }//end of foreach
 $txn_id=bin2hex(random_bytes(10));
 $order1_insert = array('user_id'=>$user_data->id,
-          'total_amount'=>$sub_total,
-          'payment_status'=>0,
-          'order_status'=>0,
-          'payment_status'=>0,
-          'txnid'=>$txn_id,
-          'ip' =>$ip,
-          'date'=>$cur_date
+'total_amount'=>$sub_total,
+'payment_status'=>0,
+'order_status'=>0,
+'payment_status'=>0,
+'txnid'=>$txn_id,
+'ip' =>$ip,
+'date'=>$cur_date
 
-          );
+);
 
 $last_id=$this->base_model->insert_table("tbl_order1",$order1_insert,1) ;
 
 if(!empty($last_id)){
 
-  $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('user_id',$user_data->id);
 $cart_data1= $this->db->get();
 $cart_check1=$cart_data->row();
 
 if(!empty($cart_check1)){
-  $total2=0;
-   foreach($cart_data1->result() as $data1) {
+$total2=0;
+foreach($cart_data1->result() as $data1) {
 
 
-               $this->db->select('*');
-   $this->db->from('tbl_inventory');
-   $this->db->where('product_id',$data1->product_id);
-   $inventory_data1= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$data1->product_id);
+$inventory_data1= $this->db->get()->row();
 
 if(!empty($inventory_data1)){
 
-                  $this->db->select('*');
-      $this->db->from('tbl_products');
-      $this->db->where('id',$data1->product_id);
-      $product_data1= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data1->product_id);
+$product_data1= $this->db->get()->row();
 
 if(!empty($product_data1)){
 
@@ -1783,52 +1783,52 @@ if($inventory_data1->quantity >= $data1->quantity){
 
 $total2 = $product_data1->sellingpricegst * $data1->quantity ;
 $order2_insert = array('main_id'=>$last_id,
-          'product_id'=>$data1->product_id,
-          'quantity'=>$data1->quantity,
-          'product_mrp'=>$product_data1->mrp,
-          // 'gst'=>$product_data1->gst,
-          // 'gst_percentage'=>$product_data1->gst_percentage,
-          'total_amount'=>$total2,
-          'ip' =>$ip,
-          'date'=>$cur_date
+'product_id'=>$data1->product_id,
+'quantity'=>$data1->quantity,
+'product_mrp'=>$product_data1->mrp,
+// 'gst'=>$product_data1->gst,
+// 'gst_percentage'=>$product_data1->gst_percentage,
+'total_amount'=>$total2,
+'ip' =>$ip,
+'date'=>$cur_date
 
-          );
+);
 
 $last_id2=$this->base_model->insert_table("tbl_order2",$order2_insert,1) ;
 
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
+'status'=>201,
+);
 
-        echo json_encode($res);
-        exit;
+echo json_encode($res);
+exit;
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Out of stock",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Out of stock",
+'status'=>201,
+);
 
-        echo json_encode($res);
-        exit;
-        }
+echo json_encode($res);
+exit;
+}
 
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"product Not found",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"product Not found",
+'status'=>201,
+);
 
-        echo json_encode($res);
-        exit;
-        }
+echo json_encode($res);
+exit;
+}
 }
 
 }//end of foreach
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('payment_status',1);
@@ -1836,330 +1836,330 @@ $this->db->order_by('id',"DESC");
 $address_data= $this->db->get()->row();
 $address = [];
 if(!empty($address_data)){
-  $address = array(
-    "name"=>$address_data->name,
-    "pincode"=>$address_data->pincode,
-    // "house_no"=>$address_data->house_no,
-    "street_address"=>$address_data->street_address,
-    "city"=>$address_data->city,
-    "state"=>$address_data->state,
-    "phone"=>$address_data->phone,
-  );
+$address = array(
+"name"=>$address_data->name,
+"pincode"=>$address_data->pincode,
+// "house_no"=>$address_data->house_no,
+"street_address"=>$address_data->street_address,
+"city"=>$address_data->city,
+"state"=>$address_data->state,
+"phone"=>$address_data->phone,
+);
 }
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>"success",
-                    'status'=>200,
-                    'total'=>$sub_total,
-                    'subtotal'=>$sub_total,
-                    'txn_id'=>$txn_id,
-                    'address'=>$address
-                    );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"success",
+'status'=>200,
+'total'=>$sub_total,
+'subtotal'=>$sub_total,
+'txn_id'=>$txn_id,
+'address'=>$address
+);
 
-                    echo json_encode($res);
-                  }else{
-                    header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>"some error occured",
-                          'status'=>201,
-                          );
-
-                          echo json_encode($res);
-                  }
+echo json_encode($res);
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Cart is empty",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"some error occured",
+'status'=>201,
+);
 
-        echo json_encode($res);
+echo json_encode($res);
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Wrong Authentication",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Cart is empty",
+'status'=>201,
+);
 
-        echo json_encode($res);
+echo json_encode($res);
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"No user found",
-        'status'=>201,
-        );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Wrong Authentication",
+'status'=>201,
+);
 
-        echo json_encode($res);
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"No user found",
+'status'=>201,
+);
+
+echo json_encode($res);
 }
 
-              }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-              echo json_encode($res);
-
-
-              }
-
-              }else{
-
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>"please insert some data",
-              'status'=>201
-              );
-
-              echo json_encode($res);
+echo json_encode($res);
 
 
-              }
+}
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"please insert some data",
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
 
 }
 
 //----promocode---
 public function apply_promocode(){
 
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-  $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('promocode', 'promocode', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('promocode', 'promocode', 'required|xss_clean|trim');
 
-  if($this->form_validation->run()== TRUE)
-  {
+if($this->form_validation->run()== TRUE)
+{
 
-  $phone=$this->input->post('phone');
-  $authentication=$this->input->post('authentication');
-  $token_id=$this->input->post('token_id');
-  $txn_id=$this->input->post('txn_id');
-  $promocode=$this->input->post('promocode');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$txn_id=$this->input->post('txn_id');
+$promocode=$this->input->post('promocode');
 
-  $this->db->select('*');
-  $this->db->from('tbl_users');
-  $this->db->where('phone',$phone);
-  $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-  if(!empty($user_data)){
+if(!empty($user_data)){
 
-  if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
-  //--------check_promocode------
-  $discount = 0;
-  $promocode_id=0;
+//--------check_promocode------
+$discount = 0;
+$promocode_id=0;
 
-  $promocode = strtoupper($promocode);
+$promocode = strtoupper($promocode);
 // echo $promocode;
 // exit;
-  $this->db->select('*');
-  $this->db->from('tbl_promocode');
-  $this->db->where('promocode',$promocode);
-  $this->db->where('is_active',1);
-  $dsa= $this->db->get();
-  $promocode_data=$dsa->row();
+$this->db->select('*');
+$this->db->from('tbl_promocode');
+$this->db->where('promocode',$promocode);
+$this->db->where('is_active',1);
+$dsa= $this->db->get();
+$promocode_data=$dsa->row();
 
-  if(!empty($promocode_data)){
+if(!empty($promocode_data)){
 
-    $this->db->select('*');
-    $this->db->from('tbl_order1');
-    $this->db->where('txnid',$txn_id);
-    $order_data= $this->db->get()->row();
-
-
-    $final_amount = 0;
-  $promocode_id = $promocode_data->id;
-  if($promocode_data->ptype==1){
-
-  $this->db->select('*');
-  $this->db->from('tbl_order1');
-  $this->db->where('user_id',$user_data->id);
-  $this->db->where('promocode_id',$promocode_data->id);
-  $dsa= $this->db->get();
-  $promo_check=$dsa->row();
-
-  if(empty($promo_check)){
-
-  if($order_data->total_amount > $promocode_data->minorder){ //----checking minorder for promocode
-  // echo "hii";
-
-  $discount_amt = $order_data->total_amount * $promocode_data->giftpercent/100;
-  if($discount_amt > $promocode_data->max){
-  // will get max amount
-  $discount =  $promocode_data->max;
-
-  }else{
-
-  $discount =  $discount_amt;
-  }
-
-  }//endif of minorder
-  else{
-
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'Please add more products for promocode',
-  'status'=>201
-  );
-
-  echo json_encode($res);
-  exit;
-  }
+$this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('txnid',$txn_id);
+$order_data= $this->db->get()->row();
 
 
+$final_amount = 0;
+$promocode_id = $promocode_data->id;
+if($promocode_data->ptype==1){
 
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'Promocode is already used',
-  'status'=>201
-  );
+$this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('user_id',$user_data->id);
+$this->db->where('promocode_id',$promocode_data->id);
+$dsa= $this->db->get();
+$promo_check=$dsa->row();
 
-  echo json_encode($res);
-  exit;
+if(empty($promo_check)){
 
+if($order_data->total_amount > $promocode_data->minorder){ //----checking minorder for promocode
+// echo "hii";
 
-  }
+$discount_amt = $order_data->total_amount * $promocode_data->giftpercent/100;
+if($discount_amt > $promocode_data->max){
+// will get max amount
+$discount =  $promocode_data->max;
 
+}else{
 
-  }
-  //-----every time promocode---
-  else{
-  if($order_data->total_amount > $promocode_data->minorder){ //----checking minorder for promocode
-  // echo "hii";
+$discount =  $discount_amt;
+}
 
-  $discount_amt = $order_data->total_amount * $promocode_data->giftpercent/100;
-  if($discount_amt > $promocode_data->max){
-  // will get max amount
-  $discount =  $promocode_data->max;
+}//endif of minorder
+else{
 
-  }else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Please add more products for promocode',
+'status'=>201
+);
 
-  $discount =  $discount_amt;
-  }
-
-  }//endif of minorder
-  else{
-
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'Please add more products for promocode',
-  'status'=>201
-  );
-
-  echo json_encode($res);
-  exit;
-  }
+echo json_encode($res);
+exit;
+}
 
 
 
-  }
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Promocode is already used',
+'status'=>201
+);
+
+echo json_encode($res);
+exit;
 
 
-  $final_amount = $order_data->total_amount - $discount;
+}
 
 
-  //-------table_order1 entry-------
+}
+//-----every time promocode---
+else{
+if($order_data->total_amount > $promocode_data->minorder){ //----checking minorder for promocode
+// echo "hii";
 
-  $update_order1_data = array(
-  'promocode_id'=>$promocode_id,
-  'discount'=>$discount,
-  );
+$discount_amt = $order_data->total_amount * $promocode_data->giftpercent/100;
+if($discount_amt > $promocode_data->max){
+// will get max amount
+$discount =  $promocode_data->max;
 
-  $this->db->where('txnid', $txn_id);
-  $last_id=$this->db->update('tbl_order1', $update_order1_data);
+}else{
+
+$discount =  $discount_amt;
+}
+
+}//endif of minorder
+else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Please add more products for promocode',
+'status'=>201
+);
+
+echo json_encode($res);
+exit;
+}
+
+
+
+}
+
+
+$final_amount = $order_data->total_amount - $discount;
+
+
+//-------table_order1 entry-------
+
+$update_order1_data = array(
+'promocode_id'=>$promocode_id,
+'discount'=>$discount,
+);
+
+$this->db->where('txnid', $txn_id);
+$last_id=$this->db->update('tbl_order1', $update_order1_data);
 
 if(!empty($last_id)){
 
 
 
-  $response  = array(
+$response  = array(
 
-  'total' => $order_data->total_amount,
-  'sub_total' => $final_amount,
-  'promocode_discount' => $discount,
-  'promocode_id' => $promocode_id,
+'total' => $order_data->total_amount,
+'sub_total' => $final_amount,
+'promocode_discount' => $discount,
+'promocode_id' => $promocode_id,
 
-  );
-
-
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'success',
-  'status'=>200,
-  'data'=>$response
-  );
-
-  echo json_encode($res);
-
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'some eroor occured! please try again',
-  'status'=>201
-  );
-
-  echo json_encode($res);
-  exit;
+);
 
 
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$response
+);
 
-  }
+echo json_encode($res);
 
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'some eroor occured! please try again',
+'status'=>201
+);
 
-  }else{
-
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'invalid promocode',
-  'status'=>201
-  );
-
-  echo json_encode($res);
-  exit;
-
-
-  }
+echo json_encode($res);
+exit;
 
 
 
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'Wrong Authentication',
-  'status'=>201
-  );
+}
 
-  echo json_encode($res);
-  }
-  }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'user not found',
-  'status'=>201
-  );
 
-  echo json_encode($res);
+}else{
 
-  }
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'invalid promocode',
+'status'=>201
+);
+
+echo json_encode($res);
+exit;
+
+
+}
 
 
 
 }else{
-  header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
 
-  $res = array('message'=>validation_errors(),
-  'status'=>201
-  );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
+
+}
 
 
-  }
 
-  }else{
-  header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-  $res = array('message'=>'No data are available',
-  'status'=>201
-  );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-  echo json_encode($res);
-  }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2171,50 +2171,50 @@ if(!empty($last_id)){
 //----promocode_remove-----
 public function promocode_remove(){
 
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-  $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
-  $this->form_validation->set_rules('promocode_id', 'promocode_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('promocode_id', 'promocode_id', 'required|xss_clean|trim');
 
-  if($this->form_validation->run()== TRUE)
-  {
+if($this->form_validation->run()== TRUE)
+{
 
-  $phone=$this->input->post('phone');
-  $authentication=$this->input->post('authentication');
-  $token_id=$this->input->post('token_id');
-  $txn_id=$this->input->post('txn_id');
-  $promocode=$this->input->post('promocode');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$txn_id=$this->input->post('txn_id');
+$promocode=$this->input->post('promocode');
 
-  $this->db->select('*');
-  $this->db->from('tbl_users');
-  $this->db->where('phone',$phone);
-  $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-  if(!empty($user_data)){
+if(!empty($user_data)){
 
-  if($user_data->authentication==$authentication){
-
-
-              $data_insert = array('promocode_id'=>0,
-                        'discount'=>0,
-
-                        );
+if($user_data->authentication==$authentication){
 
 
-                $this->db->where('txnid', $txn_id);
-                $last_id=$this->db->update('tbl_order1', $data_insert);
-  if(!empty($last_id))   {
-    $this->db->select('*');
-  $this->db->from('tbl_order1');
-  $this->db->where('txnid',$txn_id);
-  $order_data= $this->db->get()->row();
+$data_insert = array('promocode_id'=>0,
+'discount'=>0,
+
+);
+
+
+$this->db->where('txnid', $txn_id);
+$last_id=$this->db->update('tbl_order1', $data_insert);
+if(!empty($last_id))   {
+$this->db->select('*');
+$this->db->from('tbl_order1');
+$this->db->where('txnid',$txn_id);
+$order_data= $this->db->get()->row();
 
 // $final_amount = $order_data->total_amount + $order_data->delivery_charge;
 $response  = array(
@@ -2240,47 +2240,47 @@ $res = array('message'=>'some error occured',
 echo json_encode($res);
 }
 
-      }else{
-      header('Access-Control-Allow-Origin: *');
-      $res = array('message'=>'Wrong Password',
-      'status'=>201
-      );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Password',
+'status'=>201
+);
 
-      echo json_encode($res);
-      }
-      }else{
-      header('Access-Control-Allow-Origin: *');
-      $res = array('message'=>'user not found',
-      'status'=>201
-      );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-      echo json_encode($res);
+echo json_encode($res);
 
-      }
-
-
-
-    }else{
-      header('Access-Control-Allow-Origin: *');
-
-      $res = array('message'=>validation_errors(),
-      'status'=>201
-      );
-
-      echo json_encode($res);
+}
 
 
-      }
 
-      }else{
-      header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-      $res = array('message'=>'No data are available',
-      'status'=>201
-      );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-      echo json_encode($res);
-      }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2293,121 +2293,121 @@ public function add_to_wishlist(){
 
 
 
-    $this->load->helper(array('form', 'url'));
-    $this->load->library('form_validation');
-    $this->load->helper('security');
-    if($this->input->post())
-    {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-    $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-    $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 
-    if($this->form_validation->run()== TRUE)
-    {
+if($this->form_validation->run()== TRUE)
+{
 
-    $phone=$this->input->post('phone');
-    $authentication=$this->input->post('authentication');
-    $token_id=$this->input->post('token_id');
-    $product_id=$this->input->post('product_id');
-    $ip = $this->input->ip_address();
-    date_default_timezone_set("Asia/Calcutta");
-    $cur_date=date("Y-m-d H:i:s");
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$product_id=$this->input->post('product_id');
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
 
-    $this->db->select('*');
-    $this->db->from('tbl_users');
-    $this->db->where('phone',$phone);
-    $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-    if(!empty($user_data)){
+if(!empty($user_data)){
 
-    if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_wishlist');
 $this->db->where('user_id',$user_data->id);
 $this->db->where('product_id',$product_id);
 $wishlist_data= $this->db->get()->row();
 
 if(empty($wishlist_data)){
-      $data_insert = array('user_id'=>$user_data->id,
-                'product_id'=>$product_id,
-                'ip' =>$ip,
-                'date'=>$cur_date
+$data_insert = array('user_id'=>$user_data->id,
+'product_id'=>$product_id,
+'ip' =>$ip,
+'date'=>$cur_date
 
-                );
+);
 
 
-      $last_id=$this->base_model->insert_table("tbl_wishlist",$data_insert,1) ;
+$last_id=$this->base_model->insert_table("tbl_wishlist",$data_insert,1) ;
 if(!empty($last_id)){
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'success',
-  'status'=>200
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'some error occured',
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'some error occured',
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 }
 
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>'product is already in your wishist',
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'product is already in your wishist',
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 
 }
 
-        }else{
-        header('Access-Control-Allow-Origin: *');
-        $res = array('message'=>'Wrong Authentication',
-        'status'=>201
-        );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
 
-        echo json_encode($res);
-        }
-        }else{
-        header('Access-Control-Allow-Origin: *');
-        $res = array('message'=>'user not found',
-        'status'=>201
-        );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-        echo json_encode($res);
+echo json_encode($res);
 
-        }
-
-
-
-      }else{
-        header('Access-Control-Allow-Origin: *');
-
-        $res = array('message'=>validation_errors(),
-        'status'=>201
-        );
-
-        echo json_encode($res);
+}
 
 
-        }
 
-        }else{
-        header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-        $res = array('message'=>'No data are available',
-        'status'=>201
-        );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-        echo json_encode($res);
-        }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2420,97 +2420,97 @@ if(!empty($last_id)){
 public function remove_wishlist_product(){
 
 
-      $this->load->helper(array('form', 'url'));
-      $this->load->library('form_validation');
-      $this->load->helper('security');
-      if($this->input->post())
-      {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-        $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-      $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-      $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
 
-      if($this->form_validation->run()== TRUE)
-      {
+if($this->form_validation->run()== TRUE)
+{
 
-        $phone=$this->input->post('phone');
-        $authentication=$this->input->post('authentication');
-      $token_id=$this->input->post('token_id');
-      $product_id=$this->input->post('product_id');
-      $ip = $this->input->ip_address();
-      date_default_timezone_set("Asia/Calcutta");
-      $cur_date=date("Y-m-d H:i:s");
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$product_id=$this->input->post('product_id');
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
 
-      $this->db->select('*');
-      $this->db->from('tbl_users');
-      $this->db->where('phone',$phone);
-      $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-      if(!empty($user_data)){
+if(!empty($user_data)){
 
-      if($user_data->authentication==$authentication){
-
-
-        $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $user_data->id,'product_id' => $product_id));
-
-  if(!empty($zapak)){
-    header('Access-Control-Allow-Origin: *');
-    $res = array('message'=>'success',
-    'status'=>200
-    );
-
-    echo json_encode($res);
-  }else{
-    header('Access-Control-Allow-Origin: *');
-    $res = array('message'=>'some error occured',
-    'status'=>201
-    );
-
-    echo json_encode($res);
-  }
-
-          }else{
-          header('Access-Control-Allow-Origin: *');
-          $res = array('message'=>'Wrong Authentication',
-          'status'=>201
-          );
-
-          echo json_encode($res);
-          }
-          }else{
-          header('Access-Control-Allow-Origin: *');
-          $res = array('message'=>'user not found',
-          'status'=>201
-          );
-
-          echo json_encode($res);
-
-          }
+if($user_data->authentication==$authentication){
 
 
+$zapak=$this->db->delete('tbl_wishlist', array('user_id' => $user_data->id,'product_id' => $product_id));
 
-        }else{
-          header('Access-Control-Allow-Origin: *');
+if(!empty($zapak)){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
 
-          $res = array('message'=>validation_errors(),
-          'status'=>201
-          );
+echo json_encode($res);
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'some error occured',
+'status'=>201
+);
 
-          echo json_encode($res);
+echo json_encode($res);
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
 
 
-          }
 
-          }else{
-          header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-          $res = array('message'=>'No data are available',
-          'status'=>201
-          );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-          echo json_encode($res);
-          }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2526,54 +2526,54 @@ public function view_wishlist(){
 
 
 
-          $this->load->helper(array('form', 'url'));
-          $this->load->library('form_validation');
-          $this->load->helper('security');
-          if($this->input->post())
-          {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
-          if($this->form_validation->run()== TRUE)
-          {
+if($this->form_validation->run()== TRUE)
+{
 
-            $phone=$this->input->post('phone');
-      $authentication=$this->input->post('authentication');
-          $token_id=$this->input->post('token_id');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
 
-          $this->db->select('*');
-      $this->db->from('tbl_users');
-      $this->db->where('phone',$phone);
-      $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-      if(!empty($user_data)){
+if(!empty($user_data)){
 
-      if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
 
-                      $this->db->select('*');
-          $this->db->from('tbl_wishlist');
-          $this->db->where('user_id',$user_data->id);
-          $wishlist_data= $this->db->get();
-          $wishlist_check= $wishlist_data->row();
-  $wishlist_info = [];
+$this->db->select('*');
+$this->db->from('tbl_wishlist');
+$this->db->where('user_id',$user_data->id);
+$wishlist_data= $this->db->get();
+$wishlist_check= $wishlist_data->row();
+$wishlist_info = [];
 foreach($wishlist_data->result() as $data) {
 
 $this->db->select('*');
-            $this->db->from('tbl_products');
-            $this->db->where('id',$data->product_id);
-            $dsa= $this->db->get();
-            $product_data=$dsa->row();
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$dsa= $this->db->get();
+$product_data=$dsa->row();
 
 
 $wishlist_info[]=array(
-  'product_id'=>$product_data->id,
-  'product_name'=>$product_data->productname,
-  'product_image'=>base_url().$product_data->image1,
-  'product_mrp'=>$product_data->mrp,
-  'product_selling_price'=>$product_data->sellingpricegst,
+'product_id'=>$product_data->id,
+'product_name'=>$product_data->productname,
+'product_image'=>base_url().$product_data->image1,
+'product_mrp'=>$product_data->mrp,
+'product_selling_price'=>$product_data->sellingpricegst,
 );
 
 }
@@ -2586,47 +2586,47 @@ $res = array('message'=>'success',
 echo json_encode($res);
 
 
-        }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'Wrong Authentication',
-              'status'=>201
-              );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
-              }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'user not found',
-              'status'=>201
-              );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-              echo json_encode($res);
+echo json_encode($res);
 
-              }
-
-
-
-            }else{
-              header('Access-Control-Allow-Origin: *');
-
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
-
-              echo json_encode($res);
+}
 
 
-              }
 
-              }else{
-              header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-              $res = array('message'=>'No data are available',
-              'status'=>201
-              );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2662,18 +2662,18 @@ $search_string= $this->db->get();
 $search_data=[];
 foreach($search_string->result() as $data){
 
-                     $search_data[]=array(
-                       'product_id'=>$data->id,
-                       'product_name'=>$data->productname,
-                       'produt_image'=>base_url().$data->image,
-                       'productdescription'=>$data->productdescription,
-                       'product_mrp'=>$data->mrp,
-                       'product_selling_price'=>$data->sellingpricegst,
-                       'max'=>$data->max
+$search_data[]=array(
+'product_id'=>$data->id,
+'product_name'=>$data->productname,
+'produt_image'=>base_url().$data->image,
+'productdescription'=>$data->productdescription,
+'product_mrp'=>$data->mrp,
+'product_selling_price'=>$data->sellingpricegst,
+'max'=>$data->max
 
 
 
-   );
+);
 
 
 }
@@ -2719,46 +2719,46 @@ public function store_details(){
 
 
 
-          $this->load->helper(array('form', 'url'));
-          $this->load->library('form_validation');
-          $this->load->helper('security');
-          if($this->input->post())
-          {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
-          if($this->form_validation->run()== TRUE)
-          {
+if($this->form_validation->run()== TRUE)
+{
 
-            $phone=$this->input->post('phone');
-      $authentication=$this->input->post('authentication');
-          $token_id=$this->input->post('token_id');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
 
-          $this->db->select('*');
-      $this->db->from('tbl_users');
-      $this->db->where('phone',$phone);
-      $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-      if(!empty($user_data)){
+if(!empty($user_data)){
 
-      if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
 
-                      $this->db->select('*');
-          $this->db->from('tbl_store');
-          $store_data= $this->db->get();
-  $store_info = [];
+$this->db->select('*');
+$this->db->from('tbl_store');
+$store_data= $this->db->get();
+$store_info = [];
 foreach($store_data->result() as $data) {
 
 $store_info[]=array(
-  'id'=>$data->id,
-  'name'=>$data->name,
-  'address'=>$data->address,
-  'pincode'=>$data->pincode,
-  'contact1'=>$data->contact1,
-  'contact2'=>$data->contact2,
+'id'=>$data->id,
+'name'=>$data->name,
+'address'=>$data->address,
+'pincode'=>$data->pincode,
+'contact1'=>$data->contact1,
+'contact2'=>$data->contact2,
 );
 
 }
@@ -2771,47 +2771,47 @@ $res = array('message'=>'success',
 echo json_encode($res);
 
 
-        }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'Wrong Authentication',
-              'status'=>201
-              );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
-              }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'user not found',
-              'status'=>201
-              );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-              echo json_encode($res);
+echo json_encode($res);
 
-              }
-
-
-
-            }else{
-              header('Access-Control-Allow-Origin: *');
-
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
-
-              echo json_encode($res);
+}
 
 
-              }
 
-              }else{
-              header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-              $res = array('message'=>'No data are available',
-              'status'=>201
-              );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -2820,99 +2820,99 @@ echo json_encode($res);
 //----checkout-------
 public function checkout(){
 
-          $this->load->helper(array('form', 'url'));
-          $this->load->library('form_validation');
-          $this->load->helper('security');
-          if($this->input->post())
-          {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
-          // $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
+// $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+$this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
-          if($this->form_validation->run()== TRUE)
-          {
+if($this->form_validation->run()== TRUE)
+{
 
-            $phone=$this->input->post('phone');
-      $authentication=$this->input->post('authentication');
-          $token_id=$this->input->post('token_id');
-          $txn_id=$this->input->post('txn_id');
-          $payment_type=$this->input->post('payment_type');
-          // $name=$this->input->post('name');
-          // $contact=$this->input->post('contact');
-          // $pincode=$this->input->post('pincode');
-          // $state=$this->input->post('state');
-          // $city=$this->input->post('city');
-          // $house_no=$this->input->post('house_no');
-          // $street_address=$this->input->post('street_address');
-          $store_id=$this->input->post('store_id');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$txn_id=$this->input->post('txn_id');
+$payment_type=$this->input->post('payment_type');
+// $name=$this->input->post('name');
+// $contact=$this->input->post('contact');
+// $pincode=$this->input->post('pincode');
+// $state=$this->input->post('state');
+// $city=$this->input->post('city');
+// $house_no=$this->input->post('house_no');
+// $street_address=$this->input->post('street_address');
+$store_id=$this->input->post('store_id');
 
-          $this->load->library('upload');
+$this->load->library('upload');
 
-          $image="";
-          if($payment_type == 1){
-          $img1='image';
-                      $file_check=($_FILES['image']['error']);
-                      if($file_check!=4){
-                    	$image_upload_folder = FCPATH . "assets/uploads/bank_receipts/";
-            						if (!file_exists($image_upload_folder))
-            						{
-            							mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-            						}
-            						$new_file_name="bank_receipt".date("Ymdhms");
-            						$this->upload_config = array(
-            								'upload_path'   => $image_upload_folder,
-            								'file_name' => $new_file_name,
-            								'allowed_types' =>'pdf|doc|docx|jpg|jpeg|png',
-            								'max_size'      => 25000
-            						);
-            						$this->upload->initialize($this->upload_config);
-            						if (!$this->upload->do_upload($img1))
-            						{
-            							$upload_error = $this->upload->display_errors();
-            							echo json_encode($upload_error);
-            							// echo $upload_error;
-            						}
-            						else
-            						{
-
-            							$file_info = $this->upload->data();
-
-            							$videoNAmePath = "assets/uploads/bank_receipts/".$new_file_name.$file_info['file_ext'];
-            							$file_info['new_name']=$videoNAmePath;
-            							// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-            							$image=$videoNAmePath;
-            							// echo json_encode($file_info);
-            						}
-                      }
+$image="";
+if($payment_type == 1){
+$img1='image';
+$file_check=($_FILES['image']['error']);
+if($file_check!=4){
+$image_upload_folder = FCPATH . "assets/uploads/bank_receipts/";
+if (!file_exists($image_upload_folder))
+{
+mkdir($image_upload_folder, DIR_WRITE_MODE, true);
 }
-          $this->db->select('*');
-      $this->db->from('tbl_users');
-      $this->db->where('phone',$phone);
-      $user_data= $this->db->get()->row();
+$new_file_name="bank_receipt".date("Ymdhms");
+$this->upload_config = array(
+'upload_path'   => $image_upload_folder,
+'file_name' => $new_file_name,
+'allowed_types' =>'pdf|doc|docx|jpg|jpeg|png',
+'max_size'      => 25000
+);
+$this->upload->initialize($this->upload_config);
+if (!$this->upload->do_upload($img1))
+{
+$upload_error = $this->upload->display_errors();
+echo json_encode($upload_error);
+// echo $upload_error;
+}
+else
+{
 
-      if(!empty($user_data)){
+$file_info = $this->upload->data();
 
-      if($user_data->authentication==$authentication){
+$videoNAmePath = "assets/uploads/bank_receipts/".$new_file_name.$file_info['file_ext'];
+$file_info['new_name']=$videoNAmePath;
+// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+$image=$videoNAmePath;
+// echo json_encode($file_info);
+}
+}
+}
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-            $this->db->select('*');
+if(!empty($user_data)){
+
+if($user_data->authentication==$authentication){
+
+$this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('txnid',$txn_id);
 $order1_data= $this->db->get()->row();
 
 if(!empty($order1_data)){
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_order2');
 $this->db->where('main_id',$order1_data->id);
 $order2_data= $this->db->get();
@@ -2922,104 +2922,104 @@ if(!empty($order2_check)){
 
 
 //----------------inventory check---------
-   foreach($order2_data->result() as $data) {
+foreach($order2_data->result() as $data) {
 
 
 
-            $this->db->select('*');
-            $this->db->from('tbl_products');
-            $this->db->where('id',$data->product_id);
-            $product_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_products');
+$this->db->where('id',$data->product_id);
+$product_data= $this->db->get()->row();
 
-            $this->db->select('*');
-            $this->db->from('tbl_inventory');
-            $this->db->where('product_id',$data->product_id);
-            $inventory_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$data->product_id);
+$inventory_data= $this->db->get()->row();
 
-        if($inventory_data->quantity >= $data->quantity){
-
-
-        }else{
-          header('Access-Control-Allow-Origin: *');
-          $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
-          'status'=>201
-          );
-
-          echo json_encode($res);
-          exit;
-        }
+if($inventory_data->quantity >= $data->quantity){
 
 
-   }//end of foreach
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
+'status'=>201
+);
+
+echo json_encode($res);
+exit;
+}
+
+
+}//end of foreach
 }//end of order2
 $total = $order1_data->total_amount;
 $discount = $order1_data->discount;
 
 if(empty($discount)){
-  $discount=0;
+$discount=0;
 }
 $final_amount = $total - $discount;
 
 //----------order1 entry-------
 
 $data_insert = array('payment_type'=>$payment_type,
-          'name'=>$user_data->name,
-          'phone'=>$user_data->phone,
-          'pincode'=>$user_data->zipcode,
-          'state'=>$user_data->state,
-          'city'=>$user_data->city,
-          // 'house_no'=>$user_data->house_no,
-          'street_address'=>$user_data->address,
-          'final_amount'=>$final_amount,
-          'bank_receipt'=>$image,
-          'store_id'=>$store_id,
-          'payment_status'=>1,
-          'order_status'=>1,
+'name'=>$user_data->name,
+'phone'=>$user_data->phone,
+'pincode'=>$user_data->zipcode,
+'state'=>$user_data->state,
+'city'=>$user_data->city,
+// 'house_no'=>$user_data->house_no,
+'street_address'=>$user_data->address,
+'final_amount'=>$final_amount,
+'bank_receipt'=>$image,
+'store_id'=>$store_id,
+'payment_status'=>1,
+'order_status'=>1,
 
-          );
+);
 
-  $this->db->where('txnid', $txn_id);
-  $last_id=$this->db->update('tbl_order1', $data_insert);
+$this->db->where('txnid', $txn_id);
+$last_id=$this->db->update('tbl_order1', $data_insert);
 
 
 //----------------inventory update---------
 
-  if(!empty($order2_check)){
+if(!empty($order2_check)){
 
 
-     foreach($order2_data->result() as $data1) {
+foreach($order2_data->result() as $data1) {
 
 
 
-              $this->db->select('*');
-              $this->db->from('tbl_inventory');
-              $this->db->where('product_id',$data1->product_id);
-              $product_data1= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$data1->product_id);
+$product_data1= $this->db->get()->row();
 
-              $updated_inventory = $product_data1->quantity - $data1->quantity;
+$updated_inventory = $product_data1->quantity - $data1->quantity;
 
 
 $data_update = array('quantity'=>$updated_inventory);
 
-  $this->db->where('id', $product_data1->id);
-  $last_id=$this->db->update('tbl_inventory', $data_update);
+$this->db->where('id', $product_data1->id);
+$last_id=$this->db->update('tbl_inventory', $data_update);
 
-     }//end of foreach
-  }//end of order2
+}//end of foreach
+}//end of order2
 
 //------------cart clear--------------
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_cart');
 $this->db->where('user_id',$user_data->id);
 $cart_data= $this->db->get();
 $cart_check= $cart_data->row();
 
 if(!empty($cart_check)){
-   foreach($cart_data->result() as $cart) {
+foreach($cart_data->result() as $cart) {
 
-     $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
+$zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
 
-   }
+}
 }
 
 }// end of order1
@@ -3034,47 +3034,47 @@ $res = array('message'=>'success',
 echo json_encode($res);
 
 
-        }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'Wrong Authentication',
-              'status'=>201
-              );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
-              }else{
-              header('Access-Control-Allow-Origin: *');
-              $res = array('message'=>'user not found',
-              'status'=>201
-              );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-              echo json_encode($res);
+echo json_encode($res);
 
-              }
-
-
-
-            }else{
-              header('Access-Control-Allow-Origin: *');
-
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
-
-              echo json_encode($res);
+}
 
 
-              }
 
-              }else{
-              header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-              $res = array('message'=>'No data are available',
-              'status'=>201
-              );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -3082,35 +3082,35 @@ echo json_encode($res);
 
 
 public function view_order(){
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
 
-  if($this->form_validation->run()== TRUE)
-  {
+if($this->form_validation->run()== TRUE)
+{
 
-      $phone=$this->input->post('phone');
-      $authentication=$this->input->post('authentication');
-      $token_id=$this->input->post('token_id');
-
-
-                $this->db->select('*');
-            $this->db->from('tbl_users');
-            $this->db->where('phone',$phone);
-            $user_data= $this->db->get()->row();
-
-            if(!empty($user_data)){
-
-            if($user_data->authentication==$authentication){
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
 
 
-            $this->db->select('*');
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
+
+if(!empty($user_data)){
+
+if($user_data->authentication==$authentication){
+
+
+$this->db->select('*');
 $this->db->from('tbl_order1');
 $this->db->where('user_id',$user_data->id);
 $check_data= $this->db->get()->row();
@@ -3131,27 +3131,27 @@ foreach ($data->result() as $value) {
 if($value->payment_type == 1){
 $payment_type="Bank Tranfer";
 }else if($value->payment_type == 2){
-  $payment_type="Pay at store";
+$payment_type="Pay at store";
 }else{
-  $payment_type = "NA";
+$payment_type = "NA";
 }
 
 if($value->order_status==1 || $value->order_status==2){
-  $cancel_status = 1;
+$cancel_status = 1;
 }else{
-    $cancel_status =0;
+$cancel_status =0;
 }
 
 if($value->order_status==1){
-  $order_status= "Placed";
+$order_status= "Placed";
 }else if($value->order_status==2){
-  $order_status= "Confirmed";
+$order_status= "Confirmed";
 }else if($value->order_status==3){
-  $order_status= "Dispatched";
+$order_status= "Dispatched";
 }else if($value->order_status==4){
-  $order_status= "Delivered";
+$order_status= "Delivered";
 }else if($value->order_status==5){
-  $order_status= "Canceled";
+$order_status= "Canceled";
 }
 
 $newdate = new DateTime($value->date);
@@ -3195,21 +3195,21 @@ echo json_encode($res);
 
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>validation_errors(),
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Please insert some data",
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Please insert some data",
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 }
 
@@ -3222,34 +3222,34 @@ echo json_encode($res);
 //-------------order detail-------------------
 public function orderdetail(){
 
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
 
-  if($this->form_validation->run()== TRUE)
-  {
+if($this->form_validation->run()== TRUE)
+{
 
-          $phone=$this->input->post('phone');
-          $authentication=$this->input->post('authentication');
-          $token_id=$this->input->post('token_id');
-          $order_id=$this->input->post('order_id');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$order_id=$this->input->post('order_id');
 
 
-                  $this->db->select('*');
-              $this->db->from('tbl_users');
-              $this->db->where('phone',$phone);
-              $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-              if(!empty($user_data)){
+if(!empty($user_data)){
 
-              if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
 $this->db->select('*');
 $this->db->from('tbl_order2');
@@ -3260,7 +3260,7 @@ $order2 = [] ;
 $subtotal= 0 ;
 foreach($dsa->result() as $data) {
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_products');
 $this->db->where('id',$data->product_id);
 $product_data= $this->db->get()->row();
@@ -3308,21 +3308,21 @@ echo json_encode($res);
 
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>validation_errors(),
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 }
 }else{
-  header('Access-Control-Allow-Origin: *');
-  $res = array('message'=>"Please insert some data",
-  'status'=>201
-  );
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Please insert some data",
+'status'=>201
+);
 
-  echo json_encode($res);
+echo json_encode($res);
 
 }
 
@@ -3425,131 +3425,131 @@ public function cancel_order(){
 
 
 
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        $this->load->helper('security');
-        if($this->input->post())
-        {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
-          $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-          $this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+$this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('order_id', 'order_id', 'required|xss_clean|trim');
 
-        if($this->form_validation->run()== TRUE)
-        {
+if($this->form_validation->run()== TRUE)
+{
 
-        $phone=$this->input->post('phone');
-        $authentication=$this->input->post('authentication');
-        $token_id=$this->input->post('token_id');
-        $order_id=$this->input->post('order_id');
+$phone=$this->input->post('phone');
+$authentication=$this->input->post('authentication');
+$token_id=$this->input->post('token_id');
+$order_id=$this->input->post('order_id');
 
-        $this->db->select('*');
-        $this->db->from('tbl_users');
-        $this->db->where('phone',$phone);
-        $user_data= $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_users');
+$this->db->where('phone',$phone);
+$user_data= $this->db->get()->row();
 
-        if(!empty($user_data)){
+if(!empty($user_data)){
 
-        if($user_data->authentication==$authentication){
+if($user_data->authentication==$authentication){
 
 
-                    $data_insert = array('order_status'=>5,
-                              );
+$data_insert = array('order_status'=>5,
+);
 
-                      $this->db->where('id', $order_id);
-                      $last_id=$this->db->update('tbl_order1', $data_insert);
+$this->db->where('id', $order_id);
+$last_id=$this->db->update('tbl_order1', $data_insert);
 
-            $this->db->select('*');
+$this->db->select('*');
 $this->db->from('tbl_order2');
 $this->db->where('main_id',$order_id);
 $data_order1= $this->db->get();
 
 if(!empty($data_order1)){
- foreach($data_order1->result() as $data) {
-                $this->db->select('*');
-                            $this->db->from('tbl_inventory');
-                            $this->db->where('product_id',$data->product_id);
-                            $data_inventory= $this->db->get()->row();
+foreach($data_order1->result() as $data) {
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$data->product_id);
+$data_inventory= $this->db->get()->row();
 
-                          $total_quantity=$data->quantity + $data_inventory->quantity;
+$total_quantity=$data->quantity + $data_inventory->quantity;
 
 
 
-                          $data_update=array(
-                                   'quantity'=>$total_quantity
-                          );
-                          $this->db->where('product_id', $data->product_id);
-                          $last_id2=$this->db->update('tbl_inventory', $data_update);
+$data_update=array(
+'quantity'=>$total_quantity
+);
+$this->db->where('product_id', $data->product_id);
+$last_id2=$this->db->update('tbl_inventory', $data_update);
 }
 
 
-    if(!empty($last_id)){
-      header('Access-Control-Allow-Origin: *');
-      $res = array('message'=>'success',
-      'status'=>200
-      );
+if(!empty($last_id)){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
 
-      echo json_encode($res);
-    }else{
-      header('Access-Control-Allow-Origin: *');
-      $res = array('message'=>'some error occured',
-      'status'=>201
-      );
+echo json_encode($res);
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'some error occured',
+'status'=>201
+);
 
-      echo json_encode($res);
-    }
-  }
-  else{
-    header('Access-Control-Allow-Origin: *');
-    $res = array('message'=>'Order id not found',
-    'status'=>201
-    );
+echo json_encode($res);
+}
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Order id not found',
+'status'=>201
+);
 
-    echo json_encode($res);
-  }
+echo json_encode($res);
+}
 
-            }else{
-            header('Access-Control-Allow-Origin: *');
-            $res = array('message'=>'Wrong authantication',
-            'status'=>201
-            );
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Wrong authantication',
+'status'=>201
+);
 
-            echo json_encode($res);
-            }
-            }else{
-            header('Access-Control-Allow-Origin: *');
-            $res = array('message'=>'user not found',
-            'status'=>201
-            );
+echo json_encode($res);
+}
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'user not found',
+'status'=>201
+);
 
-            echo json_encode($res);
+echo json_encode($res);
 
-            }
-
-
-
-          }else{
-            header('Access-Control-Allow-Origin: *');
-
-            $res = array('message'=>validation_errors(),
-            'status'=>201
-            );
-
-            echo json_encode($res);
+}
 
 
-            }
 
-            }else{
-            header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-            $res = array('message'=>'No data are available',
-            'status'=>201
-            );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-            echo json_encode($res);
-            }
+echo json_encode($res);
+
+
+}
+
+}else{
+header('Access-Control-Allow-Origin: *');
+
+$res = array('message'=>'No data are available',
+'status'=>201
+);
+
+echo json_encode($res);
+}
 
 
 
@@ -3558,48 +3558,48 @@ if(!empty($data_order1)){
 //------------filter-----
 public function filter(){
 
-  $this->load->helper(array('form', 'url'));
-  $this->load->library('form_validation');
-  $this->load->helper('security');
-  if($this->input->post())
-  {
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
 
 
-  $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
-  $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+$this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+$this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
+$this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
+$this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
+$this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
+$this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
+$this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
+$this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
+$this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
+$this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
+$this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
+$this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
+$this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
+$this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
 
 
 
-  if($this->form_validation->run()== TRUE)
-  {
+if($this->form_validation->run()== TRUE)
+{
 
-    $brand_id=$this->input->post('brand_id');
-    $resolution_id=$this->input->post('resolution_id');
-    $irdistance_id=$this->input->post('irdistance_id');
-    $cameratype_id=$this->input->post('cameratype_id');
-    $bodymaterial_id=$this->input->post('bodymaterial_id');
-    $videochannel_id=$this->input->post('videochannel_id');
-    $poeports_id=$this->input->post('poeports_id');
-    $poetype_id=$this->input->post('poetype_id');
+$brand_id=$this->input->post('brand_id');
+$resolution_id=$this->input->post('resolution_id');
+$irdistance_id=$this->input->post('irdistance_id');
+$cameratype_id=$this->input->post('cameratype_id');
+$bodymaterial_id=$this->input->post('bodymaterial_id');
+$videochannel_id=$this->input->post('videochannel_id');
+$poeports_id=$this->input->post('poeports_id');
+$poetype_id=$this->input->post('poetype_id');
 
-    $sataports_id=$this->input->post('sataports_id');
-    $length_id=$this->input->post('length_id');
-    $screensize_id=$this->input->post('screensize_id');
-    $ledtype_id=$this->input->post('ledtype_id');
-    $size_id=$this->input->post('size_id');
-    $lens_id=$this->input->post('lens_id');
+$sataports_id=$this->input->post('sataports_id');
+$length_id=$this->input->post('length_id');
+$screensize_id=$this->input->post('screensize_id');
+$ledtype_id=$this->input->post('ledtype_id');
+$size_id=$this->input->post('size_id');
+$lens_id=$this->input->post('lens_id');
 
 
 $brand_info = explode(',',$brand_id);
@@ -3710,27 +3710,27 @@ $res = array('message'=>'success',
 echo json_encode($res);
 
 
-            }else{
-              header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-              $res = array('message'=>validation_errors(),
-              'status'=>201
-              );
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
 
-              echo json_encode($res);
+echo json_encode($res);
 
 
-              }
+}
 
-              }else{
-              header('Access-Control-Allow-Origin: *');
+}else{
+header('Access-Control-Allow-Origin: *');
 
-              $res = array('message'=>'No data are available',
-              'status'=>201
-              );
+$res = array('message'=>'No data are available',
+'status'=>201
+);
 
-              echo json_encode($res);
-              }
+echo json_encode($res);
+}
 
 
 }
@@ -3741,28 +3741,28 @@ public function view_filter(){
 
 $this->db->select('*');
 //resoultation
-            $this->db->from('tbl_resolution');
-            //$this->db->where('id',$id);
-            $resoulation_id= $this->db->get();
-                         //$resoulation=$resoulation_id->row();
-                         $resolution_data=[];
-                         foreach($resoulation_id->result() as $value)
-                         {
-              $resolution_data[]=array(
-                'id'=>$value->id,
-                'name'=>$value->filtername
-              );
-            }
+$this->db->from('tbl_resolution');
+//$this->db->where('id',$id);
+$resoulation_id= $this->db->get();
+//$resoulation=$resoulation_id->row();
+$resolution_data=[];
+foreach($resoulation_id->result() as $value)
+{
+$resolution_data[]=array(
+'id'=>$value->id,
+'name'=>$value->filtername
+);
+}
 //brands
 $this->db->from('tbl_brands');
 //$this->db->where('id',$id);
 $brands= $this->db->get();
 $brands_data=[];
 foreach($brands->result() as $value1){
-  $brands_data[]=array(
-    'id'=>$value1->id,
-    'name'=>$value1->name
-  );
+$brands_data[]=array(
+'id'=>$value1->id,
+'name'=>$value1->name
+);
 }
 //irdistance
 $this->db->from('tbl_irdistance');
@@ -3771,10 +3771,10 @@ $irdistance= $this->db->get();
 $irdistance_data=[];
 foreach($irdistance->result() as $value2){
 
-  $irdistance_data[]=array(
-    'id'=>$value2->id,
-    'name'=>$value2->filtername
-  );
+$irdistance_data[]=array(
+'id'=>$value2->id,
+'name'=>$value2->filtername
+);
 }
 
 //cameratype
@@ -3784,10 +3784,10 @@ $cameratype= $this->db->get();
 $cameratype_data=[];
 foreach($cameratype->result() as $value3){
 
-  $cameratype_data[]=array(
-    'id'=>$value3->id,
-    'name'=>$value3->filtername
-  );
+$cameratype_data[]=array(
+'id'=>$value3->id,
+'name'=>$value3->filtername
+);
 }
 
 //bodymaterial
@@ -3797,10 +3797,10 @@ $bodymaterial= $this->db->get();
 $bodymaterial_data=[];
 foreach($bodymaterial->result() as $value13){
 
-  $bodymaterial_data[]=array(
-    'id'=>$value13->id,
-    'name'=>$value13->filter_name
-  );
+$bodymaterial_data[]=array(
+'id'=>$value13->id,
+'name'=>$value13->filter_name
+);
 }
 
 //videochannel
@@ -3810,10 +3810,10 @@ $videochannel= $this->db->get();
 $videochannel_data=[];
 foreach($videochannel->result() as $value4){
 
-  $videochannel_data[]=array(
-    'id'=>$value4->id,
-    'name'=>$value4->filter_name
-  );
+$videochannel_data[]=array(
+'id'=>$value4->id,
+'name'=>$value4->filter_name
+);
 }
 //poeports
 $this->db->from('tbl_poeports');
@@ -3822,23 +3822,23 @@ $poeports= $this->db->get();
 $poeports_data=[];
 foreach($poeports->result() as $value5){
 
-  $poeports_data[]=array(
-    'id'=>$value5->id,
-    'name'=>$value5->filter_name
-  );
+$poeports_data[]=array(
+'id'=>$value5->id,
+'name'=>$value5->filter_name
+);
 }
-  //poetype
-  $this->db->from('tbl_poetype');
-  //$this->db->where('id',$id);
-  $poetype= $this->db->get();
-  $poetype_data=[];
-  foreach($poetype->result() as $value6){
+//poetype
+$this->db->from('tbl_poetype');
+//$this->db->where('id',$id);
+$poetype= $this->db->get();
+$poetype_data=[];
+foreach($poetype->result() as $value6){
 
-    $poetype_data[]=array(
-      'id'=>$value6->id,
-      'name'=>$value6->filter_name
-    );
-  }
+$poetype_data[]=array(
+'id'=>$value6->id,
+'name'=>$value6->filter_name
+);
+}
 //sataports
 $this->db->from('tbl_sataports');
 //$this->db->where('id',$id);
@@ -3846,10 +3846,10 @@ $sataports= $this->db->get();
 $sataports_data=[];
 foreach($sataports->result() as $value7){
 
-  $sataports_data[]=array(
-    'id'=>$value7->id,
-    'name'=>$value7->filter_name
-  );
+$sataports_data[]=array(
+'id'=>$value7->id,
+'name'=>$value7->filter_name
+);
 }
 //length
 $this->db->from('tbl_length');
@@ -3858,10 +3858,10 @@ $length= $this->db->get();
 $length_data=[];
 foreach($length->result() as $value8){
 
-  $length_data[]=array(
-    'id'=>$value8->id,
-    'name'=>$value8->filter_name
-  );
+$length_data[]=array(
+'id'=>$value8->id,
+'name'=>$value8->filter_name
+);
 }
 //screensize
 $this->db->from('tbl_screensize');
@@ -3870,10 +3870,10 @@ $screensize= $this->db->get();
 $screensize_data=[];
 foreach($screensize->result() as $value9){
 
-  $screensize_data[]=array(
-    'id'=>$value9->id,
-    'name'=>$value9->filter_name
-  );
+$screensize_data[]=array(
+'id'=>$value9->id,
+'name'=>$value9->filter_name
+);
 }
 //ledtype
 $this->db->from('tbl_ledtype');
@@ -3882,10 +3882,10 @@ $ledtype= $this->db->get();
 $ledtype_data=[];
 foreach($ledtype->result() as $value10){
 
-  $ledtype_data[]=array(
-    'id'=>$value10->id,
-    'name'=>$value10->filter_name
-  );
+$ledtype_data[]=array(
+'id'=>$value10->id,
+'name'=>$value10->filter_name
+);
 }
 //size
 $this->db->from('tbl_size');
@@ -3894,49 +3894,124 @@ $size= $this->db->get();
 $size_data=[];
 foreach($size->result() as $value11){
 
-  $size_data[]=array(
-    'id'=>$value11->id,
-    'name'=>$value11->filter_name
-  );
+$size_data[]=array(
+'id'=>$value11->id,
+'name'=>$value11->filter_name
+);
 }
-  //lens
-  $this->db->from('tbl_lens');
-  //$this->db->where('id',$id);
-  $lens= $this->db->get();
-  $lens_data=[];
-  foreach($lens->result() as $value12){
+//lens
+$this->db->from('tbl_lens');
+//$this->db->where('id',$id);
+$lens= $this->db->get();
+$lens_data=[];
+foreach($lens->result() as $value12){
 
-    $lens_data[]=array(
-      'id'=>$value12->id,
-      'name'=>$value12->filtername
-    );
+$lens_data[]=array(
+'id'=>$value12->id,
+'name'=>$value12->filtername
+);
 }
-    $filter_name=[];
-    $filter_name[]=array(
-      'brand'=>$brands_data,
-      'resoulation'=>$resolution_data,
-      'irdistance'=>$irdistance_data,
-      'cameratype'=>$cameratype_data,
-      'bodymaterial'=>$bodymaterial_data,
-      'videochannel'=>$videochannel_data,
-      'poeports'=>$poeports_data,
-      'poetype'=>$poetype_data,
-      'sataports'=>$sataports_data,
-      'lengths'=>$length_data,
-      'screensize'=>$screensize_data,
-      'ledtype'=>$ledtype_data,
-      'size'=>$size_data,
-      'lens'=>$lens_data,
-    );
+$filter_name=[];
+$filter_name[]=array(
+'brand'=>$brands_data,
+'resoulation'=>$resolution_data,
+'irdistance'=>$irdistance_data,
+'cameratype'=>$cameratype_data,
+'bodymaterial'=>$bodymaterial_data,
+'videochannel'=>$videochannel_data,
+'poeports'=>$poeports_data,
+'poetype'=>$poetype_data,
+'sataports'=>$sataports_data,
+'lengths'=>$length_data,
+'screensize'=>$screensize_data,
+'ledtype'=>$ledtype_data,
+'size'=>$size_data,
+'lens'=>$lens_data,
+);
 
-    header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *');
 
-    $res = array('message'=>'success',
-    'status'=>200,
-    'data'=>$filter_name,
-    );
+$res = array('message'=>'success',
+'status'=>200,
+'data'=>$filter_name,
+);
 
-    echo json_encode($res);
+echo json_encode($res);
 
 }
+
+public function feedback(){
+$this->load->helper(array('form', 'url'));
+$this->load->library('form_validation');
+$this->load->helper('security');
+if($this->input->post())
+{
+$this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+$this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+$this->form_validation->set_rules('message', 'message', 'required|xss_clean|trim');
+
+
+if($this->form_validation->run()== TRUE)
+{
+
+$name=$this->input->post('name');
+$contact=$this->input->post('contact');
+$message=$this->input->post('message');
+
+$ip = $this->input->ip_address();
+date_default_timezone_set("Asia/Calcutta");
+$cur_date=date("Y-m-d H:i:s");
+
+$data_insert = array('name'=>$name,
+'contact'=>$contact,
+'message'=>$message,
+'ip' =>$ip,
+'date'=>$cur_date
+);
+
+$last_id=$this->base_model->insert_table("tbl_feedback",$data_insert,1) ;
+
+if(!empty($last_id)){
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'success',
+'status'=>200
+);
+
+echo json_encode($res);
+}else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>'Some error occured',
+'status'=>201
+);
+
+echo json_encode($res);
+}
+
+
+}else{
+
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+echo json_encode($res);
+
+
+}
+
+}
+else{
+header('Access-Control-Allow-Origin: *');
+$res = array('message'=>"Please insert some data, No data available",
+'status'=>201
+);
+
+echo json_encode($res);
+
+}
+
+}
+
+
 }
