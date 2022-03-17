@@ -3942,7 +3942,7 @@ $this->db->from('tbl_length');
 $length= $this->db->get();
 $length_data=[];
 $lengths=json_decode($minorcategory_data->length);
-if(!empty($length)){
+if(!empty($lengths)){
 foreach($length->result() as $value8){
   $a=0;
    foreach ($lengths as $data) {
@@ -4004,11 +4004,11 @@ $ledtype_data[]=array(
 $this->db->from('tbl_size');
 $size= $this->db->get();
 $size_data=[];
-$size=json_decode($minorcategory_data->size);
-if(!empty($size)){
+$sizeids=json_decode($minorcategory_data->size);
+if(!empty($sizeids)){
 foreach($size->result() as $value11){
   $a=0;
-   foreach ($sata_ports as $data) {
+   foreach ($sizeids as $data) {
    if($data==$value11->id){
      $a=1;
    }
