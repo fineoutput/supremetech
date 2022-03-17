@@ -3737,180 +3737,311 @@ echo json_encode($res);
 
 //-----------filter_data-------------------
 
-public function view_filter(){
+public function view_filter($id){
 
 $this->db->select('*');
-//resoultation
+$this->db->from('tbl_minorcategory');
+$this->db->where('id',$id);
+$minorcategory_data= $this->db->get()->row();
+
+  //resoultation
+$this->db->select('*');
 $this->db->from('tbl_resolution');
-//$this->db->where('id',$id);
 $resoulation_id= $this->db->get();
-//$resoulation=$resoulation_id->row();
 $resolution_data=[];
+$resolution=json_decode($minorcategory_data->resolution);
+if(!empty($resolution)){
 foreach($resoulation_id->result() as $value)
 {
+  $a=0;
+   foreach ($resolution as $data) {
+   if($data==$value->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $resolution_data[]=array(
 'id'=>$value->id,
 'name'=>$value->filtername
 );
 }
+}
+}
+
 //brands
 $this->db->from('tbl_brands');
-//$this->db->where('id',$id);
 $brands= $this->db->get();
 $brands_data=[];
+$brand=json_decode($minorcategory_data->brand);
+if(!empty($brand)){
 foreach($brands->result() as $value1){
+  $a=0;
+   foreach ($brand as $data) {
+   if($data==$value1->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $brands_data[]=array(
 'id'=>$value1->id,
 'name'=>$value1->name
 );
 }
+}
+}
+
 //irdistance
 $this->db->from('tbl_irdistance');
-//$this->db->where('id',$id);
 $irdistance= $this->db->get();
 $irdistance_data=[];
+$ir_distance=json_decode($minorcategory_data->ir_distance);
+if(!empty($ir_distance)){
 foreach($irdistance->result() as $value2){
-
+  $a=0;
+   foreach ($ir_distance as $data) {
+   if($data==$value2->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $irdistance_data[]=array(
 'id'=>$value2->id,
 'name'=>$value2->filtername
 );
 }
+}
+}
 
 //cameratype
 $this->db->from('tbl_cameratype');
-//$this->db->where('id',$id);
 $cameratype= $this->db->get();
 $cameratype_data=[];
+$camera_type=json_decode($minorcategory_data->camera_type);
+if(!empty($camera_type)){
 foreach($cameratype->result() as $value3){
-
+  $a=0;
+   foreach ($camera_type as $data) {
+   if($data==$value3->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $cameratype_data[]=array(
 'id'=>$value3->id,
 'name'=>$value3->filtername
 );
 }
+}}
 
 //bodymaterial
 $this->db->from('tbl_bodymaterial');
-//$this->db->where('id',$id);
 $bodymaterial= $this->db->get();
 $bodymaterial_data=[];
+$body_materials=json_decode($minorcategory_data->body_materials);
+if(!empty($body_materials)){
 foreach($bodymaterial->result() as $value13){
-
+  $a=0;
+ foreach ($body_materials as $data) {
+ if($data==$value13->id){
+   $a=1;
+ }
+ }
+if($a==1){
 $bodymaterial_data[]=array(
 'id'=>$value13->id,
 'name'=>$value13->filter_name
 );
 }
+}}
 
 //videochannel
 $this->db->from('tbl_videochannel');
-//$this->db->where('id',$id);
 $videochannel= $this->db->get();
 $videochannel_data=[];
+$video_channel=json_decode($minorcategory_data->video_channel);
+if(!empty($video_channel)){
 foreach($videochannel->result() as $value4){
-
+  $a=0;
+ foreach ($video_channel as $data) {
+ if($data==$value4->id){
+   $a=1;
+ }
+ }
+if($a==1){
 $videochannel_data[]=array(
 'id'=>$value4->id,
 'name'=>$value4->filter_name
 );
 }
+}}
+
 //poeports
 $this->db->from('tbl_poeports');
-//$this->db->where('id',$id);
 $poeports= $this->db->get();
 $poeports_data=[];
+$poe_ports=json_decode($minorcategory_data->poe_ports);
+if(!empty($poe_ports)){
 foreach($poeports->result() as $value5){
-
+  $a=0;
+   foreach ($poe_ports as $data) {
+   if($data==$value5->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $poeports_data[]=array(
 'id'=>$value5->id,
 'name'=>$value5->filter_name
 );
 }
+}}
+
 //poetype
 $this->db->from('tbl_poetype');
-//$this->db->where('id',$id);
 $poetype= $this->db->get();
 $poetype_data=[];
+$poe_type=json_decode($minorcategory_data->poe_type);
+if(!empty($poe_type)){
 foreach($poetype->result() as $value6){
-
+  $a=0;
+   foreach ($poe_type as $data) {
+   if($data==$value6->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $poetype_data[]=array(
 'id'=>$value6->id,
 'name'=>$value6->filter_name
 );
 }
+}}
+
 //sataports
 $this->db->from('tbl_sataports');
-//$this->db->where('id',$id);
 $sataports= $this->db->get();
 $sataports_data=[];
+$sata_ports=json_decode($minorcategory_data->sata_ports);
+if(!empty($sata_ports)){
 foreach($sataports->result() as $value7){
-
+  $a=0;
+   foreach ($sata_ports as $data) {
+   if($data==$value7->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $sataports_data[]=array(
 'id'=>$value7->id,
 'name'=>$value7->filter_name
 );
-}
+}}}
+
 //length
 $this->db->from('tbl_length');
-//$this->db->where('id',$id);
 $length= $this->db->get();
 $length_data=[];
+$lengths=json_decode($minorcategory_data->length);
+if(!empty($length)){
 foreach($length->result() as $value8){
-
+  $a=0;
+   foreach ($lengths as $data) {
+   if($data==$value8->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $length_data[]=array(
 'id'=>$value8->id,
 'name'=>$value8->filter_name
 );
 }
+}}
+
 //screensize
 $this->db->from('tbl_screensize');
-//$this->db->where('id',$id);
 $screensize= $this->db->get();
 $screensize_data=[];
+$screen_size=json_decode($minorcategory_data->screen_size);
+if(!empty($screen_size)){
 foreach($screensize->result() as $value9){
-
+  $a=0;
+   foreach ($screen_size as $data) {
+   if($data==$value9->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $screensize_data[]=array(
 'id'=>$value9->id,
 'name'=>$value9->filter_name
 );
 }
+}}
+
 //ledtype
 $this->db->from('tbl_ledtype');
-//$this->db->where('id',$id);
 $ledtype= $this->db->get();
 $ledtype_data=[];
+$led_type=json_decode($minorcategory_data->led_type);
+if(!empty($led_type)){
 foreach($ledtype->result() as $value10){
-
+  $a=0;
+ foreach ($led_type as $data) {
+ if($data==$value10->id){
+   $a=1;
+ }
+ }
+if($a==1){
 $ledtype_data[]=array(
 'id'=>$value10->id,
 'name'=>$value10->filter_name
 );
 }
+}}
+
 //size
 $this->db->from('tbl_size');
-//$this->db->where('id',$id);
 $size= $this->db->get();
 $size_data=[];
+$size=json_decode($minorcategory_data->size);
+if(!empty($size)){
 foreach($size->result() as $value11){
-
+  $a=0;
+   foreach ($sata_ports as $data) {
+   if($data==$value11->id){
+     $a=1;
+   }
+   }
+if($a==1){
 $size_data[]=array(
 'id'=>$value11->id,
 'name'=>$value11->filter_name
 );
 }
+}}
+
 //lens
 $this->db->from('tbl_lens');
-//$this->db->where('id',$id);
-$lens= $this->db->get();
+$lens_datas= $this->db->get();
 $lens_data=[];
-foreach($lens->result() as $value12){
-
+$lens=json_decode($minorcategory_data->lens);
+if(!empty($lens)){
+foreach($lens_datas->result() as $value12){
+  $a=0;
+ foreach ($lens as $data) {
+ if($data==$value12->id){
+   $a=1;
+ }
+ }
+if($a==1){
 $lens_data[]=array(
 'id'=>$value12->id,
 'name'=>$value12->filtername
 );
 }
+}}
+
 $filter_name=[];
 $filter_name[]=array(
 'brand'=>$brands_data,
