@@ -4191,6 +4191,75 @@ $total = $order1_data->total_amount;
 
     }
 
+    public function filter_content($mini_id,$b_name){
+      // $mini_id = $this->uri->segment('3');
+      // $b_name = $this->uri->segment('4');
+
+      $this->db->select('*');
+      $this->db->from('tbl_minorcategory');
+      $this->db->where('id',$mini_id);
+      $minorcategory_data= $this->db->get()->row();
+    $this->db->select('*');
+    $this->db->from('tbl_'.$b_name);
+    $filter_result= $this->db->get();
+    $filter_data=[];
+    if($b_name=="brands"){
+    $filter=json_decode($minorcategory_data->brand);
+  }else if($b_name=="irdistance"){
+    $filter=json_decode($minorcategory_data->ir_distance);
+  }else if($b_name=="cameratype"){
+    $filter=json_decode($minorcategory_data->camera_type);
+  }else if($b_name=="bodymaterial"){
+    $filter=json_decode($minorcategory_data->body_materials);
+  }else if($b_name=="videochannel"){
+    $filter=json_decode($minorcategory_data->video_channel);
+  }else if($b_name=="poeports"){
+    $filter=json_decode($minorcategory_data->poe_ports);
+  }else if($b_name=="poetype"){
+    $filter=json_decode($minorcategory_data->poe_type);
+  }else if($b_name=="sataports"){
+    $filter=json_decode($minorcategory_data->sata_ports);
+  }else if($b_name=="screensize"){
+    $filter=json_decode($minorcategory_data->screen_size);
+  }else if($b_name=="ledtype"){
+    $filter=json_decode($minorcategory_data->led_type);
+  }else{
+    $filter=json_decode($minorcategory_data->$b_name);
+  }
+    if(!empty($filter)){
+    foreach($filter_result->result() as $value)
+    {
+      $a=0;
+       foreach ($filter as $data) {
+       if($data==$value->id){
+         $a=1;
+       }
+       }
+    if($a==1){
+      if(!empty($value->filtername)){
+        $f_name=$value->filtername;
+      }else if(!empty($value->filter_name)){
+        $f_name=$value->filter_name;
+      }else{
+        $f_name=$value->name;
+      }
+    $filter_data[]=array(
+    'id'=>$value->id,
+    'name'=>$f_name
+    );
+    }
+    }
+    }
+
+    $res = array('message'=>'success',
+    'status'=>200,
+    'data'=>$filter_data,
+    );
+
+    echo json_encode($res);
+
+    }
+
     public function popup(){
 
       $this->db->select('*');
