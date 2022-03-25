@@ -350,44 +350,43 @@ class Apicontroller extends CI_Controller
     //get all category
     public function get_allcategory()
     {
-
         $this->db->select('*');
         $this->db->from('tbl_category');
-        $this->db->where('is_active',1);
+        $this->db->where('is_active', 1);
         $catdata= $this->db->get();
-         $is_false ="false";
+        $is_false ="false";
         $category=[];
-         foreach($catdata->result() as $cat) {
+        foreach ($catdata->result() as $cat) {
+            $this->db->select('*');
+            $this->db->from('tbl_subcategory');
+            $this->db->where('category_id', $cat->id);
+            $sub= $this->db->get();
+            // if(!empty($sub->row())){
+            //   $is_sub = "True";
+            // }else{
+            //   $is_sub ="False";
+            // }
+            $subcategory=[];
+            foreach ($sub->result() as $data2) {
                 $this->db->select('*');
-                $this->db->from('tbl_subcategory');
+                $this->db->from('tbl_minorcategory');
                 $this->db->where('category_id', $cat->id);
-                $sub= $this->db->get();
-                // if(!empty($sub->row())){
-                //   $is_sub = "True";
+                $this->db->where('subcategory_id', $data2->id);
+                $minor_category= $this->db->get();
+                // if(!empty($minor_category->row())){
+                //   $is_min = "True";
                 // }else{
-                //   $is_sub ="False";
+                //   $is_min ="False";
                 // }
-                $subcategory=[];
-                foreach ($sub->result() as $data2) {
-                    $this->db->select('*');
-                    $this->db->from('tbl_minorcategory');
-                    $this->db->where('category_id', $cat->id);
-                    $this->db->where('subcategory_id', $data2->id);
-                    $minor_category= $this->db->get();
-                    // if(!empty($minor_category->row())){
-                    //   $is_min = "True";
-                    // }else{
-                    //   $is_min ="False";
-                    // }
-                    $minorcategory=[];
-                    foreach ($minor_category->result() as $m_id) {
-                        $minorcategory[]=array(
+                $minorcategory=[];
+                foreach ($minor_category->result() as $m_id) {
+                    $minorcategory[]=array(
                   'minor_id'=>$m_id->id,
                   'minor_name' =>$m_id->minorcategoryname
                 );
-                    }
+                }
 
-                    $subcategory[] = array(
+                $subcategory[] = array(
                       'sub_id' => $data2->id,
                       'name'=> $data2->subcategory,
                       'is_min'=> $is_false,
@@ -396,23 +395,22 @@ class Apicontroller extends CI_Controller
 
 
   );
-}
+            }
 
-  $category[]=array(
+            $category[]=array(
     'category_id'=>$cat->id,
    'categoryname'=> $cat->category,
    'image'=>base_url().$cat->image2,
    'is_sub'=>$is_false,
    'data'=>$subcategory,
  );
-}
-                $res = array('message'=>"success",
+        }
+        $res = array('message'=>"success",
       'status'=>200,
       'data'=>$category,
       );
 
-      echo json_encode($res);
-
+        echo json_encode($res);
     }
     public function get_allcategory2()
     {
@@ -430,10 +428,10 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_subcategory');
                 $this->db->where('category_id', $category_id);
                 $sub= $this->db->get();
-                if(!empty($sub->row())){
-                  $is_sub = "True";
-                }else{
-                  $is_sub ="False";
+                if (!empty($sub->row())) {
+                    $is_sub = "True";
+                } else {
+                    $is_sub ="False";
                 }
                 $subcategory=[];
                 foreach ($sub->result() as $data2) {
@@ -615,7 +613,6 @@ class Apicontroller extends CI_Controller
                     $check_phone= $this->db->get();
                     $check_id=$check_phone->row();
                     if (!empty($check_id)) {
-
                         if ($check_id->authentication == $password) {
                             $this->db->select('*');
                             $this->db->from('tbl_cart');
@@ -1708,7 +1705,6 @@ class Apicontroller extends CI_Controller
 
 
         if (!empty($phone) && !empty($authentication) && !empty($token_id)) {
-
             $ip = $this->input->ip_address();
             date_default_timezone_set("Asia/Calcutta");
             $cur_date=date("Y-m-d H:i:s");
@@ -1770,12 +1766,12 @@ class Apicontroller extends CI_Controller
                                     $this->db->where('id', $data1->product_id);
                                     $product_data1= $this->db->get()->row();
 
-                                      $this->db->select('*');
-                                      $this->db->from('tbl_inventory');
-                                      $this->db->where('product_id', $product_data1->id);
-                                      $check_inventory= $this->db->get();
-                                      $check_inventory_id=$check_inventory->row();
-                                      if (!empty($check_inventory_id)) {
+                                    $this->db->select('*');
+                                    $this->db->from('tbl_inventory');
+                                    $this->db->where('product_id', $product_data1->id);
+                                    $check_inventory= $this->db->get();
+                                    $check_inventory_id=$check_inventory->row();
+                                    if (!empty($check_inventory_id)) {
                                         if ($check_inventory_id->quantity >= $data1->quantity) {
                                             $total2 = $product_data1->sellingpricegst * $data1->quantity ;
                                             $order2_insert = array('main_id'=>$last_id,
@@ -1791,64 +1787,61 @@ class Apicontroller extends CI_Controller
           );
 
                                             $last_id2=$this->base_model->insert_table("tbl_order2", $order2_insert, 1) ;
-
-                                    } else {
-                                        $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
+                                        } else {
+                                            $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
                                         'status'=>201,
                                       );
+
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                    } else {
+                                        $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
+                                  'status'=>201,
+                                );
 
                                         echo json_encode($res);
                                         exit;
                                     }
-                                }else{
-                                  $res = array('message'=>"Product is out of stock! Please remove this ".$product_data1->productname,
-                                  'status'=>201,
-                                );
-
-                                  echo json_encode($res);
-                                  exit;
-                                }
-                            }//end of foreach
+                                }//end of foreach
 
 
-                            $res = array('message'=>"success",
+                                $res = array('message'=>"success",
                     'status'=>200,
                     'subtotal'=>$sub_total,
                     'txn_id'=>$txn_id
                     );
 
+                                echo json_encode($res);
+                            } else {
+                                $res = array('message'=>"cart is empty",
+        'status'=>201,
+        );
+
+                                echo json_encode($res);
+                            }
+                        } else {
+                            $res = array('message'=>"Some erro occured",
+        'status'=>201,
+        );
+
                             echo json_encode($res);
-
-                    } else {
-                        $res = array('message'=>"cart is empty",
-        'status'=>201,
-        );
-
-                        echo json_encode($res);
+                        }
                     }
+                } else {
+                    $res = array('message'=>"Wromg Password",
+          'status'=>201,
+          );
 
+                    echo json_encode($res);
+                }
             } else {
-                $res = array('message'=>"Some erro occured",
-        'status'=>201,
-        );
+                $res = array('message'=>"User does not exist",
+          'status'=>201,
+          );
 
                 echo json_encode($res);
             }
-}
-}else{
-  $res = array('message'=>"Wromg Password",
-          'status'=>201,
-          );
-
-  echo json_encode($res);
-}
-}else{
-  $res = array('message'=>"User does not exist",
-          'status'=>201,
-          );
-
-  echo json_encode($res);
-}
         } else {
             $res = array('message'=>"Please insert some data",
                     'status'=>201,
@@ -2866,51 +2859,51 @@ class Apicontroller extends CI_Controller
                         $last_id=$this->db->update('tbl_order1', $data_insert);
 
                         $this->db->select('*');
-            $this->db->from('tbl_order2');
-            $this->db->where('main_id',$order_id);
-            $data_order1= $this->db->get();
+                        $this->db->from('tbl_order2');
+                        $this->db->where('main_id', $order_id);
+                        $data_order1= $this->db->get();
 
-            if(!empty($data_order1)){
-              foreach($data_order1->result() as $data) {
-                             $this->db->select('*');
-                                         $this->db->from('tbl_inventory');
-                                         $this->db->where('product_id',$data->product_id);
-                                         $data_inventory= $this->db->get()->row();
+                        if (!empty($data_order1)) {
+                            foreach ($data_order1->result() as $data) {
+                                $this->db->select('*');
+                                $this->db->from('tbl_inventory');
+                                $this->db->where('product_id', $data->product_id);
+                                $data_inventory= $this->db->get()->row();
 
-                                       $total_quantity=$data->quantity + $data_inventory->quantity;
+                                $total_quantity=$data->quantity + $data_inventory->quantity;
 
 
 
-                                       $data_update=array(
+                                $data_update=array(
                                                 'quantity'=>$total_quantity
                                        );
-                                       $this->db->where('product_id', $data->product_id);
-                                       $last_id2=$this->db->update('tbl_inventory', $data_update);
-             }
+                                $this->db->where('product_id', $data->product_id);
+                                $last_id2=$this->db->update('tbl_inventory', $data_update);
+                            }
 
-                if(!empty($last_id)){
-                  header('Access-Control-Allow-Origin: *');
-                  $res = array('message'=>'success',
+                            if (!empty($last_id)) {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=>'success',
                   'status'=>200
                   );
 
-                  echo json_encode($res);
-                }else{
-                  header('Access-Control-Allow-Origin: *');
-                  $res = array('message'=>'some error occured',
+                                echo json_encode($res);
+                            } else {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=>'some error occured',
                   'status'=>201
                   );
 
-                  echo json_encode($res);
-                }
-              }else{
-                header('Access-Control-Allow-Origin: *');
-                $res = array('message'=>'Order id not found',
+                                echo json_encode($res);
+                            }
+                        } else {
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'Order id not found',
                 'status'=>201
                 );
 
-                echo json_encode($res);
-              }
+                            echo json_encode($res);
+                        }
                     } else {
                         $res = array('message'=>'Wrong authantication',
             'status'=>201
@@ -3221,28 +3214,28 @@ class Apicontroller extends CI_Controller
           //   $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
                 //   $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
-                if($this->input->post('payment_type')==1){
-                $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('name', 'name', 'xss_clean|trim');
-                $this->form_validation->set_rules('contact', 'contact', 'xss_clean|trim');
-                $this->form_validation->set_rules('pincode', 'pincode', 'xss_clean|trim');
-                $this->form_validation->set_rules('state', 'state', 'xss_clean|trim');
-                $this->form_validation->set_rules('city', 'city', 'xss_clean|trim');
-                $this->form_validation->set_rules('house_no', 'house_no', 'xss_clean|trim');
-                $this->form_validation->set_rules('street_address', 'street_address', 'xss_clean|trim');
-                $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
-              }else{
-                $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-              }
+                if ($this->input->post('payment_type')==1) {
+                    $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('name', 'name', 'xss_clean|trim');
+                    $this->form_validation->set_rules('contact', 'contact', 'xss_clean|trim');
+                    $this->form_validation->set_rules('pincode', 'pincode', 'xss_clean|trim');
+                    $this->form_validation->set_rules('state', 'state', 'xss_clean|trim');
+                    $this->form_validation->set_rules('city', 'city', 'xss_clean|trim');
+                    $this->form_validation->set_rules('house_no', 'house_no', 'xss_clean|trim');
+                    $this->form_validation->set_rules('street_address', 'street_address', 'xss_clean|trim');
+                    $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
+                } else {
+                    $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('pincode', 'pincode', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
+                    $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
+                }
                 if ($this->form_validation->run()== true) {
 
       //       $phone=$this->input->post('phone');
@@ -3423,64 +3416,62 @@ $total = $order1_data->total_amount;
                             echo json_encode($res);
                         }
                     } else {
+                        $this->db->select('*');
+                        $this->db->from('tbl_users');
+                        $this->db->where('phone', $phone);
+                        $user_data= $this->db->get()->row();
 
+                        if (!empty($user_data)) {
+                            if ($user_data->authentication==$authentication) {
+                                $this->db->select('*');
+                                $this->db->from('tbl_order1');
+                                $this->db->where('txnid', $txn_id);
+                                $order1_data= $this->db->get()->row();
 
-                            $this->db->select('*');
-                            $this->db->from('tbl_users');
-                            $this->db->where('phone', $phone);
-                            $user_data= $this->db->get()->row();
-
-                            if (!empty($user_data)) {
-                                if ($user_data->authentication==$authentication) {
+                                if (!empty($order1_data)) {
                                     $this->db->select('*');
-                                    $this->db->from('tbl_order1');
-                                    $this->db->where('txnid', $txn_id);
-                                    $order1_data= $this->db->get()->row();
+                                    $this->db->from('tbl_order2');
+                                    $this->db->where('main_id', $order1_data->id);
+                                    $order2_data= $this->db->get();
+                                    $order2_check= $order2_data->row();
 
-                                    if (!empty($order1_data)) {
-                                        $this->db->select('*');
-                                        $this->db->from('tbl_order2');
-                                        $this->db->where('main_id', $order1_data->id);
-                                        $order2_data= $this->db->get();
-                                        $order2_check= $order2_data->row();
-
-                                        if (!empty($order2_check)) {
+                                    if (!empty($order2_check)) {
 
 
   //----------------inventory check---------
-                                            foreach ($order2_data->result() as $data) {
-                                                $this->db->select('*');
-                                                $this->db->from('tbl_products');
-                                                $this->db->where('id', $data->product_id);
-                                                $product_data= $this->db->get()->row();
+                                        foreach ($order2_data->result() as $data) {
+                                            $this->db->select('*');
+                                            $this->db->from('tbl_products');
+                                            $this->db->where('id', $data->product_id);
+                                            $product_data= $this->db->get()->row();
 
-                                                $this->db->select('*');
-                                                $this->db->from('tbl_inventory');
-                                                $this->db->where('product_id', $data->product_id);
-                                                $inventory_data= $this->db->get()->row();
+                                            $this->db->select('*');
+                                            $this->db->from('tbl_inventory');
+                                            $this->db->where('product_id', $data->product_id);
+                                            $inventory_data= $this->db->get()->row();
 
-                                                if ($inventory_data->quantity >= $data->quantity) {
-                                                } else {
-                                                    $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
+                                            if ($inventory_data->quantity >= $data->quantity) {
+                                            } else {
+                                                $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
     'status'=>201
     );
 
-                                                    echo json_encode($res);
-                                                    exit;
-                                                }
-                                            }//end of foreach
-                                        }//end of order2
+                                                echo json_encode($res);
+                                                exit;
+                                            }
+                                        }//end of foreach
+                                    }//end of order2
   $total = $order1_data->total_amount;
-                                        $discount = $order1_data->discount;
+                                    $discount = $order1_data->discount;
 
-                                        if (empty($discount)) {
-                                            $discount=0;
-                                        }
-                                        $final_amount = $total - $discount;
+                                    if (empty($discount)) {
+                                        $discount=0;
+                                    }
+                                    $final_amount = $total - $discount;
 
-                                        //----------order1 entry-------
+                                    //----------order1 entry-------
 
-                                        $data_insert = array('payment_type'=>$payment_type,
+                                    $data_insert = array('payment_type'=>$payment_type,
     'name'=>$name,
     'phone'=>$contact,
     'pincode'=>$pincode,
@@ -3496,65 +3487,64 @@ $total = $order1_data->total_amount;
 
     );
 
-                                        $this->db->where('txnid', $txn_id);
-                                        $last_id=$this->db->update('tbl_order1', $data_insert);
+                                    $this->db->where('txnid', $txn_id);
+                                    $last_id=$this->db->update('tbl_order1', $data_insert);
 
 
-                                        //----------------inventory update---------
+                                    //----------------inventory update---------
 
-                                        if (!empty($order2_check)) {
-                                            foreach ($order2_data->result() as $data1) {
-                                                $this->db->select('*');
-                                                $this->db->from('tbl_inventory');
-                                                $this->db->where('product_id', $data1->product_id);
-                                                $product_data1= $this->db->get()->row();
+                                    if (!empty($order2_check)) {
+                                        foreach ($order2_data->result() as $data1) {
+                                            $this->db->select('*');
+                                            $this->db->from('tbl_inventory');
+                                            $this->db->where('product_id', $data1->product_id);
+                                            $product_data1= $this->db->get()->row();
 
-                                                $updated_inventory = $product_data1->quantity - $data1->quantity;
+                                            $updated_inventory = $product_data1->quantity - $data1->quantity;
 
 
-                                                $data_update = array('quantity'=>$updated_inventory);
+                                            $data_update = array('quantity'=>$updated_inventory);
 
-                                                $this->db->where('id', $product_data1->id);
-                                                $last_id=$this->db->update('tbl_inventory', $data_update);
-                                            }//end of foreach
-                                        }//end of order2
+                                            $this->db->where('id', $product_data1->id);
+                                            $last_id=$this->db->update('tbl_inventory', $data_update);
+                                        }//end of foreach
+                                    }//end of order2
 
   //------------cart clear--------------
-                                        $this->db->select('*');
-                                        $this->db->from('tbl_cart');
-                                        $this->db->where('user_id', $user_data->id);
-                                        $cart_data= $this->db->get();
-                                        $cart_check= $cart_data->row();
+                                    $this->db->select('*');
+                                    $this->db->from('tbl_cart');
+                                    $this->db->where('user_id', $user_data->id);
+                                    $cart_data= $this->db->get();
+                                    $cart_check= $cart_data->row();
 
-                                        if (!empty($cart_check)) {
-                                            foreach ($cart_data->result() as $cart) {
-                                                $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
-                                            }
+                                    if (!empty($cart_check)) {
+                                        foreach ($cart_data->result() as $cart) {
+                                            $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
                                         }
-                                    }// end of order1
+                                    }
+                                }// end of order1
 
-                                    $res = array('message'=>'success',
+                                $res = array('message'=>'success',
   'status'=>200,
   'order_id'=>$order1_data->id,
   'amount'=>$final_amount,
   );
 
-                                    echo json_encode($res);
-                                } else {
-                                    $res = array('message'=>'Wrong Authentication',
-        'status'=>201
-        );
-
-                                    echo json_encode($res);
-                                }
+                                echo json_encode($res);
                             } else {
-                                $res = array('message'=>'user not found',
+                                $res = array('message'=>'Wrong Authentication',
         'status'=>201
         );
 
                                 echo json_encode($res);
                             }
+                        } else {
+                            $res = array('message'=>'user not found',
+        'status'=>201
+        );
 
+                            echo json_encode($res);
+                        }
                     }
                 } else {
                     $res = array('message'=>validation_errors(),
@@ -3858,313 +3848,324 @@ $total = $order1_data->total_amount;
 
     //-----------filter_data-------------------
 
-    public function view_filter($id){
-
-    $this->db->select('*');
-    $this->db->from('tbl_minorcategory');
-    $this->db->where('id',$id);
-    $minorcategory_data= $this->db->get()->row();
-
-      //resoultation
-    $this->db->select('*');
-    $this->db->from('tbl_resolution');
-    $resoulation_id= $this->db->get();
-    $resolution_data=[];
-    $resolution=json_decode($minorcategory_data->resolution);
-    if(!empty($resolution)){
-    foreach($resoulation_id->result() as $value)
+    public function view_filter($id)
     {
-      $a=0;
-       foreach ($resolution as $data) {
-       if($data==$value->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $resolution_data[]=array(
+        $this->db->select('*');
+        $this->db->from('tbl_minorcategory');
+        $this->db->where('id', $id);
+        $minorcategory_data= $this->db->get()->row();
+
+        //resoultation
+        $this->db->select('*');
+        $this->db->from('tbl_resolution');
+        $resoulation_id= $this->db->get();
+        $resolution_data=[];
+        $resolution=json_decode($minorcategory_data->resolution);
+        if (!empty($resolution)) {
+            foreach ($resoulation_id->result() as $value) {
+                $a=0;
+                foreach ($resolution as $data) {
+                    if ($data==$value->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $resolution_data[]=array(
     'id'=>$value->id,
     'name'=>$value->filtername
     );
-    }
-    }
-    }
+                }
+            }
+        }
 
-    //brands
-    $this->db->from('tbl_brands');
-    $brands= $this->db->get();
-    $brands_data=[];
-    $brand=json_decode($minorcategory_data->brand);
-    if(!empty($brand)){
-    foreach($brands->result() as $value1){
-      $a=0;
-       foreach ($brand as $data) {
-       if($data==$value1->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $brands_data[]=array(
+        //brands
+        $this->db->from('tbl_brands');
+        $brands= $this->db->get();
+        $brands_data=[];
+        $brand=json_decode($minorcategory_data->brand);
+        if (!empty($brand)) {
+            foreach ($brands->result() as $value1) {
+                $a=0;
+                foreach ($brand as $data) {
+                    if ($data==$value1->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $brands_data[]=array(
     'id'=>$value1->id,
     'name'=>$value1->name
     );
-    }
-    }
-    }
+                }
+            }
+        }
 
-    //irdistance
-    $this->db->from('tbl_irdistance');
-    $irdistance= $this->db->get();
-    $irdistance_data=[];
-    $ir_distance=json_decode($minorcategory_data->ir_distance);
-    if(!empty($ir_distance)){
-    foreach($irdistance->result() as $value2){
-      $a=0;
-       foreach ($ir_distance as $data) {
-       if($data==$value2->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $irdistance_data[]=array(
+        //irdistance
+        $this->db->from('tbl_irdistance');
+        $irdistance= $this->db->get();
+        $irdistance_data=[];
+        $ir_distance=json_decode($minorcategory_data->ir_distance);
+        if (!empty($ir_distance)) {
+            foreach ($irdistance->result() as $value2) {
+                $a=0;
+                foreach ($ir_distance as $data) {
+                    if ($data==$value2->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $irdistance_data[]=array(
     'id'=>$value2->id,
     'name'=>$value2->filtername
     );
-    }
-    }
-    }
+                }
+            }
+        }
 
-    //cameratype
-    $this->db->from('tbl_cameratype');
-    $cameratype= $this->db->get();
-    $cameratype_data=[];
-    $camera_type=json_decode($minorcategory_data->camera_type);
-    if(!empty($camera_type)){
-    foreach($cameratype->result() as $value3){
-      $a=0;
-       foreach ($camera_type as $data) {
-       if($data==$value3->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $cameratype_data[]=array(
+        //cameratype
+        $this->db->from('tbl_cameratype');
+        $cameratype= $this->db->get();
+        $cameratype_data=[];
+        $camera_type=json_decode($minorcategory_data->camera_type);
+        if (!empty($camera_type)) {
+            foreach ($cameratype->result() as $value3) {
+                $a=0;
+                foreach ($camera_type as $data) {
+                    if ($data==$value3->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $cameratype_data[]=array(
     'id'=>$value3->id,
     'name'=>$value3->filtername
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //bodymaterial
-    $this->db->from('tbl_bodymaterial');
-    $bodymaterial= $this->db->get();
-    $bodymaterial_data=[];
-    $body_materials=json_decode($minorcategory_data->body_materials);
-    if(!empty($body_materials)){
-    foreach($bodymaterial->result() as $value13){
-      $a=0;
-     foreach ($body_materials as $data) {
-     if($data==$value13->id){
-       $a=1;
-     }
-     }
-    if($a==1){
-    $bodymaterial_data[]=array(
+        //bodymaterial
+        $this->db->from('tbl_bodymaterial');
+        $bodymaterial= $this->db->get();
+        $bodymaterial_data=[];
+        $body_materials=json_decode($minorcategory_data->body_materials);
+        if (!empty($body_materials)) {
+            foreach ($bodymaterial->result() as $value13) {
+                $a=0;
+                foreach ($body_materials as $data) {
+                    if ($data==$value13->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $bodymaterial_data[]=array(
     'id'=>$value13->id,
     'name'=>$value13->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //videochannel
-    $this->db->from('tbl_videochannel');
-    $videochannel= $this->db->get();
-    $videochannel_data=[];
-    $video_channel=json_decode($minorcategory_data->video_channel);
-    if(!empty($video_channel)){
-    foreach($videochannel->result() as $value4){
-      $a=0;
-     foreach ($video_channel as $data) {
-     if($data==$value4->id){
-       $a=1;
-     }
-     }
-    if($a==1){
-    $videochannel_data[]=array(
+        //videochannel
+        $this->db->from('tbl_videochannel');
+        $videochannel= $this->db->get();
+        $videochannel_data=[];
+        $video_channel=json_decode($minorcategory_data->video_channel);
+        if (!empty($video_channel)) {
+            foreach ($videochannel->result() as $value4) {
+                $a=0;
+                foreach ($video_channel as $data) {
+                    if ($data==$value4->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $videochannel_data[]=array(
     'id'=>$value4->id,
     'name'=>$value4->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //poeports
-    $this->db->from('tbl_poeports');
-    $poeports= $this->db->get();
-    $poeports_data=[];
-    $poe_ports=json_decode($minorcategory_data->poe_ports);
-    if(!empty($poe_ports)){
-    foreach($poeports->result() as $value5){
-      $a=0;
-       foreach ($poe_ports as $data) {
-       if($data==$value5->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $poeports_data[]=array(
+        //poeports
+        $this->db->from('tbl_poeports');
+        $poeports= $this->db->get();
+        $poeports_data=[];
+        $poe_ports=json_decode($minorcategory_data->poe_ports);
+        if (!empty($poe_ports)) {
+            foreach ($poeports->result() as $value5) {
+                $a=0;
+                foreach ($poe_ports as $data) {
+                    if ($data==$value5->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $poeports_data[]=array(
     'id'=>$value5->id,
     'name'=>$value5->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //poetype
-    $this->db->from('tbl_poetype');
-    $poetype= $this->db->get();
-    $poetype_data=[];
-    $poe_type=json_decode($minorcategory_data->poe_type);
-    if(!empty($poe_type)){
-    foreach($poetype->result() as $value6){
-      $a=0;
-       foreach ($poe_type as $data) {
-       if($data==$value6->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $poetype_data[]=array(
+        //poetype
+        $this->db->from('tbl_poetype');
+        $poetype= $this->db->get();
+        $poetype_data=[];
+        $poe_type=json_decode($minorcategory_data->poe_type);
+        if (!empty($poe_type)) {
+            foreach ($poetype->result() as $value6) {
+                $a=0;
+                foreach ($poe_type as $data) {
+                    if ($data==$value6->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $poetype_data[]=array(
     'id'=>$value6->id,
     'name'=>$value6->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //sataports
-    $this->db->from('tbl_sataports');
-    $sataports= $this->db->get();
-    $sataports_data=[];
-    $sata_ports=json_decode($minorcategory_data->sata_ports);
-    if(!empty($sata_ports)){
-    foreach($sataports->result() as $value7){
-      $a=0;
-       foreach ($sata_ports as $data) {
-       if($data==$value7->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $sataports_data[]=array(
+        //sataports
+        $this->db->from('tbl_sataports');
+        $sataports= $this->db->get();
+        $sataports_data=[];
+        $sata_ports=json_decode($minorcategory_data->sata_ports);
+        if (!empty($sata_ports)) {
+            foreach ($sataports->result() as $value7) {
+                $a=0;
+                foreach ($sata_ports as $data) {
+                    if ($data==$value7->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $sataports_data[]=array(
     'id'=>$value7->id,
     'name'=>$value7->filter_name
     );
-    }}}
+                }
+            }
+        }
 
-    //length
-    $this->db->from('tbl_length');
-    $length= $this->db->get();
-    $length_data=[];
-    $lengths=json_decode($minorcategory_data->length);
-    if(!empty($lengths)){
-    foreach($length->result() as $value8){
-      $a=0;
-       foreach ($lengths as $data) {
-       if($data==$value8->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $length_data[]=array(
+        //length
+        $this->db->from('tbl_length');
+        $length= $this->db->get();
+        $length_data=[];
+        $lengths=json_decode($minorcategory_data->length);
+        if (!empty($lengths)) {
+            foreach ($length->result() as $value8) {
+                $a=0;
+                foreach ($lengths as $data) {
+                    if ($data==$value8->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $length_data[]=array(
     'id'=>$value8->id,
     'name'=>$value8->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //screensize
-    $this->db->from('tbl_screensize');
-    $screensize= $this->db->get();
-    $screensize_data=[];
-    $screen_size=json_decode($minorcategory_data->screen_size);
-    if(!empty($screen_size)){
-    foreach($screensize->result() as $value9){
-      $a=0;
-       foreach ($screen_size as $data) {
-       if($data==$value9->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $screensize_data[]=array(
+        //screensize
+        $this->db->from('tbl_screensize');
+        $screensize= $this->db->get();
+        $screensize_data=[];
+        $screen_size=json_decode($minorcategory_data->screen_size);
+        if (!empty($screen_size)) {
+            foreach ($screensize->result() as $value9) {
+                $a=0;
+                foreach ($screen_size as $data) {
+                    if ($data==$value9->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $screensize_data[]=array(
     'id'=>$value9->id,
     'name'=>$value9->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //ledtype
-    $this->db->from('tbl_ledtype');
-    $ledtype= $this->db->get();
-    $ledtype_data=[];
-    $led_type=json_decode($minorcategory_data->led_type);
-    if(!empty($led_type)){
-    foreach($ledtype->result() as $value10){
-      $a=0;
-     foreach ($led_type as $data) {
-     if($data==$value10->id){
-       $a=1;
-     }
-     }
-    if($a==1){
-    $ledtype_data[]=array(
+        //ledtype
+        $this->db->from('tbl_ledtype');
+        $ledtype= $this->db->get();
+        $ledtype_data=[];
+        $led_type=json_decode($minorcategory_data->led_type);
+        if (!empty($led_type)) {
+            foreach ($ledtype->result() as $value10) {
+                $a=0;
+                foreach ($led_type as $data) {
+                    if ($data==$value10->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $ledtype_data[]=array(
     'id'=>$value10->id,
     'name'=>$value10->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //size
-    $this->db->from('tbl_size');
-    $size= $this->db->get();
-    $size_data=[];
-    $sizeids=json_decode($minorcategory_data->size);
-    if(!empty($sizeids)){
-    foreach($size->result() as $value11){
-      $a=0;
-       foreach ($sizeids as $data) {
-       if($data==$value11->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-    $size_data[]=array(
+        //size
+        $this->db->from('tbl_size');
+        $size= $this->db->get();
+        $size_data=[];
+        $sizeids=json_decode($minorcategory_data->size);
+        if (!empty($sizeids)) {
+            foreach ($size->result() as $value11) {
+                $a=0;
+                foreach ($sizeids as $data) {
+                    if ($data==$value11->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $size_data[]=array(
     'id'=>$value11->id,
     'name'=>$value11->filter_name
     );
-    }
-    }}
+                }
+            }
+        }
 
-    //lens
-    $this->db->from('tbl_lens');
-    $lens_datas= $this->db->get();
-    $lens_data=[];
-    $lens=json_decode($minorcategory_data->lens);
-    if(!empty($lens)){
-    foreach($lens_datas->result() as $value12){
-      $a=0;
-     foreach ($lens as $data) {
-     if($data==$value12->id){
-       $a=1;
-     }
-     }
-    if($a==1){
-    $lens_data[]=array(
+        //lens
+        $this->db->from('tbl_lens');
+        $lens_datas= $this->db->get();
+        $lens_data=[];
+        $lens=json_decode($minorcategory_data->lens);
+        if (!empty($lens)) {
+            foreach ($lens_datas->result() as $value12) {
+                $a=0;
+                foreach ($lens as $data) {
+                    if ($data==$value12->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $lens_data[]=array(
     'id'=>$value12->id,
     'name'=>$value12->filtername
     );
-    }
-    }}
+                }
+            }
+        }
 
-    $filter_name=[];
-    $filter_name[]=array(
+        $filter_name=[];
+        $filter_name[]=array(
     'brand'=>$brands_data,
     'resoulation'=>$resolution_data,
     'irdistance'=>$irdistance_data,
@@ -4182,100 +4183,97 @@ $total = $order1_data->total_amount;
     );
 
 
-    $res = array('message'=>'success',
+        $res = array('message'=>'success',
     'status'=>200,
     'data'=>$filter_name,
     );
 
-    echo json_encode($res);
-
+        echo json_encode($res);
     }
 
-    public function filter_content($mini_id,$b_name){
-      // $mini_id = $this->uri->segment('3');
-      // $b_name = $this->uri->segment('4');
-
-      $this->db->select('*');
-      $this->db->from('tbl_minorcategory');
-      $this->db->where('id',$mini_id);
-      $minorcategory_data= $this->db->get()->row();
-    $this->db->select('*');
-    $this->db->from('tbl_'.$b_name);
-    $filter_result= $this->db->get();
-    $filter_data=[];
-    if($b_name=="brands"){
-    $filter=json_decode($minorcategory_data->brand);
-  }else if($b_name=="irdistance"){
-    $filter=json_decode($minorcategory_data->ir_distance);
-  }else if($b_name=="cameratype"){
-    $filter=json_decode($minorcategory_data->camera_type);
-  }else if($b_name=="bodymaterial"){
-    $filter=json_decode($minorcategory_data->body_materials);
-  }else if($b_name=="videochannel"){
-    $filter=json_decode($minorcategory_data->video_channel);
-  }else if($b_name=="poeports"){
-    $filter=json_decode($minorcategory_data->poe_ports);
-  }else if($b_name=="poetype"){
-    $filter=json_decode($minorcategory_data->poe_type);
-  }else if($b_name=="sataports"){
-    $filter=json_decode($minorcategory_data->sata_ports);
-  }else if($b_name=="screensize"){
-    $filter=json_decode($minorcategory_data->screen_size);
-  }else if($b_name=="ledtype"){
-    $filter=json_decode($minorcategory_data->led_type);
-  }else{
-    $filter=json_decode($minorcategory_data->$b_name);
-  }
-    if(!empty($filter)){
-    foreach($filter_result->result() as $value)
+    public function filter_content($mini_id, $b_name)
     {
-      $a=0;
-       foreach ($filter as $data) {
-       if($data==$value->id){
-         $a=1;
-       }
-       }
-    if($a==1){
-      if(!empty($value->filtername)){
-        $f_name=$value->filtername;
-      }else if(!empty($value->filter_name)){
-        $f_name=$value->filter_name;
-      }else{
-        $f_name=$value->name;
-      }
-    $filter_data[]=array(
+        // $mini_id = $this->uri->segment('3');
+        // $b_name = $this->uri->segment('4');
+
+        $this->db->select('*');
+        $this->db->from('tbl_minorcategory');
+        $this->db->where('id', $mini_id);
+        $minorcategory_data= $this->db->get()->row();
+        $this->db->select('*');
+        $this->db->from('tbl_'.$b_name);
+        $filter_result= $this->db->get();
+        $filter_data=[];
+        if ($b_name=="brands") {
+            $filter=json_decode($minorcategory_data->brand);
+        } elseif ($b_name=="irdistance") {
+            $filter=json_decode($minorcategory_data->ir_distance);
+        } elseif ($b_name=="cameratype") {
+            $filter=json_decode($minorcategory_data->camera_type);
+        } elseif ($b_name=="bodymaterial") {
+            $filter=json_decode($minorcategory_data->body_materials);
+        } elseif ($b_name=="videochannel") {
+            $filter=json_decode($minorcategory_data->video_channel);
+        } elseif ($b_name=="poeports") {
+            $filter=json_decode($minorcategory_data->poe_ports);
+        } elseif ($b_name=="poetype") {
+            $filter=json_decode($minorcategory_data->poe_type);
+        } elseif ($b_name=="sataports") {
+            $filter=json_decode($minorcategory_data->sata_ports);
+        } elseif ($b_name=="screensize") {
+            $filter=json_decode($minorcategory_data->screen_size);
+        } elseif ($b_name=="ledtype") {
+            $filter=json_decode($minorcategory_data->led_type);
+        } else {
+            $filter=json_decode($minorcategory_data->$b_name);
+        }
+        if (!empty($filter)) {
+            foreach ($filter_result->result() as $value) {
+                $a=0;
+                foreach ($filter as $data) {
+                    if ($data==$value->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    if (!empty($value->filtername)) {
+                        $f_name=$value->filtername;
+                    } elseif (!empty($value->filter_name)) {
+                        $f_name=$value->filter_name;
+                    } else {
+                        $f_name=$value->name;
+                    }
+                    $filter_data[]=array(
     'id'=>$value->id,
     'name'=>$f_name
     );
-    }
-    }
-    }
+                }
+            }
+        }
 
-    $res = array('message'=>'success',
+        $res = array('message'=>'success',
     'status'=>200,
     'data'=>$filter_data,
     );
 
-    echo json_encode($res);
-
+        echo json_encode($res);
     }
 
-    public function popup(){
+    public function popup()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_popup');
+        $this->db->where('is_active', 1);
+        $popup_data= $this->db->get()->row();
 
-      $this->db->select('*');
-      $this->db->from('tbl_popup');
-      $this->db->where('is_active',1);
-      $popup_data= $this->db->get()->row();
+        $poopup = [];
+        $popoup = array('image'=>base_url().$popup_data->image);
 
-      $poopup = [];
-      $popoup = array('image'=>base_url().$popup_data->image);
-
-      $res = array('message'=>'success',
+        $res = array('message'=>'success',
       'status'=>200,
       'data'=>$popoup,
       );
 
-      echo json_encode($res);
-
+        echo json_encode($res);
     }
 }
