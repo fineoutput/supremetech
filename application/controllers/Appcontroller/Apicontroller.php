@@ -4166,7 +4166,7 @@ $total = $order1_data->total_amount;
 
         $filter_name=[];
         $filter_name[]=array(
-    'brand'=>$brands_data,
+    'brands'=>$brands_data,
     'resoulation'=>$resolution_data,
     'irdistance'=>$irdistance_data,
     'cameratype'=>$cameratype_data,
