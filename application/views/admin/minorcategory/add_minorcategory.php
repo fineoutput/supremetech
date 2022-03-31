@@ -76,7 +76,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>Brand</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Brand</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control"  multiple="multiple" name="brand[]" >
                           <?php foreach ($brand_data->result() as $value) {?>
@@ -85,7 +85,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Resolution</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Resolution</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="resolution[]" >
                           <?php foreach ($resolution_data->result() as $value) {?>
@@ -96,7 +96,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>IR Distance</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>IR Distance</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]" >
                           <?php foreach ($irdistance_data->result() as $value) {?>
@@ -105,7 +105,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Camera Type</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Body Type</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="camera_type[]" >
                           <?php foreach ($cameratype_data->result() as $value) {?>
@@ -116,7 +116,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Body Materials</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Body Material</strong></strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="body_materials[]" >
                           <?php foreach ($bodymaterial_data->result() as $value) {?>
@@ -125,7 +125,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Video Channel</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>No. of channel</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="video_channel[]" >
                           <?php foreach ($videochannel_data->result() as $value) {?>
@@ -136,7 +136,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Ports</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>POE Ports</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]" >
                           <?php foreach ($poeports_data->result() as $value) {?>
@@ -145,7 +145,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>POE Types</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>POE Types</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_type[]" >
                           <?php foreach ($poetype_data->result() as $value) {?>
@@ -157,7 +157,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>SATA Ports</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>SATA Ports</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]" >
                           <?php foreach ($sataports_data->result() as $value) {?>
@@ -166,7 +166,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Length</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Length</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="length[]" >
                           <?php foreach ($length_data->result() as $value) {?>
@@ -177,7 +177,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Screen Size</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Screen Size</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="screen_size[]" >
                           <?php foreach ($screensize_data->result() as $value) {?>
@@ -186,7 +186,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>LED Type</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Features</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="led_type[]" >
                           <?php foreach ($ledtype_data->result() as $value) {?>
@@ -197,7 +197,7 @@
                       </td>
 
                     <tr>
-                      <td> <strong>Size</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Size</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="size[]" >
                           <?php foreach ($size_data->result() as $value) {?>
@@ -206,7 +206,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Lens</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Lens</strong></strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple"  name="lens[]" >
                           <?php foreach ($lens_data->result() as $value) {?>

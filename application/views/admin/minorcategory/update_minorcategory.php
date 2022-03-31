@@ -3,7 +3,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Update minorcategory
+      Update Minor category
     </h1>
 
   </section>
@@ -13,7 +13,7 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Update minorcategory</h3>
+            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Update Minor category</h3>
           </div>
 
           <?php if (!empty($this->session->flashdata('smessage'))) {  ?>
@@ -91,7 +91,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>Brand</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Brand</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control"  multiple="multiple" name="brand[]" >
                           <?php
@@ -109,7 +109,7 @@
                       <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Resolution</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Resolution</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="resolution[]" >
                           <?php
@@ -129,7 +129,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>IR Distance</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>IR Distance</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]" >
                           <?php
@@ -147,7 +147,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Camera Type</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Body Type</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="camera_type[]" >
                           <?php
@@ -167,7 +167,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Body Materials</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Body Material</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="body_materials[]" >
                           <?php
@@ -186,7 +186,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Video Channel</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>No. of channel</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="video_channel[]" >
                           <?php
@@ -206,7 +206,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Ports</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>POE Ports</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]" >
                           <?php
@@ -224,7 +224,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>POE Types</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>POE Types</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_type[]" >
                           <?php
@@ -245,7 +245,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>SATA Ports</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>SATA Ports</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]" >
                           <?php
@@ -263,7 +263,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Length</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Length</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="length[]" >
                           <?php
@@ -283,7 +283,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Screen Size</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Screen Size</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="screen_size[]" >
                           <?php
@@ -301,7 +301,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>LED Type</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Features</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="led_type[]" >
                           <?php
@@ -321,7 +321,7 @@
                       </td>
 
                     <tr>
-                      <td> <strong>Size</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Size</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="size[]" >
                           <?php
@@ -339,7 +339,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Lens</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Lens</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple"  name="lens[]" >
                           <?php

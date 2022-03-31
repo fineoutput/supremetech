@@ -2,17 +2,17 @@
         <div class="content-wrapper">
         <section class="content-header">
         <h1>
-          View Minorcategory
+          View Minor category
         </h1>
         </section>
         <section class="content">
         <div class="row">
         <div class="col-lg-12">
         <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/minorcategory/add_minorcategory"
-        role="button" style="margin-bottom:12px;"> Add Minor category</a>
+        role="button" style="margin-bottom:12px;"> Add Minor Category</a>
         <div class="panel panel-default">
         <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View minorcategory</h3>
+        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Minor Category</h3>
         </div>
         <div class="panel panel-default">
 
