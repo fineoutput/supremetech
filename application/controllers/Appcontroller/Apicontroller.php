@@ -892,7 +892,7 @@ class Apicontroller extends CI_Controller
                     echo json_encode($res);
                 }
             } else {
-                $res = array('message'=>'Email is not exist',
+                $res = array('message'=>'Please login first',
 'status'=>201
 );
 
@@ -2355,7 +2355,7 @@ class Apicontroller extends CI_Controller
                     echo json_encode($res);
                 }
             } else {
-                $res = array('message'=>'user not found',
+                $res = array('message'=>'Please login first',
 'status'=>201
 );
 
