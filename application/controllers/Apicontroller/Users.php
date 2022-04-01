@@ -47,32 +47,71 @@ $da=$dsa->row();
 if (!empty($da)) {
     // $OTP = random_int(100000, 999999);
     $OTP = 123456;
-    $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
+    $contacts = $phone;
+  $from = 'SUPTEC';
+  if($OTP==null){
+    $sms_text = urlencode('Welcome to Supreme Technocom, your account has been activated. You can start shopping with us. ENJOY OUR EXPERTISE SERVICES!');
 
-    $curl = curl_init();
+  }else{
+    $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is'." ".$OTP);
+  }
 
-    curl_setopt_array($curl, array(
+  //Submit to server
 
-                CURLOPT_URL => "http://alerts.prioritysms.com/api/v4/?api_key=A3933e8d0ad9a27cc96ac182da9498cb0&method=sms&message=".$msg."&to=91".$phone."&sender=SUPREM",
-               CURLOPT_RETURNTRANSFER => true,
-               CURLOPT_ENCODING => "",
-               CURLOPT_MAXREDIRS => 10,
-               CURLOPT_TIMEOUT => 30,
-               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-               CURLOPT_CUSTOMREQUEST => "GET",
-               CURLOPT_SSL_VERIFYHOST => 0,
-               CURLOPT_SSL_VERIFYPEER => 0,
-              ));
+  $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+      CURLOPT_URL => "http://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=".$contacts."&sender=SUPTEC&message=".$sms_text."",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_POSTFIELDS => "",
+      CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 29403299-fe01-4795-bf32-437b3bdb487b",
+        "cache-control: no-cache"
+      ),
+    ));
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
+
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+      echo "cURL Error #:" . $err;
     } else {
-        // echo $response;
+      //echo $response;
+
     }
+    // $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Login Into your account is ".$OTP."." ;
+    //
+    // $curl = curl_init();
+    //
+    // curl_setopt_array($curl, array(
+    //
+    //             CURLOPT_URL => "http://alerts.prioritysms.com/api/v4/?api_key=A3933e8d0ad9a27cc96ac182da9498cb0&method=sms&message=".$msg."&to=91".$phone."&sender=SUPREM",
+    //            CURLOPT_RETURNTRANSFER => true,
+    //            CURLOPT_ENCODING => "",
+    //            CURLOPT_MAXREDIRS => 10,
+    //            CURLOPT_TIMEOUT => 30,
+    //            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //            CURLOPT_CUSTOMREQUEST => "GET",
+    //            CURLOPT_SSL_VERIFYHOST => 0,
+    //            CURLOPT_SSL_VERIFYPEER => 0,
+    //           ));
+    //
+    // $response = curl_exec($curl);
+    // $err = curl_error($curl);
+    // curl_close($curl);
+    //
+    // if ($err) {
+    //     echo "cURL Error #:" . $err;
+    // } else {
+    //     // echo $response;
+    // }
 
 
 
@@ -371,33 +410,72 @@ if (empty($userdata1)) {
     if ($last_id!=0) {
         // $OTP = random_int(100000, 999999);
         $OTP = 123456;
-        $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Registering Into your account is ".$OTP."." ;
+        $contacts = $phone;
+          $from = 'SUPTEC';
+          if($OTP==null){
+            $sms_text = urlencode('Welcome to Supreme Technocom, your account has been activated. You can start shopping with us. ENJOY OUR EXPERTISE SERVICES!');
 
-        $curl = curl_init();
+          }else{
+            $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is'." ".$OTP);
+          }
 
-        curl_setopt_array($curl, array(
+          //Submit to server
 
-                    CURLOPT_URL => "http://alerts.prioritysms.com/api/v4/?api_key=A3933e8d0ad9a27cc96ac182da9498cb0&method=sms&message=".$msg."&to=91".$phone."&sender=SUPREM",
-                   CURLOPT_RETURNTRANSFER => true,
-                   CURLOPT_ENCODING => "",
-                   CURLOPT_MAXREDIRS => 10,
-                   CURLOPT_TIMEOUT => 30,
-                   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                   CURLOPT_CUSTOMREQUEST => "GET",
-                   CURLOPT_SSL_VERIFYHOST => 0,
-                   CURLOPT_SSL_VERIFYPEER => 0,
-                  ));
+          $curl = curl_init();
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
+              curl_setopt_array($curl, array(
+              CURLOPT_URL => "http://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=".$contacts."&sender=SUPTEC&message=".$sms_text."",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_POSTFIELDS => "",
+              CURLOPT_HTTPHEADER => array(
+                "Postman-Token: 29403299-fe01-4795-bf32-437b3bdb487b",
+                "cache-control: no-cache"
+              ),
+            ));
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            // echo $response;
-        }
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              //echo $response;
+
+            }
+
+        // $msg= "Welcome to supremetech.com and Your One Time Password (OTP) for Registering Into your account is ".$OTP."." ;
+        //
+        // $curl = curl_init();
+        //
+        // curl_setopt_array($curl, array(
+        //
+        //             CURLOPT_URL => "http://alerts.prioritysms.com/api/v4/?api_key=A3933e8d0ad9a27cc96ac182da9498cb0&method=sms&message=".$msg."&to=91".$phone."&sender=SUPREM",
+        //            CURLOPT_RETURNTRANSFER => true,
+        //            CURLOPT_ENCODING => "",
+        //            CURLOPT_MAXREDIRS => 10,
+        //            CURLOPT_TIMEOUT => 30,
+        //            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //            CURLOPT_CUSTOMREQUEST => "GET",
+        //            CURLOPT_SSL_VERIFYHOST => 0,
+        //            CURLOPT_SSL_VERIFYPEER => 0,
+        //           ));
+        //
+        // $response = curl_exec($curl);
+        // $err = curl_error($curl);
+        // curl_close($curl);
+        //
+        // if ($err) {
+        //     echo "cURL Error #:" . $err;
+        // } else {
+        //     // echo $response;
+        // }
 
 
 
