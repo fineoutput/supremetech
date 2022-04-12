@@ -1716,6 +1716,7 @@ class Apicontroller extends CI_Controller
 
             if (!empty($user_data)) {
                 if ($authentication==$user_data->authentication) {
+
                     $this->db->select('*');
                     $this->db->from('tbl_cart');
                     $this->db->where('user_id', $user_data->id);
@@ -1804,12 +1805,28 @@ class Apicontroller extends CI_Controller
                                         exit;
                                     }
                                 }//end of foreach
+                                            $this->db->select('*');
+                                $this->db->from('all_states');
+                                $this->db->where('id',$user_data->state);
+                                $statedata= $this->db->get()->row();
+
+                                $address=array(
+                                'name'=>$user_data->name,
+                                'email'=>$user_data->email,
+                                'dob'=>$user_data->dob,
+                                'address'=>$user_data->address,
+                                'state'=>$statedata->state_name,
+                                'district'=>$user_data->district,
+                                'city'=>$user_data->city,
+                                'zipcode'=>$user_data->zipcode,
+                              );
 
 
                                 $res = array('message'=>"success",
                     'status'=>200,
                     'subtotal'=>$sub_total,
-                    'txn_id'=>$txn_id
+                    'txn_id'=>$txn_id,
+                    'address'=>$address
                     );
 
                                 echo json_encode($res);
