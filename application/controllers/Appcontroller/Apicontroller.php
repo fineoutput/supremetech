@@ -4293,4 +4293,23 @@ $total = $order1_data->total_amount;
 
         echo json_encode($res);
     }
+
+    //============================get cities===========================
+    public function get_cities($idd)
+    {
+        $this->db->select('*');
+        $this->db->from('all_cities');
+        $this->db->where('state_id', $idd);
+        $city_data = $this->db->get();
+        $city = [];
+        foreach ($city_data->result() as $cities) {
+            $city[] = array('id'=>$cities->id, 'name'=>$cities->city_name);
+        }
+        $res = array('message'=>"success",
+      'status'=>200,
+      'data'=>$city,
+      );
+
+        echo json_encode($res);
+    }
 }
