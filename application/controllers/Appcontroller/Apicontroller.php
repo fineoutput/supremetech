@@ -1716,7 +1716,6 @@ class Apicontroller extends CI_Controller
 
             if (!empty($user_data)) {
                 if ($authentication==$user_data->authentication) {
-
                     $this->db->select('*');
                     $this->db->from('tbl_cart');
                     $this->db->where('user_id', $user_data->id);
@@ -1805,9 +1804,9 @@ class Apicontroller extends CI_Controller
                                         exit;
                                     }
                                 }//end of foreach
-                                            $this->db->select('*');
+                                $this->db->select('*');
                                 $this->db->from('all_states');
-                                $this->db->where('id',$user_data->state);
+                                $this->db->where('id', $user_data->state);
                                 $statedata= $this->db->get()->row();
 
                                 $address=array(
@@ -4311,5 +4310,64 @@ $total = $order1_data->total_amount;
       );
 
         echo json_encode($res);
+    }
+
+    //=========================feedback=================================
+    public function feedback()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+            $this->form_validation->set_rules('contact', 'contact', 'required|xss_clean|trim');
+            $this->form_validation->set_rules('message', 'message', 'required|xss_clean|trim');
+
+
+            if ($this->form_validation->run()== true) {
+                $name=$this->input->post('name');
+                $contact=$this->input->post('contact');
+                $message=$this->input->post('message');
+
+                $ip = $this->input->ip_address();
+                date_default_timezone_set("Asia/Calcutta");
+                $cur_date=date("Y-m-d H:i:s");
+
+                $data_insert = array('name'=>$name,
+    'contact'=>$contact,
+    'message'=>$message,
+    'ip' =>$ip,
+    'date'=>$cur_date
+    );
+
+                $last_id=$this->base_model->insert_table("tbl_feedback", $data_insert, 1) ;
+
+                if (!empty($last_id)) {
+                    $res = array('message'=>'success',
+    'status'=>200
+    );
+
+                    echo json_encode($res);
+                } else {
+                    $res = array('message'=>'Some error occured',
+    'status'=>201
+    );
+
+                    echo json_encode($res);
+                }
+            } else {
+                $res = array('message'=>validation_errors(),
+    'status'=>201
+    );
+
+                echo json_encode($res);
+            }
+        } else {
+            $res = array('message'=>"Please insert some data, No data available",
+    'status'=>201
+    );
+
+            echo json_encode($res);
+        }
     }
 }
