@@ -153,7 +153,7 @@
                        $last_id=$this->base_model->insert_table("tbl_popup", $data_insert, 1) ;
                        if ($last_id!=0) {
                            $this->session->set_flashdata('smessage', 'Popup inserted successfully');
-                           redirect("dcadmin/popup/view_popup", "refresh");
+                           redirect("dcadmin/Popup/view_popup", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -230,7 +230,7 @@
                        $last_id=$this->db->update('tbl_popup', $data_insert);
                        if ($last_id!=0) {
                            $this->session->set_flashdata('smessage', 'Popup updated successfully');
-                           redirect("dcadmin/popup/view_popup", "refresh");
+                           redirect("dcadmin/Popup/view_popup", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -279,7 +279,7 @@
 
                        if ($zapak!=0) {
                           $this->session->set_flashdata('smessage', 'Popup status updated successfully');
-                           redirect("dcadmin/popup/view_popup", "refresh");
+                           redirect("dcadmin/Popup/view_popup", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -296,7 +296,7 @@
 
                        if ($zapak!=0) {
                           $this->session->set_flashdata('smessage', 'Popup status updated successfully');
-                           redirect("dcadmin/popup/view_popup", "refresh");
+                           redirect("dcadmin/Popup/view_popup", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -334,7 +334,7 @@
                            // $path = FCPATH .$img;
                            //   unlink($path);
                            $this->session->set_flashdata('smessage', 'Popup status deleted successfully');
-                           redirect("dcadmin/popup/view_popup", "refresh");
+                           redirect("dcadmin/Popup/view_popup", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);

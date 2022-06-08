@@ -138,7 +138,7 @@ class Slider extends CI_finecontrol
                         if ($last_id!=0) {
                             $this->session->set_flashdata('smessage', 'Slider inserted successfully');
 
-                            redirect("dcadmin/slider/view_slider", "refresh");
+                            redirect("dcadmin/Slider/view_slider", "refresh");
                         } else {
                             $this->session->set_flashdata('emessage', 'Sorry error occured');
                             redirect($_SERVER['HTTP_REFERER']);
@@ -178,7 +178,7 @@ class Slider extends CI_finecontrol
                         if ($last_id!=0) {
                             $this->session->set_flashdata('smessage', 'Slider updated successfully');
 
-                            redirect("dcadmin/slider/view_slider", "refresh");
+                            redirect("dcadmin/Slider/view_slider", "refresh");
                         } else {
                             $this->session->set_flashdata('emessage', 'Sorry error occured');
                             redirect($_SERVER['HTTP_REFERER']);

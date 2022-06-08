@@ -161,7 +161,7 @@ class Stock extends CI_finecontrol
 												if ($last_id!=0) {
 														$this->session->set_flashdata('smessage', 'Stock inserted successfully');
 
-														redirect("dcadmin/stock/view_stock", "refresh");
+														redirect("dcadmin/Stock/view_stock", "refresh");
 												} else {
 														$this->session->set_flashdata('emessage', 'Sorry error occured');
 														redirect($_SERVER['HTTP_REFERER']);
@@ -218,7 +218,7 @@ class Stock extends CI_finecontrol
 												if ($last_id!=0) {
 														$this->session->set_flashdata('smessage', 'Stock updated successfully');
 
-														redirect("dcadmin/stock/view_stock", "refresh");
+														redirect("dcadmin/Stock/view_stock", "refresh");
 												} else {
 														$this->session->set_flashdata('emessage', 'Sorry error occured');
 														redirect($_SERVER['HTTP_REFERER']);
@@ -284,7 +284,7 @@ class Stock extends CI_finecontrol
 
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Stock status updated successfully');
-                    redirect("dcadmin/stock/view_stock", "refresh");
+                    redirect("dcadmin/Stock/view_stock", "refresh");
                 } else {
                     echo "Error";
                     exit;
@@ -301,7 +301,7 @@ class Stock extends CI_finecontrol
 
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Stock status updated successfully');
-                    redirect("dcadmin/stock/view_stock", "refresh");
+                    redirect("dcadmin/Stock/view_stock", "refresh");
                 } else {
                     $data['e']="Error Occured";
                     // exit;
@@ -336,7 +336,7 @@ class Stock extends CI_finecontrol
                     $path = FCPATH .$img;
                     unlink($path);
 										$this->session->set_flashdata('smessage', 'Stock deleted successfully');
-                    redirect("dcadmin/stock/view_stock", "refresh");
+                    redirect("dcadmin/Stock/view_stock", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Unknown error occured');
 									redirect($_SERVER['HTTP_REFERER']);

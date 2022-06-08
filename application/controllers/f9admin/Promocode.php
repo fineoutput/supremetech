@@ -123,7 +123,7 @@ class Promocode extends CI_finecontrol
                         $last_id=$this->base_model->insert_table("tbl_promocode", $data_insert, 1) ;
                         if ($last_id!=0) {
                             $this->session->set_flashdata('smessage', 'Promocode inserted successfully');
-                            redirect("dcadmin/promocode/view_promocode", "refresh");
+                            redirect("dcadmin/Promocode/view_promocode", "refresh");
                         } else {
                             $this->session->set_flashdata('emessage', 'Sorry error occured');
                             redirect($_SERVER['HTTP_REFERER']);
@@ -155,7 +155,7 @@ class Promocode extends CI_finecontrol
                         $last_id=$this->db->update('tbl_promocode', $data_insert);
                         if ($last_id!=0) {
                             $this->session->set_flashdata('smessage', 'Promocode updated successfully');
-                            redirect("dcadmin/promocode/view_promocode", "refresh");
+                            redirect("dcadmin/Promocode/view_promocode", "refresh");
                         } else {
                             $this->session->set_flashdata('emessage', 'Sorry error occured');
                             redirect($_SERVER['HTTP_REFERER']);
@@ -196,7 +196,7 @@ class Promocode extends CI_finecontrol
 
                 if ($zapak!=0) {
                   $this->session->set_flashdata('smessage', 'Promocode status updated successfully');
-                    redirect("dcadmin/promocode/view_promocode", "refresh");
+                    redirect("dcadmin/Promocode/view_promocode", "refresh");
                 } else {
                     $this->session->set_flashdata('emessage', 'Sorry error occured');
                     redirect($_SERVER['HTTP_REFERER']);
@@ -213,7 +213,7 @@ class Promocode extends CI_finecontrol
 
                 if ($zapak!=0) {
                   $this->session->set_flashdata('smessage', 'Promocode status updated successfully');
-                    redirect("dcadmin/promocode/view_promocode", "refresh");
+                    redirect("dcadmin/Promocode/view_promocode", "refresh");
                 } else {
                     $this->session->set_flashdata('emessage', 'Sorry error occured');
                     redirect($_SERVER['HTTP_REFERER']);
@@ -241,7 +241,7 @@ class Promocode extends CI_finecontrol
                 $zapak=$this->db->delete('tbl_promocode', array('id' => $id));
                 if ($zapak!=0) {
                   $this->session->set_flashdata('smessage', 'Promocode deleted successfully');
-                    redirect("dcadmin/promocode/view_promocode", "refresh");
+                    redirect("dcadmin/Promocode/view_promocode", "refresh");
                 } else {
                     $this->session->set_flashdata('emessage', 'Sorry error occured');
                     redirect($_SERVER['HTTP_REFERER']);

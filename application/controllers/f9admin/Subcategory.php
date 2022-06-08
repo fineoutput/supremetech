@@ -128,7 +128,7 @@
                                $last_id=$this->base_model->insert_table("tbl_subcategory", $data_insert, 1) ;
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Subcategory inserted successfully');
-                                   redirect("dcadmin/subcategory/view_subcategory", "refresh");
+                                   redirect("dcadmin/Subcategory/view_subcategory", "refresh");
                                } else {
                                    $this->session->set_flashdata('emessage', 'Sorry error occured');
                                    redirect($_SERVER['HTTP_REFERER']);
@@ -157,7 +157,7 @@
                                $last_id=$this->db->update('tbl_subcategory', $data_insert);
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Subcategory updated successfully');
-                                   redirect("dcadmin/subcategory/view_subcategory", "refresh");
+                                   redirect("dcadmin/Subcategory/view_subcategory", "refresh");
                                } else {
                                    $this->session->set_flashdata('emessage', 'Sorry error occured');
                                    redirect($_SERVER['HTTP_REFERER']);
@@ -199,7 +199,7 @@
 
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Subcategory status updated successfully');
-                           redirect("dcadmin/subcategory/view_subcategory", "refresh");
+                           redirect("dcadmin/Subcategory/view_subcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -217,7 +217,7 @@
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Subcategory status updated successfully');
 
-                           redirect("dcadmin/subcategory/view_subcategory", "refresh");
+                           redirect("dcadmin/Subcategory/view_subcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -253,7 +253,7 @@
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Subcategory deleted successfully');
 
-                           redirect("dcadmin/subcategory/view_subcategory", "refresh");
+                           redirect("dcadmin/Subcategory/view_subcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);

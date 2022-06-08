@@ -118,7 +118,7 @@ class Vendors extends CI_finecontrol
 												if ($last_id!=0) {
 		                        $this->session->set_flashdata('smessage', 'Vendor inserted successfully');
 
-		                        redirect("dcadmin/vendors/view_vendors", "refresh");
+		                        redirect("dcadmin/Vendors/view_vendors", "refresh");
 		                    } else {
 		                        $this->session->set_flashdata('emessage', 'Sorry error occured');
 		                        redirect($_SERVER['HTTP_REFERER']);
@@ -161,7 +161,7 @@ class Vendors extends CI_finecontrol
 												if ($last_id!=0) {
 		                        $this->session->set_flashdata('smessage', 'Vendor updated successfully');
 
-		                        redirect("dcadmin/vendors/view_vendors", "refresh");
+		                        redirect("dcadmin/Vendors/view_vendors", "refresh");
 		                    } else {
 		                        $this->session->set_flashdata('emessage', 'Sorry error occured');
 		                        redirect($_SERVER['HTTP_REFERER']);
@@ -228,7 +228,7 @@ class Vendors extends CI_finecontrol
                 $zapak=$this->db->delete('tbl_vendors', array('id' => $id));
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Vendor deleted successfully');
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
                     echo "Error";
                     exit;
@@ -264,7 +264,7 @@ class Vendors extends CI_finecontrol
 
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Vendor status updated successfully');
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 						redirect($_SERVER['HTTP_REFERER']);
@@ -282,7 +282,7 @@ class Vendors extends CI_finecontrol
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Vendor status updated successfully');
 
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 						redirect($_SERVER['HTTP_REFERER']);
@@ -315,7 +315,7 @@ class Vendors extends CI_finecontrol
 
                 if ($zapak!=0) {
 									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 					redirect($_SERVER['HTTP_REFERER']);
@@ -333,7 +333,7 @@ class Vendors extends CI_finecontrol
                 if ($zapak!=0) {
 									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
 
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 					redirect($_SERVER['HTTP_REFERER']);
@@ -351,7 +351,7 @@ class Vendors extends CI_finecontrol
                 if ($zapak!=0) {
 									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
 
-                    redirect("dcadmin/vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 					redirect($_SERVER['HTTP_REFERER']);

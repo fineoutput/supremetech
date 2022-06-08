@@ -32,7 +32,7 @@
 
           <div class="panel-body">
             <div class="col-lg-10">
-              <form action=" <?php echo base_url()  ?>dcadmin/products/add_products_data/<? echo base64_encode(2);?>/<?=$id;?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+              <form action=" <?php echo base_url()  ?>dcadmin/Products/add_products_data/<? echo base64_encode(2);?>/<?=$id;?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <tr>
@@ -397,8 +397,8 @@
         $('#mid option').remove();
         var opton = "<option value=''>Please Select </option>";
         $.ajax({
-          url: base_url + "dcadmin/products/getMinorcategory?isl=" + vf,
-          // url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+          url: base_url + "dcadmin/Products/getMinorcategory?isl=" + vf,
+          // url:base_url+"dcadmin/Products/getMinorcategory?isl="+vf,
           data: '',
           type: "get",
           success: function(html) {

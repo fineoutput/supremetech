@@ -286,7 +286,7 @@ class System extends CI_finecontrol
                     if ($last_id!=0) {
 											$this->session->set_flashdata('smessage','Team inserted successfully');
 
-                        redirect("admin/system/view_team", "refresh");
+                        redirect("dcadmin/System/view_team", "refresh");
                     } else {
                         $this->session->set_flashdata('emessage', 'Error Occured in data insert, Please try again');
                         redirect($_SERVER['HTTP_REFERER']);

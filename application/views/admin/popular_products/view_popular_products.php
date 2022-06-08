@@ -11,7 +11,7 @@
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/popular_products/add_popular_products" role="button" style="margin-bottom:12px;"> Add Popular products</a>
+        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Popular_products/add_popular_products" role="button" style="margin-bottom:12px;"> Add Popular products</a>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View popular products</h3>
@@ -131,13 +131,13 @@ Sorry No File Found
                             <ul class="dropdown-menu" role="menu">
 
                               <?php if($data->is_active==1){ ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popular_products/updatepopular_productsStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popular_products/updatepopular_productsStatus/<?php echo
 base64_encode($data->id) ?>/inactive">Inactive</a></li>
                               <?php } else { ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popular_products/updatepopular_productsStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popular_products/updatepopular_productsStatus/<?php echo
 base64_encode($data->id) ?>/active">Active</a></li>
                               <?php } ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popular_products/update_popular_products/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popular_products/update_popular_products/<?php echo
 base64_encode($data->id) ?>">Edit</a></li>
                               <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
                             </ul>
@@ -146,7 +146,7 @@ base64_encode($data->id) ?>">Edit</a></li>
 
                         <div style="display:none" id="cnfbox<?php echo $i ?>">
                           <p> Are you sure delete this </p>
-                          <a href="<?php echo base_url() ?>dcadmin/popular_products/delete_popular_products/<?php echo
+                          <a href="<?php echo base_url() ?>dcadmin/Popular_products/delete_popular_products/<?php echo
 base64_encode($data->id); ?>" class="btn btn-danger">Yes</a>
                           <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>">No</a>
                         </div>

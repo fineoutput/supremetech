@@ -11,7 +11,7 @@
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/promocode/add_promocode" role="button" style="margin-bottom:12px;"> Add promocode</a>
+        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Promocode/add_promocode" role="button" style="margin-bottom:12px;"> Add promocode</a>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Promocode</h3>
@@ -78,13 +78,13 @@ if(!empty($this->session->flashdata('emessage'))){ ?>
                             <ul class="dropdown-menu" role="menu">
 
                               <?php if($data->is_active==1){ ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/promocode/updatepromocodeStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Promocode/updatepromocodeStatus/<?php echo
 base64_encode($data->id) ?>/inactive">Inactive</a></li>
                               <?php } else { ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/promocode/updatepromocodeStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Promocode/updatepromocodeStatus/<?php echo
 base64_encode($data->id) ?>/active">Active</a></li>
                               <?php } ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/promocode/update_promocode/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Promocode/update_promocode/<?php echo
 base64_encode($data->id) ?>">Edit</a></li>
                               <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
                             </ul>
@@ -93,7 +93,7 @@ base64_encode($data->id) ?>">Edit</a></li>
 
                         <div style="display:none" id="cnfbox<?php echo $i ?>">
                           <p> Are you sure delete this </p>
-                          <a href="<?php echo base_url() ?>dcadmin/promocode/delete_promocode/<?php echo
+                          <a href="<?php echo base_url() ?>dcadmin/Promocode/delete_promocode/<?php echo
 base64_encode($data->id); ?>" class="btn btn-danger">Yes</a>
                           <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>">No</a>
                         </div>

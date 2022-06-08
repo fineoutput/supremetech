@@ -183,7 +183,7 @@
                        $last_id=$this->base_model->insert_table("tbl_two_images", $data_insert, 1) ;
                        if ($last_id!=0) {
                            $this->session->set_flashdata('smessage', 'Two images inserted successfully');
-                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                           redirect("dcadmin/Two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -309,7 +309,7 @@
                        $last_id=$this->db->update('tbl_two_images', $data_insert);
                        if ($last_id!=0) {
                            $this->session->set_flashdata('smessage', 'Two images updated successfully');
-                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                           redirect("dcadmin/Two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -351,7 +351,7 @@
 
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Two images status updated successfully');
-                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                           redirect("dcadmin/Two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -368,7 +368,7 @@
 
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Two images status updated successfully');
-                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                           redirect("dcadmin/Two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -406,7 +406,7 @@
                            // $path = FCPATH .$img;
                            //   unlink($path);
                            $this->session->set_flashdata('smessage', 'Two images deleted successfully');
-                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                           redirect("dcadmin/Two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);

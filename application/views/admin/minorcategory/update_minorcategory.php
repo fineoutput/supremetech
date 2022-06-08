@@ -447,7 +447,7 @@
         var opton = "<option value=''>Please Select </option>";
         $.ajax({
           url: base_url + "dcadmin/Minorcategory/getSubcategory?isl=" + vf,
-          // url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+          // url:base_url+"dcadmin/Products/getMinorcategory?isl="+vf,
           data: '',
           type: "get",
           success: function(html) {

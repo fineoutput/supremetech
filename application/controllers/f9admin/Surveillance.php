@@ -181,7 +181,7 @@ $img1='image';
            $last_id=$this->base_model->insert_table("tbl_surveillance",$data_insert,1) ;
            if($last_id!=0){
                    $this->session->set_flashdata('smessage','Surveillance inserted successfully');
-                   redirect("dcadmin/surveillance/view_surveillance","refresh");
+                   redirect("dcadmin/Surveillance/view_surveillance","refresh");
                   }
                    else
                        {
@@ -259,7 +259,7 @@ if(!empty($img)) { if(empty($nnnn1)){ $nnnn1 = $img; } }else{ if(empty($nnnn1)){
              $last_id=$this->db->update('tbl_surveillance', $data_insert);
              if($last_id!=0){
                      $this->session->set_flashdata('smessage','Surveillance updated successfully');
-                     redirect("dcadmin/surveillance/view_surveillance","refresh");
+                     redirect("dcadmin/Surveillance/view_surveillance","refresh");
                     }
                      else
                          {
@@ -319,7 +319,7 @@ if(!empty($img)) { if(empty($nnnn1)){ $nnnn1 = $img; } }else{ if(empty($nnnn1)){
 
                             if($zapak!=0){
                                $this->session->set_flashdata('smessage','Surveillance status updated successfully');
-                            redirect("dcadmin/surveillance/view_surveillance","refresh");
+                            redirect("dcadmin/Surveillance/view_surveillance","refresh");
                                     }
                                     else
                                     {
@@ -339,7 +339,7 @@ if(!empty($img)) { if(empty($nnnn1)){ $nnnn1 = $img; } }else{ if(empty($nnnn1)){
                              if($zapak!=0){
                                $this->session->set_flashdata('smessage','Surveillance status updated successfully');
 
-                             redirect("dcadmin/surveillance/view_surveillance","refresh");
+                             redirect("dcadmin/Surveillance/view_surveillance","refresh");
                                      }
                                      else
                                      {
@@ -389,7 +389,7 @@ if(!empty($img)) { if(empty($nnnn1)){ $nnnn1 = $img; } }else{ if(empty($nnnn1)){
           unlink($path);
           $this->session->set_flashdata('smessage','Surveillance deleted successfully');
 
-        redirect("dcadmin/surveillance/view_surveillance","refresh");
+        redirect("dcadmin/Surveillance/view_surveillance","refresh");
                 }
                 else
                 {

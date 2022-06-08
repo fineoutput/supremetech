@@ -8,7 +8,7 @@
         <section class="content">
         <div class="row">
         <div class="col-lg-12">
-          <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/products/add_products"
+          <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Products/add_products"
           role="button" style="margin-bottom:12px;"> Add New Product</a> -->
         <div class="panel panel-default">
         <div class="panel-heading">
@@ -62,7 +62,7 @@
         <td>
         <div class="btn-group" id="btns<?php echo $i ?>">
         <div class="btn-group">
-          <a href="<?php echo base_url() ?>dcadmin/products/view_products/<?php echo
+          <a href="<?php echo base_url() ?>dcadmin/Products/view_products/<?php echo
           base64_encode($data->id) ?>"><button type="button" class="btn btn-default ">
         View Products </button></a>
 

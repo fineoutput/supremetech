@@ -11,7 +11,7 @@
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-        <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/popup/add_popup"
+        <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Popup/add_popup"
         role="button" style="margin-bottom:12px;"> Add popup</a> -->
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -86,13 +86,13 @@
                             <ul class="dropdown-menu" role="menu">
 
                               <?php if($data->is_active==1){ ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popup/updatepopupStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popup/updatepopupStatus/<?php echo
         base64_encode($data->id) ?>/inactive">Inactive</a></li>
                               <?php } else { ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popup/updatepopupStatus/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popup/updatepopupStatus/<?php echo
         base64_encode($data->id) ?>/active">Active</a></li>
                               <?php } ?>
-                              <li><a href="<?php echo base_url() ?>dcadmin/popup/update_popup/<?php echo
+                              <li><a href="<?php echo base_url() ?>dcadmin/Popup/update_popup/<?php echo
         base64_encode($data->id) ?>">Edit</a></li>
                               <!-- <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li> -->
                             </ul>
@@ -101,7 +101,7 @@
 
                         <!-- <div style="display:none" id="cnfbox<?php echo $i ?>">
         <p> Are you sure delete this </p>
-        <a href="<?php echo base_url() ?>dcadmin/popup/delete_popup/<?php echo
+        <a href="<?php echo base_url() ?>dcadmin/Popup/delete_popup/<?php echo
         base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
         <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>" >No</a>
         </div> -->

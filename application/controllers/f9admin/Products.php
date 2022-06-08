@@ -697,7 +697,7 @@
 
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Products inserted successfully');
-                                   redirect("dcadmin/products/view_products/$id1", "refresh");
+                                   redirect("dcadmin/Products/view_products/$id1", "refresh");
                                } else {
                                    $this->session->set_flashdata('emessage', 'Sorry error occured');
                                    redirect($_SERVER['HTTP_REFERER']);
@@ -812,7 +812,7 @@
 
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Products updated successfully');
-                                   redirect("dcadmin/products/view_products/$id1", "refresh");
+                                   redirect("dcadmin/Products/view_products/$id1", "refresh");
                                } else {
                                    $this->session->set_flashdata('emessage', 'Sorry error occured');
                                    redirect($_SERVER['HTTP_REFERER']);
