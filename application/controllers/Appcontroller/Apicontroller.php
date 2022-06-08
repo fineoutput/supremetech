@@ -1188,24 +1188,20 @@ class Apicontroller extends CI_Controller
                 $this->db->select('*');
                 $this->db->from('tbl_cart');
                 $this->db->where('user_id', $user_id);
-
                 $counting=$this->db->count_all_results();
-                if (!empty($counting)) {
+                $this->db->select('*');
+                $this->db->from('tbl_wishlist');
+                $this->db->where('user_id', $user_id);
+                $wishcount=$this->db->count_all_results();
+
                     $res = array('message'=>"success",
 'status'=>200,
-'data'=>$counting
+'data'=>$counting,
+'wishlist_count'=>$wishcount
 );
 
                     echo json_encode($res);
-                } else {
-                    $res = array('message'=>"Your cart is empty",
-'status'=>200,
 
-);
-
-                    echo json_encode($res);
-                    exit();
-                }
             } else {
                 $res = array('message'=>"email or password do not match",
 'status'=>201,
@@ -1292,7 +1288,6 @@ class Apicontroller extends CI_Controller
                 $this->db->select('*');
                 $this->db->from('tbl_wishlist');
                 $this->db->where('user_id', $user_id);
-
                 $counting=$this->db->count_all_results();
                 if (!empty($counting)) {
                     $res = array('message'=>"success",
