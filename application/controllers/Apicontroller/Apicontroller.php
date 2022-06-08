@@ -666,7 +666,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Product is alredy in cart.',
+$res = array('message'=>'Product is already in your cart',
 'status'=>201
 );
 
@@ -775,7 +775,7 @@ echo json_encode($res);
 }
 }else{
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Product_id not exist.',
+$res = array('message'=>'Product does not exist.',
 'status'=>201
 );
 
@@ -786,7 +786,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Product is alredy in cart.',
+$res = array('message'=>'Product is already in your cart',
 'status'=>201
 );
 
@@ -909,7 +909,7 @@ echo json_encode($res);
 
 }else{
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>' Your cart is empty',
+$res = array('message'=>'Your cart is empty',
 'status'=>201
 );
 
@@ -929,7 +929,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Phone is not exist',
+$res = array('message'=>'Phone does not exist',
 'status'=>201
 );
 
@@ -1129,7 +1129,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Phone is not exist',
+$res = array('message'=>'Phone does not exist',
 'status'=>201
 );
 
@@ -1311,7 +1311,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2154,7 +2154,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2275,7 +2275,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2402,7 +2402,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2505,7 +2505,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2621,7 +2621,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2701,7 +2701,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2806,7 +2806,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -3069,7 +3069,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -3411,7 +3411,7 @@ echo json_encode($res);
 }else{
 
 header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -3544,7 +3544,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -3725,7 +3725,7 @@ echo json_encode($res);
 }else{
 header('Access-Control-Allow-Origin: *');
 
-$res = array('message'=>'No data are available',
+$res = array('message'=>'No data available',
 'status'=>201
 );
 

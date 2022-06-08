@@ -686,7 +686,7 @@ class Apicontroller extends CI_Controller
                                     echo json_encode($res);
                                 }
                             } else {
-                                $res = array('message'=>'Product is alredy in cart.',
+                                $res = array('message'=>'Product is already in your cart',
 'status'=>201
 );
 
@@ -771,14 +771,14 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             }
                         } else {
-                            $res = array('message'=>'Product_id not exist.',
+                            $res = array('message'=>'Product does not exist.',
                                    'status'=>201
                                    );
 
                             echo json_encode($res);
                         }
                     } else {
-                        $res = array('message'=>'Product is alredy in cart.',
+                        $res = array('message'=>'Product is already in your cart',
                           'status'=>201
                           );
 
@@ -2162,7 +2162,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
   'status'=>201
   );
 
@@ -2270,7 +2270,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
       'status'=>201
       );
 
@@ -2680,7 +2680,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2785,7 +2785,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -2942,7 +2942,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
 'status'=>201
 );
 
@@ -3059,7 +3059,7 @@ class Apicontroller extends CI_Controller
         // }else{
             //
             //
-            // $res = array('message'=>'No data are available',
+            // $res = array('message'=>'No data available',
             // 'status'=>201
             // );
             //
@@ -3265,7 +3265,7 @@ class Apicontroller extends CI_Controller
         } else {
             header('Access-Control-Allow-Origin: *');
 
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
               'status'=>201
               );
 
@@ -3700,7 +3700,7 @@ $total = $order1_data->total_amount;
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'No data are available',
+            $res = array('message'=>'No data available',
               'status'=>201
               );
 
@@ -3976,7 +3976,7 @@ $total = $order1_data->total_amount;
             //   }else{
             //   header('Access-Control-Allow-Origin: *');
             //
-            //   $res = array('message'=>'No data are available',
+            //   $res = array('message'=>'No data available',
             //   'status'=>201
             //   );
             //
