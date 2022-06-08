@@ -104,6 +104,14 @@
                    $data['lens_data']= $this->db->get();
 
                    $this->db->select('*');
+                   $this->db->from('tbl_night_vision');
+                   $data['night_vision_data']= $this->db->get();
+
+                   $this->db->select('*');
+                   $this->db->from('tbl_audio_type');
+                   $data['audio_type_data']= $this->db->get();
+
+                   $this->db->select('*');
                    $this->db->from('tbl_subcategory');
                    //$this->db->where('id',$usr);
                    $data['subcategory_data']= $this->db->get();
@@ -230,6 +238,14 @@
                    $data['lens_data']= $this->db->get();
 
                    $this->db->select('*');
+                   $this->db->from('tbl_night_vision');
+                   $data['night_vision_data']= $this->db->get();
+
+                   $this->db->select('*');
+                   $this->db->from('tbl_audio_type');
+                   $data['audio_type_data']= $this->db->get();
+
+                   $this->db->select('*');
                    $this->db->from('tbl_subcategory');
                    //$this->db->where('id',$usr);
                    $data['subcategory_data']= $this->db->get();
@@ -270,6 +286,8 @@
                        $this->form_validation->set_rules('led_type[]', 'led_type', 'trim');
                        $this->form_validation->set_rules('size[]', 'size', 'trim');
                        $this->form_validation->set_rules('lens[]', 'lens', 'trim');
+                       $this->form_validation->set_rules('night_vision[]', 'night_vision', 'trim');
+                       $this->form_validation->set_rules('audio_type[]', 'audio_type', 'trim');
 
 
 
@@ -294,6 +312,8 @@
                            $led_type=json_encode($this->input->post('led_type[]'));
                            $size=json_encode($this->input->post('size[]'));
                            $lens=json_encode($this->input->post('lens[]'));
+                           $night_vision=json_encode($this->input->post('night_vision[]'));
+                           $audio_type=json_encode($this->input->post('audio_type[]'));
 
                            $img1='fileToUpload1';
 
@@ -353,6 +373,8 @@
   'led_type'=>$led_type,
   'size'=>$size,
   'lens'=>$lens,
+  'night_vision'=>$night_vision,
+  'audio_type'=>$audio_type,
   'image'=>$nnnn1,
 
 
@@ -364,6 +386,13 @@
 
 
                                $last_id=$this->base_model->insert_table("tbl_minorcategory", $data_insert, 1) ;
+                               if ($last_id!=0) {
+                                   $this->session->set_flashdata('smessage', 'Minorcategory inserted successfully');
+                                   redirect("dcadmin/Minorcategory/view_minorcategory", "refresh");
+                               } else {
+                                   $this->session->set_flashdata('emessage', 'Sorry error occured');
+                                   redirect($_SERVER['HTTP_REFERER']);
+                               }
                            }
                            if ($typ==2) {
                                $idw=base64_decode($iw);
@@ -402,18 +431,20 @@
   'led_type'=>$led_type,
   'size'=>$size,
   'lens'=>$lens,
+  'night_vision'=>$night_vision,
+  'audio_type'=>$audio_type,
   'image'=>$n1
 
                      );
                                $this->db->where('id', $idw);
                                $last_id=$this->db->update('tbl_minorcategory', $data_insert);
-                           }
-                           if ($last_id!=0) {
-                               $this->session->set_flashdata('smessage', 'Data inserted successfully');
-                               redirect("dcadmin/minorcategory/view_minorcategory", "refresh");
-                           } else {
-                               $this->session->set_flashdata('emessage', 'Sorry error occured');
-                               redirect($_SERVER['HTTP_REFERER']);
+                               if ($last_id!=0) {
+                                   $this->session->set_flashdata('smessage', 'Minorcategory updated successfully');
+                                   redirect("dcadmin/Minorcategory/view_minorcategory", "refresh");
+                               } else {
+                                   $this->session->set_flashdata('emessage', 'Sorry error occured');
+                                   redirect($_SERVER['HTTP_REFERER']);
+                               }
                            }
                        } else {
                            $this->session->set_flashdata('emessage', validation_errors());
@@ -449,7 +480,8 @@
                        $zapak=$this->db->update('tbl_minorcategory', $data_update);
 
                        if ($zapak!=0) {
-                           redirect("dcadmin/minorcategory/view_minorcategory", "refresh");
+                           $this->session->set_flashdata('smessage', 'Minorcategory status updated successfully');
+                           redirect("dcadmin/Minorcategory/view_minorcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -465,7 +497,9 @@
                        $zapak=$this->db->update('tbl_minorcategory', $data_update);
 
                        if ($zapak!=0) {
-                           redirect("dcadmin/minorcategory/view_minorcategory", "refresh");
+                           $this->session->set_flashdata('smessage', 'Minorcategory status updated successfully');
+
+                           redirect("dcadmin/Minorcategory/view_minorcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -499,7 +533,9 @@
 
                        $zapak=$this->db->delete('tbl_minorcategory', array('id' => $id));
                        if ($zapak!=0) {
-                           redirect("dcadmin/minorcategory/view_minorcategory", "refresh");
+                           $this->session->set_flashdata('smessage', 'Minorcategory deleted successfully');
+
+                           redirect("dcadmin/Minorcategory/view_minorcategory", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
                            redirect($_SERVER['HTTP_REFERER']);

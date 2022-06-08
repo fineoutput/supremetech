@@ -604,8 +604,8 @@ if (!empty($last_id2)) {
             $last_id3=$this->db->update('token_id', $data_insert);
         }
     }
-    $res = array('message'=>'Account request submitted successfully',
-'status'=>201 ,
+    $res = array('message'=>'You have scuccessfully signed up. Please wait for admin approval',
+'status'=>200,
 // 'user_id'=>$last_id2,
 // 'authentication'=>$authentication
 );

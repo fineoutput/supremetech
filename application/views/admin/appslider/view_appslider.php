@@ -8,7 +8,7 @@
         <section class="content">
         <div class="row">
         <div class="col-lg-12">
-        <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/appslider/add_appslider"
+        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Appslider/add_appslider"
         role="button" style="margin-bottom:12px;"> Add App slider</a>
         <div class="panel panel-default">
         <div class="panel-heading">
@@ -85,13 +85,13 @@
         <ul class="dropdown-menu" role="menu">
 
         <?php if($data->is_active==1){ ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/appslider/updateappsliderStatus/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/Appslider/updateappsliderStatus/<?php echo
         base64_encode($data->id) ?>/inactive">Inactive</a></li>
         <?php } else { ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/appslider/updateappsliderStatus/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/Appslider/updateappsliderStatus/<?php echo
         base64_encode($data->id) ?>/active">Active</a></li>
         <?php } ?>
-        <li><a href="<?php echo base_url() ?>dcadmin/appslider/update_appslider/<?php echo
+        <li><a href="<?php echo base_url() ?>dcadmin/Appslider/update_appslider/<?php echo
         base64_encode($data->id) ?>">Edit</a></li>
         <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
         </ul>
@@ -100,7 +100,7 @@
 
         <div style="display:none" id="cnfbox<?php echo $i ?>">
         <p> Are you sure delete this </p>
-        <a href="<?php echo base_url() ?>dcadmin/appslider/delete_appslider/<?php echo
+        <a href="<?php echo base_url() ?>dcadmin/Appslider/delete_appslider/<?php echo
         base64_encode($data->id); ?>" class="btn btn-danger" >Yes</a>
         <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>" >No</a>
         </div>

@@ -3,7 +3,10 @@
     <h1>
       Add New Two Images
     </h1>
-
+    <ol class="breadcrumb">
+    <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li><a href="<?php echo base_url() ?>dcadmin/Two Images/view_two_images"><i class="fa fa-dashboard"></i> View Two Images</a></li>
+    </ol>
   </section>
   <section class="content">
     <div class="row">

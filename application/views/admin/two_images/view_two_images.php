@@ -3,11 +3,15 @@
     <h1>
       View Two Images
     </h1>
+    <ol class="breadcrumb">
+    <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">View Two Images</li>
+    </ol>
   </section>
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-        <a class="btn btn-info cticket" href="<?php echo base_url() ?>dcadmin/two_images/add_two_images" role="button" style="margin-bottom:12px;"> Add Two Images</a>
+        <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/two_images/add_two_images" role="button" style="margin-bottom:12px;"> Add Two Images</a>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Two Images</h3>

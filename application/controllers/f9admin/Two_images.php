@@ -85,91 +85,91 @@
                    // if ($this->input->post()) {
                    //
                    //     if ($this->form_validation->run()== true) {
-                           $ip = $this->input->ip_address();
-                           date_default_timezone_set("Asia/Calcutta");
-                           $cur_date=date("Y-m-d H:i:s");
-                           $addedby=$this->session->userdata('admin_id');
+                   $ip = $this->input->ip_address();
+                   date_default_timezone_set("Asia/Calcutta");
+                   $cur_date=date("Y-m-d H:i:s");
+                   $addedby=$this->session->userdata('admin_id');
 
-                           $typ=base64_decode($t);
-                           $last_id = 0;
-                           if ($typ==1) {
-                               $img0='image1';
-
-
+                   $typ=base64_decode($t);
+                   $last_id = 0;
+                   if ($typ==1) {
+                       $img0='image1';
 
 
-                               $image_upload_folder = FCPATH . "assets/uploads/two_images/";
-                               if (!file_exists($image_upload_folder)) {
-                                   mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-                               }
-                               $new_file_name="two_images".date("Ymdhms");
-                               $this->upload_config = array(
+
+
+                       $image_upload_folder = FCPATH . "assets/uploads/two_images/";
+                       if (!file_exists($image_upload_folder)) {
+                           mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                       }
+                       $new_file_name="two_images".date("Ymdhms");
+                       $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'jpg|jpeg|png',
                              'max_size'      => 25000
                      );
-                               $this->upload->initialize($this->upload_config);
-                               if (!$this->upload->do_upload($img0)) {
-                                   $upload_error = $this->upload->display_errors();
-                               // echo json_encode($upload_error);
+                       $this->upload->initialize($this->upload_config);
+                       if (!$this->upload->do_upload($img0)) {
+                           $upload_error = $this->upload->display_errors();
+                       // echo json_encode($upload_error);
 
            //$this->session->set_flashdata('emessage',$upload_error);
              //redirect($_SERVER['HTTP_REFERER']);
-                               } else {
-                                   $file_info = $this->upload->data();
+                       } else {
+                           $file_info = $this->upload->data();
 
-                                   $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
-                                   $file_info['new_name']=$videoNAmePath;
-                                   // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                                   $nnnn=$file_info['file_name'];
-                                   $nnnn0=$videoNAmePath;
+                           $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
+                           $file_info['new_name']=$videoNAmePath;
+                           // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                           $nnnn=$file_info['file_name'];
+                           $nnnn0=$videoNAmePath;
 
-                                   // echo json_encode($file_info);
-                               }
-
-
-
-
-                               $img1='image2';
+                           // echo json_encode($file_info);
+                       }
 
 
 
 
-                               $image_upload_folder = FCPATH . "assets/uploads/two_images/";
-                               if (!file_exists($image_upload_folder)) {
-                                   mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-                               }
-                               $new_file_name="two_images".date("Ymdhms");
-                               $this->upload_config = array(
+                       $img1='image2';
+
+
+
+
+                       $image_upload_folder = FCPATH . "assets/uploads/two_images/";
+                       if (!file_exists($image_upload_folder)) {
+                           mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                       }
+                       $new_file_name="two_images".date("Ymdhms");
+                       $this->upload_config = array(
                              'upload_path'   => $image_upload_folder,
                              'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
+                             'allowed_types' =>'jpg|jpeg|png',
                              'max_size'      => 25000
                      );
-                               $this->upload->initialize($this->upload_config);
-                               if (!$this->upload->do_upload($img1)) {
-                                   $upload_error = $this->upload->display_errors();
-                               // echo json_encode($upload_error);
+                       $this->upload->initialize($this->upload_config);
+                       if (!$this->upload->do_upload($img1)) {
+                           $upload_error = $this->upload->display_errors();
+                       // echo json_encode($upload_error);
 
            //$this->session->set_flashdata('emessage',$upload_error);
              //redirect($_SERVER['HTTP_REFERER']);
-                               } else {
-                                   $file_info = $this->upload->data();
+                       } else {
+                           $file_info = $this->upload->data();
 
-                                   $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
-                                   $file_info['new_name']=$videoNAmePath;
-                                   // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                                   $nnnn=$file_info['file_name'];
-                                   $nnnn1=$videoNAmePath;
+                           $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
+                           $file_info['new_name']=$videoNAmePath;
+                           // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                           $nnnn=$file_info['file_name'];
+                           $nnnn1=$videoNAmePath;
 
-                                   // echo json_encode($file_info);
-                               }
-
-
+                           // echo json_encode($file_info);
+                       }
 
 
-                               $data_insert = array(
+
+
+                       $data_insert = array(
                   'image1'=>$nnnn0,
                   'image2'=>$nnnn1,
 
@@ -180,134 +180,142 @@
                      );
 
 
-                               $last_id=$this->base_model->insert_table("tbl_two_images", $data_insert, 1) ;
+                       $last_id=$this->base_model->insert_table("tbl_two_images", $data_insert, 1) ;
+                       if ($last_id!=0) {
+                           $this->session->set_flashdata('smessage', 'Two images inserted successfully');
+                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                       } else {
+                           $this->session->set_flashdata('emessage', 'Sorry error occured');
+                           redirect($_SERVER['HTTP_REFERER']);
+                       }
+                   }
+                   if ($typ==2) {
+                       $idw=base64_decode($iw);
+
+
+                       $this->db->select('*');
+                       $this->db->from('tbl_two_images');
+                       $this->db->where('id', $idw);
+                       $dsa=$this->db->get();
+                       $da=$dsa->row();
+
+
+
+                       $img0='image1';
+
+
+                       $image_upload_folder = FCPATH . "assets/uploads/two_images/";
+                       if (!file_exists($image_upload_folder)) {
+                           mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                       }
+                       $new_file_name="two_images1".date("Ymdhms");
+                       $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                       $this->upload->initialize($this->upload_config);
+                       if (!$this->upload->do_upload($img0)) {
+                           $upload_error = $this->upload->display_errors();
+                       // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                       } else {
+                           $file_info = $this->upload->data();
+
+                           $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
+                           $file_info['new_name']=$videoNAmePath;
+                           // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                           $nnnn=$file_info['file_name'];
+                           $nnnn0=$videoNAmePath;
+
+                           // echo json_encode($file_info);
+                       }
+
+
+
+
+                       $img1='image2';
+
+
+
+
+                       $image_upload_folder = FCPATH . "assets/uploads/two_images/";
+                       if (!file_exists($image_upload_folder)) {
+                           mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                       }
+                       $new_file_name="two_images2".date("Ymdhms");
+                       $this->upload_config = array(
+                             'upload_path'   => $image_upload_folder,
+                             'file_name' => $new_file_name,
+                             'allowed_types' =>'jpg|jpeg|png',
+                             'max_size'      => 25000
+                     );
+                       $this->upload->initialize($this->upload_config);
+                       if (!$this->upload->do_upload($img1)) {
+                           $upload_error = $this->upload->display_errors();
+                       // echo json_encode($upload_error);
+
+           //$this->session->set_flashdata('emessage',$upload_error);
+             //redirect($_SERVER['HTTP_REFERER']);
+                       } else {
+                           $file_info = $this->upload->data();
+
+                           $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
+                           $file_info['new_name']=$videoNAmePath;
+                           // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+                           $nnnn=$file_info['file_name'];
+                           $nnnn1=$videoNAmePath;
+
+                           // echo json_encode($file_info);
+                       }
+
+
+
+
+                       if (!empty($da)) {
+                           $img = $da ->image1;
+                           if (!empty($img)) {
+                               if (empty($nnnn0)) {
+                                   $nnnn0 = $img;
+                               }
+                           } else {
+                               if (empty($nnnn0)) {
+                                   $nnnn0= "";
+                               }
                            }
-                           if ($typ==2) {
-                               $idw=base64_decode($iw);
-
-
-                               $this->db->select('*');
-                               $this->db->from('tbl_two_images');
-                               $this->db->where('id', $idw);
-                               $dsa=$this->db->get();
-                               $da=$dsa->row();
-
-
-
-                               $img0='image1';
-
-
-                               $image_upload_folder = FCPATH . "assets/uploads/two_images/";
-                               if (!file_exists($image_upload_folder)) {
-                                   mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                       }
+                       if (!empty($da)) {
+                           $img = $da ->image2;
+                           if (!empty($img)) {
+                               if (empty($nnnn1)) {
+                                   $nnnn1 = $img;
                                }
-                               $new_file_name="two_images1".date("Ymdhms");
-                               $this->upload_config = array(
-                             'upload_path'   => $image_upload_folder,
-                             'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
-                             'max_size'      => 25000
-                     );
-                               $this->upload->initialize($this->upload_config);
-                               if (!$this->upload->do_upload($img0)) {
-                                   $upload_error = $this->upload->display_errors();
-                               // echo json_encode($upload_error);
-
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
-                               } else {
-                                   $file_info = $this->upload->data();
-
-                                   $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
-                                   $file_info['new_name']=$videoNAmePath;
-                                   // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                                   $nnnn=$file_info['file_name'];
-                                   $nnnn0=$videoNAmePath;
-
-                                   // echo json_encode($file_info);
+                           } else {
+                               if (empty($nnnn1)) {
+                                   $nnnn1= "";
                                }
+                           }
+                       }
 
-
-
-
-                               $img1='image2';
-
-
-
-
-                               $image_upload_folder = FCPATH . "assets/uploads/two_images/";
-                               if (!file_exists($image_upload_folder)) {
-                                   mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-                               }
-                               $new_file_name="two_images2".date("Ymdhms");
-                               $this->upload_config = array(
-                             'upload_path'   => $image_upload_folder,
-                             'file_name' => $new_file_name,
-                             'allowed_types' =>'xlsx|csv|xls|pdf|doc|docx|txt|jpg|jpeg|png',
-                             'max_size'      => 25000
-                     );
-                               $this->upload->initialize($this->upload_config);
-                               if (!$this->upload->do_upload($img1)) {
-                                   $upload_error = $this->upload->display_errors();
-                               // echo json_encode($upload_error);
-
-           //$this->session->set_flashdata('emessage',$upload_error);
-             //redirect($_SERVER['HTTP_REFERER']);
-                               } else {
-                                   $file_info = $this->upload->data();
-
-                                   $videoNAmePath = "assets/uploads/two_images/".$new_file_name.$file_info['file_ext'];
-                                   $file_info['new_name']=$videoNAmePath;
-                                   // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                                   $nnnn=$file_info['file_name'];
-                                   $nnnn1=$videoNAmePath;
-
-                                   // echo json_encode($file_info);
-                               }
-
-
-
-
-                               if (!empty($da)) {
-                                   $img = $da ->image1;
-                                   if (!empty($img)) {
-                                       if (empty($nnnn0)) {
-                                           $nnnn0 = $img;
-                                       }
-                                   } else {
-                                       if (empty($nnnn0)) {
-                                           $nnnn0= "";
-                                       }
-                                   }
-                               }
-                               if (!empty($da)) {
-                                   $img = $da ->image2;
-                                   if (!empty($img)) {
-                                       if (empty($nnnn1)) {
-                                           $nnnn1 = $img;
-                                       }
-                                   } else {
-                                       if (empty($nnnn1)) {
-                                           $nnnn1= "";
-                                       }
-                                   }
-                               }
-
-                               $data_insert = array(
+                       $data_insert = array(
                   'image1'=>$nnnn0,
                   'image2'=>$nnnn1,
 
                      );
-                               $this->db->where('id', $idw);
-                               $last_id=$this->db->update('tbl_two_images', $data_insert);
-                           }
-                           if ($last_id!=0) {
-                               $this->session->set_flashdata('smessage', 'Data inserted successfully');
-                               redirect("dcadmin/two_images/view_two_images", "refresh");
-                           } else {
-                               $this->session->set_flashdata('emessage', 'Sorry error occured');
-                               redirect($_SERVER['HTTP_REFERER']);
-                           }
+                       $this->db->where('id', $idw);
+                       $last_id=$this->db->update('tbl_two_images', $data_insert);
+                       if ($last_id!=0) {
+                           $this->session->set_flashdata('smessage', 'Two images updated successfully');
+                           redirect("dcadmin/two_images/view_two_images", "refresh");
+                       } else {
+                           $this->session->set_flashdata('emessage', 'Sorry error occured');
+                           redirect($_SERVER['HTTP_REFERER']);
+                       }
+                   }
+
                    //     } else {
                    //         $this->session->set_flashdata('emessage', validation_errors());
                    //         redirect($_SERVER['HTTP_REFERER']);
@@ -342,6 +350,7 @@
                        $zapak=$this->db->update('tbl_two_images', $data_update);
 
                        if ($zapak!=0) {
+                         $this->session->set_flashdata('smessage', 'Two images status updated successfully');
                            redirect("dcadmin/two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
@@ -358,6 +367,7 @@
                        $zapak=$this->db->update('tbl_two_images', $data_update);
 
                        if ($zapak!=0) {
+                         $this->session->set_flashdata('smessage', 'Two images status updated successfully');
                            redirect("dcadmin/two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
@@ -395,6 +405,7 @@
                        if ($zapak!=0) {
                            // $path = FCPATH .$img;
                            //   unlink($path);
+                           $this->session->set_flashdata('smessage', 'Two images deleted successfully');
                            redirect("dcadmin/two_images/view_two_images", "refresh");
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');

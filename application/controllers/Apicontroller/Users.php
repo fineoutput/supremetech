@@ -634,7 +634,7 @@ if (!empty($otp_data)) {
                         }
                     }
                     header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>'Account request submitted successfully',
+                    $res = array('message'=>'You have scuccessfully signed up. Please wait for admin approval',
     'status'=>201,
 //     'user_id'=>$last_id2,
 // 'name'=>$temp_data->name,

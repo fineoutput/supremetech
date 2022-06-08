@@ -4,9 +4,9 @@
 Add New Sellers
 </h1>
 <ol class="breadcrumb">
-<li><a href="<?php echo base_url() ?>dcadmin/dashboard"><i class="fa fa-dashboard"></i>Home</a></li>
-<li><a href="<?php echo base_url() ?>dcadmin/sellers/view_sellers"><i class="fa fa-dashboard"></i> All Sellers </a></li>
-
+  <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+  <li><a href="<?php echo base_url() ?>dcadmin/Vendors/view_vendors"><i class="fa fa-dashboard"></i> All Vendors </a></li>
+  <li class="active">View Vendors</li>
 </ol>
 </section>
 <section class="content">

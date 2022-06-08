@@ -4,8 +4,8 @@
           Update New Testockam
           </h1>
           <ol class="breadcrumb">
-           <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> Update stock </a></li>
+           <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="<?php echo base_url() ?>dcadmin/Stock/view_stock"><i class="fa fa-dashboard"></i> View Stock </a></li>
 
           </ol>
         </section>

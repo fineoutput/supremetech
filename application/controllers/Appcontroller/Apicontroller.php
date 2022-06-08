@@ -150,7 +150,7 @@ class Apicontroller extends CI_Controller
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingpricegst,
+                                    'price'=>$data->sellingprice,
                                     'image'=>base_url().$data->image,
                                     'wishlist'=>$data->wishlist,
                                     'max'=>$data->max
@@ -205,7 +205,7 @@ class Apicontroller extends CI_Controller
                                     'product_name'=>$data->productname,
                                     'description'=> $data->productdescription,
                                     'mrp'=> $data->mrp,
-                                    'price'=>$data->sellingpricegst,
+                                    'price'=>$data->sellingprice,
                                     'image'=>base_url().$data->image,
                                     'max'=>$data->max
 
@@ -266,7 +266,7 @@ class Apicontroller extends CI_Controller
                   'product_name'=>$data->productname,
                   'description'=> $data->productdescription,
                   'mrp'=> $data->mrp,
-                  'price'=>$data->sellingpricegst,
+                  'price'=>$data->sellingprice,
                   'image'=>base_url().$data->image,
                   'max'=>$data->max
 
@@ -322,7 +322,7 @@ class Apicontroller extends CI_Controller
   // 'video1'=> base_url().$productsdata->video1,
   // 'video2'=> base_url().$productsdata->video2,
   'mrp'=> $productsdata->mrp,
-  'price'=> $productsdata->sellingpricegst,
+  'price'=> $productsdata->sellingprice,
   'productdescription'=> $productsdata->productdescription,
   'modelno'=> $productsdata->modelno,
   'stock'=> $stock,
@@ -861,8 +861,8 @@ class Apicontroller extends CI_Controller
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingpricegst,
-'total='=>$total = $product_data->sellingpricegst * $data->quantity,
+'price'=>$product_data->sellingprice,
+'total='=>$total = $product_data->sellingprice * $data->quantity,
 'max'=>$product_data->max,
 
 
@@ -924,8 +924,8 @@ class Apicontroller extends CI_Controller
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
-'price'=>$product_data->sellingpricegst,
-'total='=>$total = $product_data->sellingpricegst * $data->quantity
+'price'=>$product_data->sellingprice,
+'total='=>$total = $product_data->sellingprice * $data->quantity
 
 );
                             $sub_total= $sub_total + $total;
@@ -1198,7 +1198,111 @@ class Apicontroller extends CI_Controller
 
                     echo json_encode($res);
                 } else {
-                    $res = array('message'=>"no add product cart",
+                    $res = array('message'=>"Your cart is empty",
+'status'=>200,
+
+);
+
+                    echo json_encode($res);
+                    exit();
+                }
+            } else {
+                $res = array('message'=>"email or password do not match",
+'status'=>201,
+
+);
+
+                echo json_encode($res);
+                exit();
+            }
+        } else {
+            if (!empty($token_id)) {
+                $this->db->select('*');
+                $this->db->from('tbl_cart');
+                $this->db->where('token_id', $token_id);
+                $counting=$this->db->count_all_results();
+                if (!empty($counting)) {
+                    $fa= $counting;
+
+
+
+
+
+
+
+                    $res = array('message'=>"success",
+'status'=>200,
+'data'=>$fa
+);
+
+                    echo json_encode($res);
+                } else {
+                    $res = array('message'=>"token_id wrong",
+'status'=>201,
+
+);
+
+                    echo json_encode($res);
+                    exit();
+                }
+            } else {
+                $res = array('message'=>"Please insert data.",
+  'status'=>201,
+
+  );
+
+                echo json_encode($res);
+            }
+        }
+    }
+
+    // ========== wishlist count==============
+
+    public function wishlist_count()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        // if($this->input->post())
+        // {
+
+        $headers = apache_request_headers();
+
+
+        $phone=$headers['Phone'];
+        $password=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
+
+
+
+        if (!empty($phone) || !empty($password)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $this->db->where('authentication', $password);
+            $dsa= $this->db->get();
+            $user=$dsa->row();
+            if (!empty($user)) {
+                $user_id=$user->id;
+                // $pass=$user->password;
+
+
+
+
+                $this->db->select('*');
+                $this->db->from('tbl_wishlist');
+                $this->db->where('user_id', $user_id);
+
+                $counting=$this->db->count_all_results();
+                if (!empty($counting)) {
+                    $res = array('message'=>"success",
+'status'=>200,
+'data'=>$counting
+);
+
+                    echo json_encode($res);
+                } else {
+                    $res = array('message'=>"Your wishlist is empty",
 'status'=>200,
 
 );
@@ -1499,7 +1603,7 @@ class Apicontroller extends CI_Controller
 'productimage2'=> base_url().$limit->video1,
 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
-'price'=>$limit->sellingpricegst,
+'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
 'max'=>$limit->max
 
@@ -1609,7 +1713,7 @@ class Apicontroller extends CI_Controller
 'productimage2'=> base_url().$limit->video1,
 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
-'price'=>$limit->sellingpricegst,
+'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
 'max'=>$limit->max
 
@@ -1672,7 +1776,7 @@ class Apicontroller extends CI_Controller
 'productdescription'=>$data->productdescription,
 'minorcategory_id'=>$data->minorcategory_id,
 'mrp'=>$data->mrp,
-'price'=>$data->sellingpricegst,
+'price'=>$data->sellingprice,
 'max'=>$data->max
 
 );
@@ -1732,7 +1836,7 @@ class Apicontroller extends CI_Controller
                             $product_data= $this->db->get()->row();
 
                             if (!empty($product_data)) {
-                                $total = $product_data->sellingpricegst * $data->quantity;
+                                $total = $product_data->sellingprice * $data->quantity;
 
                                 $sub_total = $sub_total + $total;
                             }
@@ -1773,7 +1877,7 @@ class Apicontroller extends CI_Controller
                                     $check_inventory_id=$check_inventory->row();
                                     if (!empty($check_inventory_id)) {
                                         if ($check_inventory_id->quantity >= $data1->quantity) {
-                                            $total2 = $product_data1->sellingpricegst * $data1->quantity ;
+                                            $total2 = $product_data1->sellingprice * $data1->quantity ;
                                             $order2_insert = array('main_id'=>$last_id,
           'product_id'=>$data1->product_id,
           'quantity'=>$data1->quantity,
@@ -2293,7 +2397,7 @@ class Apicontroller extends CI_Controller
                             $this->db->where('id', $data_mrp->product_id);
                             $data_product= $this->db->get()->row();
                             if (!empty($data_product)) {
-                                $data_result=$data_product->sellingpricegst;
+                                $data_result=$data_product->sellingprice;
                             }
 
                             foreach ($data->result() as $value) {
@@ -2449,6 +2553,7 @@ class Apicontroller extends CI_Controller
                             $da=$dsa->row();
                             $order2 = [] ;
                             $subtotal= 0 ;
+                            $total_weight = 0;
                             foreach ($dsa->result() as $data) {
                                 $this->db->select('*');
                                 $this->db->from('tbl_products');
@@ -2469,13 +2574,20 @@ class Apicontroller extends CI_Controller
 
 );
                                 $subtotal = $subtotal + $data->total_amount;
+                                $total_weight = ($product_data->weight*$data->quantity) + $total_weight;
                             }
 
-
+                            if($total_weight>1000){
+                              $total_weight = $total_weight/1000;
+                              $total_weight_value = $total_weight." kg";
+                            }else{
+                              $total_weight_value = $total_weight." gm";
+                            }
                             $res = array('message'=>"success",
 'status'=>200,
 'data'=>$order2,
-'subtotal'=>$subtotal
+'subtotal'=>$subtotal,
+'total_weight'=>$total_weight_value
 );
 
                             echo json_encode($res);
@@ -2550,7 +2662,7 @@ class Apicontroller extends CI_Controller
                        'produt_image'=>base_url().$data->image,
                        'productdescription'=>$data->productdescription,
                        'product_mrp'=>$data->mrp,
-                       'product_selling_price'=>$data->sellingpricegst,
+                       'product_selling_price'=>$data->sellingprice,
                        'max'=>$data->max
 
 
@@ -2975,7 +3087,7 @@ class Apicontroller extends CI_Controller
             $authentication=$headers['Authentication'];
             $token_id=$headers['Tokenid'];
 
-            $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+              $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
             $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
             $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
             $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
@@ -2989,6 +3101,8 @@ class Apicontroller extends CI_Controller
             $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
             $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
             $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
 
 
 
@@ -3008,6 +3122,8 @@ class Apicontroller extends CI_Controller
                 $ledtype_id=$this->input->post('ledtype_id');
                 $size_id=$this->input->post('size_id');
                 $lens_id=$this->input->post('lens_id');
+                $night_vision_id=$this->input->post('night_vision_id');
+                $audio_type_id=$this->input->post('audio_type_id');
 
 
                 $brand_info = explode(',', $brand_id);
@@ -3024,9 +3140,11 @@ class Apicontroller extends CI_Controller
                 $ledtype_info = explode(',', $ledtype_id);
                 $size_info = explode(',', $size_id);
                 $lens_info = explode(',', $lens_id);
+                $night_vision_info = explode(',', $night_vision_id);
+                $audio_type_info = explode(',', $audio_type_id);
 
 
-
+                // die();
                 $this->db->select('*');
                 $this->db->from('tbl_products');
 
@@ -3100,6 +3218,16 @@ class Apicontroller extends CI_Controller
                         $this->db->or_where('lens', $data12, null, false);
                     }
                 }
+                if (!empty($night_vision_info[0])) {
+                    foreach ($night_vision_info as $data13) {
+                        $this->db->or_where('night_vision', $data13);
+                    }
+                }
+                if (!empty($audio_type_info[0])) {
+                    foreach ($audio_type_info as $data14) {
+                        $this->db->or_where('audio_type', $data14);
+                    }
+                }
 
 
                 $filter_data= $this->db->get();
@@ -3113,7 +3241,7 @@ class Apicontroller extends CI_Controller
 'product_name'=>$data->productname,
 'image'=>base_url().$data->image,
 'productdescription'=>$data->productdescription,
-'price'=>$data->sellingpricegst,
+'price'=>$data->sellingprice,
 'max'=>$data->max
 
 
@@ -3807,7 +3935,7 @@ $total = $order1_data->total_amount;
   'product_name'=>$product_data->productname,
   'product_image'=>base_url().$product_data->image1,
   'product_mrp'=>$product_data->mrp,
-  'product_selling_price'=>$product_data->sellingpricegst,
+  'product_selling_price'=>$product_data->sellingprice,
 );
                     }
                     header('Access-Control-Allow-Origin: *');
@@ -3825,14 +3953,14 @@ $total = $order1_data->total_amount;
                     echo json_encode($res);
                 }
             } else {
-                $res = array('message'=>'user not found',
+                $res = array('message'=>'Please login first',
               'status'=>201
               );
 
                 echo json_encode($res);
             }
         } else {
-            $res = array('message'=>'phone authentication or token_id required',
+            $res = array('message'=>'Phone authentication or token id required',
    'status'=>201
    );
 
