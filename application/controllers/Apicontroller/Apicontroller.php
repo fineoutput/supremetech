@@ -1227,7 +1227,7 @@ $this->load->helper('security');
 if($this->input->post())
 {
 
-$this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+$this->form_validation->set_rules('token_id', 'token_id', 'xss_clean|trim');
 $this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
 $this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
 
@@ -1255,13 +1255,19 @@ $this->db->from('tbl_cart');
 $this->db->where('user_id',$user_data->id);
 $count= $this->db->count_all_results();
 
+$this->db->select('*');
+$this->db->from('tbl_wishlist');
+$this->db->where('user_id', $user_data->id);
+$wishlist_count=$this->db->count_all_results();
+
 if(empty($count)){
 $count = 0;
 }
 header('Access-Control-Allow-Origin: *');
 $res = array('message'=>"success",
 'status'=>200,
-'data'=>$count
+'data'=>$count,
+'wishlist_count'=>$wishlist_count
 );
 
 echo json_encode($res);
