@@ -612,6 +612,17 @@ $res = array('message'=> "$check_product_id->productname Product is out of stock
 echo json_encode($res);
 exit;
 }
+if($check_product_id->max >= $quantity){
+
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=> "Maximum purchase limit exceeded",
+  'status'=>201
+  );
+
+  echo json_encode($res);
+  exit;
+}
 
 
 

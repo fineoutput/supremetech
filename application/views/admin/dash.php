@@ -64,7 +64,7 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="<?=base_url()?>dcadmin/Orders/view_completed_orders">
+              <a href="javascript:void(0)">
               <div class="info-box">
                 <span class="info-box-icon bg-orange"><i class="ionicons ion-bag"></i></span>
                 <div class="info-box-content">

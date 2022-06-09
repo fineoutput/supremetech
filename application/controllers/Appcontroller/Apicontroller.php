@@ -648,6 +648,16 @@ class Apicontroller extends CI_Controller
                                         echo json_encode($res);
                                         exit;
                                     }
+                                    if ($check_product_id->max >= $quantity) {
+                                    } else {
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=> "Maximum purchase limit exceeded",
+                                      'status'=>201
+                                      );
+
+                                        echo json_encode($res);
+                                        exit;
+                                    }
 
 
 
@@ -1194,14 +1204,13 @@ class Apicontroller extends CI_Controller
                 $this->db->where('user_id', $user_id);
                 $wishcount=$this->db->count_all_results();
 
-                    $res = array('message'=>"success",
+                $res = array('message'=>"success",
 'status'=>200,
 'data'=>$counting,
 'wishlist_count'=>$wishcount
 );
 
-                    echo json_encode($res);
-
+                echo json_encode($res);
             } else {
                 $res = array('message'=>"email or password do not match",
 'status'=>201,
@@ -2572,11 +2581,11 @@ class Apicontroller extends CI_Controller
                                 $total_weight = ($product_data->weight*$data->quantity) + $total_weight;
                             }
 
-                            if($total_weight>1000){
-                              $total_weight = $total_weight/1000;
-                              $total_weight_value = $total_weight." kg";
-                            }else{
-                              $total_weight_value = $total_weight." gm";
+                            if ($total_weight>1000) {
+                                $total_weight = $total_weight/1000;
+                                $total_weight_value = $total_weight." kg";
+                            } else {
+                                $total_weight_value = $total_weight." gm";
                             }
                             $res = array('message'=>"success",
 'status'=>200,
@@ -3082,7 +3091,7 @@ class Apicontroller extends CI_Controller
             $authentication=$headers['Authentication'];
             $token_id=$headers['Tokenid'];
 
-              $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
             $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
             $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
             $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');

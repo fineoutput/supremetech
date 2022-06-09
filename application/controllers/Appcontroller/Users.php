@@ -220,6 +220,7 @@ $res = array('message'=>'success',
 'status'=>200,
 'authentication'=>$user_data->authentication,
 'user_name'=>$user_data->name
+// 'phone'=>$user_data->phone
 );
 
 echo json_encode($res);
