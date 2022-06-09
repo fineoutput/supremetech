@@ -218,7 +218,8 @@ if($user_data->is_active==1){
 
 $res = array('message'=>'success',
 'status'=>200,
-'authentication'=>$user_data->authentication
+'authentication'=>$user_data->authentication,
+'user_name'=>$user_data->name
 );
 
 echo json_encode($res);
