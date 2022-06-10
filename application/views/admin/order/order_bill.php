@@ -184,7 +184,7 @@ if (!empty($product_data)) {
           <?php
           if (!empty($product_data)) {
               // $hsn_code= $product_data->hsn_code;
-              echo "Rs.".$product_price= $product_data->sellingprice;
+              echo "₹ ".$product_price= $product_data->sellingprice;
           } else {
               $product_price= "";
           }
@@ -206,7 +206,7 @@ if (!empty($product_data)) {
         ?>
 
 
-        <td><?php echo "Rs. ".$data->total_amount;?></td>
+        <td><?php echo "₹ ".$data->total_amount;?></td>
       </tr>
   <?php $i++;}
 }?>
@@ -242,7 +242,7 @@ if (!empty($product_data)) {
 }?></th>
 
         <th class="product_table"><?php if (!empty($order1_data)) {
-    echo "Rs. ".$order1_data->total_amount;
+    echo "₹ ".$order1_data->total_amount;
 }?></th>
       </tr>
 
@@ -291,17 +291,17 @@ if (!empty($product_data)) {
         } else {
             $promo_discount= 0;
         }
-        "- Rs. ".$promo_discount;
+        "- ₹ ".$promo_discount;
     } else {
-        echo "-Rs. 0";
+        echo "-₹ 0";
     } ?>
 
 <!-- from table order1  start-->
 
 <?php if (!empty($order1_data)) {
-        echo "- Rs. ".$order1_data->promo_deduction_amount;
+        echo "- ₹ ".$order1_data->promo_deduction_amount;
     } else {
-        echo "-Rs. 0";
+        echo "-₹ 0";
     } ?>
 
 <!-- from table order1  end-->
@@ -316,7 +316,7 @@ if (!empty($product_data)) {
       <tr>
         <th colspan="4">SubTotal</th>
         <th class="product_table"><?php if (!empty($order1_data)) {
-        echo "Rs. ".$order1_data->total_amount;
+        echo "₹ ".$order1_data->total_amount;
     }?></th>
 
       </tr>

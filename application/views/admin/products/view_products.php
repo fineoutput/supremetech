@@ -155,8 +155,8 @@ $minorcategory_name="";
                           <?php } ?>
                       </td>
 
-                      <td><?php echo $data->mrp ?></td>
-                      <td><?php echo $data->sellingprice ?></td>
+                      <td>₹<?php echo $data->mrp ?></td>
+                      <td>₹<?php echo $data->sellingprice ?></td>
                       <!-- <td><?php echo $data->gstrate ?></td>
 <td><?php echo $data->gstprice ?></td>
 <td><?php echo $data->sellingpricegst ?></td> -->
@@ -178,7 +178,7 @@ $inventory_dat="";
 
 ?> -->
                       <td><?php echo $inventory_dat ?></td>
-                      <td><?php echo $data->weight ?></td>
+                      <td><?php echo $data->weight ?> gm</td>
                       <td><?php $feature_product= $data->feature_product;
 if($feature_product==1){
 echo "yes";

@@ -152,6 +152,13 @@
 
 
                                $last_id=$this->base_model->insert_table("tbl_appslider", $data_insert, 1) ;
+                               if ($last_id!=0) {
+                                   $this->session->set_flashdata('smessage', 'Appslider inserted successfully');
+                                   redirect("dcadmin/Appslider/view_appslider", "refresh");
+                               } else {
+                                   $this->session->set_flashdata('emessage', 'Sorry error occured');
+                                   redirect($_SERVER['HTTP_REFERER']);
+                               }
                            }
                            if ($typ==2) {
                                $idw=base64_decode($iw);
@@ -223,14 +230,15 @@
                      );
                                $this->db->where('id', $idw);
                                $last_id=$this->db->update('tbl_appslider', $data_insert);
+                               if ($last_id!=0) {
+                                   $this->session->set_flashdata('smessage', 'Appslider updated successfully');
+                                   redirect("dcadmin/Appslider/view_appslider", "refresh");
+                               } else {
+                                   $this->session->set_flashdata('emessage', 'Sorry error occured');
+                                   redirect($_SERVER['HTTP_REFERER']);
+                               }
                            }
-                           if ($last_id!=0) {
-                               $this->session->set_flashdata('smessage', 'Data inserted successfully');
-                               redirect("dcadmin/Appslider/view_appslider", "refresh");
-                           } else {
-                               $this->session->set_flashdata('emessage', 'Sorry error occured');
-                               redirect($_SERVER['HTTP_REFERER']);
-                           }
+
                        } else {
                            $this->session->set_flashdata('emessage', validation_errors());
                            redirect($_SERVER['HTTP_REFERER']);

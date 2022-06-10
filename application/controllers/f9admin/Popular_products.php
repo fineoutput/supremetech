@@ -123,8 +123,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -161,8 +161,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -199,8 +199,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -237,8 +237,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -354,8 +354,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -392,8 +392,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -430,8 +430,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 
@@ -468,8 +468,8 @@
                                          $upload_error = $this->upload->display_errors();
                                      // echo json_encode($upload_error);
 
-                     //$this->session->set_flashdata('emessage',$upload_error);
-                         //redirect($_SERVER['HTTP_REFERER']);
+                     $this->session->set_flashdata('emessage',$upload_error);
+                         redirect($_SERVER['HTTP_REFERER']);
                                      } else {
                                          $file_info = $this->upload->data();
 

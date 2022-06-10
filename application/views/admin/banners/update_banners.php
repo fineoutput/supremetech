@@ -48,7 +48,7 @@
                             <tr>
                                                       <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
                                                       <td>
-                                <input type="file" name="banner_image"  class="form-control" placeholder="" required value="" />
+                                <input type="file" name="banner_image"  class="form-control" placeholder="" value="" />
                                                     </td>
                                                     <td>
                                                         <?php if($banner->banner_image!=""){  ?>

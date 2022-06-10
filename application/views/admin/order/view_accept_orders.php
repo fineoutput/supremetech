@@ -80,7 +80,7 @@
 
 
                               ?></td>
-                            <td><?php echo $data->total_amount;  ?></td>
+                            <td>₹<?php echo $data->total_amount;  ?></td>
                             <td><?php $check_prmocode_id= $data->promocode_id;
                                $this->db->select('*');
                                            $this->db->from('tbl_promocode');

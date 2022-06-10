@@ -11,7 +11,7 @@
           <section class="content">
           <div class="row">
              <div class="col-lg-12">
-                 <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Banners/add_banners" role="button" style="margin-bottom:12px;"> Add banners</a>
+                 <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Banners/add_banners" role="button" style="margin-bottom:12px;"> Add banners</a> -->
                               <div class="panel panel-default">
                                   <div class="panel-heading">
                                       <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Appbanner</h3>
@@ -80,7 +80,7 @@
 <li><a href="<?php echo base_url() ?>dcadmin/Banners/updatebannersStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
 <?php		}   ?>
 <li><a href="<?php echo base_url() ?>dcadmin/Banners/update_banners/<?php echo base64_encode($data->id) ?>">Edit</a></li>
-<li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li>
+<!-- <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li> -->
 </ul>
 </div>
 </div>
