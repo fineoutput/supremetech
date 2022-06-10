@@ -1521,7 +1521,20 @@ foreach($productslimitdata->result() as $limit) {
 //   $m1="";
 // }
 
+$this->db->select('*');
+$this->db->from('tbl_inventory');
+$this->db->where('product_id',$limit->id);
+$inventory_data= $this->db->get()->row();
 
+if(!empty($inventory_data)){
+if($inventory_data->quantity>0){
+$stock = 1;
+}else{
+$stock =0;
+}
+}else{
+$stock =0;
+}
 
 
 
@@ -1532,13 +1545,14 @@ $products[] = array(
 // 'sucategory'=> $s1,
 // 'minorcategory'=>$m1,
 'productimage'=> base_url().$limit->image,
-'productimage1'=> base_url().$limit->image1,
-'productimage2'=> base_url().$limit->video1,
-'productimage3'=> base_url().$limit->video2,
+// 'productimage1'=> base_url().$limit->image1,
+// 'productimage2'=> base_url().$limit->video1,
+// 'productimage3'=> base_url().$limit->video2,
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
 'max'=>$limit->max,
+'stock'=>$stock
 // 'inventory'=> $data->inventory
 );
 }
