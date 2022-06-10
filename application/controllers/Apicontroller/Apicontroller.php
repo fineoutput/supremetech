@@ -3132,6 +3132,8 @@ $total = $order1_data->total_amount;
             $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
             $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
             $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
 
 
 
@@ -3151,6 +3153,8 @@ $total = $order1_data->total_amount;
                 $ledtype_id=$this->input->post('ledtype_id');
                 $size_id=$this->input->post('size_id');
                 $lens_id=$this->input->post('lens_id');
+                $night_vision_id=$this->input->post('night_vision_id');
+                $audio_type_id=$this->input->post('audio_type_id');
 
 
                 $brand_info = explode(',', $brand_id);
@@ -3167,6 +3171,8 @@ $total = $order1_data->total_amount;
                 $ledtype_info = explode(',', $ledtype_id);
                 $size_info = explode(',', $size_id);
                 $lens_info = explode(',', $lens_id);
+                $night_vision_info = explode(',', $night_vision_id);
+                $audio_type_info = explode(',', $audio_type_id);
 
 
                 $this->db->select('*');
@@ -3240,6 +3246,16 @@ $total = $order1_data->total_amount;
                 if (!empty($lens_info[0])) {
                     foreach ($lens_info as $data12) {
                         $this->db->or_where('lens', $data12, null, false);
+                    }
+                }
+                if (!empty($night_vision_info[0])) {
+                    foreach ($night_vision_info as $data13) {
+                        $this->db->or_where('night_vision', $data13);
+                    }
+                }
+                if (!empty($audio_type_info[0])) {
+                    foreach ($audio_type_info as $data14) {
+                        $this->db->or_where('audio_type', $data14);
                     }
                 }
 
@@ -3610,6 +3626,50 @@ $total = $order1_data->total_amount;
             }
         }
 
+        //audio type
+        $this->db->from('tbl_audio_type');
+        $audio_type_datas= $this->db->get();
+        $audio_data=[];
+        $audio=json_decode($minorcategory_data->audio_type);
+        if (!empty($audio)) {
+            foreach ($audio_type_datas->result() as $value13) {
+                $a=0;
+                foreach ($audio as $data) {
+                    if ($data==$value13->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $audio_data[]=array(
+'id'=>$value13->id,
+'name'=>$value13->filtername
+);
+                }
+            }
+        }
+
+        //night_vision type
+        $this->db->from('tbl_night_vision');
+        $night_vision_datas= $this->db->get();
+        $night_vision_data=[];
+        $night_vision=json_decode($minorcategory_data->night_vision);
+        if (!empty($night_vision)) {
+            foreach ($night_vision_datas->result() as $value14) {
+                $a=0;
+                foreach ($night_vision as $data) {
+                    if ($data==$value14->id) {
+                        $a=1;
+                    }
+                }
+                if ($a==1) {
+                    $night_vision_data[]=array(
+'id'=>$value14->id,
+'name'=>$value14->filtername
+);
+                }
+            }
+        }
+
         $filter_name=[];
         $filter_name[]=array(
 'brand'=>$brands_data,
@@ -3626,6 +3686,8 @@ $total = $order1_data->total_amount;
 'ledtype'=>$ledtype_data,
 'size'=>$size_data,
 'lens'=>$lens_data,
+'audio_type'=>$audio_data,
+'night_vision'=>$night_vision_data
 );
 
         header('Access-Control-Allow-Origin: *');
