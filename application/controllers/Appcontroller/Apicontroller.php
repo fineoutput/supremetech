@@ -4541,4 +4541,62 @@ $total = $order1_data->total_amount;
             echo json_encode($res);
         }
     }
+
+    //----view store_details-------
+    public function store_details()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $headers = apache_request_headers();
+
+        $phone=$headers['Phone'];
+        $authentication=$headers['Authentication'];
+        $token_id=$headers['Tokenid'];
+
+                $this->db->select('*');
+                $this->db->from('tbl_users');
+                $this->db->where('phone', $phone);
+                $user_data= $this->db->get()->row();
+
+                if (!empty($user_data)) {
+                    if ($user_data->authentication==$authentication) {
+                        $this->db->select('*');
+                        $this->db->from('tbl_store');
+                        $store_data= $this->db->get();
+                        $store_info = [];
+                        foreach ($store_data->result() as $data) {
+                            $store_info[]=array(
+'id'=>$data->id,
+'name'=>$data->name,
+'address'=>$data->address,
+'pincode'=>$data->pincode,
+'contact1'=>$data->contact1,
+'contact2'=>$data->contact2,
+);
+                        }
+                        $res = array('message'=>'success',
+'status'=>200,
+'data'=>$store_info,
+);
+
+                        echo json_encode($res);
+                    } else {
+                        $res = array('message'=>'Wrong Authentication',
+'status'=>201
+);
+
+                        echo json_encode($res);
+                    }
+                } else {
+                    $res = array('message'=>'user not found',
+'status'=>201
+);
+
+                    echo json_encode($res);
+                }
+
+
+    }
+
 }
