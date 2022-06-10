@@ -2979,6 +2979,17 @@ $res = array('message'=>$product_data->productname.'is out of stock! Please remo
 echo json_encode($res);
 exit;
 }
+if($product_data->max > $data->quantity){
+
+}else{
+  header('Access-Control-Allow-Origin: *');
+  $res = array('message'=>'Maximum purchase limit exceeded',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+  exit;
+}
 
 
 }//end of foreach
