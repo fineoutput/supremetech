@@ -98,7 +98,7 @@ class Apicontroller extends CI_Controller
 
     //  ========== Product Api minorcategory =============
 
-    public function get_minorcategory_products()
+      public function get_minorcategory_products()
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -134,6 +134,20 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
+
+                  $this->db->select('*');
+                  $this->db->from('tbl_inventory');
+                  $this->db->where('product_id', $data->id);
+                  $inventory_data = $this->db->get()->row();
+                  if (!empty($inventory_data)) {
+                      if ($inventory_data->quantity>0) {
+                          $stock = 1;
+                      } else {
+                          $stock =0;
+                      }
+                  } else {
+                      $stock =0;
+                  }
                     $product[] = array(
 'product_id'=>$data->id,
 'product_name'=>$data->productname,
@@ -141,7 +155,8 @@ class Apicontroller extends CI_Controller
 'mrp'=> $data->mrp,
 'price'=>$data->sellingprice,
 'image'=>base_url().$data->image,
-'max'=>$data->max
+'max'=>$data->max,
+'stock'=>$stock
 
 );
                 }
@@ -1506,6 +1521,19 @@ class Apicontroller extends CI_Controller
 
         $related_info = [];
         foreach ($related_data->result() as $data) {
+          $this->db->select('*');
+          $this->db->from('tbl_inventory');
+          $this->db->where('product_id', $data->id);
+          $inventory_data = $this->db->get()->row();
+          if (!empty($inventory_data)) {
+              if ($inventory_data->quantity>0) {
+                  $stock = 1;
+              } else {
+                  $stock =0;
+              }
+          } else {
+              $stock =0;
+          }
             if ($data->id!=$id) {
             }
             $related_info[]  = array(
@@ -1515,7 +1543,8 @@ class Apicontroller extends CI_Controller
 'productdescription'=>$data->productdescription,
 'mrp'=>$data->mrp,
 'price'=>$data->sellingprice,
-'max'=>$data->max
+'max'=>$data->max,
+'stock'=>$stock
 );
         }
 
