@@ -1557,40 +1557,20 @@ class Apicontroller extends CI_Controller
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
 
-//category
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_category');
-            //   $this->db->where('id',$limit->subcategory_id);
-            //   $cat= $this->db->get()->row();
-            //   if(!empty($cat)){
-            //   $c1=$cat->category;
-            //   }
-            //   else{
-            //   $c1="";
-            //   }
-//
-//
-            //   //subcategory
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_subcategory');
-            //   $this->db->where('id',$limit->subcategory_id);
-            //   $sub= $this->db->get()->row();
-            //   if(!empty($sub)){
-            //   $s1=$sub->subcategory;
-            //   }else{
-            //   $s1="";
-            //   }
-//
-            //   //type --
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_minorcategory');
-//     $this->db->where('id',$limit->minorcategory_id);
-            //   $minor= $this->db->get()->row();
-            //   if(!empty($minor)){
-//     $m1=$minor->minorcategoryname;
-            // }else{
-            //   $m1="";
-            // }
+            $this->db->select('*');
+            $this->db->from('tbl_inventory');
+            $this->db->where('product_id', $limit->id);
+            $inventory_data= $this->db->get()->row();
+
+            if (!empty($inventory_data)) {
+                if ($inventory_data->quantity>0) {
+                    $stock = 1;
+                } else {
+                    $stock =0;
+                }
+            } else {
+                $stock =0;
+            }
 
 
 
@@ -1609,7 +1589,8 @@ class Apicontroller extends CI_Controller
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
-'max'=>$limit->max
+'max'=>$limit->max,
+'stock'=>$stock
 
 // 'colours'=> $limit->colours,
 // 'inventory'=> $data->inventory
@@ -1709,6 +1690,20 @@ class Apicontroller extends CI_Controller
         $data= $this->db->get();
         $feature=[];
         foreach ($data->result() as $limit) {
+          $this->db->select('*');
+          $this->db->from('tbl_inventory');
+          $this->db->where('product_id', $limit->id);
+          $inventory_data= $this->db->get()->row();
+
+          if (!empty($inventory_data)) {
+              if ($inventory_data->quantity>0) {
+                  $stock = 1;
+              } else {
+                  $stock =0;
+              }
+          } else {
+              $stock =0;
+          }
             $feature[] = array(
 'product_id'=>$limit->id,
 'productname'=> $limit->productname,
@@ -1719,7 +1714,8 @@ class Apicontroller extends CI_Controller
 'mrp'=> $limit->mrp,
 'price'=>$limit->sellingprice,
 'productdescription'=> $limit->productdescription,
-'max'=>$limit->max
+'max'=>$limit->max,
+'stock'=>$stock
 
 );
         }
