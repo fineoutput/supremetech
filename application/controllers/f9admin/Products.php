@@ -34,57 +34,6 @@
                    $this->db->where('category_id', $id);
                    $data['products_data']= $this->db->get();
 
-                   //             $this->db->select('*');
-                   // $this->db->from('tbl_inventory');
-                   // // $this->db->where('',$usr);
-                   // $data['inventory_data']= $this->db->get();
-
-                   $this->load->view('admin/common/header_view', $data);
-                   $this->load->view('admin/products/view_products');
-                   $this->load->view('admin/common/footer_view');
-               } else {
-                   redirect("login/admin_login", "refresh");
-               }
-           }
-           public function view_product_categories()
-           {
-               if (!empty($this->session->userdata('admin_data'))) {
-                   $this->db->select('*');
-                   $this->db->from('tbl_category');
-                   $this->db->where('is_active', 1);
-                   $data['category_data']= $this->db->get();
-
-
-                   $this->load->view('admin/common/header_view', $data);
-                   $this->load->view('admin/products/view_product_categories');
-                   $this->load->view('admin/common/footer_view');
-               } else {
-                   redirect("login/admin_login", "refresh");
-               }
-           }
-
-           public function add_products($idd)
-           {
-               if (!empty($this->session->userdata('admin_data'))) {
-                   $id=base64_decode($idd);
-                   $data['id']=$idd;
-
-
-                   $this->db->select('*');
-                   $this->db->from('tbl_category');
-                   $this->db->where('is_active', 1);
-                   $data['category_data']= $this->db->get();
-
-                   $this->db->select('*');
-                   $this->db->from('tbl_subcategory');
-                   $this->db->where('category_id', $id);
-                   $this->db->where('is_active', 1);
-                   $data['subcategory_data']= $this->db->get();
-
-                   $this->db->select('*');
-                   $this->db->from('tbl_minorcategory');
-                   $this->db->where('is_active', 1);
-                   $data['minorcategory_data']= $this->db->get();
 
                    //Brands
                    $this->db->select('*');
@@ -168,12 +117,433 @@
                    //$this->db->where('_id',$id);
                    $data['audio_type_data']= $this->db->get();
 
+                   //             $this->db->select('*');
+                   // $this->db->from('tbl_inventory');
+                   // // $this->db->where('',$usr);
+                   // $data['inventory_data']= $this->db->get();
+
+                   $this->load->view('admin/common/header_view', $data);
+                   $this->load->view('admin/products/view_products');
+                   $this->load->view('admin/common/footer_view');
+               } else {
+                   redirect("login/admin_login", "refresh");
+               }
+           }
+           public function view_product_categories()
+           {
+               if (!empty($this->session->userdata('admin_data'))) {
+                   $this->db->select('*');
+                   $this->db->from('tbl_category');
+                   $this->db->where('is_active', 1);
+                   $data['category_data']= $this->db->get();
+
+
+                   $this->load->view('admin/common/header_view', $data);
+                   $this->load->view('admin/products/view_product_categories');
+                   $this->load->view('admin/common/footer_view');
+               } else {
+                   redirect("login/admin_login", "refresh");
+               }
+           }
+
+           public function add_products($idd)
+           {
+               if (!empty($this->session->userdata('admin_data'))) {
+                   $id=base64_decode($idd);
+                   $data['id']=$idd;
+
+
+                   $this->db->select('*');
+                   $this->db->from('tbl_category');
+                   $this->db->where('is_active', 1);
+                   $data['category_data']= $this->db->get();
+
+                   $this->db->select('*');
+                   $this->db->from('tbl_subcategory');
+                   $this->db->where('category_id', $id);
+                   $this->db->where('is_active', 1);
+                   $data['subcategory_data']= $this->db->get();
+
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_minorcategory');
+                   // $this->db->where('is_active', 1);
+                   // $data['minorcategory_data']= $this->db->get();
+                   //
+                   // //Brands
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_brands');
+                   // //$this->db->where('_id',$id);
+                   // $data['brand_data']= $this->db->get();
+                   //
+                   // //resolution
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_resolution');
+                   // //$this->db->where('_id',$id);
+                   // $data['resolution_data']= $this->db->get();
+                   // //Lens
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_lens');
+                   // //$this->db->where('_id',$id);
+                   // $data['lens_data']= $this->db->get();
+                   // // ir Distance
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_irdistance');
+                   // //$this->db->where('_id',$id);
+                   // $data['distance_data']= $this->db->get();
+                   // //camera type
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_cameratype');
+                   // //$this->db->where('_id',$id);
+                   // $data['camera_data']= $this->db->get();
+                   //
+                   // // body Material
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_bodymaterial');
+                   // //$this->db->where('_id',$id);
+                   // $data['body_data']= $this->db->get();
+                   // // video Channel
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_videochannel');
+                   // //$this->db->where('_id',$id);
+                   // $data['video_data']= $this->db->get();
+                   // // poe Ports
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_poeports');
+                   // //$this->db->where('_id',$id);
+                   // $data['port_data']= $this->db->get();
+                   // // SATA ports
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_sataports');
+                   // //$this->db->where('_id',$id);
+                   // $data['sata_data']= $this->db->get();
+                   //
+                   // //Length
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_length');
+                   // //$this->db->where('_id',$id);
+                   // $data['length_data']= $this->db->get();
+                   // //screen size
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_screensize');
+                   // //$this->db->where('_id',$id);
+                   // $data['screen_data']= $this->db->get();
+                   // //led type
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_ledtype');
+                   // //$this->db->where('_id',$id);
+                   // $data['led_data']= $this->db->get();
+                   //
+                   // //size
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_size');
+                   // //$this->db->where('_id',$id);
+                   // $data['size_data']= $this->db->get();
+                   //
+                   // //night vision
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_night_vision');
+                   // //$this->db->where('_id',$id);
+                   // $data['nv_data']= $this->db->get();
+                   //
+                   // //audio type
+                   // $this->db->select('*');
+                   // $this->db->from('tbl_audio_type');
+                   // //$this->db->where('_id',$id);
+                   // $data['audio_type_data']= $this->db->get();
+
                    $this->load->view('admin/common/header_view', $data);
                    $this->load->view('admin/products/add_products');
                    $this->load->view('admin/common/footer_view');
                } else {
                    redirect("login/admin_login", "refresh");
                }
+           }
+
+           public function set_filters()
+           {
+               $minorid =$this->input->post('minorid');
+               // echo $minorid;
+               $this->db->select('*');
+               $this->db->from('tbl_minorcategory');
+               $this->db->where('id', $minorid);
+               $minor_data = $this->db->get()->row();
+
+               $brands=[];
+               $brands[] = array('id'=>'', 'name'=>'None Selected');
+               $brand_json = json_decode($minor_data->brand);
+               // print_r($brand_json);die();
+               if (!empty($brand_json)) {
+                   // echo "hi";
+                   foreach ($brand_json as $data1) {
+                       //Brands
+                       $this->db->select('*');
+                       $this->db->from('tbl_brands');
+                       $this->db->where('id', $data1);
+                       $brand_result = $this->db->get()->row();
+                       $brands[] = array('id'=>$brand_result->id, 'name'=>$brand_result->name);
+                   }
+                   $data['brands'] = json_encode($brands);
+               } else {
+                   $data['brands'] = '';
+               }
+
+               //resolution
+               $resolution=[];
+               $resolution[]=array('id'=>'', 'name'=>'None Selected');
+               $resolution_json = json_decode($minor_data->resolution);
+               if (!empty($resolution_json)) {
+                   // echo "hi";
+                   foreach ($resolution_json as $data2) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_resolution');
+                       $this->db->where('id', $data2);
+                       $resolution_result= $this->db->get()->row();
+                       $resolution[] = array('id'=>$resolution_result->id, 'name'=>$resolution_result->filtername);
+                   }
+                   $data['resolution'] = json_encode($resolution);
+               } else {
+                   $data['resolution'] = '';
+               }
+               //Lens
+               $lens=[];
+               $lens=array('id'=>'', 'name'=>'None Selected');
+               $lens_json = json_decode($minor_data->lens);
+               if (!empty($lens_json)) {
+                   foreach ($lens_json as $data3) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_lens');
+                       $this->db->where('id', $data3);
+                       $lens_result = $this->db->get()->row();
+                       $lens[] = array('id'=>$lens_result->id, 'name'=>$lens_result->filtername);
+                   }
+                   $data['lens']  = json_encode($lens);
+               } else {
+                   $data['lens'] = '';
+               }
+
+               // ir Distance
+               $irdistance = [];
+               $irdistance[] = array('id'=>'', 'name'=>'None Selected');
+               $irdistance_json = json_decode($minor_data->ir_distance);
+               if (!empty($irdistance_json)) {
+                   foreach ($irdistance_json as $data4) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_irdistance');
+                       $this->db->where('id', $data4);
+                       $irdistance_result = $this->db->get()->row();
+                       $irdistance[] = array('id'=>$irdistance_result->id, 'name'=>$irdistance_result->filtername);
+                   }
+                   $data['irdistance'] = json_encode($irdistance);
+               } else {
+                   $data['irdistance'] = '';
+               }
+
+               //camera type
+               $camera_type = [];
+               $camera_type[] = array('id'=>'', 'name'=>'None Selected');
+               $camera_type_json = json_decode($minor_data->camera_type);
+               if (!empty($camera_type_json)) {
+                   foreach ($camera_type_json as $data5) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_cameratype');
+                       $this->db->where('id', $data5);
+                       $camera_type_result = $this->db->get()->row();
+                       $camera_type[] = array('id'=>$camera_type_result->id, 'name'=>$camera_type_result->filtername);
+                   }
+                   $data['camera_type'] = json_encode($camera_type);
+               } else {
+                   $data['camera_type'] = '';
+               }
+
+
+               // body Material
+               $body_material = [];
+               $body_material[] = array('id'=>'', 'name'=>'None Selected');;
+               $body_material_json = json_decode($minor_data->body_materials);
+               if (!empty($body_material_json)) {
+                   foreach ($body_material_json as $data6) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_bodymaterial');
+                       $this->db->where('id', $data6);
+                       $body_material_result = $this->db->get()->row();
+                       $body_material[] = array('id'=>$body_material_result->id, 'name'=>$body_material_result->filter_name);
+                   }
+                   $data['body_material'] = json_encode($body_material);
+               } else {
+                   $data['body_material'] = '';
+               }
+
+               // video Channel
+               $video_channel = [];
+               $video_channel[] = array('id'=>'', 'name'=>'None Selected');
+               $video_channel_json = json_decode($minor_data->video_channel);
+               if (!empty($video_channel_json)) {
+                   foreach ($video_channel_json as $data7) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_videochannel');
+                       $this->db->where('id', $data7);
+                       $video_channel_result = $this->db->get()->row();
+                       $video_channel[] = array('id'=>$video_channel_result->id, 'name'=>$video_channel_result->filter_name);
+                   }
+                   $data['video_channel'] = json_encode($video_channel);
+               } else {
+                   $data['video_channel'] = '';
+               }
+
+               // poe Ports
+               $pov_ports = [];
+               $pov_ports[] = array('id'=>'', 'name'=>'None Selected');
+               $pov_ports_json = json_decode($minor_data->poe_ports);
+               if (!empty($pov_ports_json)) {
+                   foreach ($pov_ports_json as $data8) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_poeports');
+                       $this->db->where('id',$data8);
+                       $pov_ports_result = $this->db->get()->row();
+                       $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filtername);
+                   }
+                   $data['pov_ports'] = json_encode($pov_ports);
+               } else {
+                   $data['pov_ports'] = '';
+               }
+
+               // Poe Type
+               $pov_type = [];
+               $pov_type[] = array('id'=>'', 'name'=>'None Selected');
+               $pov_type_json = json_decode($minor_data->poe_type);
+               if (!empty($pov_type_json)) {
+                   foreach ($pov_type_json as $data16) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_poeports');
+                       $this->db->where('id',$data16);
+                       $pov_type_result = $this->db->get()->row();
+                       $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filtername);
+                   }
+                   $data['pov_type'] = json_encode($pov_type);
+               } else {
+                   $data['pov_type'] = '';
+               }
+
+               // SATA ports
+               $sata_ports = [];
+               $sata_ports[] = array('id'=>'', 'name'=>'None Selected');
+               $sata_ports_json = json_decode($minor_data->sata_ports);
+               if (!empty($sata_ports_json)) {
+                   foreach ($sata_ports_json as $data9) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_sataports');
+                       $this->db->where('id', $data9);
+                       $sata_ports_result = $this->db->get()->row();
+                       $sata_ports[] = array('id'=>$sata_ports_result, 'name'=>$sata_ports_result->filter_name);
+                   }
+                   $data['sata_ports'] = json_encode($sata_ports);
+               } else {
+                   $data['sata_ports'] = '';
+               }
+
+
+               //Length
+               $length = [];
+               $length[] = array('id'=>'', 'name'=>'None Selected');
+               $length_json = json_decode($minor_data->length);
+               if (!empty($length_json)) {
+                   foreach ($length_json as $data10) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_length');
+                       $this->db->where('id', $data10);
+                       $length_result = $this->db->get()->row();
+                       $length[] = array('id'=>$length_result->id, 'name'=>$length_result->filter_name);
+                   }
+                   $data['length'] = json_encode($length);
+               } else {
+                   $data['length'] = '';
+               }
+               //screen size
+               $screen_size = [];
+               $screen_size[] = array('id'=>'', 'name'=>'None Selected');
+               $screen_size_json = json_decode($minor_data->screen_size);
+               if (!empty($screen_size_json)) {
+                   foreach ($screen_size_json as $data11) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_screensize');
+                       $this->db->where('id', $data11);
+                       $screen_size_result = $this->db->get()->row();
+                       $screen_size[] = array('id'=>$screen_size_result->id, 'name'=>$screen_size_result->filter_name);
+                   }
+                   $data['screen_size'] = json_encode($screen_size);
+               } else {
+                   $data['screen_size'] = '';
+               }
+               //led type
+               $led_type = [];
+               $led_type[] = array('id'=>'', 'name'=>'None Selected');;
+               $led_type_json = json_decode($minor_data->led_type);
+               if (!empty($led_type_json)) {
+                   foreach ($led_type_json as $data12) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_ledtype');
+                       $this->db->where('id', $data12);
+                       $led_type_result= $this->db->get()->row();
+                       $screen_size[] = array('id'=>$led_type_result->id, 'name'=>$led_type_result->filter_name);
+                   }
+                   $data['led_type'] = json_encode($led_type);
+               } else {
+                   $data['led_type'] = '';
+               }
+
+               //size
+               $size = [];
+               $size[] = array('id'=>'', 'name'=>'None Selected');;
+               $size_json = json_decode($minor_data->size);
+               if (!empty($size_json)) {
+                   foreach ($size_json as $data13) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_size');
+                       $this->db->where('id', $data13);
+                       $size_result = $this->db->get()->row();
+                       $size[] = array('id'=>$size_result->id, 'name'=>$size_result->filter_name);
+                   }
+                   $data['size'] = json_encode($size);
+               } else {
+                   $data['size'] = '';
+               }
+
+               //night vision
+               $night_vision = [];
+               $night_vision[] = array('id'=>'', 'name'=>'None Selected');;
+               $night_vision_json = json_decode($minor_data->night_vision);
+               if (!empty($night_vision_json)) {
+                   foreach ($night_vision_json as $data14) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_night_vision');
+                       $this->db->where('id', $id);
+                       $night_vision_result = $this->db->get()->row();
+                       $night_vision[] = array('id'=>$night_vision_result->id, 'name'=>$night_vision_result->filtername);
+                   }
+                   $data['night_vision'] = json_encode($night_vision);
+               } else {
+                   $data['night_vision'] = '';
+               }
+
+               //audio type
+               $audio_type = [];
+               $audio_type[] = array('id'=>'', 'name'=>'None Selected');;
+               $audio_type_json = json_decode($minor_data->audio_type);
+               if (!empty($audio_type_json)) {
+                   foreach ($audio_type_json as $data15) {
+                       $this->db->select('*');
+                       $this->db->from('tbl_audio_type');
+                       $this->db->where('id', $data15);
+                       $audio_type_result = $this->db->get()->row();
+                       $audio_type[] = array('id'=>$audio_type_result->id, 'name'=>$audio_type_result->filtername);
+                   }
+                   $data['audio_type'] = json_encode($audio_type);
+               } else {
+                   $data['audio_type'] = '';
+               }
+               $data['data'] = true;
+
+               echo json_encode($data);
            }
 
            public function getSubcategory()
@@ -248,6 +618,7 @@
                    $this->db->from('tbl_products');
                    $this->db->where('id', $id);
                    $data['products_data']= $this->db->get()->row();
+                   $products_data = $data['products_data'];
 
 
                    $this->db->select('*');
@@ -271,87 +642,285 @@
                    $this->db->where('product_id', $id);
                    $data['inventory_data']= $this->db->get()->row();
 
-                   //Brands
                    $this->db->select('*');
-                   $this->db->from('tbl_brands');
-                   //$this->db->where('_id',$id);
-                   $data['brand_data']= $this->db->get();
+                   $this->db->from('tbl_minorcategory');
+                   $this->db->where('id', $products_data->minorcategory_id);
+                   $minor_data = $this->db->get()->row();
+
+                                     $brands=[];
+                   $brands[] = array('id'=>'', 'name'=>'None Selected');
+                   $brand_json = json_decode($minor_data->brand);
+                   // print_r($brand_json);die();
+                   if (!empty($brand_json)) {
+                       // echo "hi";
+                       foreach ($brand_json as $data1) {
+                           //Brands
+                           $this->db->select('*');
+                           $this->db->from('tbl_brands');
+                           $this->db->where('id', $data1);
+                           $brand_result = $this->db->get()->row();
+                           $brands[] = array('id'=>$brand_result->id, 'name'=>$brand_result->name);
+                       }
+                       $data['brands_data'] = $brands;
+                   } else {
+                       $data['brands_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
 
                    //resolution
-                   $this->db->select('*');
-                   $this->db->from('tbl_resolution');
-                   //$this->db->where('_id',$id);
-                   $data['resolution_data']= $this->db->get();
+                   $resolution=[];
+                   $resolution[]=array('id'=>'', 'name'=>'None Selected');
+                   $resolution_json = json_decode($minor_data->resolution);
+                   if (!empty($resolution_json)) {
+                       // echo "hi";
+                       foreach ($resolution_json as $data2) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_resolution');
+                           $this->db->where('id', $data2);
+                           $resolution_result= $this->db->get()->row();
+                           $resolution[] = array('id'=>$resolution_result->id, 'name'=>$resolution_result->filtername);
+                       }
+                       $data['resolution_data'] = $resolution;
+                   } else {
+                       $data['resolution_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
                    //Lens
-                   $this->db->select('*');
-                   $this->db->from('tbl_lens');
-                   //$this->db->where('_id',$id);
-                   $data['lens_data']= $this->db->get();
+                   $lens=[];
+                   $lens[]=array('id'=>'', 'name'=>'None Selected');
+                   $lens_json = json_decode($minor_data->lens);
+                   if (!empty($lens_json)) {
+                       foreach ($lens_json as $data3) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_lens');
+                           $this->db->where('id', $data3);
+                           $lens_result = $this->db->get()->row();
+                           $lens[] = array('id'=>$lens_result->id, 'name'=>$lens_result->filtername);
+                       }
+                       $data['lens_data']  = $lens;
+                   } else {
+                       $data['lens_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
                    // ir Distance
-                   $this->db->select('*');
-                   $this->db->from('tbl_irdistance');
-                   //$this->db->where('_id',$id);
-                   $data['distance_data']= $this->db->get();
+                   $irdistance = [];
+                   $irdistance[]=array('id'=>'', 'name'=>'None Selected');
+                   $irdistance_json = json_decode($minor_data->ir_distance);
+                   if (!empty($irdistance_json)) {
+                       foreach ($irdistance_json as $data4) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_irdistance');
+                           $this->db->where('id', $data4);
+                           $irdistance_result = $this->db->get()->row();
+                           $irdistance[] = array('id'=>$irdistance_result->id, 'name'=>$irdistance_result->filtername);
+                       }
+                       $data['irdistance_data'] = $irdistance;
+                   } else {
+                        // $something[] = array('id'=>'', 'name'=>'Not Found');
+                       $data['irdistance_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
                    //camera type
-                   $this->db->select('*');
-                   $this->db->from('tbl_cameratype');
-                   //$this->db->where('_id',$id);
-                   $data['camera_data']= $this->db->get();
+                   $camera_type = [];
+                   $camera_type[]=array('id'=>'', 'name'=>'None Selected');
+                   $camera_type_json = json_decode($minor_data->camera_type);
+                   if (!empty($camera_type_json)) {
+                       foreach ($camera_type_json as $data5) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_cameratype');
+                           $this->db->where('id', $data5);
+                           $camera_type_result = $this->db->get()->row();
+                           $camera_type[] = array('id'=>$camera_type_result->id, 'name'=>$camera_type_result->filtername);
+                       }
+                       $data['camera_type'] = $camera_type;
+                   } else {
+                       $data['camera_type'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
 
                    // body Material
-                   $this->db->select('*');
-                   $this->db->from('tbl_bodymaterial');
-                   //$this->db->where('_id',$id);
-                   $data['body_data']= $this->db->get();
+                   $body_material = [];
+                   $body_material[]=array('id'=>'', 'name'=>'None Selected');;
+                   $body_material_json = json_decode($minor_data->body_materials);
+                   if (!empty($body_material_json)) {
+                       foreach ($body_material_json as $data6) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_bodymaterial');
+                           $this->db->where('id', $data6);
+                           $body_material_result = $this->db->get()->row();
+                           $body_material[] = array('id'=>$body_material_result->id, 'name'=>$body_material_result->filter_name);
+                       }
+                       $data['body_material'] = $body_material;
+                   } else {
+                       $data['body_material'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
                    // video Channel
-                   $this->db->select('*');
-                   $this->db->from('tbl_videochannel');
-                   //$this->db->where('_id',$id);
-                   $data['video_data']= $this->db->get();
+                   $video_channel = [];
+                   $video_channel[] = array('id'=>'', 'name'=>'None Selected');
+                   $video_channel_json = json_decode($minor_data->video_channel);
+                   if (!empty($video_channel_json)) {
+                       foreach ($video_channel_json as $data7) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_videochannel');
+                           $this->db->where('id', $data7);
+                           $video_channel_result = $this->db->get()->row();
+                           $video_channel[] = array('id'=>$video_channel_result->id, 'name'=>$video_channel_result->filter_name);
+                       }
+                       $data['video_channel'] = $video_channel;
+                   } else {
+                       $data['video_channel'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
                    // poe Ports
-                   $this->db->select('*');
-                   $this->db->from('tbl_poeports');
-                   //$this->db->where('_id',$id);
-                   $data['port_data']= $this->db->get();
+                   $pov_ports = [];
+                   $pov_ports[]= array('id'=>'', 'name'=>'None Selected');
+                   $pov_ports_json = json_decode($minor_data->poe_ports);
+                   if (!empty($pov_ports_json)) {
+                       foreach ($pov_ports_json as $data8) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_poeports');
+                           $this->db->where('id',$data8);
+                           $pov_ports_result = $this->db->get()->row();
+                           $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filtername);
+                       }
+                       $data['pov_ports'] = $pov_ports;
+                   } else {
+                       $data['pov_ports'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
+                   // Poe Type
+                   $pov_type = [];
+                   $pov_type[] = array('id'=>'', 'name'=>'None Selected');
+                   $pov_type_json = json_decode($minor_data->poe_type);
+                   if (!empty($pov_type_json)) {
+                       foreach ($pov_type_json as $data16) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_poetype');
+                           $this->db->where('id',$data16);
+                           $pov_type_result = $this->db->get()->row();
+                           $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filtername);
+                       }
+                       $data['pov_type'] = $pov_type;
+                   } else {
+                       $data['pov_type'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
                    // SATA ports
-                   $this->db->select('*');
-                   $this->db->from('tbl_sataports');
-                   //$this->db->where('_id',$id);
-                   $data['sata_data']= $this->db->get();
+                   $sata_ports = [];
+                   $sata_ports[] = array('id'=>'', 'name'=>'None Selected');
+                   $sata_ports_json = json_decode($minor_data->sata_ports);
+                   if (!empty($sata_ports_json)) {
+                       foreach ($sata_ports_json as $data9) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_sataports');
+                           $this->db->where('id', $data9);
+                           $sata_ports_result = $this->db->get()->row();
+                           $sata_ports[] = array('id'=>$sata_ports_result, 'name'=>$sata_ports_result->filtername);
+                       }
+                       $data['sata_ports'] = $sata_ports;
+                   } else {
+                       $data['sata_ports'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
+
 
                    //Length
-                   $this->db->select('*');
-                   $this->db->from('tbl_length');
-                   //$this->db->where('_id',$id);
-                   $data['length_data']= $this->db->get();
+                   $length = [];
+                   $length[] = array('id'=>'', 'name'=>'None Selected');
+                   $length_json = json_decode($minor_data->length);
+                   if (!empty($length_json)) {
+                       foreach ($length_json as $data10) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_length');
+                           $this->db->where('id', $data10);
+                           $length_result = $this->db->get()->row();
+                           $length[] = array('id'=>$length_result->id, 'name'=>$length_result->filter_name);
+                       }
+                       $data['length_data'] = $length;
+                   } else {
+                       $data['length_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
                    //screen size
-                   $this->db->select('*');
-                   $this->db->from('tbl_screensize');
-                   //$this->db->where('_id',$id);
-                   $data['screen_data']= $this->db->get();
+                   $screen_size = [];
+                   $screen_size[] = array('id'=>'', 'name'=>'None Selected');
+                   $screen_size_json = json_decode($minor_data->screen_size);
+                   if (!empty($screen_size_json)) {
+                       foreach ($screen_size_json as $data11) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_screensize');
+                           $this->db->where('id', $data11);
+                           $screen_size_result = $this->db->get()->row();
+                           $screen_size[] = array('id'=>$screen_size_result->id, 'name'=>$screen_size_result->filtername);
+                       }
+                       $data['screen_size'] = $screen_size;
+                   } else {
+                       $data['screen_size'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
                    //led type
-                   $this->db->select('*');
-                   $this->db->from('tbl_ledtype');
-                   //$this->db->where('_id',$id);
-                   $data['led_data']= $this->db->get();
+                   $led_type = [];
+                   $led_type[] = array('id'=>'', 'name'=>'None Selected');;
+                   $led_type_json = json_decode($minor_data->led_type);
+                   if (!empty($led_type_json)) {
+                       foreach ($led_type_json as $data12) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_ledtype');
+                           $this->db->where('id', $data12);
+                           $led_type_result= $this->db->get()->row();
+                           $led_type[] = array('id'=>$led_type_result->id, 'name'=>$led_type_result->filtername);
+                       }
+                       $data['led_type'] = $led_type;
+                   } else {
+                       $data['led_type'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
 
                    //size
-                   $this->db->select('*');
-                   $this->db->from('tbl_size');
-                   //$this->db->where('_id',$id);
-                   $data['size_data']= $this->db->get();
+                   $size = [];
+                   $size[] = array('id'=>'', 'name'=>'None Selected');;
+                   $size_json = json_decode($minor_data->size);
+                   if (!empty($size_json)) {
+                       foreach ($size_json as $data13) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_size');
+                           $this->db->where('id', $data13);
+                           $size_result = $this->db->get()->row();
+                           $size[] = array('id'=>$size_result->id, 'name'=>$size_result->filtername);
+                       }
+                       $data['size_data'] = $size;
+                   } else {
+                       $data['size_data'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
 
                    //night vision
-                   $this->db->select('*');
-                   $this->db->from('tbl_night_vision');
-                   //$this->db->where('_id',$id);
-                   $data['nv_data']= $this->db->get();
+                   $night_vision = [];
+                   $night_vision[] = array('id'=>'', 'name'=>'None Selected');;
+                   $night_vision_json = json_decode($minor_data->night_vision);
+                   if (!empty($night_vision_json)) {
+                       foreach ($night_vision_json as $data14) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_night_vision');
+                           $this->db->where('id', $id);
+                           $night_vision_result = $this->db->get()->row();
+                           $night_vision[] = array('id'=>$night_vision_result->id, 'name'=>$night_vision_result->filtername);
+                       }
+                       $data['night_vision'] = $night_vision;
+                   } else {
+                       $data['night_vision'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
 
                    //audio type
-                   $this->db->select('*');
-                   $this->db->from('tbl_audio_type');
-                   //$this->db->where('_id',$id);
-                   $data['audio_type_data']= $this->db->get();
+                   $audio_type = [];
+                   $audio_type[] = array('id'=>'', 'name'=>'None Selected');;
+                   $audio_type_json = json_decode($minor_data->audio_type);
+                   if (!empty($audio_type_json)) {
+                       foreach ($audio_type_json as $data15) {
+                           $this->db->select('*');
+                           $this->db->from('tbl_audio_type');
+                           $this->db->where('id', $data15);
+                           $audio_type_result = $this->db->get()->row();
+                           $audio_type[] = array('id'=>$audio_type_result->id, 'name'=>$audio_type_result->filtername);
+                       }
+                       $data['audio_type'] = $audio_type;
+                   } else {
+                       $data['audio_type'][] = array('id'=>'', 'name'=>'Not Found');
+                   }
 
 
 
@@ -818,7 +1387,6 @@
                                    redirect($_SERVER['HTTP_REFERER']);
                                }
                            }
-
                        } else {
                            $this->session->set_flashdata('emessage', validation_errors());
                            redirect($_SERVER['HTTP_REFERER']);
@@ -870,7 +1438,7 @@
                        $zapak=$this->db->update('tbl_products', $data_update);
 
                        if ($zapak!=0) {
-                         $this->session->set_flashdata('smessage', 'Product status updated successfully');
+                           $this->session->set_flashdata('smessage', 'Product status updated successfully');
                            redirect($_SERVER['HTTP_REFERER']);
                        } else {
                            $this->session->set_flashdata('emessage', 'Sorry error occured');
