@@ -532,6 +532,15 @@
 
 
                        $zapak=$this->db->delete('tbl_minorcategory', array('id' => $id));
+                       $this->db->select('*');
+                       $this->db->from('tbl_products');
+                       $this->db->where('minorcategory_id', $id);
+                       $product_data = $this->db->get();
+                       foreach($product_data->result() as $pro){
+                        $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
+                        $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
+                       }
+                       $zapak=$this->db->delete('tbl_products', array('minorcategory_id' => $id));
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Minorcategory deleted successfully');
 

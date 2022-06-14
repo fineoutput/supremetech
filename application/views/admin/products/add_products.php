@@ -133,7 +133,7 @@
                       <td> <input type="number" name="Inventory" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Weight</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Weight</strong> <span style="color:red;">*<br/>in grams</span> </td>
                       <td> <input type="text" onkeypress="return valide_weight(event)" name="weight" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
                     <tr>

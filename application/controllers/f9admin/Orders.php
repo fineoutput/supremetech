@@ -86,7 +86,7 @@ class Orders extends CI_finecontrol
 
                 if ($zapak!=0) {
                     $this->session->set_flashdata('smessage', 'Order status updated successfully');
-                    redirect("dcadmin/Orders/view_accept_order", "refresh");
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;
@@ -103,7 +103,7 @@ class Orders extends CI_finecontrol
 
                 if ($zapak!=0) {
                     $this->session->set_flashdata('smessage', 'Order status updated successfully');
-                    redirect("dcadmin/Orders/view_accept_order", "refresh");
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;
@@ -192,7 +192,7 @@ class Orders extends CI_finecontrol
 
                 if ($zapak!=0) {
                     $this->session->set_flashdata('smessage', 'Order status updated successfully');
-                    redirect("dcadmin/Orders/view_dispatched_orders", "refresh");
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;
@@ -225,7 +225,7 @@ class Orders extends CI_finecontrol
 
                 if ($zapak!=0) {
                     $this->session->set_flashdata('smessage', 'Order status updated successfully');
-                    redirect("dcadmin/Orders/view_completed_orders", "refresh");
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;

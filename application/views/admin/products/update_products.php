@@ -169,7 +169,7 @@
                       <td> <input type="number" name="Inventory" class="form-control" placeholder="" value="<? if(!empty($inventory_data->quantity)){ echo $data1=$inventory_data->quantity;}else { echo $data1="";}?>" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Weight</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Weight</strong> <span style="color:red;">*<br/>in grams</span></strong> </td>
                       <td> <input type="number" name="weight" class="form-control" placeholder="" value="<?=$products_data->weight?>" /> </td>
                     </tr>
                     <td> <strong>Feature Product</strong> <span style="color:red;">*</span></strong> </td>

@@ -297,12 +297,23 @@ class Category extends CI_finecontrol
 
             if ($this->load->get_var('position')=="Super Admin") {
                 $zapak=$this->db->delete('tbl_category', array('id' => $id));
+                $zapak=$this->db->delete('tbl_subcategory', array('category_id' => $id));
+                $zapak=$this->db->delete('tbl_minorcategory', array('category_id' => $id));
+                $this->db->select('*');
+                $this->db->from('tbl_products');
+                $this->db->where('category_id', $id);
+                $product_data = $this->db->get();
+                foreach($product_data->result() as $pro){
+                  $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
+                  $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
+                }
+                $zapak=$this->db->delete('tbl_products', array('category_id' => $id));
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Category deleted successfully');
                     redirect("dcadmin/Category/view_category", "refresh");
                 } else {
-                    echo "Error";
-                    exit;
+                  $this->session->set_flashdata('emessage', 'Some unknown error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             } else {
 							$this->session->set_flashdata('emessage', 'Sorry You Dont Have Permission To Delete Anything');

@@ -250,6 +250,16 @@
 
 
                        $zapak=$this->db->delete('tbl_subcategory', array('id' => $id));
+                       $zapak=$this->db->delete('tbl_minorcategory', array('subcategory_id' => $id));
+                       $this->db->select('*');
+                       $this->db->from('tbl_products');
+                       $this->db->where('subcategory_id', $id);
+                       $product_data = $this->db->get();
+                       foreach($product_data->result() as $pro){
+                         $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
+                         $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
+                       }
+                       $zapak=$this->db->delete('tbl_products', array('subcategory_id' => $id));
                        if ($zapak!=0) {
                          $this->session->set_flashdata('smessage', 'Subcategory deleted successfully');
 
