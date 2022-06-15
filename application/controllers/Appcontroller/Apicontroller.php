@@ -214,6 +214,19 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
+                  $this->db->select('*');
+                  $this->db->from('tbl_inventory');
+                  $this->db->where('product_id', $data->id);
+                  $inventory_data = $this->db->get()->row();
+                  if (!empty($inventory_data)) {
+                      if ($inventory_data->quantity>0) {
+                          $stock = 1;
+                      } else {
+                          $stock =0;
+                      }
+                  } else {
+                      $stock =0;
+                  }
                     $product[] = array(
                                     'product_id'=>$data->id,
                                     'product_name'=>$data->productname,
@@ -221,7 +234,8 @@ class Apicontroller extends CI_Controller
                                     'mrp'=> $data->mrp,
                                     'price'=>$data->sellingprice,
                                     'image'=>base_url().$data->image,
-                                    'max'=>$data->max
+                                    'max'=>$data->max,
+                                    'stock'=> $stock
 
 
                                   );
