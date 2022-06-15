@@ -3387,9 +3387,10 @@ class Apicontroller extends CI_Controller
         $this->load->library('form_validation');
         $this->load->helper('security');
         if ($this->input->post()) {
-            $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
+          $headers = apache_request_headers();
+          $phone=$headers['Phone'];
+          $authentication=$headers['Authentication'];
+          $token_id=$headers['Tokenid'];
             $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
             $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
