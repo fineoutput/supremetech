@@ -2560,7 +2560,7 @@ class Apicontroller extends CI_Controller
                         $this->upload_config = array(
 'upload_path'   => $image_upload_folder,
 'file_name' => $new_file_name,
-'allowed_types' =>'pdf|doc|docx|jpg|jpeg|png',
+'allowed_types' =>'jpg|jpeg|png',
 'max_size'      => 25000
 );
                         $this->upload->initialize($this->upload_config);
@@ -2658,6 +2658,7 @@ $total = $order1_data->total_amount;
 'store_id'=>$store_id,
 'payment_status'=>1,
 'order_status'=>1,
+'from'=>'web'
 
 );
 
