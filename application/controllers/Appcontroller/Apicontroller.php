@@ -145,20 +145,19 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
-
-                                    $this->db->select('*');
-                                    $this->db->from('tbl_inventory');
-                                    $this->db->where('product_id', $data->id);
-                                    $inventory_data = $this->db->get()->row();
-                                    if (!empty($inventory_data)) {
-                                        if ($inventory_data->quantity>0) {
-                                            $stock = 1;
-                                        } else {
-                                            $stock =0;
-                                        }
-                                    } else {
-                                        $stock =0;
-                                    }
+                    $this->db->select('*');
+                    $this->db->from('tbl_inventory');
+                    $this->db->where('product_id', $data->id);
+                    $inventory_data = $this->db->get()->row();
+                    if (!empty($inventory_data)) {
+                        if ($inventory_data->quantity>0) {
+                            $stock = 1;
+                        } else {
+                            $stock =0;
+                        }
+                    } else {
+                        $stock =0;
+                    }
                     $product[] = array(
                                     'product_id'=>$data->id,
                                     'product_name'=>$data->productname,
@@ -1571,7 +1570,6 @@ class Apicontroller extends CI_Controller
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
-
             $this->db->select('*');
             $this->db->from('tbl_inventory');
             $this->db->where('product_id', $limit->id);
@@ -1705,20 +1703,20 @@ class Apicontroller extends CI_Controller
         $data= $this->db->get();
         $feature=[];
         foreach ($data->result() as $limit) {
-          $this->db->select('*');
-          $this->db->from('tbl_inventory');
-          $this->db->where('product_id', $limit->id);
-          $inventory_data= $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_inventory');
+            $this->db->where('product_id', $limit->id);
+            $inventory_data= $this->db->get()->row();
 
-          if (!empty($inventory_data)) {
-              if ($inventory_data->quantity>0) {
-                  $stock = 1;
-              } else {
-                  $stock =0;
-              }
-          } else {
-              $stock =0;
-          }
+            if (!empty($inventory_data)) {
+                if ($inventory_data->quantity>0) {
+                    $stock = 1;
+                } else {
+                    $stock =0;
+                }
+            } else {
+                $stock =0;
+            }
             $feature[] = array(
 'product_id'=>$limit->id,
 'productname'=> $limit->productname,
@@ -1782,19 +1780,19 @@ class Apicontroller extends CI_Controller
 
         $related_info = [];
         foreach ($related_data->result() as $data) {
-          $this->db->select('*');
-          $this->db->from('tbl_inventory');
-          $this->db->where('product_id', $data->id);
-          $inventory_data = $this->db->get()->row();
-          if (!empty($inventory_data)) {
-              if ($inventory_data->quantity>0) {
-                  $stock = 1;
-              } else {
-                  $stock =0;
-              }
-          } else {
-              $stock =0;
-          }
+            $this->db->select('*');
+            $this->db->from('tbl_inventory');
+            $this->db->where('product_id', $data->id);
+            $inventory_data = $this->db->get()->row();
+            if (!empty($inventory_data)) {
+                if ($inventory_data->quantity>0) {
+                    $stock = 1;
+                } else {
+                    $stock =0;
+                }
+            } else {
+                $stock =0;
+            }
             if ($data->id!=$id) {
             }
             $related_info[]  = array(
@@ -2685,19 +2683,19 @@ class Apicontroller extends CI_Controller
                 // exit;
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
-                  $this->db->select('*');
-                  $this->db->from('tbl_inventory');
-                  $this->db->where('product_id', $data->id);
-                  $inventory_data = $this->db->get()->row();
-                  if (!empty($inventory_data)) {
-                      if ($inventory_data->quantity>0) {
-                          $stock = 1;
-                      } else {
-                          $stock =0;
-                      }
-                  } else {
-                      $stock =0;
-                  }
+                    $this->db->select('*');
+                    $this->db->from('tbl_inventory');
+                    $this->db->where('product_id', $data->id);
+                    $inventory_data = $this->db->get()->row();
+                    if (!empty($inventory_data)) {
+                        if ($inventory_data->quantity>0) {
+                            $stock = 1;
+                        } else {
+                            $stock =0;
+                        }
+                    } else {
+                        $stock =0;
+                    }
                     $search_data[]=array(
                        'product_id'=>$data->id,
                        'product_name'=>$data->productname,
@@ -3387,10 +3385,10 @@ class Apicontroller extends CI_Controller
         $this->load->library('form_validation');
         $this->load->helper('security');
         if ($this->input->post()) {
-          $headers = apache_request_headers();
-          $phone=$headers['Phone'];
-          $authentication=$headers['Authentication'];
-          $token_id=$headers['Tokenid'];
+            $headers = apache_request_headers();
+            $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
 
             $this->form_validation->set_rules('txn_id', 'txn_id', 'required|xss_clean|trim');
             $this->form_validation->set_rules('payment_type', 'payment_type', 'required|xss_clean|trim');
@@ -3401,7 +3399,7 @@ class Apicontroller extends CI_Controller
             // $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
+            // $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
             if ($this->form_validation->run()== true) {
                 $txn_id=$this->input->post('txn_id');
@@ -3413,7 +3411,7 @@ class Apicontroller extends CI_Controller
                 // $city=$this->input->post('city');
                 // $house_no=$this->input->post('house_no');
                 // $street_address=$this->input->post('street_address');
-                $store_id=$this->input->post('store_id');
+                // $store_id=$this->input->post('store_id');
 
                 $this->load->library('upload');
 
@@ -3436,8 +3434,11 @@ class Apicontroller extends CI_Controller
                         $this->upload->initialize($this->upload_config);
                         if (!$this->upload->do_upload($img1)) {
                             $upload_error = $this->upload->display_errors();
-                            echo json_encode($upload_error);
-                        // echo $upload_error;
+                            $res = array('message'=>$upload_error,
+                                      'status'=>201
+                                      );
+                            echo json_encode($res);
+                            exit;
                         } else {
                             $file_info = $this->upload->data();
 
@@ -3523,7 +3524,7 @@ class Apicontroller extends CI_Controller
   'street_address'=>$user_data->address,
   'final_amount'=>$final_amount,
   'bank_receipt'=>$image,
-  'store_id'=>$store_id,
+  // 'store_id'=>$store_id,
   'payment_status'=>1,
   'order_status'=>1,
   'from'=>'app'
@@ -3589,7 +3590,6 @@ class Apicontroller extends CI_Controller
                     echo json_encode($res);
                 }
             } else {
-
                 $res = array('message'=>validation_errors(),
   'status'=>201
   );
@@ -3597,7 +3597,6 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             }
         } else {
-
             $res = array('message'=>'No data available',
   'status'=>201
   );
@@ -4450,19 +4449,19 @@ class Apicontroller extends CI_Controller
         $authentication=$headers['Authentication'];
         $token_id=$headers['Tokenid'];
 
-                $this->db->select('*');
-                $this->db->from('tbl_users');
-                $this->db->where('phone', $phone);
-                $user_data= $this->db->get()->row();
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('phone', $phone);
+        $user_data= $this->db->get()->row();
 
-                if (!empty($user_data)) {
-                    if ($user_data->authentication==$authentication) {
-                        $this->db->select('*');
-                        $this->db->from('tbl_store');
-                        $store_data= $this->db->get();
-                        $store_info = [];
-                        foreach ($store_data->result() as $data) {
-                            $store_info[]=array(
+        if (!empty($user_data)) {
+            if ($user_data->authentication==$authentication) {
+                $this->db->select('*');
+                $this->db->from('tbl_store');
+                $store_data= $this->db->get();
+                $store_info = [];
+                foreach ($store_data->result() as $data) {
+                    $store_info[]=array(
 'id'=>$data->id,
 'name'=>$data->name,
 'address'=>$data->address,
@@ -4470,29 +4469,26 @@ class Apicontroller extends CI_Controller
 'contact1'=>$data->contact1,
 'contact2'=>$data->contact2,
 );
-                        }
-                        $res = array('message'=>'success',
+                }
+                $res = array('message'=>'success',
 'status'=>200,
 'data'=>$store_info,
 );
 
-                        echo json_encode($res);
-                    } else {
-                        $res = array('message'=>'Wrong Authentication',
+                echo json_encode($res);
+            } else {
+                $res = array('message'=>'Wrong Authentication',
 'status'=>201
 );
 
-                        echo json_encode($res);
-                    }
-                } else {
-                    $res = array('message'=>'user not found',
+                echo json_encode($res);
+            }
+        } else {
+            $res = array('message'=>'user not found',
 'status'=>201
 );
 
-                    echo json_encode($res);
-                }
-
-
+            echo json_encode($res);
+        }
     }
-
 }

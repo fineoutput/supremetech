@@ -2528,7 +2528,7 @@ class Apicontroller extends CI_Controller
             // $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('street_address', 'street_address', 'required|xss_clean|trim');
-            $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
+            // $this->form_validation->set_rules('store_id', 'store_id', 'xss_clean|trim');
 
             if ($this->form_validation->run()== true) {
                 $phone=$this->input->post('phone');
@@ -2543,7 +2543,7 @@ class Apicontroller extends CI_Controller
                 // $city=$this->input->post('city');
                 // $house_no=$this->input->post('house_no');
                 // $street_address=$this->input->post('street_address');
-                $store_id=$this->input->post('store_id');
+                // $store_id=$this->input->post('store_id');
 
                 $this->load->library('upload');
 
@@ -2566,8 +2566,12 @@ class Apicontroller extends CI_Controller
                         $this->upload->initialize($this->upload_config);
                         if (!$this->upload->do_upload($img1)) {
                             $upload_error = $this->upload->display_errors();
-                            echo json_encode($upload_error);
-                        // echo $upload_error;
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>$upload_error,
+                                      'status'=>201
+                                      );
+                            echo json_encode($res);
+                            exit;
                         } else {
                             $file_info = $this->upload->data();
 
@@ -2626,9 +2630,9 @@ class Apicontroller extends CI_Controller
                                     if ($product_data->max > $data->quantity) {
                                     } else {
                                         header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=>'Maximum purchase limit exceeded',
-  'status'=>201
-  );
+                                        $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
+                                              'status'=>201
+                                              );
 
                                         echo json_encode($res);
                                         exit;
@@ -2655,7 +2659,7 @@ $total = $order1_data->total_amount;
 'street_address'=>$user_data->address,
 'final_amount'=>$final_amount,
 'bank_receipt'=>$image,
-'store_id'=>$store_id,
+// 'store_id'=>$store_id,
 'payment_status'=>1,
 'order_status'=>1,
 'from'=>'web'
