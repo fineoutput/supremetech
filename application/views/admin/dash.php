@@ -71,6 +71,7 @@
                   <span class="info-box-text">TOTAL ORDERS</span>
                   <span class="info-box-number"><?$this->db->select('*');
                   $this->db->from('tbl_order1');
+                  $this->db->where('payment_status', 1);
                   $total_orders = $this->db->count_all_results();
                   echo $total_orders; ?></span>
                 </div><!-- /.info-box-content -->
@@ -109,7 +110,7 @@
                 </div></a><!-- /.info-box -->
               </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="<?=base_url()?>dcadmin/Inventory/view_icategory">
+              <a href="javascript:void(0)">
               <div class="info-box">
                 <span class="info-box-icon bg-grey"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">

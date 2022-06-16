@@ -351,11 +351,12 @@
 // exit;
             foreach($sidebar as $sd){
 
-
+              $currentURL = current_url();
+              $urls= base_url().ADMIN_URL."/".$sd['url'];
 
                             ?>
                             <li class="treeview">
-                              <a href="<?
+                              <a style="<?php if($currentURL == $urls){ echo 'background-color:#d7314a; color: white;';}?>" href="<?
                               $this->db->select('*');
                               $this->db->from('tbl_admin_sidebar2');
                               $this->db->where('main_id',$sd['id']);
