@@ -2605,7 +2605,7 @@ class Apicontroller extends CI_Controller
                                 $order2[]=array(
 'product_id' =>$product_data->id,
 'product_name' =>$product_data->productname,
-'product_image' =>base_url().$product_data->image1,
+'product_image' =>base_url().$product_data->image,
 'quantity'=> $data->quantity,
 'price'=>$data->product_mrp,
 'total_amount'=>$data->total_amount,
