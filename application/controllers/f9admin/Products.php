@@ -896,7 +896,7 @@
                        foreach ($night_vision_json as $data14) {
                            $this->db->select('*');
                            $this->db->from('tbl_night_vision');
-                           $this->db->where('id', $id);
+                           $this->db->where('id', $data14);
                            $night_vision_result = $this->db->get()->row();
                            $night_vision[] = array('id'=>$night_vision_result->id, 'name'=>$night_vision_result->filtername);
                        }
