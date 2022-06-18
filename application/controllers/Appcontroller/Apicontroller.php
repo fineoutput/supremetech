@@ -26,7 +26,6 @@ class Apicontroller extends CI_Controller
         $this->db->select('*');
         $this->db->from('tbl_appslider');
         $this->db->where('is_active', 1);
-
         $sliderdata= $this->db->get();
         $slider=[];
         foreach ($sliderdata->result() as $data) {
@@ -4283,9 +4282,10 @@ $total = $order1_data->total_amount;
         $this->db->where('is_active', 1);
         $popup_data= $this->db->get()->row();
 
-        $poopup = [];
+        $poopup =array('image'=>'');
+        if(!empty($popup_data)){
         $popoup = array('image'=>base_url().$popup_data->image);
-
+      }
         $res = array('message'=>'success',
       'status'=>200,
       'data'=>$popoup,
