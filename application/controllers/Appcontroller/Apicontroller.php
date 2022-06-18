@@ -4361,7 +4361,7 @@ class Apicontroller extends CI_Controller
         $this->db->where('is_active', 1);
         $popup_data= $this->db->get()->row();
 
-        $poopup =array('image'=>'');
+        $popoup =array('image'=>'');
         if(!empty($popup_data)){
         $popoup = array('image'=>base_url().$popup_data->image);
       }
