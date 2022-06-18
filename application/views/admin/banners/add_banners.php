@@ -1,12 +1,11 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-          Add New Banner
+          Add New Appbanner
           </h1>
           <ol class="breadcrumb">
-           <li><a href="<?php echo base_url() ?>dcadmin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>dcadmin/banners/view_banners"><i class="fa fa-dashboard"></i> All Banners </a></li>
-
+           <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="<?php echo base_url() ?>dcadmin/Banners/view_banners"><i class="fa fa-dashboard"></i> All Banners </a></li>
           </ol>
         </section>
     <section class="content">
@@ -15,7 +14,7 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Banner</h3>
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Appbanner</h3>
                             </div>
 
                                     <? if(!empty($this->session->flashdata('smessage'))){ ?>
@@ -36,7 +35,7 @@
 
                             <div class="panel-body">
                                 <div class="col-lg-10">
-                                   <form action="<?php echo base_url() ?>dcadmin/banners/add_banner_data/<? echo base64_encode(1); ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+                                   <form action="<?php echo base_url() ?>dcadmin/Banners/add_banner_data/<? echo base64_encode(1); ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
 

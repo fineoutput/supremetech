@@ -47,6 +47,8 @@ $this->db->where('phone', $phone);
 $dsa= $this->db->get();
 $da=$dsa->row();
 if (!empty($da)) {
+  // echo $da->is_active;die();
+  if($da->is_active==1){
 // $OTP = random_int(100000, 999999);
 $OTP = 123456;
 $contacts = $phone;
@@ -143,6 +145,13 @@ $res=array(
 );
 echo json_encode($res);
 }
+}else{
+  $res=array(
+    'message'=>'Your account is inactive at the moment. Contact admin',
+    'code'=>201,
+  );
+  echo json_encode($res);
+}
 } else {
 $res=array(
   'message'=>'User not registered! please register first',
@@ -205,15 +214,25 @@ $this->db->select('*');
 $this->db->from('tbl_users');
 $this->db->where('phone', $phone);
 $user_data= $this->db->get()->row();
+if($user_data->is_active==1){
 
 $res = array('message'=>'success',
 'status'=>200,
-'authentication'=>$user_data->authentication
+'authentication'=>$user_data->authentication,
+'user_name'=>$user_data->name
+// 'phone'=>$user_data->phone
 );
 
 echo json_encode($res);
+}else{
+  $res = array('message'=>'Your account is inactive at the moment. Contact admin',
+  'status'=>201
+  );
+
+  echo json_encode($res);
+}
 } else {
-$res = array('message'=>'some error occured! Please try again',
+$res = array('message'=>'Some error occured! Please try again',
 'status'=>201
 );
 
@@ -393,7 +412,7 @@ $OTP = 123456;
 $contacts = $phone;
   $from = 'SUPTEC';
   if($OTP==null){
-    $sms_text = urlencode('Welcome to Supreme Technocom, your account has been activated. You can start shopping with us. ENJOY OUR EXPERTISE SERVICES!');
+    $sms_text = urlencode('Welcome to Supreme Technocom, your account will be activated soon. You can start shopping with us. ENJOY OUR EXPERTISE SERVICES!');
 
   }else{
     $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is'." ".$OTP);
@@ -566,7 +585,7 @@ $data_insert = array('name'=>$temp_data->name,
        'token_id'=>$temp_data->token_id,
  'authentication'=>$authentication,
        'ip' =>$ip,
-       'is_active' =>1,
+       'is_active' =>0,
        'date'=>$cur_date
 );
 
@@ -587,22 +606,22 @@ if (!empty($last_id2)) {
             $last_id3=$this->db->update('token_id', $data_insert);
         }
     }
-    $res = array('message'=>'success',
+    $res = array('message'=>'You have scuccessfully signed up. Please wait for admin approval',
 'status'=>200,
-'user_id'=>$last_id2,
-'authentication'=>$authentication
+// 'user_id'=>$last_id2,
+// 'authentication'=>$authentication
 );
 
     echo json_encode($res);
 } else {
-    $res = array('message'=>'some error occured! Please try again',
+    $res = array('message'=>'Some error occured! Please try again',
 'status'=>201
 );
 
     echo json_encode($res);
 }
 } else {
-$res = array('message'=>'some error occured',
+$res = array('message'=>'Some error occured',
 'status'=>201
 );
 
@@ -616,7 +635,7 @@ $res = array('message'=>'Wrong Otp',
 echo json_encode($res);
 }
 } else {
-$res = array('message'=>'OTP is already used',
+$res = array('message'=>'OTP already used',
 'status'=>201
 );
 

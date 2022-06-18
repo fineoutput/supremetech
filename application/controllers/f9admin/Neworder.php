@@ -24,6 +24,7 @@
                               // exit;
                        $this->db->select('*');
            $this->db->from('tbl_order1');
+           $this->db->order_by('id', 'desc');
            //$this->db->where('id',$usr);
            $data['order_data']= $this->db->get();
 

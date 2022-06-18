@@ -3,7 +3,10 @@
    <h1>
   Update Surveillance
   </h1>
-
+  <ol class="breadcrumb">
+  <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+  <li><a href="<?php echo base_url() ?>dcadmin/Surveillance/view_surveillance"><i class="fa fa-dashboard"></i> View Surveillance</a></li>
+  </ol>
 </section>
 <section class="content">
 <div class="row">
@@ -32,7 +35,7 @@
 
                     <div class="panel-body">
                         <div class="col-lg-10">
-                           <form action=" <?php echo base_url(); ?>dcadmin/surveillance/add_surveillance_data/<? echo base64_encode(2); ?>/<?=$id;?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+                           <form action=" <?php echo base_url(); ?>dcadmin/Surveillance/add_surveillance_data/<? echo base64_encode(2); ?>/<?=$id;?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                         <div class="table-responsive">
                             <table class="table table-hover">
 <tr>

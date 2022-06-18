@@ -5,7 +5,11 @@
     <h1>
       Add New minorcategory
     </h1>
-
+    <ol class="breadcrumb">
+      <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li><a href="<?php echo base_url() ?>dcadmin/Minorcategory/view_minorcategory"><i class="fa fa-dashboard"></i> All Minor Categories </a></li>
+      <li class="active">View Coupon Codes</li>
+    </ol>
   </section>
   <section class="content">
     <div class="row">
@@ -34,7 +38,7 @@
 
           <div class="panel-body">
             <div class="col-lg-10">
-              <form action=" <?php echo base_url()  ?>dcadmin/minorcategory/add_minorcategory_data/<?php echo base64_encode(1);  ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+              <form action=" <?php echo base_url()  ?>dcadmin/Minorcategory/add_minorcategory_data/<?php echo base64_encode(1);  ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <tr>
@@ -78,7 +82,7 @@
                     <tr>
                       <td> <strong>Brand</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control"  multiple="multiple" name="brand[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="brand[]">
                           <?php foreach ($brand_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->name?></option>
 
@@ -87,7 +91,7 @@
                       </td>
                       <td> <strong>Resolution</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="resolution[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="resolution[]">
                           <?php foreach ($resolution_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filtername?></option>
 
@@ -98,7 +102,7 @@
                     <tr>
                       <td> <strong>IR Distance</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]">
                           <?php foreach ($irdistance_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filtername?></option>
 
@@ -107,7 +111,7 @@
                       </td>
                       <td> <strong>Body Type</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="camera_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="camera_type[]">
                           <?php foreach ($cameratype_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filtername?></option>
 
@@ -118,7 +122,7 @@
                     <tr>
                       <td> <strong>Body Material</strong></strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="body_materials[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="body_materials[]">
                           <?php foreach ($bodymaterial_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -127,7 +131,7 @@
                       </td>
                       <td> <strong>No. of channel</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="video_channel[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="video_channel[]">
                           <?php foreach ($videochannel_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -138,7 +142,7 @@
                     <tr>
                       <td> <strong>POE Ports</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]">
                           <?php foreach ($poeports_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -147,7 +151,7 @@
                       </td>
                       <td> <strong>POE Types</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="poe_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="poe_type[]">
                           <?php foreach ($poetype_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -159,7 +163,7 @@
                     <tr>
                       <td> <strong>SATA Ports</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]">
                           <?php foreach ($sataports_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -168,7 +172,7 @@
                       </td>
                       <td> <strong>Length</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="length[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="length[]">
                           <?php foreach ($length_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -179,7 +183,7 @@
                     <tr>
                       <td> <strong>Screen Size</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="screen_size[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="screen_size[]">
                           <?php foreach ($screensize_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -188,7 +192,7 @@
                       </td>
                       <td> <strong>Features</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="led_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="led_type[]">
                           <?php foreach ($ledtype_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -199,7 +203,7 @@
                     <tr>
                       <td> <strong>Size</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="size[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="size[]">
                           <?php foreach ($size_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filter_name?></option>
 
@@ -208,7 +212,7 @@
                       </td>
                       <td> <strong>Lens</strong></strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple"  name="lens[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="lens[]">
                           <?php foreach ($lens_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->filtername?></option>
 
@@ -216,6 +220,28 @@
                         </select>
                       </td>
                     </tr>
+
+                    <tr>
+                      <td> <strong>Night Vision</strong> </strong> </td>
+                      <td>
+                        <select class="selectpicker form-control" multiple="multiple" name="night_vision[]">
+                          <?php foreach ($night_vision_data->result() as $value) {?>
+                          <option value="<?=$value->id;?>"><?=$value->filtername?></option>
+
+                          <?php } ?>
+                        </select>
+                      </td>
+                      <td> <strong>Audio Type</strong></strong> </td>
+                      <td>
+                        <select class="selectpicker form-control" multiple="multiple" name="audio_type[]">
+                          <?php foreach ($audio_type_data->result() as $value) {?>
+                          <option value="<?=$value->id;?>"><?=$value->filtername?></option>
+
+                          <?php } ?>
+                        </select>
+                      </td>
+                    </tr>
+
 
 
                     <tr>
@@ -263,8 +289,8 @@
         $('#sid option').remove();
         var opton = "<option value=''>Please Select </option>";
         $.ajax({
-          url: base_url + "dcadmin/minorcategory/getSubcategory?isl=" + vf,
-          // url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+          url: base_url + "dcadmin/Minorcategory/getSubcategory?isl=" + vf,
+          // url:base_url+"dcadmin/Products/getMinorcategory?isl="+vf,
           data: '',
           type: "get",
           success: function(html) {

@@ -4,8 +4,8 @@
           Add New User
           </h1>
           <ol class="breadcrumb">
-           <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i>Home</a></li>
-            <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Users </a></li>
+           <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+            <li><a href="<?php echo base_url() ?>dcadmin/Users/view_users"><i class="fa fa-dashboard"></i> All Users </a></li>
 
           </ol>
         </section>

@@ -45,6 +45,7 @@ $this->db->where('phone', $phone);
 $dsa= $this->db->get();
 $da=$dsa->row();
 if (!empty($da)) {
+  if($da->is_active==1){
     // $OTP = random_int(100000, 999999);
     $OTP = 123456;
     $contacts = $phone;
@@ -137,12 +138,21 @@ if (!empty($da)) {
                 );
         echo json_encode($res);
     } else {
+      header('Access-Control-Allow-Origin: *');
         $res=array(
                   'message'=>'some error occured',
                   'code'=>201,
                 );
         echo json_encode($res);
     }
+  }else{
+    header('Access-Control-Allow-Origin: *');
+    $res=array(
+              'message'=>'Your account is inactive at the moment. Contact admin',
+              'code'=>201,
+            );
+    echo json_encode($res);
+  }
 } else {
     header('Access-Control-Allow-Origin: *');
     $res=array(
@@ -210,6 +220,7 @@ if (!empty($otp_data)) {
                 $this->db->from('tbl_users');
                 $this->db->where('phone', $phone);
                 $user_data= $this->db->get()->row();
+                if($user_data->is_active==1){
 
                 header('Access-Control-Allow-Origin: *');
                 $res = array('message'=>'success',
@@ -220,6 +231,14 @@ if (!empty($otp_data)) {
 );
 
                 echo json_encode($res);
+              }else{
+                header('Access-Control-Allow-Origin: *');
+                $res = array('message'=>'Your account is inactive at the moment. Contact admin',
+'status'=>201
+);
+
+                echo json_encode($res);
+              }
             } else {
                 header('Access-Control-Allow-Origin: *');
                 $res = array('message'=>'some error occured! Please try again',
@@ -593,7 +612,7 @@ if (!empty($otp_data)) {
                        'token_id'=>$temp_data->token_id,
                        'authentication'=>$authentication,
                        'ip' =>$ip,
-                       'is_active' =>1,
+                       'is_active' =>0,
                        'date'=>$cur_date
 );
 
@@ -615,12 +634,12 @@ if (!empty($otp_data)) {
                         }
                     }
                     header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>'success',
-    'status'=>200,
-    'user_id'=>$last_id2,
-'name'=>$temp_data->name,
-'phone'=>$temp_data->phone,
-'authentication'=>$authentication
+                    $res = array('message'=>'You have scuccessfully signed up. Please wait for admin approval',
+    'status'=>201,
+//     'user_id'=>$last_id2,
+// 'name'=>$temp_data->name,
+// 'phone'=>$temp_data->phone,
+// 'authentication'=>$authentication
     );
 
                     echo json_encode($res);

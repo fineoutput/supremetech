@@ -13,7 +13,7 @@
 <script src="<?php echo base_url() ?>assets/admin/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src='<?php echo base_url() ?>assets/admin/plugins/fastclick/fastclick.min.js'></script>
 <script src="<?php echo base_url() ?>assets/admin/dist/js/app.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/admin/dist/js/demo.js" type="text/javascript"></script>
+<!-- <script src="<?php echo base_url() ?>assets/admin/dist/js/demo.js" type="text/javascript"></script> -->
     <script>
     $(function() {
         //----- OPEN
@@ -37,7 +37,7 @@
 
     </script>
 
-<script>
+
 <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
           <script>
           // Attach a submit handler to the form

@@ -4,15 +4,15 @@
           Add New Blog
           </h1>
           <ol class="breadcrumb">
-           <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Blog </a></li>
-    
+           <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <!-- <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Blog </a></li> -->
+
           </ol>
         </section>
 		<section class="content">
 		<div class="row">
        <div class="col-lg-12">
-				   <a class="btn btn-info cticket" href="<?php echo base_url() ?>admin/home/blog" role="button" style="margin-bottom:12px;"> Back</a>
+				   <a class="btn custom_btn" href="<?php echo base_url() ?>admin/home/blog" role="button" style="margin-bottom:12px;"> Back</a>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Blog</h3>
@@ -22,7 +22,7 @@
                                    <form action="<?php echo base_url() ?>admin/home/add_blog_data" method="POST" id="slide_frm" >
                                 <div class="table-responsive">
                                     <table class="table table-hover">
-	                                        
+
 											<tr>
                                                 <td> <strong>Blog Title</strong>  <span style="color:red;">*</span></strong> </td>
                                                 <td>
@@ -32,14 +32,14 @@
 												<tr>
                                                 <td> <strong>Highlight Short Description</strong>  <span style="color:red;">*</span></strong> </td>
                                                 <td>
-												
+
 										<textarea class="form-control" rows="5" name="highlight" placeholder="Maximum One Line" required></textarea>
 	                                            </td>
     										</tr>
 											<tr>
                                                 <td> <strong>Short Description</strong>  <span style="color:red;">*</span></strong> </td>
                                                 <td>
-												
+
 										<textarea class="form-control" rows="5" name="short" placeholder="Maximum Two Three Lines" required></textarea>
 	                                            </td>
     										</tr>
@@ -58,11 +58,11 @@
 												<tr>
                                                 <td> <strong>Meta Description</strong>  <span style="color:red;">*</span></strong> </td>
                                                 <td>
-												
+
 										<textarea class="form-control" rows="5" name="meta" placeholder="Maximum Two Three Lines" required></textarea>
 	                                            </td>
     										</tr>
-										
+
 											<tr class="st1">
 												<td> <strong>Image</strong> </td>
 												<td>
@@ -73,8 +73,8 @@
 														</div>
 												</td>
 											</tr>
-									
-										
+
+
 											<tr>
 												<td colspan="2" >
 													<input type="submit" class="btn btn-success" value="save">
@@ -82,12 +82,12 @@
 											</tr>
                                     </table>
                                 </div>
-                                
-                             </form>    
+
+                             </form>
 
                                 </div>
 
-                                
+
 
                             </div>
 
@@ -98,17 +98,17 @@
         </section>
       </div>
 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	  
+
 	  <script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
-	  	<script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>	  
+	  	<script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
 				<link href="<? echo base_url() ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
 
-	
+
 							<script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url() ?>assets/admin/plup/js/plupload.full.min.js"></script>	
+<script type="text/javascript" src="<?php echo base_url() ?>assets/admin/plup/js/plupload.full.min.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url() ?>assets/admin/plup/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>	
+<script type="text/javascript" src="<?php echo base_url() ?>assets/admin/plup/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/admin/plup/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <script>
@@ -125,8 +125,8 @@
 $(document).ready(function(){
 
 	$("#uploader").pluploadQueue({
-		
-		
+
+
 
 		// General settings
 
@@ -140,7 +140,7 @@ $(document).ready(function(){
 
 		dragdrop: true,
 
-		
+
 
 		filters : {
 
@@ -152,7 +152,7 @@ $(document).ready(function(){
 
 			mime_types: [
 
-				{title : "Image files", extensions : "jpg,gif,png,bmp,pdf,xls,doc,docx,xlsx"}				
+				{title : "Image files", extensions : "jpg,gif,png,bmp,pdf,xls,doc,docx,xlsx"}
 
 			]
 
@@ -164,15 +164,15 @@ $(document).ready(function(){
 
 		//resize : {width : 800, height : 240, quality : 90},
 
-	
+
 
 		flash_swf_url : base_url+'assets/admin/pulp/js/Moxie.swf',
 
-		silverlight_xap_url : base_url+'assets/admin/pulp/js/Moxie.xap'		
+		silverlight_xap_url : base_url+'assets/admin/pulp/js/Moxie.xap'
 
 	});
 
-	
+
 
 	var uploaderqueue = $('#uploader').pluploadQueue();
 
@@ -202,7 +202,7 @@ $(document).ready(function(){
 
 					console.log(get_data);
 
-					
+
 
 					var input = document.createElement("input");
 
@@ -214,7 +214,7 @@ $(document).ready(function(){
 
 					input.setAttribute("name", "image[]");
 
-	
+
 
 					//console.log(get_data.new_name);
 
@@ -222,9 +222,9 @@ $(document).ready(function(){
 
 					$("#slide_frm").append(input);
 
-		
 
-					}		
+
+					}
 
 			}else
 
@@ -234,8 +234,8 @@ $(document).ready(function(){
 
 				}
 
-			});	
-			
+			});
+
 			});
 			</script>
 <style>
@@ -243,6 +243,5 @@ label{
 	margin:5px;
 }
 </style>
-<!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>	  
+<!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/rs.js"></script>	  -->
-	  

@@ -5,7 +5,10 @@
     <h1>
       Update Minor category
     </h1>
-
+    <ol class="breadcrumb">
+      <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li><a href="<?php echo base_url() ?>dcadmin/Minorcategory/view_minorcategory"><i class="fa fa-dashboard"></i> All Minor Categories </a></li>
+    </ol>
   </section>
   <section class="content">
     <div class="row">
@@ -34,7 +37,7 @@
 
           <div class="panel-body">
             <div class="col-lg-10">
-              <form action=" <?php echo base_url()  ?>dcadmin/minorcategory/add_minorcategory_data/<?php echo base64_encode(2);?>/<?=$id?>" method="POST" id="slide_frm" enctype="multipart/form-data">
+              <form action=" <?php echo base_url()  ?>dcadmin/Minorcategory/add_minorcategory_data/<?php echo base64_encode(2);?>/<?=$id?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <tr>
@@ -93,7 +96,7 @@
                     <tr>
                       <td> <strong>Brand</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control"  multiple="multiple" name="brand[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="brand[]">
                           <?php
                           $brands=json_decode($minorcategory_data->brand);
                           foreach ($brand_data->result() as $value) {
@@ -104,14 +107,14 @@
                             }
                             }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->name?></option>
 
-                      <?php } ?>
+                          <?php } ?>
                         </select>
                       </td>
                       <td> <strong>Resolution</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="resolution[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="resolution[]">
                           <?php
                           $resolution=json_decode($minorcategory_data->resolution);
                            foreach ($resolution_data->result() as $value) {
@@ -122,7 +125,7 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filtername?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
                           <?php } ?>
                         </select>
@@ -131,7 +134,7 @@
                     <tr>
                       <td> <strong>IR Distance</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="ir_distance[]">
                           <?php
                           $ir_distance=json_decode($minorcategory_data->ir_distance);
                            foreach ($irdistance_data->result() as $value) {
@@ -142,14 +145,14 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filtername?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>Body Type</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="camera_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="camera_type[]">
                           <?php
                           $camera_type=json_decode($minorcategory_data->camera_type);
                            foreach ($cameratype_data->result() as $value) {
@@ -160,7 +163,7 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filtername?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
                           <?php } ?>
                         </select>
@@ -169,7 +172,7 @@
                     <tr>
                       <td> <strong>Body Material</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="body_materials[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="body_materials[]">
                           <?php
                           $body_materials=json_decode($minorcategory_data->body_materials);
 
@@ -181,14 +184,14 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>No. of channel</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="video_channel[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="video_channel[]">
                           <?php
                           $video_channel=json_decode($minorcategory_data->video_channel);
                            foreach ($videochannel_data->result() as $value) {
@@ -199,7 +202,7 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
@@ -208,7 +211,7 @@
                     <tr>
                       <td> <strong>POE Ports</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]">
                           <?php
                           $poe_ports=json_decode($minorcategory_data->poe_ports);
                            foreach ($poeports_data->result() as $value) {
@@ -219,14 +222,14 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>POE Types</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="poe_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="poe_type[]">
                           <?php
                           $poe_type=json_decode($minorcategory_data->poe_type);
                           foreach ($poetype_data->result() as $value) {
@@ -237,7 +240,7 @@
                             }
                             }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
@@ -247,7 +250,7 @@
                     <tr>
                       <td> <strong>SATA Ports</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="sata_ports[]">
                           <?php
                           $sata_ports=json_decode($minorcategory_data->sata_ports);
                           foreach ($sataports_data->result() as $value) {
@@ -258,14 +261,14 @@
                              }
                              }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>Length</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="length[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="length[]">
                           <?php
                           $length=json_decode($minorcategory_data->length);
                           foreach ($length_data->result() as $value) {
@@ -276,7 +279,7 @@
                              }
                              }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
@@ -285,7 +288,7 @@
                     <tr>
                       <td> <strong>Screen Size</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="screen_size[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="screen_size[]">
                           <?php
                           $screen_size=json_decode($minorcategory_data->screen_size);
                           foreach ($screensize_data->result() as $value) {
@@ -296,14 +299,14 @@
                              }
                              }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>Features</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="led_type[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="led_type[]">
                           <?php
                           $led_type=json_decode($minorcategory_data->led_type);
                           foreach ($ledtype_data->result() as $value) {
@@ -314,7 +317,7 @@
                           }
                           }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
@@ -323,7 +326,7 @@
                     <tr>
                       <td> <strong>Size</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple" name="size[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="size[]">
                           <?php
                           $size=json_decode($minorcategory_data->size);
                            foreach ($size_data->result() as $value) {
@@ -334,14 +337,14 @@
                              }
                              }
                              ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filter_name?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
                           <?php } ?>
                         </select>
                       </td>
                       <td> <strong>Lens</strong> </strong> </td>
                       <td>
-                        <select class="selectpicker form-control" multiple="multiple"  name="lens[]" >
+                        <select class="selectpicker form-control" multiple="multiple" name="lens[]">
                           <?php
                           $lens=json_decode($minorcategory_data->lens);
                           foreach ($lens_data->result() as $value) {
@@ -352,7 +355,46 @@
                             }
                             }
                             ?>
-                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected";}?>><?=$value->filtername?></option>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
+
+                          <?php } ?>
+                        </select>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td> <strong>Night Vision</strong> </strong> </td>
+                      <td>
+                        <select class="selectpicker form-control" multiple="multiple" name="night_vision[]">
+                          <?php
+                          $nv_data=json_decode($minorcategory_data->night_vision);
+                           foreach ($night_vision_data->result() as $value) {
+                             $a=0;
+                             foreach ($nv_data as $data) {
+                             if($data==$value->id){
+                               $a=1;
+                             }
+                             }
+                             ?>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
+
+                          <?php } ?>
+                        </select>
+                      </td>
+                      <td> <strong>Audio Type</strong> </strong> </td>
+                      <td>
+                        <select class="selectpicker form-control" multiple="multiple" name="audio_type[]">
+                          <?php
+                          $audio =json_decode($minorcategory_data->audio_type);
+                          foreach ($audio_type_data->result() as $value) {
+                            $a=0;
+                            foreach ($audio as $data) {
+                            if($data==$value->id){
+                              $a=1;
+                            }
+                            }
+                            ?>
+                          <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
                           <?php } ?>
                         </select>
@@ -404,8 +446,8 @@
         $('#sid option').remove();
         var opton = "<option value=''>Please Select </option>";
         $.ajax({
-          url: base_url + "dcadmin/minorcategory/getSubcategory?isl=" + vf,
-          // url:base_url+"dcadmin/products/getMinorcategory?isl="+vf,
+          url: base_url + "dcadmin/Minorcategory/getSubcategory?isl=" + vf,
+          // url:base_url+"dcadmin/Products/getMinorcategory?isl="+vf,
           data: '',
           type: "get",
           success: function(html) {

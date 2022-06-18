@@ -5,8 +5,8 @@
             Profile
             </h1>
             <ol class="breadcrumb">
-             <li><a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url() ?>admin/college"><i class="fa fa-dashboard"></i> All Profile </a></li>
+             <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+              <li class="active">View Profile</li>
 
             </ol>
           </section>
@@ -52,7 +52,7 @@
                         <?php echo $data->address ?>
                                    </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
           <td> <strong>Password</strong>  <span style="color:red;">*</span></strong> </td>
                               <td>
 <button type="button" class="btn btn-default" id="popcustom" pd-popup-open="popupNew" name="button">Change password</button>
@@ -85,7 +85,7 @@
 
 
                                      </td>
-                                  </tr>
+                                  </tr> -->
                                 <tr class="st1">
                                 <td> <strong>Image</strong> </td>
                                 <td>
@@ -98,7 +98,7 @@
                                   </tr>
                           <tr>
     												<td colspan="2" >
-    													<input type="submit" class="btn btn-default" value="save">
+    													<a href="<?=base_url()?>dcadmin/Home"><input type="submit" class="btn btn-default" value="save"></a>
     												</td>
     											</tr>
 
@@ -140,7 +140,7 @@
             // var posting = $.post( url, { s: term } );
             $.ajax({
                        type: "POST",
-                       url: "<?php echo base_url(); ?>admin/system/change_pass",
+                       url: "<?php echo base_url(); ?>dcadmin/System/change_pass",
                        data: {
                           'old': old,
                           'new': newpass
