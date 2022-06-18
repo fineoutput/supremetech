@@ -120,6 +120,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_products');
                 // $this->db->where('category_id',$category_id);
                 // $this->db->where('subcategory_id',$subcategory_id);
+                $this->db->where('is_active',1);
                 $this->db->where('minorcategory_id', $minorcategory_id);
                 $product_data= $this->db->get();
 
@@ -382,6 +383,7 @@ class Apicontroller extends CI_Controller
             $this->db->select('*');
             $this->db->from('tbl_subcategory');
             $this->db->where('category_id', $data->id);
+            $this->db->where('is_active', 1);
             $sub= $this->db->get();
             $subcategory=[];
             foreach ($sub->result() as $data2) {
@@ -389,6 +391,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_minorcategory');
                 $this->db->where('category_id', $c_id);
                 $this->db->where('subcategory_id', $data2->id);
+                $this->db->where('is_active', 1);
                 $minor_category= $this->db->get();
                 $minorcategory=[];
                 foreach ($minor_category->result() as $m_id) {
@@ -2297,6 +2300,19 @@ class Apicontroller extends CI_Controller
                             $this->db->where('id', $data->product_id);
                             $dsa= $this->db->get();
                             $product_data=$dsa->row();
+                            $this->db->select('*');
+                            $this->db->from('tbl_inventory');
+                            $this->db->where('product_id', $data->product_id);
+                            $inventory_data = $this->db->get()->row();
+                            if (!empty($inventory_data)) {
+                                if ($inventory_data->quantity>0) {
+                                    $stock = 1;
+                                } else {
+                                    $stock =0;
+                                }
+                            } else {
+                                $stock =0;
+                            }
 
 
                             $wishlist_info[]=array(
@@ -2305,6 +2321,7 @@ class Apicontroller extends CI_Controller
 'product_image'=>base_url().$product_data->image1,
 'product_mrp'=>$product_data->mrp,
 'product_selling_price'=>$product_data->sellingprice,
+'stock'=>$stock
 );
                         }
                         header('Access-Control-Allow-Origin: *');
@@ -2590,6 +2607,7 @@ class Apicontroller extends CI_Controller
 
                 if (!empty($user_data)) {
                     if ($user_data->authentication==$authentication) {
+                      if($user_data->is_active==1){
                         $this->db->select('*');
                         $this->db->from('tbl_order1');
                         $this->db->where('txnid', $txn_id);
@@ -2711,6 +2729,14 @@ $total = $order1_data->total_amount;
 );
 
                         echo json_encode($res);
+                      }else{
+                        header('Access-Control-Allow-Origin: *');
+                        $res = array('message'=>'Your account is blocked! Please contact to admin.',
+'status'=>201
+);
+
+                        echo json_encode($res);
+                      }
                     } else {
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'Wrong Authentication',

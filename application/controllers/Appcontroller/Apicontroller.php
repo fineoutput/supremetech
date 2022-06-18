@@ -2423,6 +2423,7 @@ class Apicontroller extends CI_Controller
                     $this->db->from('tbl_order1');
                     $this->db->where('user_id', $user_data->id);
                     $this->db->where('payment_status', 1);
+                    $this->db->order_by('id', "desc");
                     $data= $this->db->get();
                     $data_id=$data->row();
                     $viewcart=[];
@@ -3833,6 +3834,19 @@ class Apicontroller extends CI_Controller
                         $this->db->where('id', $data->product_id);
                         $dsa= $this->db->get();
                         $product_data=$dsa->row();
+                        $this->db->select('*');
+                        $this->db->from('tbl_inventory');
+                        $this->db->where('product_id', $data->product_id);
+                        $inventory_data = $this->db->get()->row();
+                        if (!empty($inventory_data)) {
+                            if ($inventory_data->quantity>0) {
+                                $stock = 1;
+                            } else {
+                                $stock =0;
+                            }
+                        } else {
+                            $stock =0;
+                        }
 
 
                         $wishlist_info[]=array(
@@ -3841,6 +3855,7 @@ class Apicontroller extends CI_Controller
   'product_image'=>base_url().$product_data->image1,
   'product_mrp'=>$product_data->mrp,
   'product_selling_price'=>$product_data->sellingprice,
+  'stock'=>$stock
 );
                     }
                     header('Access-Control-Allow-Origin: *');
