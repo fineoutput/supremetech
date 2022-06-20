@@ -99,7 +99,16 @@
 
                             <td><?php echo $data->phone  ?></td>
                               <td><?php echo $data->street_address  ?></td>
-                              <td><?php echo $data->city  ?></td>
+                              <td><?php $this->db->select('*');
+                              $this->db->from('all_cities');
+                              $this->db->where('id', $data->city);
+                              $city_data = $this->db->get()->row();
+                              if(!empty($city_data)){
+                                echo $city_data->city_name;
+                              }else{
+                                echo "Not Found";
+                              }
+                                ?></td>
                               <td><?php
                                           $this->db->select('*');
                               $this->db->from('all_states');
