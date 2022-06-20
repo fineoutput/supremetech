@@ -1519,6 +1519,7 @@ class Apicontroller extends CI_Controller
 
         $this->db->select('*');
         $this->db->from('tbl_products');
+        $this->db->where('is_active', 1);
         $this->db->where('minorcategory_id', $product_data->minorcategory_id);
         $related_data= $this->db->get();
 
@@ -2842,7 +2843,9 @@ $total = $order1_data->total_amount;
                                 } elseif ($value->order_status==4) {
                                     $order_status= "Delivered";
                                 } elseif ($value->order_status==5) {
-                                    $order_status= "Canceled";
+                                    $order_status= "Cancelled";
+                                } elseif ($value->order_status==6){
+                                    $order_status= "On Hold";
                                 }
 
                                 $newdate = new DateTime($value->date);

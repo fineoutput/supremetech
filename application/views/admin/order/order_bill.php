@@ -31,7 +31,7 @@
 
 Rajasthan<br>India
 <br><br>
-		www.Supremetech.com<br></span>
+		www.supremetech.com<br></span>
 		</div>
 
 		<div class="col-sm-6 billing_content"><span class="font-weight-bold ">Billing Address:</span><br>
@@ -83,7 +83,16 @@ User: <?=$user_name;?>
       // }
 
       $address=$order1_data->street_address;
-      $state=$order1_data->state;
+      $this->db->select('*');
+      $this->db->from('all_states');
+      $this->db->where('id', $order1_data->state);
+      $state_data = $this->db->get()->row();
+      if(!empty($state_data)){
+        $state= $state_data->state_name;
+      }else{
+        $state="";
+      }
+
       $city=$order1_data->city;
       $zipcode=$order1_data->pincode;
   }

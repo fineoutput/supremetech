@@ -276,6 +276,7 @@ class Orders extends CI_finecontrol
             $this->db->select('*');
             $this->db->from('tbl_order1');
             $this->db->where('order_status', 4);
+            $this->db->order_by("id", "desc");
 
             $data['order_data']= $this->db->get();
 
