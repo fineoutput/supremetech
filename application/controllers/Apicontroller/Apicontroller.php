@@ -2300,6 +2300,7 @@ class Apicontroller extends CI_Controller
                             $this->db->where('id', $data->product_id);
                             $dsa= $this->db->get();
                             $product_data=$dsa->row();
+                            if($product_data->is_active==1){
                             $this->db->select('*');
                             $this->db->from('tbl_inventory');
                             $this->db->where('product_id', $data->product_id);
@@ -2324,6 +2325,7 @@ class Apicontroller extends CI_Controller
 'stock'=>$stock
 );
                         }
+                      }
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'success',
 'status'=>200,
@@ -2331,7 +2333,10 @@ class Apicontroller extends CI_Controller
 );
 
                         echo json_encode($res);
-                    } else {
+                    }
+
+
+                     else {
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'Wrong Authentication',
 'status'=>201

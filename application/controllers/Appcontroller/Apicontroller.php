@@ -3471,6 +3471,8 @@ class Apicontroller extends CI_Controller
 
                 if (!empty($user_data)) {
                     if ($user_data->authentication==$authentication) {
+                      if($user_data->is_active==1){
+
                         $this->db->select('*');
                         $this->db->from('tbl_order1');
                         $this->db->where('txnid', $txn_id);
@@ -3589,6 +3591,14 @@ class Apicontroller extends CI_Controller
   );
 
                         echo json_encode($res);
+                      }else{
+                        header('Access-Control-Allow-Origin: *');
+                        $res = array('message'=>'Your account is blocked! Please contact to admin.',
+'status'=>201
+);
+
+                        echo json_encode($res);
+                      }
                     } else {
                         $res = array('message'=>'Wrong Authentication',
   'status'=>201
@@ -3834,6 +3844,7 @@ class Apicontroller extends CI_Controller
                         $this->db->where('id', $data->product_id);
                         $dsa= $this->db->get();
                         $product_data=$dsa->row();
+                          if($product_data->is_active==1){
                         $this->db->select('*');
                         $this->db->from('tbl_inventory');
                         $this->db->where('product_id', $data->product_id);
@@ -3857,7 +3868,7 @@ class Apicontroller extends CI_Controller
   'product_selling_price'=>$product_data->sellingprice,
   'stock'=>$stock
 );
-                    }
+}}
                     header('Access-Control-Allow-Origin: *');
                     $res = array('message'=>'success',
 'status'=>200,
