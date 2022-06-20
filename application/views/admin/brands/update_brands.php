@@ -47,7 +47,7 @@
                       <td> <input type="text" name="message" class="form-control" placeholder="" required value="<?=$brands_data->message;?>" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image</strong></td>
                       <td> <input type="file" name="image" class="form-control" placeholder="" />
                         <?php if($brands_data->image!=""){ ?> <img id="slide_img_path" height=200 width=300 src="<?php echo base_url().$brands_data->image; ?> "> <?php }else{ ?> Sorry No File Found <?php } ?> </td>
                     </tr>
