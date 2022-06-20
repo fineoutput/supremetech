@@ -2320,7 +2320,7 @@ class Apicontroller extends CI_Controller
                             $wishlist_info[]=array(
 'product_id'=>$product_data->id,
 'product_name'=>$product_data->productname,
-'product_image'=>base_url().$product_data->image1,
+'product_image'=>base_url().$product_data->image,
 'product_mrp'=>$product_data->mrp,
 'product_selling_price'=>$product_data->sellingprice,
 'stock'=>$stock
