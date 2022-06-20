@@ -1,11 +1,11 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-           New Order
+           New Orders
           </h1>
           <ol class="breadcrumb">
            <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-           <li class="active">View New Order</li>
+           <li class="active">View New Orders</li>
           </ol>
         </section>
           <section class="content">
@@ -14,7 +14,7 @@
                  <!-- <a class="btn custom_btn" href="<?php echo base_url() ?>admin/home/add_team" role="button" style="margin-bottom:12px;"> Add Order</a> -->
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View order</h3>
+                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Orders</h3>
                                   </div>
                                      <div class="panel panel-default">
 

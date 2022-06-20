@@ -1,11 +1,11 @@
 <div class="content-wrapper">
         <section class="content-header">
            <h1>
-          View On Hold Order
+          View On Hold Orders
           </h1>
           <ol class="breadcrumb">
            <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li class="active">View On Hold Order</li>
+            <li class="active">View On Hold Orders</li>
           </ol>
         </section>
           <section class="content">
@@ -14,7 +14,7 @@
 
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View On Hold order</h3>
+                                      <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View On Hold Orders</h3>
                                   </div>
                                      <div class="panel panel-default">
 
