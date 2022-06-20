@@ -3538,7 +3538,7 @@ class Apicontroller extends CI_Controller
   'phone'=>$user_data->phone,
   'pincode'=>$user_data->zipcode,
   'state'=>$user_data->state,
-  'city'=>$user_data->city,
+  'city'=>$user_data->district,
   // 'house_no'=>$user_data->house_no,
   'street_address'=>$user_data->address,
   'final_amount'=>$final_amount,

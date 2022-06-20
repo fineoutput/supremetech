@@ -92,8 +92,16 @@ User: <?=$user_name;?>
       }else{
         $state="";
       }
+      $this->db->select('*');
+      $this->db->from('all_cities');
+      $this->db->where('id', $order1_data->city);
+      $city_data = $this->db->get()->row();
+      if(!empty($city_data)){
+        $city= $city_data->city_name;
+      }else{
+        $city="";
+      }
 
-      $city=$order1_data->city;
       $zipcode=$order1_data->pincode;
   }
 

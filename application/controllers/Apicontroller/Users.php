@@ -304,9 +304,9 @@ $this->form_validation->set_rules('email', 'email', 'required|xss_clean|trim|val
 $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
 $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-$this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim');
 $this->form_validation->set_rules('zipcode', 'zipcode', 'required|xss_clean|trim');
 $this->form_validation->set_rules('company_name', 'company_name', 'required|xss_clean|trim');
+$this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim');
 $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
 // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
