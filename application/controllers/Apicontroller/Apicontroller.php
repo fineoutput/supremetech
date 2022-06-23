@@ -337,14 +337,24 @@ class Apicontroller extends CI_Controller
             } else {
                 $stock =0;
             }
+if(!empty($productsdata->video1)){
+  $video1 = base_url().$productsdata->video1;
+}else{
+  $video1 = "";
+}
+if(!empty($productsdata->video2)){
+  $video2 = base_url().$productsdata->video2;
+}else{
+  $video2 = "";
+}
 
             $products[] = array(
 'id'=> $productsdata->id,
 'productname'=> $productsdata->productname,
 'productimage1'=> base_url().$productsdata->image,
 'productimage2'=> base_url().$productsdata->image1,
-'productvideo1'=> base_url().$productsdata->video1,
-'productvideo2'=> base_url().$productsdata->video2,
+'productvideo1'=> $video1,
+'productvideo2'=> $video2,
 'mrp'=> $productsdata->mrp,
 'price'=> $productsdata->sellingprice,
 'productdescription'=> $productsdata->productdescription,
@@ -613,6 +623,248 @@ class Apicontroller extends CI_Controller
 
 
                                     if (!empty($last_id)) {
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=>'success',
+'status'=>200
+);
+
+                                        echo json_encode($res);
+                                    } else {
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=>'Some error occured',
+'status'=>201
+);
+
+                                        echo json_encode($res);
+                                    }
+                                } else {
+                                    header('Access-Control-Allow-Origin: *');
+                                    $res = array('message'=>'product_id is not exist',
+'status'=>201
+);
+
+                                    echo json_encode($res);
+                                }
+                            } else {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=>'Product is already in your cart',
+'status'=>201
+);
+
+                                echo json_encode($res);
+                            }
+                        } else {
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'Authentication not exist',
+'status'=>201
+);
+
+                            echo json_encode($res);
+                        }
+                    } else {
+                        header('Access-Control-Allow-Origin: *');
+                        $res = array('message'=>'email not exist ',
+'status'=>201
+);
+
+                        echo json_encode($res);
+                    }
+                } else {
+                    $this->db->select('*');
+                    $this->db->from('tbl_cart');
+                    $this->db->where('token_id', $token_id);
+                    $this->db->where('product_id', $product_id);
+                    $check_cart= $this->db->get();
+                    $cart=$check_cart->row();
+                    if (empty($cart)) {
+                        $ip = $this->input->ip_address();
+                        date_default_timezone_set("Asia/Calcutta");
+                        $cur_date=date("Y-m-d H:i:s");
+
+                        //----check product_id in product table-------
+                        $this->db->select('*');
+                        $this->db->from('tbl_products');
+                        $this->db->where('id', $product_id);
+                        $check_product= $this->db->get();
+                        $check_product_id=$check_product->row();
+
+                        if (!empty($check_product_id)) {
+                            $this->db->select('*');
+                            $this->db->from('tbl_inventory');
+                            $this->db->where('product_id', $product_id);
+                            $check_inventory= $this->db->get();
+                            $check_inventory_id=$check_inventory->row();
+
+
+                            if ($check_inventory_id->quantity >= $quantity) {
+                            } else {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=> "$check_product_id->productname Product is out of stock",
+'status'=>201
+);
+
+                                echo json_encode($res);
+                                exit;
+                            }
+
+
+
+                            $data_insert = array('product_id'=>$product_id,
+'quantity'=>$quantity,
+'token_id'=>$token_id,
+'ip' =>$ip,
+'date'=>$cur_date
+
+);
+
+                            $last_id=$this->base_model->insert_table("tbl_cart", $data_insert, 1) ;
+
+
+                            if (!empty($last_id)) {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=>'success',
+'status'=>200
+);
+
+                                echo json_encode($res);
+                            } else {
+                                header('Access-Control-Allow-Origin: *');
+                                $res = array('message'=>'Some error occured',
+'status'=>201
+);
+
+                                echo json_encode($res);
+                            }
+                        } else {
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'Product does not exist.',
+'status'=>201
+);
+
+                            echo json_encode($res);
+                        }
+                    } else {
+                        header('Access-Control-Allow-Origin: *');
+                        $res = array('message'=>'Product is already in your cart',
+'status'=>201
+);
+
+                        echo json_encode($res);
+                    }
+                }
+            } else {
+                header('Access-Control-Allow-Origin: *');
+                $res = array('message'=>validation_errors(),
+'status'=>201
+);
+
+                echo json_encode($res);
+            }
+        } else {
+            header('Access-Control-Allow-Origin: *');
+            $res = array('message'=>"Insert data, No data Available",
+'status'=>201
+);
+
+            echo json_encode($res);
+        }
+    }
+    // =========== Move to Cart from wishlist Api ===================
+
+    public function move_to_cart()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
+            $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
+            $this->form_validation->set_rules('phone', 'phone', 'trim');
+            $this->form_validation->set_rules('authentication', 'authentication', 'trim');
+            $this->form_validation->set_rules('token_id', 'token_id', 'required|trim');
+
+            if ($this->form_validation->run()== true) {
+                $product_id=$this->input->post('product_id');
+                $quantity=$this->input->post('quantity');
+                $phone=$this->input->post('phone');
+                $authentication=$this->input->post('authentication');
+                $token_id=$this->input->post('token_id');
+
+
+                // --------------add to cart using email------------
+
+
+                if (!empty($phone)) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_users');
+                    $this->db->where('phone', $phone);
+                    $check_email= $this->db->get();
+                    $check_id=$check_email->row();
+                    if (!empty($check_id)) {
+                        if ($check_id->authentication == $authentication) {
+                            $this->db->select('*');
+                            $this->db->from('tbl_cart');
+                            $this->db->where('user_id', $check_id->id);
+                            $this->db->where('product_id', $product_id);
+                            $check_cart= $this->db->get();
+                            $cart=$check_cart->row();
+                            if (empty($cart)) {
+                                $ip = $this->input->ip_address();
+                                date_default_timezone_set("Asia/Calcutta");
+                                $cur_date=date("Y-m-d H:i:s");
+
+                                //----check product_id in product table-------
+                                $this->db->select('*');
+                                $this->db->from('tbl_products');
+                                $this->db->where('id', $product_id);
+                                $check_product= $this->db->get();
+                                $check_product_id=$check_product->row();
+
+                                if (!empty($check_product_id)) {
+                                    $this->db->select('*');
+                                    $this->db->from('tbl_inventory');
+                                    $this->db->where('product_id', $product_id);
+                                    $check_inventory= $this->db->get();
+                                    $check_inventory_id=$check_inventory->row();
+
+                                    if ($check_inventory_id->quantity >= $quantity) {
+                                    } else {
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=> "$check_product_id->productname Product is out of stock",
+'status'=>201
+);
+
+                                        echo json_encode($res);
+                                        exit;
+                                    }
+                                    if ($check_product_id->max >= $quantity) {
+                                    } else {
+                                        header('Access-Control-Allow-Origin: *');
+                                        $res = array('message'=> "Maximum purchase limit exceeded",
+  'status'=>201
+  );
+
+                                        echo json_encode($res);
+                                        exit;
+                                    }
+
+
+
+
+                                    $data_insert = array('product_id'=>$product_id,
+'quantity'=>$quantity,
+'user_id'=>$check_id->id,
+'token_id'=>$token_id,
+'ip' =>$ip,
+'date'=>$cur_date
+);
+
+                                    $last_id=$this->base_model->insert_table("tbl_cart", $data_insert, 1) ;
+
+                                    $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $check_id->id,'product_id'=>$product_id));
+
+                                    if (!empty($last_id)) {
+
                                         header('Access-Control-Allow-Origin: *');
                                         $res = array('message'=>'success',
 'status'=>200
@@ -1539,7 +1791,6 @@ class Apicontroller extends CI_Controller
               $stock =0;
           }
             if ($data->id!=$id) {
-            }
             $related_info[]  = array(
 'product_id'=>$data->id,
 'productname'=>$data->productname,
@@ -1550,6 +1801,7 @@ class Apicontroller extends CI_Controller
 'max'=>$data->max,
 'stock'=>$stock
 );
+}
         }
 
         header('Access-Control-Allow-Origin: *');
@@ -2683,7 +2935,8 @@ $total = $order1_data->total_amount;
 'phone'=>$user_data->phone,
 'pincode'=>$user_data->zipcode,
 'state'=>$user_data->state,
-'city'=>$user_data->district,
+'city'=>$user_data->city,
+  'district'=>$user_data->district,
 // 'house_no'=>$user_data->house_no,
 'street_address'=>$user_data->address,
 'final_amount'=>$final_amount,
