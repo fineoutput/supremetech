@@ -606,6 +606,7 @@ if (!empty($otp_data)) {
                        'company_name'=>$temp_data->company_name,
                        'gstin'=>$temp_data->gstin,
                        'city'=>$temp_data->city,
+                       'district'=>$temp_data->district,
                        // 'house_no'=>$temp_data->house_no,
                        'image1'=>$temp_data->image1,
                        // 'image2'=>$temp_data->image2,

@@ -1501,4 +1501,49 @@
                    redirect("login/admin_login", "refresh");
                }
            }
+
+           public function remove_video($idd, $t)
+           {
+               if (!empty($this->session->userdata('admin_data'))) {
+                   $data['user_name']=$this->load->get_var('user_name');
+
+                   $id=base64_decode($idd);
+
+                   if ($t=="video1") {
+                       $data_update = array(
+         'video1'=>""
+
+         );
+
+                       $this->db->where('id', $id);
+                       $zapak=$this->db->update('tbl_products', $data_update);
+
+                       if ($zapak!=0) {
+                           $this->session->set_flashdata('smessage', 'Successfully Removed');
+                           redirect($_SERVER['HTTP_REFERER']);
+                       } else {
+                         $this->session->set_flashdata('emessage', 'Sorry error occured');
+                         redirect($_SERVER['HTTP_REFERER']);
+                       }
+                   }
+                   if ($t=="video2") {
+                       $data_update = array(
+          'video2'=>""
+          );
+
+                       $this->db->where('id', $id);
+                       $zapak=$this->db->update('tbl_products', $data_update);
+
+                       if ($zapak!=0) {
+                           $this->session->set_flashdata('smessage', 'Successfully Removed');
+                           redirect($_SERVER['HTTP_REFERER']);
+                       } else {
+                         $this->session->set_flashdata('emessage', 'Sorry error occured');
+                         redirect($_SERVER['HTTP_REFERER']);
+                       }
+                   }
+               } else {
+                   $this->load->view('admin/login/index');
+               }
+           }
        }

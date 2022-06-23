@@ -92,11 +92,11 @@
                       <td> <input type="file" name="image1" required class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video1</strong> </td>
+                      <td> <strong>Video1</strong>  <span style="color:red;">*<br />Landscape</span> </td>
                       <td> <input type="file" name="video1" class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video2</strong></td>
+                      <td> <strong>Video2</strong> <span style="color:red;">*<br />Landscape</span> </td>
                       <td> <input type="file" name="video2" class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <!-- <tr>
