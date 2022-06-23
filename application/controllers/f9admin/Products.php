@@ -881,7 +881,7 @@
                            $this->db->from('tbl_size');
                            $this->db->where('id', $data13);
                            $size_result = $this->db->get()->row();
-                           $size[] = array('id'=>$size_result->id, 'name'=>$size_result->filtername);
+                           $size[] = array('id'=>$size_result->id, 'name'=>$size_result->filter_name);
                        }
                        $data['size_data'] = $size;
                    } else {
@@ -1207,11 +1207,11 @@
   'image1'=>$nnnn3,
   'video1'=>$nnnn4,
   'video2'=>$nnnn5,
-  'mrp'=>$mrp,
+  // 'mrp'=>$mrp,
   'sellingprice'=>$sellingprice,
-  'gstrate'=>$gst,
-  'gstprice'=>$gstprice,
-  'sellingpricegst'=>$sp,
+  // 'gstrate'=>$gst,
+  // 'gstprice'=>$gstprice,
+  // 'sellingpricegst'=>$sp,
 
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
