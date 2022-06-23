@@ -120,7 +120,7 @@
                             <td><?php $type=$data->payment_type;
                             $n1="";
                             if($type==2){
-                              $n1="Pay at store";
+                              $n1="Pay after discussion";
                             }
                             if($type==1){
                               $n1="Bank Transfer";

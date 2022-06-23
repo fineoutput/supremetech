@@ -28,8 +28,37 @@ class Vendors extends CI_finecontrol
             $this->db->select('*');
             $this->db->from('tbl_users');
             $this->db->order_by('id', 'desc');
-            //$this->db->where('id',$usr);
+            $this->db->where('is_active', 1);
             $data['vendors_data']= $this->db->get();
+
+            $data['heading'] = "Accepted";
+
+
+            $this->load->view('admin/common/header_view', $data);
+            $this->load->view('admin/vendors/view_vendors');
+            $this->load->view('admin/common/footer_view');
+        } else {
+            redirect("login/admin_login", "refresh");
+        }
+    }
+
+    public function view_pending_vendors()
+    {
+        if (!empty($this->session->userdata('admin_data'))) {
+            $data['user_name']=$this->load->get_var('user_name');
+
+            // echo SITE_NAME;
+            // echo $this->session->userdata('image');
+            // echo $this->session->userdata('position');
+            // exit;
+
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->order_by('id', 'desc');
+            $this->db->where('is_active', 0);
+            $data['vendors_data']= $this->db->get();
+
+            $data['heading'] = "Pending";
 
 
             $this->load->view('admin/common/header_view', $data);

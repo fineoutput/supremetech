@@ -120,7 +120,7 @@
                             <td><?php $type=$data->payment_type;
                             $n1="";
                             if($type==2){
-                              $n1="Pay at store";
+                              $n1="Pay after discussion";
                             }
                             if($type==1){
                               $n1="Bank Transfer";
@@ -196,6 +196,8 @@
   base64_encode($data->id) ?>/Cancel">Cancel order</a></li> -->
   <li><a href="<?php echo base_url() ?>dcadmin/Orders/view_order_bill/<?php echo
   base64_encode($data->id) ?>">View bill</a></li>
+  <li><a href="<?php echo base_url() ?>dcadmin/Orders/view_product_status/<?php echo
+  base64_encode($data->id) ?>">View Order Details</a></li>
 
 <!-- <li><a href="<?php echo base_url() ?>dcadmin/Neworder/view_product_status/<?php echo
 base64_encode($data->id) ?>">view product</a></li>

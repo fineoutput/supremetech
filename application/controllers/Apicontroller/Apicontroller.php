@@ -2824,7 +2824,7 @@ $total = $order1_data->total_amount;
                                 if ($value->payment_type == 1) {
                                     $payment_type="Bank Tranfer";
                                 } elseif ($value->payment_type == 2) {
-                                    $payment_type="Pay at store";
+                                    $payment_type="Pay After Discussion";
                                 } else {
                                     $payment_type = "NA";
                                 }

@@ -46,7 +46,6 @@ if(!empty($this->session->flashdata('emessage'))){ ?>
                       <th>Video 1</th>
                       <th>Video 2</th>
                       <th>Price</th>
-                      <th>Selling Price</th>
                       <!-- <th>Gst %</th>
 <th>Gst price</th>
 <th>Selling Price(Gst)</th> -->
@@ -137,7 +136,7 @@ $minorcategory_name="";
                         <!-- <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->video1
 ?>" > -->
                         <video id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->video1
-?>" autoplay poster="">
+?>" poster="">
 
                         </video>
                         <?php }else { ?>
@@ -149,13 +148,12 @@ $minorcategory_name="";
                       <td>
                         <?php if($data->video2!=""){ ?>
                         <video id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->video2
-  ?>" autoplay poster="">
+  ?>" poster="">
                           <?php }else { ?>
                           Sorry No File Found
                           <?php } ?>
                       </td>
 
-                      <td>₹<?php echo $data->mrp ?></td>
                       <td>₹<?php echo $data->sellingprice ?></td>
                       <!-- <td><?php echo $data->gstrate ?></td>
 <td><?php echo $data->gstprice ?></td>

@@ -92,20 +92,20 @@
                       <td> <input type="file" name="image1" required class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video1</strong> <span style="color:red;">*</span> </td>
-                      <td> <input type="file" name="video1" required class="form-control" placeholder="" value="" /> </td>
+                      <td> <strong>Video1</strong> </td>
+                      <td> <input type="file" name="video1" class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video2</strong> <span style="color:red;">*</span> </td>
-                      <td> <input type="file" name="video2" required class="form-control" placeholder="" value="" /> </td>
+                      <td> <strong>Video2</strong></td>
+                      <td> <input type="file" name="video2" class="form-control" placeholder="" value="" /> </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td> <strong>Price</strong> <span style="color:red;">*</span> </td>
                       <td> <input type="number" name="mrp" required class="form-control" id="mrp" placeholder="" value="" /> </td>
-                    </tr>
+                    </tr> -->
                     <!-- <tr> -->
                     <tr>
-                      <td> <strong>Selling Price</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Price</strong> <span style="color:red;">*</span> </td>
                       <td> <input type="number" required name="sellingprice" class="form-control" id="sellingprice" placeholder="" value="" /> </td>
                     </tr>
                     <!-- <tr>

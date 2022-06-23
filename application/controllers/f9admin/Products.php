@@ -298,7 +298,7 @@
                        $this->db->from('tbl_resolution');
                        $this->db->where('id', $data2);
                        $resolution_result= $this->db->get()->row();
-                       $resolution[] = array('id'=>$resolution_result->id, 'name'=>$resolution_result->filtername);
+                         $resolution[] = array('id'=>$resolution_result->id, 'name'=>$resolution_result->filtername);
                    }
                    $data['resolution'] = json_encode($resolution);
                } else {
@@ -400,7 +400,7 @@
                        $this->db->from('tbl_poeports');
                        $this->db->where('id',$data8);
                        $pov_ports_result = $this->db->get()->row();
-                       $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filtername);
+                       $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filter_name);
                    }
                    $data['pov_ports'] = json_encode($pov_ports);
                } else {
@@ -417,7 +417,7 @@
                        $this->db->from('tbl_poeports');
                        $this->db->where('id',$data16);
                        $pov_type_result = $this->db->get()->row();
-                       $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filtername);
+                       $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filter_name);
                    }
                    $data['pov_type'] = json_encode($pov_type);
                } else {
@@ -946,11 +946,11 @@
                        $this->form_validation->set_rules('category_id', 'category_id', 'required|trim');
                        $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|trim');
                        $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|trim');
-                       $this->form_validation->set_rules('mrp', 'mrp', 'trim|integer');
+                       // $this->form_validation->set_rules('mrp', 'mrp', 'trim|integer');
                        $this->form_validation->set_rules('sellingprice', 'sellingprice', 'trim');
-                       $this->form_validation->set_rules('gst', 'gst', 'trim');
-                       $this->form_validation->set_rules('gstprice', 'gstprice', 'trim');
-                       $this->form_validation->set_rules('sp', 'sp', 'trim');
+                       // $this->form_validation->set_rules('gst', 'gst', 'trim');
+                       // $this->form_validation->set_rules('gstprice', 'gstprice', 'trim');
+                       // $this->form_validation->set_rules('sp', 'sp', 'trim');
 
                        $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
                        $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
@@ -986,11 +986,11 @@
                            $category_id=$this->input->post('category_id');
                            $subcategory_id=$this->input->post('subcategory_id');
                            $minorcategory_id=$this->input->post('minorcategory_id');
-                           $mrp=$this->input->post('mrp');
+                           // $mrp=$this->input->post('mrp');
                            $sellingprice=$this->input->post('sellingprice');
-                           $gst=$this->input->post('gst');
-                           $gstprice=$this->input->post('gstprice');
-                           $sp=$this->input->post('sp');
+                           // $gst=$this->input->post('gst');
+                           // $gstprice=$this->input->post('gstprice');
+                           // $sp=$this->input->post('sp');
 
                            $productdescription=$this->input->post('productdescription');
                            $modelno=$this->input->post('modelno');

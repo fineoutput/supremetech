@@ -290,7 +290,8 @@ $this->form_validation->set_rules('dob', 'dob', 'xss_clean|trim');
 $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
 $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-$this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim');
+$this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim'); //-- table all_cities id
+$this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');   //-- varchar
 $this->form_validation->set_rules('zipcode', 'zipcode', 'required|xss_clean|trim');
 $this->form_validation->set_rules('company_name', 'company_name', 'required|xss_clean|trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -303,6 +304,7 @@ $phone=$this->input->post('phone');
 $address=$this->input->post('address');
 $state=$this->input->post('state');
 $district=$this->input->post('district');
+$city=$this->input->post('city');
 $zipcode=$this->input->post('zipcode');
 $company_name=$this->input->post('company_name');
 $gstin=$this->input->post('gstin');
@@ -389,6 +391,7 @@ $data_insert = array(
 'address'=>$address,
 'state'=>$state,
 'district'=>$district,
+'city'=>$city,
 'zipcode'=>$zipcode,
 'company_name'=>$company_name,
 'gstin'=>$gstin,

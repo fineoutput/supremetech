@@ -12,8 +12,8 @@ View Subcategory
 <section class="content">
 <div class="row">
 <div class="col-lg-12">
-<a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Subcategory/add_subcategory"
-role="button" style="margin-bottom:12px;"> Add Subcategory</a>
+<!-- <a class="btn custom_btn" href="<?php echo base_url() ?>dcadmin/Subcategory/add_subcategory"
+role="button" style="margin-bottom:12px;"> Add Subcategory</a> -->
 <div class="panel panel-default">
 <div class="panel-heading">
 <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Subcategory</h3>

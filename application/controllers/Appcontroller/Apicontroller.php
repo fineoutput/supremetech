@@ -386,6 +386,7 @@ class Apicontroller extends CI_Controller
         foreach ($catdata->result() as $cat) {
             $this->db->select('*');
             $this->db->from('tbl_subcategory');
+            $this->db->where('is_active', 1);
             $this->db->where('category_id', $cat->id);
             $sub= $this->db->get();
             // if(!empty($sub->row())){
@@ -399,6 +400,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_minorcategory');
                 $this->db->where('category_id', $cat->id);
                 $this->db->where('subcategory_id', $data2->id);
+                $this->db->where('is_active', 1);
                 $minor_category= $this->db->get();
                 // if(!empty($minor_category->row())){
                 //   $is_min = "True";
@@ -454,6 +456,8 @@ class Apicontroller extends CI_Controller
                 $this->db->select('*');
                 $this->db->from('tbl_subcategory');
                 $this->db->where('category_id', $category_id);
+                $this->db->where('is_active', 1);
+
                 $sub= $this->db->get();
                 if (!empty($sub->row())) {
                     $is_sub = "True";
@@ -466,6 +470,7 @@ class Apicontroller extends CI_Controller
                     $this->db->from('tbl_minorcategory');
                     $this->db->where('category_id', $category_id);
                     $this->db->where('subcategory_id', $data2->id);
+                    $this->db->where('is_active', 1);
                     $minor_category= $this->db->get();
                     $minorcategory=[];
                     foreach ($minor_category->result() as $m_id) {
@@ -2446,7 +2451,7 @@ class Apicontroller extends CI_Controller
                                 if ($value->payment_type == 1) {
                                     $payment_type="Bank Tranfer";
                                 } elseif ($value->payment_type == 2) {
-                                    $payment_type="Pay at store";
+                                    $payment_type="Pay After Discussion";
                                 } else {
                                     $payment_type = "NA";
                                 }
@@ -2604,19 +2609,15 @@ class Apicontroller extends CI_Controller
                                 $this->db->where('id', $data->product_id);
                                 $product_data= $this->db->get()->row();
 
-
                                 $order2[]=array(
-'product_id' =>$product_data->id,
-'product_name' =>$product_data->productname,
-'product_image' =>base_url().$product_data->image,
-'quantity'=> $data->quantity,
-'price'=>$data->product_mrp,
-'total_amount'=>$data->total_amount,
-'weight'=>$product_data->weight,
-
-
-
-);
+                                    'product_id' =>$product_data->id,
+                                    'product_name' =>$product_data->productname,
+                                    'product_image' =>base_url().$product_data->image,
+                                    'quantity'=> $data->quantity,
+                                    'price'=>$data->product_mrp,
+                                    'total_amount'=>$data->total_amount,
+                                    'weight'=>$product_data->weight,
+                                    );
                                 $subtotal = $subtotal + $data->total_amount;
                                 $total_weight = ($product_data->weight*$data->quantity) + $total_weight;
                             }

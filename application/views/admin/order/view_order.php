@@ -42,6 +42,7 @@
                                                   <th>#</th>
                                                   <th>Order_id</th>
                                                   <th>User</th>
+                                                  <th>Total Order Weight</th>
                                                   <th>Total Amount</th>
                                                   <th>promocode</th>
                                                   <th>User mob.</th>
@@ -80,6 +81,8 @@
 
 
                               ?></td>
+                              <td>
+                              <?php echo $data->weight;?></td>
                             <td>₹<?php echo $data->total_amount;  ?></td>
                             <td><?php $check_prmocode_id= $data->promocode_id;
                                $this->db->select('*');
@@ -121,7 +124,7 @@
                             <td><?php $type=$data->payment_type;
                             $n1="";
                             if($type==2){
-                              $n1="Pay at store";
+                              $n1="Pay after discussion";
                             }
                             if($type==1){
                               $n1="Bank Transfer";
@@ -149,7 +152,7 @@
                               <td>
                                 <?
                                 if($data->bank_receipt){?>
-                                  <img src="<?=base_url().$data->bank_receipt?>" width="500" height="500">
+                                  <img src="<?=base_url().$data->bank_receipt?>" width="250" height="250">
                                 <?}else{
                                   echo  "NA";
                                 }
@@ -205,7 +208,7 @@ base64_encode($data->id) ?>/dispatch">Dispatch order</a></li> -->
 
 
 <li><a href="<?php echo base_url() ?>dcadmin/Orders/view_product_status/<?php echo
-base64_encode($data->id) ?>">View product</a></li>
+base64_encode($data->id) ?>">View Order Details</a></li>
 <li><a href="<?php echo base_url() ?>dcadmin/Orders/view_order_bill/<?php echo
 base64_encode($data->id) ?>">View bill</a></li>
 <!-- <li><a href="<?php echo base_url() ?>dcadmin/Neworder/view_order_bill/<?php echo

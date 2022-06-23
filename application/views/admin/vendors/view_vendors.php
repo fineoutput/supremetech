@@ -1,11 +1,11 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Vendors
+        <?=$heading?> Vendors
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">View Vendors</li>
+        <li class="active">View <?=$heading?> Vendors</li>
       </ol>
     </section>
     <section class="content">
@@ -14,7 +14,7 @@
           <!-- <a class="btn custom_btn" href="dcadmin/Vendors/add_vendors" role="button" style="margin-bottom:12px;"> Add Vendors </a> -->
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Vendors</h3>
+              <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View <?=$heading?> Vendors</h3>
             </div>
             <div class="panel panel-default">
 
@@ -42,14 +42,12 @@
                         <th>#</th>
                         <th>Full Name</th>
                         <th>Company Name</th>
-
-                        <th>Date Of Birth</th>
                         <th>Address</th>
-                        <th>city</th>
+                        <th>City</th>
                         <th>State</th>
                         <th>Contact Number</th>
                         <th>GST IN</th>
-                        <th>images</th>
+                        <th>Images</th>
                         <th>Images2</th>
 
                         <th>Registration date</th>
@@ -64,7 +62,6 @@
                         <td><?php echo $i ?> </td>
                         <td><?php echo $data->name ?></td>
                         <td><?php echo $data->company_name ?></td>
-                        <td><?php echo $data->dob ?></td>
                         <td><?php echo $data->address ?></td>
                         <td><?php echo $data->district ?></td>
                         <td><?php echo $data->state ?></td>

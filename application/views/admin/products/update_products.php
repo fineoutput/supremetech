@@ -42,20 +42,6 @@
 
 
                     <input type="hidden" name="category_id" value="<?=base64_decode($id1)?>">
-                    <!-- <tr>
-<td> <strong>Category Name</strong>  <span style="color:red;">*</span></strong> </td>
-<td>
-          <select class="form-control" id="cid" name="category_id">
-          <option value="">Please select category</option>
-
-          <?
-
-          foreach($category_data->result() as $value) {?>
-          <option value="<?=$value->id;?>"<?php if($products_data->category_id == $value->id){ echo "selected"; } ?>><?=$value->category;?></option>
-          <? }?>
-</select>
-</td>
-</tr> -->
 
                     <tr>
                       <td> <strong>Subcategory Name</strong> <span style="color:red;">*</span></strong> </td>
@@ -132,13 +118,13 @@
                           <?php } ?>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td> <strong>Price</strong> <span style="color:red;">*</span></strong> </td>
                       <td> <input type="number" name="mrp" required class="form-control" placeholder="" value="<?=$products_data->mrp?>" /> </td>
-                    </tr>
+                    </tr> -->
                    <tr>
-<td> <strong>Selling Price</strong>  <span style="color:red;">*</span></strong> </td>
-<td> <input type="number" name="sellingprice" id="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
+<td> <strong>Price</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <input type="number" required name="sellingprice" id="sellingprice"  class="form-control" placeholder=""  value="<?=$products_data->sellingprice?>" />  </td>
 </tr>
 <!--<tr>
 <td> <strong>Gst %</strong>  <span style="color:red;"></span></strong> </td>
