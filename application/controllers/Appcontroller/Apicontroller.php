@@ -1875,6 +1875,8 @@ class Apicontroller extends CI_Controller
                     if (!empty($cart_check)) {
                         $total=0;
                         $sub_total=0;
+                        $weight=0;
+                        $total_weight=0;
                         foreach ($cart_data->result() as  $data) {
                             $this->db->select('*');
                             $this->db->from('tbl_products');
@@ -1883,13 +1885,15 @@ class Apicontroller extends CI_Controller
 
                             if (!empty($product_data)) {
                                 $total = $product_data->sellingprice * $data->quantity;
-
                                 $sub_total = $sub_total + $total;
+                                $weight = $product_data->weight * $data->quantity;
+                                $total_weight = $total_weight + $weight;
                             }
                         }//end of foreach
                         $txn_id=bin2hex(random_bytes(10));
                         $order1_insert = array('user_id'=>$user_data->id,
           'total_amount'=>$sub_total,
+          'weight'=>$total_weight,
           'payment_status'=>0,
           'order_status'=>0,
           'payment_status'=>0,

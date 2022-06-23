@@ -780,7 +780,7 @@
                            $this->db->from('tbl_poeports');
                            $this->db->where('id',$data8);
                            $pov_ports_result = $this->db->get()->row();
-                           $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filtername);
+                           $pov_ports[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_ports_result->filter_name);
                        }
                        $data['pov_ports'] = $pov_ports;
                    } else {
@@ -797,7 +797,7 @@
                            $this->db->from('tbl_poetype');
                            $this->db->where('id',$data16);
                            $pov_type_result = $this->db->get()->row();
-                           $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filtername);
+                           $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filter_name);
                        }
                        $data['pov_type'] = $pov_type;
                    } else {
@@ -814,7 +814,7 @@
                            $this->db->from('tbl_sataports');
                            $this->db->where('id', $data9);
                            $sata_ports_result = $this->db->get()->row();
-                           $sata_ports[] = array('id'=>$sata_ports_result, 'name'=>$sata_ports_result->filtername);
+                           $sata_ports[] = array('id'=>$sata_ports_result, 'name'=>$sata_ports_result->filter_name);
                        }
                        $data['sata_ports'] = $sata_ports;
                    } else {
@@ -848,7 +848,7 @@
                            $this->db->from('tbl_screensize');
                            $this->db->where('id', $data11);
                            $screen_size_result = $this->db->get()->row();
-                           $screen_size[] = array('id'=>$screen_size_result->id, 'name'=>$screen_size_result->filtername);
+                           $screen_size[] = array('id'=>$screen_size_result->id, 'name'=>$screen_size_result->filter_name);
                        }
                        $data['screen_size'] = $screen_size;
                    } else {
@@ -864,7 +864,7 @@
                            $this->db->from('tbl_ledtype');
                            $this->db->where('id', $data12);
                            $led_type_result= $this->db->get()->row();
-                           $led_type[] = array('id'=>$led_type_result->id, 'name'=>$led_type_result->filtername);
+                           $led_type[] = array('id'=>$led_type_result->id, 'name'=>$led_type_result->filter_name);
                        }
                        $data['led_type'] = $led_type;
                    } else {
