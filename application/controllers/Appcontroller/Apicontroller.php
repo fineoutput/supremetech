@@ -335,12 +335,15 @@ class Apicontroller extends CI_Controller
           }else{
             $video2 = "";
           }
+          $image= '';
             if(empty($video2) && empty($video1)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1);
             }elseif(empty($video1)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video2);
             }elseif(empty($video2)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1);
+            }else{
+              $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1,$video2);
             }
             // $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1,$video2);
             $this->db->select('*');
