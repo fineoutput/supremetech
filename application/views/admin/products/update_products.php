@@ -95,26 +95,26 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video 1</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Video 1</strong></td>
                       <td> <input type="file" name="video1" class="form-control" placeholder="" value="<?=$products_data->video1?>" /> </td>
                       <td>
                         <?php if($products_data->video1!=""){  ?>
-                        <video id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->video1; ?>" autoplay poster="">
+                        <video id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->video1; ?>" muted autoplay poster="">
                           <?php }else {  ?>
-                          Sorry No image Found
+                          Sorry No Video Found
                           <?php } ?>
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Video 2</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Video 2</strong> </td>
                       <td> <input type="file" name="video2" class="form-control" placeholder="" value="<?=$products_data->video2?>" /> </td>
 
                       <td>
                         <?php if($products_data->video2!=""){  ?>
                         <!-- <img id="slide_img_path" height=50 width=100  src="<?php echo base_url() ?><?php echo $products_data->video2; ?>"> -->
-                        <video id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->video2; ?>" autoplay poster="">
+                        <video id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $products_data->video2; ?>" muted autoplay poster="">
                           <?php }else {  ?>
-                          Sorry No image Found
+                          Sorry No Video Found
                           <?php } ?>
                       </td>
                     </tr>

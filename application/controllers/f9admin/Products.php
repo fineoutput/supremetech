@@ -1036,6 +1036,13 @@
                            }
 
 
+                           $nnnn2='';
+                           $nnnn3='';
+                           $nnnn4='';
+                           $nnnn5='';
+
+
+
                            $img1='image';
 
                                        $file_check=($_FILES['image']['error']);
@@ -1078,7 +1085,7 @@
 
                            $img3='image1';
 
-                           $file_check=($_FILES['image']['error']);
+                           $file_check=($_FILES['image1']['error']);
                            if($file_check!=4){
                          	$image_upload_folder = FCPATH . "assets/uploads/products/";
                  						if (!file_exists($image_upload_folder))
@@ -1115,7 +1122,7 @@
 
                           $img4='video1';
 
-                          $file_check=($_FILES['image']['error']);
+                          $file_check=($_FILES['video1']['error']);
                           if($file_check!=4){
                         	$image_upload_folder = FCPATH . "assets/uploads/products/";
                 						if (!file_exists($image_upload_folder))
@@ -1152,7 +1159,7 @@
 
                            $img5='video2';
 
-                           $file_check=($_FILES['image']['error']);
+                           $file_check=($_FILES['video2']['error']);
                            if($file_check!=4){
                          	$image_upload_folder = FCPATH . "assets/uploads/products/";
                  						if (!file_exists($image_upload_folder))
@@ -1327,11 +1334,11 @@
 'image1'=>$n2,
 'video1'=>$n3,
 'video2'=>$n4,
-'mrp'=>$mrp,
+// 'mrp'=>$mrp,
 'sellingprice'=>$sellingprice,
-'gstrate'=>$gst,
-'gstprice'=>$gstprice,
-'sellingpricegst'=>$sp,
+// 'gstrate'=>$gst,
+// 'gstprice'=>$gstprice,
+// 'sellingpricegst'=>$sp,
 'productdescription'=>$productdescription,
 'weight'=>$modelno,
 // 'inventory'=>$inventory,
