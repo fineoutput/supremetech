@@ -5,7 +5,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="<?php echo base_url() ?>dcadmin/System/view_team"><i class="fa fa-dashboard"></i> All Team </a></li>
+      <li><a href="<?php echo base_url() ?>dcadmin/System/view_team"><i class="fa fa-dashboard"></i> View Team </a></li>
     </ol>
   </section>
   <section class="content">
@@ -28,7 +28,7 @@
             </div>
             <? } ?>
             <div class="col-lg-10">
-              <form action="<?php echo base_url() ?>admin/system/add_team_data" method="POST" id="slide_frm" enctype="multipart/form-data">
+              <form action="<?php echo base_url() ?>dcadmin/System/add_team_data" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
 
@@ -49,7 +49,7 @@
                       <td> <strong>Phone (optional)</strong> </strong> </td>
                       <td>
 
-                        <input type="text" name="phone" class="form-control" placeholder="" value="" />
+                        <input type="text" maxlength="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="phone" class="form-control" placeholder="" value="" />
                       </td>
                     </tr>
                     <tr>
@@ -72,7 +72,7 @@
                         <div class="form-group">
 
                           <select class="form-control" name="power" required>
-                            <option value=1">Please select Type</option>
+                            <option value="1">Please select Type</option>
                             <option value="1">Super Admin</option>
                             <option value="2">Admin</option>
                             <option value="3">Manager</option>
@@ -83,7 +83,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>services</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Services</strong> <span style="color:red;">*</span></strong> </td>
                       <td>
                         <div class="form-group">
                           <div class="checkbox">
@@ -140,9 +140,6 @@
 
 <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href="<? echo base_url() ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
-
-
-
 <style>
 
 </style>

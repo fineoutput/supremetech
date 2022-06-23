@@ -73,7 +73,7 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image</strong> <span style="color:red;"><br />1447X799</span></strong> </td>
                       <td> <input type="file" name="image" class="form-control" placeholder="" value="<?=$products_data->image?>" /> </td>
                       <td>
                         <?php if($products_data->image!=""){  ?>
@@ -84,7 +84,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image 1</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image 1</strong> <span style="color:red;"><br />1447X799</span></strong> </td>
                       <td> <input type="file" name="image1" class="form-control" placeholder="" value="<?=$products_data->image1?>" /> </td>
                       <td>
                         <?php if($products_data->image1!=""){  ?>

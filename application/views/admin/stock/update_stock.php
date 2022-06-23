@@ -54,7 +54,7 @@
                                               </td>
 
                       <tr>
-                                                <td> <strong>Image</strong>  <span style="color:red;">*</span></strong> </td>
+                                                <td> <strong>Image</strong>  <span style="color:red;"><br />527X435px</span></strong> </td>
                                                 <td>
                           <input type="file" name="fileToUpload1"  class="form-control" placeholder=""  value="" />
 
@@ -68,7 +68,7 @@
                                               </td>
                         </tr>
                       <tr>
-                                                <td> <strong>Background Image</strong>  <span style="color:red;">*</span></strong> </td>
+                                                <td> <strong>Background Image</strong>  <span style="color:red;"><br />527X435px</span></strong> </td>
                                                 <td>
                           <input type="file" name="fileToUpload2"  class="form-control" placeholder=""  value="" />
 

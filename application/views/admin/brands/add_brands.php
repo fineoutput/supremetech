@@ -47,7 +47,7 @@
                       <td> <input type="text" name="message" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image</strong> <span style="color:red;">*<br />400X200px</span></strong> </td>
                       <td> <input type="file" name="image" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
 

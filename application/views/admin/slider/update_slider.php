@@ -46,7 +46,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image</strong> <span style="color:red;">*<br />1920X620px</span></strong> </td>
                       <td>
                         <input type="file" name="slider_image" class="form-control" placeholder="" value="<?= $slider->slider_image; ?>" />
                       </td>

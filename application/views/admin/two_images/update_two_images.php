@@ -39,12 +39,12 @@
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <tr>
-                      <td> <strong>Image1</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image1</strong> <span style="color:red;"><br />796X531</span></strong> </td>
                       <td> <input type="file" name="image1" class="form-control" placeholder="" />
                         <?php if ($two_images_data->image1!="") { ?> <img id="slide_img_path" height=200 width=300 src="<?php echo base_url().$two_images_data->image1; ?> "> <?php } else { ?> Sorry No File Found <?php } ?> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image2</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image2</strong> <span style="color:red;"><br />796X531</span></strong> </td>
                       <td> <input type="file" name="image2" class="form-control" placeholder="" />
                         <?php if ($two_images_data->image2!="") { ?> <img id="slide_img_path" height=200 width=300 src="<?php echo base_url().$two_images_data->image2; ?> "> <?php } else { ?> Sorry No File Found <?php } ?> </td>
                     </tr>

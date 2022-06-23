@@ -7,7 +7,7 @@
             Dashboard
           </h1>
           <ol class="breadcrumb">
-            <li class="active"><i class="fa fa-dashboard"></i> Home</li>
+            <li class="active"><i class="fa fa-dashboard"></i> dASHBOARD</li>
           </ol>
         </section>
 
@@ -110,7 +110,7 @@
                 </div></a><!-- /.info-box -->
               </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="javascript:void(0)">
+              <a href="<?=base_url()?>dcadmin/Inventory/view_out_of_stock">
               <div class="info-box">
                 <span class="info-box-icon bg-grey"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">

@@ -3114,6 +3114,7 @@ $total = $order1_data->total_amount;
 'order_id'=>$value->id,
 'order_date'=>$d2,
 'total_amount'=>$value->final_amount,
+'weight'=>$value->weight,
 'payment_type'=> $payment_type,
 'discount'=>$value->discount,
 'order_status'=>$order_status,

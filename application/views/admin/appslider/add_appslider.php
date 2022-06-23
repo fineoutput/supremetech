@@ -43,7 +43,7 @@
                       <td> <input type="text" name="title" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Slider Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Slider Image</strong> <span style="color:red;">*<br />1600X810px</span></strong> </td>
                       <td> <input type="file" name="image" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
 

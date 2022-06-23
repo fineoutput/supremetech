@@ -46,6 +46,7 @@
                                                   <th>promocode</th>
                                                   <th>User mob.</th>
                                                   <th>Address</th>
+                                                  <th>District</th>
                                                   <th>City</th>
                                                   <th>State</th>
                                                   <th>pincode</th>
@@ -101,7 +102,7 @@
                               <td><?php echo $data->street_address  ?></td>
                               <td><?php $this->db->select('*');
                               $this->db->from('all_cities');
-                              $this->db->where('id', $data->city);
+                              $this->db->where('id', $data->district);
                               $city_data = $this->db->get()->row();
                               if(!empty($city_data)){
                                 echo $city_data->city_name;
@@ -109,6 +110,7 @@
                                 echo "Not Found";
                               }
                                 ?></td>
+                                <td><?=$data->city?></td>
                               <td><?php
                                           $this->db->select('*');
                               $this->db->from('all_states');
@@ -149,7 +151,7 @@
                               <td>
                                 <?
                                 if($data->bank_receipt){?>
-                                  <img src="<?=base_url().$data->bank_receipt?>" width="250" height="250">
+                                  <img src="<?=base_url().$data->bank_receipt?>" width="220" height="220">
                                 <?}else{
                                   echo  "NA";
                                 }

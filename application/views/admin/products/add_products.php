@@ -84,11 +84,11 @@
                     </tr>
 
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Image</strong> <span style="color:red;">*<br />1447X799</span> </td>
                       <td> <input type="file" name="image" required class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image1</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Image1</strong> <span style="color:red;">*<br />1447X799</span> </td>
                       <td> <input type="file" name="image1" required class="form-control" placeholder="" value="" /> </td>
                     </tr>
                     <tr>

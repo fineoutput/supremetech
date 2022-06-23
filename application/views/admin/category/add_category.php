@@ -46,13 +46,13 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Web Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Web Image</strong> <span style="color:red;">* <br />796X531px</span></span></strong> </td>
                       <td>
                         <input type="file" name="fileToUpload2" class="form-control" placeholder="" required value="" />
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>App Image2</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>App Image2</strong> <span style="color:red;">* <br />796X531px</span></span></strong> </td>
                       <td>
                         <input type="file" name="fileToUpload1" class="form-control" placeholder="" required value="" />
                       </td>

@@ -74,6 +74,30 @@
                 }
             }
 
+            public function view_out_of_stock()
+            {
+                if (!empty($this->session->userdata('admin_data'))) {
+                    $data['user_name']=$this->load->get_var('user_name');
+
+                    // echo SITE_NAME;
+                    // echo $this->session->userdata('image');
+                    // echo $this->session->userdata('position');
+                    // exit;
+
+                    $this->db->select('*');
+                    $this->db->from('tbl_products');
+                    $data['product_list']= $this->db->get();
+
+
+
+                    $this->load->view('admin/common/header_view', $data);
+                    $this->load->view('admin/inventory/view_out_of_stock');
+                    $this->load->view('admin/common/footer_view');
+                } else {
+                    redirect("login/admin_login", "refresh");
+                }
+            }
+
             public function update_inventory($idd)
             {
                 if (!empty($this->session->userdata('admin_data'))) {

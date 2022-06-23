@@ -78,7 +78,7 @@
                       <td> <input type="text" name="minorcategoryname" class="form-control" placeholder="" value="<?=$minorcategory_data->minorcategoryname?>" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Image</strong> <span style="color:red;"><br />300X300</span></strong> </td>
                       <td> <input type="file" name="fileToUpload1" class="form-control" placeholder="" value="" />
 
                         <?php if ($minorcategory_data->image!="") { ?>

@@ -52,7 +52,7 @@
                         <?php echo $data->address ?>
                                    </td>
                                 </tr>
-                                <!-- <tr>
+                                <tr>
           <td> <strong>Password</strong>  <span style="color:red;">*</span></strong> </td>
                               <td>
 <button type="button" class="btn btn-default" id="popcustom" pd-popup-open="popupNew" name="button">Change password</button>
@@ -85,7 +85,7 @@
 
 
                                      </td>
-                                  </tr> -->
+                                  </tr>
                                 <tr class="st1">
                                 <td> <strong>Image</strong> </td>
                                 <td>

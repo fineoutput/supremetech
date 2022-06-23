@@ -206,6 +206,10 @@ class System extends CI_finecontrol
                     $services=$this->input->post('services');
                     $password=$this->input->post('password');
                     $img1='fileToUpload1';
+                    if(empty($service) && empty($services)){
+                      $this->session->set_flashdata('emessage', 'Please select services to proceed');
+                      redirect($_SERVER['HTTP_REFERER']);
+                    }
 
                     if ($service==999) {
                         $ser='["999"]';
@@ -331,7 +335,7 @@ class System extends CI_finecontrol
                 $zapak=$this->db->delete('tbl_team', array('id' => $id));
                 if ($zapak!=0) {
                     $this->session->set_flashdata('smessage', 'Successfully deleted');
-                    redirect("admin/system/view_team", "refresh");
+                    redirect("dcadmin/System/view_team", "refresh");
                 } else {
                     $this->session->set_flashdata('emessage', 'Error Occured');
                     redirect($_SERVER['HTTP_REFERER']);
@@ -376,7 +380,7 @@ class System extends CI_finecontrol
 
                     if ($zapak!=0) {
                         $this->session->set_flashdata('smessage', 'Status successfully Updated');
-                        redirect("admin/system/view_team", "refresh");
+                        redirect("dcadmin/System/view_team", "refresh");
                     } else {
                         $this->session->set_flashdata('emessage', 'Error Occured');
                         redirect($_SERVER['HTTP_REFERER']);
@@ -394,7 +398,7 @@ class System extends CI_finecontrol
                     if ($zapak!=0) {
                         $this->session->set_flashdata('smessage', 'Status successfully Updated');
 
-                        redirect("admin/system/view_team", "refresh");
+                        redirect("dcadmin/System/view_team", "refresh");
                     } else {
                         $this->session->set_flashdata('emessage', 'Error Occured');
                         redirect($_SERVER['HTTP_REFERER']);

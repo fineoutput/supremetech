@@ -47,7 +47,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Web Image</strong></td>
+                      <td> <strong>Web Image<span style="color:red;"><br />796X531px</span></strong></td>
                       <td>
                         <input type="file" name="fileToUpload2" class="form-control" placeholder="" value="" />
                       </td>
@@ -60,7 +60,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>App Image</strong></td>
+                      <td> <strong>App Image<span style="color:red;"><br />796X531px</span></strong></td>
                       <td>
                         <input type="file" name="fileToUpload1" class="form-control" placeholder="" value="" />
                       </td>

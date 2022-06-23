@@ -2744,6 +2744,7 @@ class Apicontroller extends CI_Controller
 'order_date'=>$d2,
 'product_mrp'=>$data_result,
 'total_amount'=>$value->final_amount,
+'weight'=>$value->weight,
 'quantity'=>$data_mrp->quantity,
 'payment_type'=> $payment_type,
 'discount'=>$value->discount,

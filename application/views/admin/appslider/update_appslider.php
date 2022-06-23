@@ -43,7 +43,7 @@
 <td> <input type="text" name="title"  class="form-control" placeholder="" required value="<?=$appslider_data->title;?>" />  </td>
 </tr>
 <tr>
-<td> <strong>Slider Image</strong>  <span style="color:red;">*</span></strong> </td>
+<td> <strong>Slider Image</strong>  <span style="color:red;"><br />1600X810px</span></strong> </td>
 <td> <input type="file" name="image"  class="form-control" placeholder="" />
 <?php if($appslider_data->image!=""){ ?> <img id="slide_img_path" height=200 width=300 src="<?php echo base_url().$appslider_data->image; ?> "> <?php }else{ ?> Sorry No File Found <?php } ?>  </td>
 </tr>
