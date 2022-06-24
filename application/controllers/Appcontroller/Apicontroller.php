@@ -2368,9 +2368,15 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
 
                             echo json_encode($res);
                         }
+                    }else{
+                      $res = array('message'=>"Your cart is empty",
+            'status'=>201,
+            );
+
+                      echo json_encode($res);
                     }
                 } else {
-                    $res = array('message'=>"Wromg Password",
+                    $res = array('message'=>"Wrong Password",
           'status'=>201,
           );
 
