@@ -417,7 +417,7 @@
                        $this->db->from('tbl_poeports');
                        $this->db->where('id',$data16);
                        $pov_type_result = $this->db->get()->row();
-                       $pov_type[] = array('id'=>$pov_ports_result->id, 'name'=>$pov_type_result->filter_name);
+                       $pov_type[] = array('id'=>$pov_type_result->id, 'name'=>$pov_type_result->filter_name);
                    }
                    $data['pov_type'] = json_encode($pov_type);
                } else {
