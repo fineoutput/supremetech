@@ -145,6 +145,22 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
+                  $this->db->select('*');
+                  $this->db->from('tbl_category');
+                  $this->db->where('id', $data->category_id);
+                  $this->db->where('is_active', 1);
+                  $cat_check = $this->db->get()->row();
+                  $this->db->from('tbl_subcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->subcategory_id);
+                  $subcat_check = $this->db->get()->row();
+                  $this->db->select('*');
+                  $this->db->from('tbl_minorcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->minorcategory_id);
+                  $minorcat_check = $this->db->get()->row();
+
+                  if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                     $this->db->select('*');
                     $this->db->from('tbl_inventory');
                     $this->db->where('product_id', $data->id);
@@ -171,6 +187,7 @@ class Apicontroller extends CI_Controller
 
                                   );
                 }
+              }
 
                 $res = array('message'=>"success",
                                                     'status'=>200,
@@ -215,6 +232,22 @@ class Apicontroller extends CI_Controller
                 $product=[];
                 foreach ($product_data->result() as $data) {
                   $this->db->select('*');
+                  $this->db->from('tbl_category');
+                  $this->db->where('id', $data->category_id);
+                  $this->db->where('is_active', 1);
+                  $cat_check = $this->db->get()->row();
+                  $this->db->from('tbl_subcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->subcategory_id);
+                  $subcat_check = $this->db->get()->row();
+                  $this->db->select('*');
+                  $this->db->from('tbl_minorcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->minorcategory_id);
+                  $minorcat_check = $this->db->get()->row();
+
+                  if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
+                  $this->db->select('*');
                   $this->db->from('tbl_inventory');
                   $this->db->where('product_id', $data->id);
                   $inventory_data = $this->db->get()->row();
@@ -240,6 +273,7 @@ class Apicontroller extends CI_Controller
 
                                   );
                 }
+              }
 
                 $res = array('message'=>"success",
                                                     'status'=>200,
@@ -289,6 +323,22 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
+                  $this->db->select('*');
+                  $this->db->from('tbl_category');
+                  $this->db->where('id', $data->category_id);
+                  $this->db->where('is_active', 1);
+                  $cat_check = $this->db->get()->row();
+                  $this->db->from('tbl_subcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->subcategory_id);
+                  $subcat_check = $this->db->get()->row();
+                  $this->db->select('*');
+                  $this->db->from('tbl_minorcategory');
+                  $this->db->where('is_active', 1);
+                  $this->db->where('id', $data->minorcategory_id);
+                  $minorcat_check = $this->db->get()->row();
+
+                  if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                     $product[] = array(
                   'product_id'=>$data->id,
                   'product_name'=>$data->productname,
@@ -301,6 +351,7 @@ class Apicontroller extends CI_Controller
 
                 );
                 }
+              }
 
                 $res = array('message'=>"success",
                   'status'=>200,
@@ -2063,6 +2114,23 @@ class Apicontroller extends CI_Controller
         $related_info = [];
         foreach ($related_data->result() as $data) {
             $this->db->select('*');
+            $this->db->from('tbl_category');
+            $this->db->where('id', $data->category_id);
+            $this->db->where('is_active', 1);
+            $cat_check = $this->db->get()->row();
+            $this->db->from('tbl_subcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $data->subcategory_id);
+            $subcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_minorcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $data->minorcategory_id);
+            $minorcat_check = $this->db->get()->row();
+
+            if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
+
+            $this->db->select('*');
             $this->db->from('tbl_inventory');
             $this->db->where('product_id', $data->id);
             $inventory_data = $this->db->get()->row();
@@ -2087,6 +2155,7 @@ class Apicontroller extends CI_Controller
 'max'=>$data->max,
 'stock'=>$stock
 );
+}
 }
         }
 
