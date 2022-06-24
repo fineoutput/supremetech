@@ -388,14 +388,19 @@ class Apicontroller extends CI_Controller
             $video2 = "";
           }
           $image= '';
+          $count = '';
             if(empty($video2) && empty($video1)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1);
+              $count = 2;
             }elseif(empty($video1)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video2);
+              $count = 3;
             }elseif(empty($video2)){
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1);
+              $count = 3;
             }else{
               $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1,$video2);
+              $count = 4;
             }
             // $image=array(base_url().$productsdata->image,base_url().$productsdata->image1,$video1,$video2);
             $this->db->select('*');
@@ -434,6 +439,7 @@ class Apicontroller extends CI_Controller
             $res = array('message'=>"success",
     'status'=>200,
     'image'=>$image,
+    'count'=>$count,
     'data'=>$products
     );
 
