@@ -1908,6 +1908,22 @@ class Apicontroller extends CI_Controller
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
+          $this->db->select('*');
+$this->db->from('tbl_category');
+$this->db->where('id', $limit->category_id);
+$this->db->where('is_active', 1);
+$cat_check = $this->db->get()->row();
+$this->db->from('tbl_subcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $limit->subcategory_id);
+$subcat_check = $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $limit->minorcategory_id);
+$minorcat_check = $this->db->get()->row();
+
+if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
             $this->db->select('*');
             $this->db->from('tbl_inventory');
             $this->db->where('product_id', $limit->id);
@@ -1947,6 +1963,7 @@ class Apicontroller extends CI_Controller
 // 'inventory'=> $data->inventory
 );
         }
+      }
 
 
         $res = array('message'=>"success",
@@ -2041,6 +2058,22 @@ class Apicontroller extends CI_Controller
         $data= $this->db->get();
         $feature=[];
         foreach ($data->result() as $limit) {
+          $this->db->select('*');
+          $this->db->from('tbl_category');
+          $this->db->where('id', $limit->category_id);
+          $this->db->where('is_active', 1);
+          $cat_check = $this->db->get()->row();
+          $this->db->from('tbl_subcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->subcategory_id);
+          $subcat_check = $this->db->get()->row();
+          $this->db->select('*');
+          $this->db->from('tbl_minorcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->minorcategory_id);
+          $minorcat_check = $this->db->get()->row();
+
+          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
             $this->db->select('*');
             $this->db->from('tbl_inventory');
             $this->db->where('product_id', $limit->id);
@@ -2070,6 +2103,7 @@ class Apicontroller extends CI_Controller
 
 );
         }
+      }
         $res=array(
            'message'=>"success",
            'status'=>200,
