@@ -140,6 +140,7 @@ class Apicontroller extends CI_Controller
                 // $this->db->where('category_id',$category_id);
                 // $this->db->where('subcategory_id',$subcategory_id);
                 $this->db->where('minorcategory_id', $minorcategory_id);
+                $this->db->where('is_active', 1);
                 $product_data= $this->db->get();
 
                 $product=[];
@@ -2610,6 +2611,7 @@ class Apicontroller extends CI_Controller
             $this->db->select('*');
             $this->db->from('tbl_subcategory');
             $this->db->where('category_id', $data->id);
+            $this->db->where('is_active', 1);
             $sub= $this->db->get();
             $subcategory=[];
             foreach ($sub->result() as $data2) {
@@ -2617,6 +2619,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_minorcategory');
                 $this->db->where('category_id', $c_id);
                 $this->db->where('subcategory_id', $data2->id);
+                $this->db->where('is_active', 1);
                 $minor_category= $this->db->get();
                 $minorcategory=[];
                 foreach ($minor_category->result() as $m_id) {
@@ -3473,6 +3476,7 @@ class Apicontroller extends CI_Controller
                 // die();
                 $this->db->select('*');
                 $this->db->from('tbl_products');
+                $this->db->where('is_active', 1);
 
                 if (!empty($brand_info[0])) {
                     foreach ($brand_info as $data0) {
@@ -4200,6 +4204,7 @@ class Apicontroller extends CI_Controller
         $this->db->select('*');
         $this->db->from('tbl_minorcategory');
         $this->db->where('id', $id);
+        $this->db->where('is_active', 1);
         $minorcategory_data= $this->db->get()->row();
 
         //resoultation
@@ -4592,6 +4597,7 @@ class Apicontroller extends CI_Controller
         $this->db->select('*');
         $this->db->from('tbl_minorcategory');
         $this->db->where('id', $mini_id);
+        $this->db->where('is_active', 1);
         $minorcategory_data= $this->db->get()->row();
         $this->db->select('*');
         $this->db->from('tbl_'.$b_name);
