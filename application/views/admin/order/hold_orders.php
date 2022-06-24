@@ -42,6 +42,7 @@
                                                   <th>#</th>
                                                   <th>Order_id</th>
                                                   <th>User</th>
+                                                  <th>Total Order Weight</th>
                                                   <th>Total Amount</th>
                                                   <th>promocode</th>
                                                   <th>User mob.</th>
@@ -74,7 +75,7 @@
                                            if(!empty($check_username)){
                                             echo $check_username->name;
                                            }else{
-                                             echo "user_id not exist";
+                                             echo "user does not exist";
                                            }
 
 
@@ -97,6 +98,8 @@
 
 
                               ?></td>
+                              <td>
+                              <?php echo $data->weight;?> gm</td>
                             <td><?php echo $data->phone  ?></td>
                               <td><?php echo $data->street_address  ?></td>
                               <td><?php $this->db->select('*');
