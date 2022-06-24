@@ -1555,6 +1555,22 @@ if(!empty($productsdata->video2)){
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
+          $this->db->select('*');
+          $this->db->from('tbl_category');
+          $this->db->where('id', $limit->category_id);
+          $this->db->where('is_active', 1);
+          $cat_check = $this->db->get()->row();
+          $this->db->from('tbl_subcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->subcategory_id);
+          $subcat_check = $this->db->get()->row();
+          $this->db->select('*');
+          $this->db->from('tbl_minorcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->minorcategory_id);
+          $minorcat_check = $this->db->get()->row();
+
+          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
 
 //category
             //   $this->db->select('*');
@@ -1626,6 +1642,7 @@ if(!empty($productsdata->video2)){
 // 'inventory'=> $data->inventory
 );
         }
+      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -1648,6 +1665,22 @@ if(!empty($productsdata->video2)){
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
+          $this->db->select('*');
+          $this->db->from('tbl_category');
+          $this->db->where('id', $limit->category_id);
+          $this->db->where('is_active', 1);
+          $cat_check = $this->db->get()->row();
+          $this->db->from('tbl_subcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->subcategory_id);
+          $subcat_check = $this->db->get()->row();
+          $this->db->select('*');
+          $this->db->from('tbl_minorcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $limit->minorcategory_id);
+          $minorcat_check = $this->db->get()->row();
+
+          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
             $this->db->select('*');
             $this->db->from('tbl_inventory');
             $this->db->where('product_id', $limit->id);
@@ -1674,6 +1707,7 @@ if(!empty($productsdata->video2)){
 'stock'=>$stock
 );
         }
+      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -1778,6 +1812,22 @@ if(!empty($productsdata->video2)){
         $related_info = [];
         foreach ($related_data->result() as $data) {
           $this->db->select('*');
+          $this->db->from('tbl_category');
+          $this->db->where('id', $data->category_id);
+          $this->db->where('is_active', 1);
+          $cat_check = $this->db->get()->row();
+          $this->db->from('tbl_subcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $data->subcategory_id);
+          $subcat_check = $this->db->get()->row();
+          $this->db->select('*');
+          $this->db->from('tbl_minorcategory');
+          $this->db->where('is_active', 1);
+          $this->db->where('id', $data->minorcategory_id);
+          $minorcat_check = $this->db->get()->row();
+
+          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
+          $this->db->select('*');
           $this->db->from('tbl_inventory');
           $this->db->where('product_id', $data->id);
           $inventory_data = $this->db->get()->row();
@@ -1803,6 +1853,7 @@ if(!empty($productsdata->video2)){
 );
 }
         }
+      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -2656,6 +2707,22 @@ if(!empty($productsdata->video2)){
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
                   $this->db->select('*');
+$this->db->from('tbl_category');
+$this->db->where('id', $data->category_id);
+$this->db->where('is_active', 1);
+$cat_check = $this->db->get()->row();
+$this->db->from('tbl_subcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $data->subcategory_id);
+$subcat_check = $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $data->minorcategory_id);
+$minorcat_check = $this->db->get()->row();
+
+if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
+                  $this->db->select('*');
                   $this->db->from('tbl_inventory');
                   $this->db->where('product_id', $data->id);
                   $inventory_data = $this->db->get()->row();
@@ -2682,6 +2749,7 @@ if(!empty($productsdata->video2)){
 
 );
                 }
+              }
                 header('Access-Control-Allow-Origin: *');
                 $res = array('message'=>"success",
 'status'=>200,

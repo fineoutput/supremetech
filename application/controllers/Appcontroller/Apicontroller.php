@@ -3080,6 +3080,22 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                 // exit;
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
+                  $this->db->select('*');
+$this->db->from('tbl_category');
+$this->db->where('id', $data->category_id);
+$this->db->where('is_active', 1);
+$cat_check = $this->db->get()->row();
+$this->db->from('tbl_subcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $data->subcategory_id);
+$subcat_check = $this->db->get()->row();
+$this->db->select('*');
+$this->db->from('tbl_minorcategory');
+$this->db->where('is_active', 1);
+$this->db->where('id', $data->minorcategory_id);
+$minorcat_check = $this->db->get()->row();
+
+if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                     $this->db->select('*');
                     $this->db->from('tbl_inventory');
                     $this->db->where('product_id', $data->id);
@@ -3108,7 +3124,7 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
 
    );
                 }
-
+}
                 $res = array('message'=>"success",
 'status'=>200,
 'data'=>$search_data
