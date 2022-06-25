@@ -784,7 +784,7 @@ class Apicontroller extends CI_Controller
 
             if ($this->form_validation->run()== true) {
                 $product_id=$this->input->post('product_id');
-                $quantity=$this->input->post('quantity');
+                $quantity=1;
                 $phone=$this->input->post('phone');
                 $authentication=$this->input->post('authentication');
                 $token_id=$this->input->post('token_id');
