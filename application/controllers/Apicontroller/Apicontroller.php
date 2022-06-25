@@ -3142,7 +3142,7 @@ $total = $order1_data->total_amount;
 
                             foreach ($data->result() as $value) {
                                 if ($value->payment_type == 1) {
-                                    $payment_type="Bank Tranfer";
+                                    $payment_type="Bank Transfer";
                                 } elseif ($value->payment_type == 2) {
                                     $payment_type="Pay After Discussion";
                                 } else {
