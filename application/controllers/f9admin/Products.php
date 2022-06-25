@@ -1448,6 +1448,8 @@
 
                        $this->db->where('id', $id);
                        $zapak=$this->db->update('tbl_products', $data_update);
+                       $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
+                       $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
 
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Product status updated successfully');
@@ -1484,6 +1486,8 @@
                        // $img=$da->image;
 
                        $zapak=$this->db->delete('tbl_products', array('id' => $id));
+                       $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
+                       $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
                        if ($zapak!=0) {
                            // $path = FCPATH .$img;
                            //   unlink($path);

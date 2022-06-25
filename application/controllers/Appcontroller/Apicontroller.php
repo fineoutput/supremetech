@@ -3563,10 +3563,14 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
             $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
             $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
             $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
 
 
 
             if ($this->form_validation->run()== true) {
+                $minorcategory_id=$this->input->post('audio_type_id');
+
+
                 $brand_id=$this->input->post('brand_id');
                 $resolution_id=$this->input->post('resolution_id');
                 $irdistance_id=$this->input->post('irdistance_id');
@@ -3584,6 +3588,7 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                 $lens_id=$this->input->post('lens_id');
                 $night_vision_id=$this->input->post('night_vision_id');
                 $audio_type_id=$this->input->post('audio_type_id');
+
 
 
                 $brand_info = explode(',', $brand_id);
@@ -3608,6 +3613,7 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->where('is_active', 1);
+                $this->db->where('minorcategory_id', $minorcategory_id);
 
                 if (!empty($brand_info[0])) {
                     foreach ($brand_info as $data0) {

@@ -304,8 +304,8 @@ class Category extends CI_finecontrol
                 $this->db->where('category_id', $id);
                 $product_data = $this->db->get();
                 foreach($product_data->result() as $pro){
-                  $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
-                  $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
+                  $zapak=$this->db->delete('tbl_cart', array('product_id' => $pro->id));
+                  $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $pro->id));
                 }
                 $zapak=$this->db->delete('tbl_products', array('category_id' => $id));
                 if ($zapak!=0) {
@@ -345,7 +345,14 @@ class Category extends CI_finecontrol
 
                 $this->db->where('id', $id);
                 $zapak=$this->db->update('tbl_category', $data_update);
-
+                $this->db->select('*');
+                $this->db->from('tbl_products');
+                $this->db->where('category_id', $id);
+                $product_data = $this->db->get();
+                foreach($product_data->result() as $pro){
+                  $zapak=$this->db->delete('tbl_cart', array('product_id' => $pro->id));
+                  $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $pro->id));
+                }
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Category status updated successfully');
                     redirect("dcadmin/Category/view_category", "refresh");
