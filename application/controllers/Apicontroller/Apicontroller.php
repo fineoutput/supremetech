@@ -777,7 +777,7 @@ class Apicontroller extends CI_Controller
         $this->load->helper('security');
         if ($this->input->post()) {
             $this->form_validation->set_rules('product_id', 'product_id', 'required|trim');
-            $this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
+            $this->form_validation->set_rules('quantity', 'quantity', 'trim');
             $this->form_validation->set_rules('phone', 'phone', 'trim');
             $this->form_validation->set_rules('authentication', 'authentication', 'trim');
             $this->form_validation->set_rules('token_id', 'token_id', 'required|trim');
