@@ -98,7 +98,7 @@ class Apicontroller extends CI_Controller
 
     //  ========== Product Api minorcategory =============
 
-      public function get_minorcategory_products()
+    public function get_minorcategory_products()
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -120,7 +120,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_products');
                 // $this->db->where('category_id',$category_id);
                 // $this->db->where('subcategory_id',$subcategory_id);
-                $this->db->where('is_active',1);
+                $this->db->where('is_active', 1);
                 $this->db->where('minorcategory_id', $minorcategory_id);
                 $product_data= $this->db->get();
 
@@ -135,20 +135,19 @@ class Apicontroller extends CI_Controller
 
                 $product=[];
                 foreach ($product_data->result() as $data) {
-
-                  $this->db->select('*');
-                  $this->db->from('tbl_inventory');
-                  $this->db->where('product_id', $data->id);
-                  $inventory_data = $this->db->get()->row();
-                  if (!empty($inventory_data)) {
-                      if ($inventory_data->quantity>0) {
-                          $stock = 1;
-                      } else {
-                          $stock =0;
-                      }
-                  } else {
-                      $stock =0;
-                  }
+                    $this->db->select('*');
+                    $this->db->from('tbl_inventory');
+                    $this->db->where('product_id', $data->id);
+                    $inventory_data = $this->db->get()->row();
+                    if (!empty($inventory_data)) {
+                        if ($inventory_data->quantity>0) {
+                            $stock = 1;
+                        } else {
+                            $stock =0;
+                        }
+                    } else {
+                        $stock =0;
+                    }
                     $product[] = array(
 'product_id'=>$data->id,
 'product_name'=>$data->productname,
@@ -337,16 +336,16 @@ class Apicontroller extends CI_Controller
             } else {
                 $stock =0;
             }
-if(!empty($productsdata->video1)){
-  $video1 = base_url().$productsdata->video1;
-}else{
-  $video1 = "";
-}
-if(!empty($productsdata->video2)){
-  $video2 = base_url().$productsdata->video2;
-}else{
-  $video2 = "";
-}
+            if (!empty($productsdata->video1)) {
+                $video1 = base_url().$productsdata->video1;
+            } else {
+                $video1 = "";
+            }
+            if (!empty($productsdata->video2)) {
+                $video2 = base_url().$productsdata->video2;
+            } else {
+                $video2 = "";
+            }
 
             $products[] = array(
 'id'=> $productsdata->id,
@@ -864,7 +863,6 @@ if(!empty($productsdata->video2)){
                                     $zapak=$this->db->delete('tbl_wishlist', array('user_id' => $check_id->id,'product_id'=>$product_id));
 
                                     if (!empty($last_id)) {
-
                                         header('Access-Control-Allow-Origin: *');
                                         $res = array('message'=>'success',
 'status'=>200
@@ -1555,76 +1553,76 @@ if(!empty($productsdata->video2)){
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
-          $this->db->select('*');
-          $this->db->from('tbl_category');
-          $this->db->where('id', $limit->category_id);
-          $this->db->where('is_active', 1);
-          $cat_check = $this->db->get()->row();
-          $this->db->from('tbl_subcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $limit->subcategory_id);
-          $subcat_check = $this->db->get()->row();
-          $this->db->select('*');
-          $this->db->from('tbl_minorcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $limit->minorcategory_id);
-          $minorcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_category');
+            $this->db->where('id', $limit->category_id);
+            $this->db->where('is_active', 1);
+            $cat_check = $this->db->get()->row();
+            $this->db->from('tbl_subcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $limit->subcategory_id);
+            $subcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_minorcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $limit->minorcategory_id);
+            $minorcat_check = $this->db->get()->row();
 
-          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
+            if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
 
 //category
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_category');
-            //   $this->db->where('id',$limit->subcategory_id);
-            //   $cat= $this->db->get()->row();
-            //   if(!empty($cat)){
-            //   $c1=$cat->category;
-            //   }
-            //   else{
-            //   $c1="";
-            //   }
+                //   $this->db->select('*');
+                //   $this->db->from('tbl_category');
+                //   $this->db->where('id',$limit->subcategory_id);
+                //   $cat= $this->db->get()->row();
+                //   if(!empty($cat)){
+                //   $c1=$cat->category;
+                //   }
+                //   else{
+                //   $c1="";
+                //   }
 //
 //
-            //   //subcategory
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_subcategory');
-            //   $this->db->where('id',$limit->subcategory_id);
-            //   $sub= $this->db->get()->row();
-            //   if(!empty($sub)){
-            //   $s1=$sub->subcategory;
-            //   }else{
-            //   $s1="";
-            //   }
+                //   //subcategory
+                //   $this->db->select('*');
+                //   $this->db->from('tbl_subcategory');
+                //   $this->db->where('id',$limit->subcategory_id);
+                //   $sub= $this->db->get()->row();
+                //   if(!empty($sub)){
+                //   $s1=$sub->subcategory;
+                //   }else{
+                //   $s1="";
+                //   }
 //
-            //   //type --
-            //   $this->db->select('*');
-            //   $this->db->from('tbl_minorcategory');
+                //   //type --
+                //   $this->db->select('*');
+                //   $this->db->from('tbl_minorcategory');
 //     $this->db->where('id',$limit->minorcategory_id);
-            //   $minor= $this->db->get()->row();
-            //   if(!empty($minor)){
+                //   $minor= $this->db->get()->row();
+                //   if(!empty($minor)){
 //     $m1=$minor->minorcategoryname;
-            // }else{
-            //   $m1="";
-            // }
+                // }else{
+                //   $m1="";
+                // }
 
-            $this->db->select('*');
-            $this->db->from('tbl_inventory');
-            $this->db->where('product_id', $limit->id);
-            $inventory_data= $this->db->get()->row();
+                $this->db->select('*');
+                $this->db->from('tbl_inventory');
+                $this->db->where('product_id', $limit->id);
+                $inventory_data= $this->db->get()->row();
 
-            if (!empty($inventory_data)) {
-                if ($inventory_data->quantity>0) {
-                    $stock = 1;
+                if (!empty($inventory_data)) {
+                    if ($inventory_data->quantity>0) {
+                        $stock = 1;
+                    } else {
+                        $stock =0;
+                    }
                 } else {
                     $stock =0;
                 }
-            } else {
-                $stock =0;
-            }
 
 
 
-            $products[] = array(
+                $products[] = array(
 'product_id'=>$limit->id,
 'productname'=> $limit->productname,
 // 'category'=> $c1,
@@ -1641,8 +1639,8 @@ if(!empty($productsdata->video2)){
 'stock'=>$stock
 // 'inventory'=> $data->inventory
 );
+            }
         }
-      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -1665,38 +1663,38 @@ if(!empty($productsdata->video2)){
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
-          $this->db->select('*');
-          $this->db->from('tbl_category');
-          $this->db->where('id', $limit->category_id);
-          $this->db->where('is_active', 1);
-          $cat_check = $this->db->get()->row();
-          $this->db->from('tbl_subcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $limit->subcategory_id);
-          $subcat_check = $this->db->get()->row();
-          $this->db->select('*');
-          $this->db->from('tbl_minorcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $limit->minorcategory_id);
-          $minorcat_check = $this->db->get()->row();
-
-          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
             $this->db->select('*');
-            $this->db->from('tbl_inventory');
-            $this->db->where('product_id', $limit->id);
-            $inventory_data= $this->db->get()->row();
+            $this->db->from('tbl_category');
+            $this->db->where('id', $limit->category_id);
+            $this->db->where('is_active', 1);
+            $cat_check = $this->db->get()->row();
+            $this->db->from('tbl_subcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $limit->subcategory_id);
+            $subcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_minorcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $limit->minorcategory_id);
+            $minorcat_check = $this->db->get()->row();
 
-            if (!empty($inventory_data)) {
-                if ($inventory_data->quantity>0) {
-                    $stock = 1;
+            if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
+                $this->db->select('*');
+                $this->db->from('tbl_inventory');
+                $this->db->where('product_id', $limit->id);
+                $inventory_data= $this->db->get()->row();
+
+                if (!empty($inventory_data)) {
+                    if ($inventory_data->quantity>0) {
+                        $stock = 1;
+                    } else {
+                        $stock =0;
+                    }
                 } else {
                     $stock =0;
                 }
-            } else {
-                $stock =0;
-            }
 
-            $products[] = array(
+                $products[] = array(
 'product_id'=>$limit->id,
 'productname'=> $limit->productname,
 'productimage'=> base_url().$limit->image,
@@ -1706,8 +1704,8 @@ if(!empty($productsdata->video2)){
 'max'=>$limit->max,
 'stock'=>$stock
 );
+            }
         }
-      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -1811,37 +1809,37 @@ if(!empty($productsdata->video2)){
 
         $related_info = [];
         foreach ($related_data->result() as $data) {
-          $this->db->select('*');
-          $this->db->from('tbl_category');
-          $this->db->where('id', $data->category_id);
-          $this->db->where('is_active', 1);
-          $cat_check = $this->db->get()->row();
-          $this->db->from('tbl_subcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $data->subcategory_id);
-          $subcat_check = $this->db->get()->row();
-          $this->db->select('*');
-          $this->db->from('tbl_minorcategory');
-          $this->db->where('is_active', 1);
-          $this->db->where('id', $data->minorcategory_id);
-          $minorcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_category');
+            $this->db->where('id', $data->category_id);
+            $this->db->where('is_active', 1);
+            $cat_check = $this->db->get()->row();
+            $this->db->from('tbl_subcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $data->subcategory_id);
+            $subcat_check = $this->db->get()->row();
+            $this->db->select('*');
+            $this->db->from('tbl_minorcategory');
+            $this->db->where('is_active', 1);
+            $this->db->where('id', $data->minorcategory_id);
+            $minorcat_check = $this->db->get()->row();
 
-          if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
-          $this->db->select('*');
-          $this->db->from('tbl_inventory');
-          $this->db->where('product_id', $data->id);
-          $inventory_data = $this->db->get()->row();
-          if (!empty($inventory_data)) {
-              if ($inventory_data->quantity>0) {
-                  $stock = 1;
-              } else {
-                  $stock =0;
-              }
-          } else {
-              $stock =0;
-          }
-            if ($data->id!=$id) {
-            $related_info[]  = array(
+            if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
+                $this->db->select('*');
+                $this->db->from('tbl_inventory');
+                $this->db->where('product_id', $data->id);
+                $inventory_data = $this->db->get()->row();
+                if (!empty($inventory_data)) {
+                    if ($inventory_data->quantity>0) {
+                        $stock = 1;
+                    } else {
+                        $stock =0;
+                    }
+                } else {
+                    $stock =0;
+                }
+                if ($data->id!=$id) {
+                    $related_info[]  = array(
 'product_id'=>$data->id,
 'productname'=>$data->productname,
 'productimage'=>base_url().$data->image,
@@ -1851,9 +1849,9 @@ if(!empty($productsdata->video2)){
 'max'=>$data->max,
 'stock'=>$stock
 );
-}
+                }
+            }
         }
-      }
 
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
@@ -2608,23 +2606,23 @@ if(!empty($productsdata->video2)){
                             $this->db->where('id', $data->product_id);
                             $dsa= $this->db->get();
                             $product_data=$dsa->row();
-                            if($product_data->is_active==1){
-                            $this->db->select('*');
-                            $this->db->from('tbl_inventory');
-                            $this->db->where('product_id', $data->product_id);
-                            $inventory_data = $this->db->get()->row();
-                            if (!empty($inventory_data)) {
-                                if ($inventory_data->quantity>0) {
-                                    $stock = 1;
+                            if ($product_data->is_active==1) {
+                                $this->db->select('*');
+                                $this->db->from('tbl_inventory');
+                                $this->db->where('product_id', $data->product_id);
+                                $inventory_data = $this->db->get()->row();
+                                if (!empty($inventory_data)) {
+                                    if ($inventory_data->quantity>0) {
+                                        $stock = 1;
+                                    } else {
+                                        $stock =0;
+                                    }
                                 } else {
                                     $stock =0;
                                 }
-                            } else {
-                                $stock =0;
-                            }
 
 
-                            $wishlist_info[]=array(
+                                $wishlist_info[]=array(
 'product_id'=>$product_data->id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
@@ -2632,8 +2630,8 @@ if(!empty($productsdata->video2)){
 'product_selling_price'=>$product_data->sellingprice,
 'stock'=>$stock
 );
+                            }
                         }
-                      }
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'success',
 'status'=>200,
@@ -2641,10 +2639,7 @@ if(!empty($productsdata->video2)){
 );
 
                         echo json_encode($res);
-                    }
-
-
-                     else {
+                    } else {
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'Wrong Authentication',
 'status'=>201
@@ -2706,36 +2701,36 @@ if(!empty($productsdata->video2)){
                 // exit;
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
-                  $this->db->select('*');
-$this->db->from('tbl_category');
-$this->db->where('id', $data->category_id);
-$this->db->where('is_active', 1);
-$cat_check = $this->db->get()->row();
-$this->db->from('tbl_subcategory');
-$this->db->where('is_active', 1);
-$this->db->where('id', $data->subcategory_id);
-$subcat_check = $this->db->get()->row();
-$this->db->select('*');
-$this->db->from('tbl_minorcategory');
-$this->db->where('is_active', 1);
-$this->db->where('id', $data->minorcategory_id);
-$minorcat_check = $this->db->get()->row();
+                    $this->db->select('*');
+                    $this->db->from('tbl_category');
+                    $this->db->where('id', $data->category_id);
+                    $this->db->where('is_active', 1);
+                    $cat_check = $this->db->get()->row();
+                    $this->db->from('tbl_subcategory');
+                    $this->db->where('is_active', 1);
+                    $this->db->where('id', $data->subcategory_id);
+                    $subcat_check = $this->db->get()->row();
+                    $this->db->select('*');
+                    $this->db->from('tbl_minorcategory');
+                    $this->db->where('is_active', 1);
+                    $this->db->where('id', $data->minorcategory_id);
+                    $minorcat_check = $this->db->get()->row();
 
-if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
-                  $this->db->select('*');
-                  $this->db->from('tbl_inventory');
-                  $this->db->where('product_id', $data->id);
-                  $inventory_data = $this->db->get()->row();
-                  if (!empty($inventory_data)) {
-                      if ($inventory_data->quantity>0) {
-                          $stock = 1;
-                      } else {
-                          $stock =0;
-                      }
-                  } else {
-                      $stock =0;
-                  }
-                    $search_data[]=array(
+                    if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
+                        $this->db->select('*');
+                        $this->db->from('tbl_inventory');
+                        $this->db->where('product_id', $data->id);
+                        $inventory_data = $this->db->get()->row();
+                        if (!empty($inventory_data)) {
+                            if ($inventory_data->quantity>0) {
+                                $stock = 1;
+                            } else {
+                                $stock =0;
+                            }
+                        } else {
+                            $stock =0;
+                        }
+                        $search_data[]=array(
 'product_id'=>$data->id,
 'product_name'=>$data->productname,
 'produt_image'=>base_url().$data->image,
@@ -2748,8 +2743,8 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
 
 
 );
+                    }
                 }
-              }
                 header('Access-Control-Allow-Origin: *');
                 $res = array('message'=>"success",
 'status'=>200,
@@ -2938,67 +2933,67 @@ if(!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)){
 
                 if (!empty($user_data)) {
                     if ($user_data->authentication==$authentication) {
-                      if($user_data->is_active==1){
-                        $this->db->select('*');
-                        $this->db->from('tbl_order1');
-                        $this->db->where('txnid', $txn_id);
-                        $order1_data= $this->db->get()->row();
-
-                        if (!empty($order1_data)) {
+                        if ($user_data->is_active==1) {
                             $this->db->select('*');
-                            $this->db->from('tbl_order2');
-                            $this->db->where('main_id', $order1_data->id);
-                            $order2_data= $this->db->get();
-                            $order2_check= $order2_data->row();
+                            $this->db->from('tbl_order1');
+                            $this->db->where('txnid', $txn_id);
+                            $order1_data= $this->db->get()->row();
 
-                            if (!empty($order2_check)) {
+                            if (!empty($order1_data)) {
+                                $this->db->select('*');
+                                $this->db->from('tbl_order2');
+                                $this->db->where('main_id', $order1_data->id);
+                                $order2_data= $this->db->get();
+                                $order2_check= $order2_data->row();
+
+                                if (!empty($order2_check)) {
 
 
 //----------------inventory check---------
-                                foreach ($order2_data->result() as $data) {
-                                    $this->db->select('*');
-                                    $this->db->from('tbl_products');
-                                    $this->db->where('id', $data->product_id);
-                                    $product_data= $this->db->get()->row();
+                                    foreach ($order2_data->result() as $data) {
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_products');
+                                        $this->db->where('id', $data->product_id);
+                                        $product_data= $this->db->get()->row();
 
-                                    $this->db->select('*');
-                                    $this->db->from('tbl_inventory');
-                                    $this->db->where('product_id', $data->product_id);
-                                    $inventory_data= $this->db->get()->row();
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_inventory');
+                                        $this->db->where('product_id', $data->product_id);
+                                        $inventory_data= $this->db->get()->row();
 
-                                    if ($inventory_data->quantity >= $data->quantity) {
-                                    } else {
-                                        header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
+                                        if ($inventory_data->quantity >= $data->quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array('message'=>$product_data->productname.'is out of stock! Please remove this before checkout',
 'status'=>201
 );
 
-                                        echo json_encode($res);
-                                        exit;
-                                    }
-                                    if ($product_data->max > $data->quantity) {
-                                    } else {
-                                        header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                        if ($product_data->max > $data->quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
                                               'status'=>201
                                               );
 
-                                        echo json_encode($res);
-                                        exit;
-                                    }
-                                }//end of foreach
-                            }//end of order2
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                    }//end of foreach
+                                }//end of order2
 $total = $order1_data->total_amount;
-                            $discount = $order1_data->discount;
+                                $discount = $order1_data->discount;
 
-                            if (empty($discount)) {
-                                $discount=0;
-                            }
-                            $final_amount = $total - $discount;
+                                if (empty($discount)) {
+                                    $discount=0;
+                                }
+                                $final_amount = $total - $discount;
 
-                            //----------order1 entry-------
+                                //----------order1 entry-------
 
-                            $data_insert = array('payment_type'=>$payment_type,
+                                $data_insert = array('payment_type'=>$payment_type,
 'name'=>$user_data->name,
 'phone'=>$user_data->phone,
 'pincode'=>$user_data->zipcode,
@@ -3016,59 +3011,59 @@ $total = $order1_data->total_amount;
 
 );
 
-                            $this->db->where('txnid', $txn_id);
-                            $last_id=$this->db->update('tbl_order1', $data_insert);
+                                $this->db->where('txnid', $txn_id);
+                                $last_id=$this->db->update('tbl_order1', $data_insert);
 
 
-                            //----------------inventory update---------
+                                //----------------inventory update---------
 
-                            if (!empty($order2_check)) {
-                                foreach ($order2_data->result() as $data1) {
-                                    $this->db->select('*');
-                                    $this->db->from('tbl_inventory');
-                                    $this->db->where('product_id', $data1->product_id);
-                                    $product_data1= $this->db->get()->row();
+                                if (!empty($order2_check)) {
+                                    foreach ($order2_data->result() as $data1) {
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_inventory');
+                                        $this->db->where('product_id', $data1->product_id);
+                                        $product_data1= $this->db->get()->row();
 
-                                    $updated_inventory = $product_data1->quantity - $data1->quantity;
+                                        $updated_inventory = $product_data1->quantity - $data1->quantity;
 
 
-                                    $data_update = array('quantity'=>$updated_inventory);
+                                        $data_update = array('quantity'=>$updated_inventory);
 
-                                    $this->db->where('id', $product_data1->id);
-                                    $last_id=$this->db->update('tbl_inventory', $data_update);
-                                }//end of foreach
-                            }//end of order2
+                                        $this->db->where('id', $product_data1->id);
+                                        $last_id=$this->db->update('tbl_inventory', $data_update);
+                                    }//end of foreach
+                                }//end of order2
 
 //------------cart clear--------------
-                            $this->db->select('*');
-                            $this->db->from('tbl_cart');
-                            $this->db->where('user_id', $user_data->id);
-                            $cart_data= $this->db->get();
-                            $cart_check= $cart_data->row();
+                                $this->db->select('*');
+                                $this->db->from('tbl_cart');
+                                $this->db->where('user_id', $user_data->id);
+                                $cart_data= $this->db->get();
+                                $cart_check= $cart_data->row();
 
-                            if (!empty($cart_check)) {
-                                foreach ($cart_data->result() as $cart) {
-                                    $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
+                                if (!empty($cart_check)) {
+                                    foreach ($cart_data->result() as $cart) {
+                                        $zapak=$this->db->delete('tbl_cart', array('id' => $cart->id));
+                                    }
                                 }
-                            }
-                        }// end of order1
+                            }// end of order1
 
-                        header('Access-Control-Allow-Origin: *');
-                        $res = array('message'=>'success',
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'success',
 'status'=>200,
 'order_id'=>$order1_data->id,
 'amount'=>$final_amount,
 );
 
-                        echo json_encode($res);
-                      }else{
-                        header('Access-Control-Allow-Origin: *');
-                        $res = array('message'=>'Your account is blocked! Please contact to admin.',
+                            echo json_encode($res);
+                        } else {
+                            header('Access-Control-Allow-Origin: *');
+                            $res = array('message'=>'Your account is blocked! Please contact to admin.',
 'status'=>201
 );
 
-                        echo json_encode($res);
-                      }
+                            echo json_encode($res);
+                        }
                     } else {
                         header('Access-Control-Allow-Origin: *');
                         $res = array('message'=>'Wrong Authentication',
@@ -3170,7 +3165,7 @@ $total = $order1_data->total_amount;
                                     $order_status= "Delivered";
                                 } elseif ($value->order_status==5) {
                                     $order_status= "Cancelled";
-                                } elseif ($value->order_status==6){
+                                } elseif ($value->order_status==6) {
                                     $order_status= "On Hold";
                                 }
 
@@ -3543,10 +3538,12 @@ $total = $order1_data->total_amount;
             $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
             $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
             $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'xss_clean|trim');
 
 
 
             if ($this->form_validation->run()== true) {
+                $minorcategory_id=$this->input->post('minorcategory_id');
                 $brand_id=$this->input->post('brand_id');
                 $resolution_id=$this->input->post('resolution_id');
                 $irdistance_id=$this->input->post('irdistance_id');
@@ -3584,116 +3581,311 @@ $total = $order1_data->total_amount;
                 $audio_type_info = explode(',', $audio_type_id);
 
 
+                // die();
                 $this->db->select('*');
                 $this->db->from('tbl_products');
-
-                if (!empty($brand_info[0])) {
-                    foreach ($brand_info as $data0) {
-                        $this->db->or_where('brand', $data0, null, false);
-                    }
-                }
-                if (!empty($resolution_info[0])) {
-                    foreach ($resolution_info as $data) {
-                        $this->db->or_where('resolution', $data, null, false);
-                    }
-                }
-                if (!empty($irdistance_info[0])) {
-                    foreach ($irdistance_info as $data1) {
-                        $this->db->or_where('irdistance', $data1, null, false);
-                    }
-                }
-                if (!empty($cameratype_info[0])) {
-                    foreach ($cameratype_info as $data2) {
-                        $this->db->or_where('cameratype', $data2, null, false);
-                    }
-                }
-                if (!empty($bodymaterial_info[0])) {
-                    foreach ($bodymaterial_info as $data3) {
-                        $this->db->or_where('bodymaterial', $data3, null, false);
-                    }
-                }
-                if (!empty($videochannel_info[0])) {
-                    foreach ($videochannel_info as $data4) {
-                        $this->db->or_where('videochannel', $data4, null, false);
-                    }
-                }
-                if (!empty($poeports_info[0])) {
-                    foreach ($poeports_info as $data5) {
-                        $this->db->or_where('poeports', $data5, null, false);
-                    }
-                }
-                if (!empty($poetype_info[0])) {
-                    foreach ($poetype_info as $data6) {
-                        $this->db->or_where('poetype', $data6, null, false);
-                    }
-                }
-                if (!empty($sataports_info[0])) {
-                    foreach ($sataports_info as $data7) {
-                        $this->db->or_where('sataports', $data7, null, false);
-                    }
-                }
-                if (!empty($length_info[0])) {
-                    foreach ($length_info as $data8) {
-                        $this->db->or_where('length', $data8, null, false);
-                    }
-                }
-                if (!empty($screensize_info[0])) {
-                    foreach ($screensize_info as $data9) {
-                        $this->db->or_where('screensize', $data9, null, false);
-                    }
-                }
-                if (!empty($ledtype_info[0])) {
-                    foreach ($ledtype_info as $data10) {
-                        $this->db->or_where('ledtype', $data10, null, false);
-                    }
-                }
-                if (!empty($size_info[0])) {
-                    foreach ($size_info as $data11) {
-                        $this->db->or_where('size', $data11, null, false);
-                    }
-                }
-                if (!empty($lens_info[0])) {
-                    foreach ($lens_info as $data12) {
-                        $this->db->or_where('lens', $data12, null, false);
-                    }
-                }
-                if (!empty($night_vision_info[0])) {
-                    foreach ($night_vision_info as $data13) {
-                        $this->db->or_where('night_vision', $data13);
-                    }
-                }
-                if (!empty($audio_type_info[0])) {
-                    foreach ($audio_type_info as $data14) {
-                        $this->db->or_where('audio_type', $data14);
-                    }
-                }
-
-
+                $this->db->where('is_active', 1);
+                $this->db->where('minorcategory_id', $minorcategory_id);
                 $filter_data= $this->db->get();
                 $filter_check = $filter_data->row();
-                $filter_info = [];
-                if (!empty($filter_check)) {
-                    foreach ($filter_data->result() as $data) {
-                        if ($data->is_active==1) {
-                            $filter_info[] = array(
-'product_id'=>$data->id,
-'product_name'=>$data->productname,
-'product_image'=>base_url().$data->image,
-'productdescription'=>$data->productdescription,
-'MRP'=>$data->mrp,
-'price'=>$data->sellingprice,
-'max'=>$data->max
+                // print_r($filter_check);exit;
 
-);
+                // $filter_info = [];
+                $send = [];
+                $content = [];
+
+                foreach ($filter_data->result() as $filterrr) {
+                    if ($filterrr->is_active == 1) {
+                        if (!empty($brand_info[0])) {
+                            foreach ($brand_info as $data0) {
+                                if ($filterrr->brand == $data0) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($resolution_info[0])) {
+                            foreach ($resolution_info as $data1) {
+                                if ($filterrr->resolution == $data1) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($irdistance_info[0])) {
+                            foreach ($irdistance_info as $data2) {
+                                if ($filterrr->irdistance == $data2) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($cameratype_info[0])) {
+                            foreach ($cameratype_info as $data3) {
+                                if ($filterrr->cameratype == $data3) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($bodymaterial_info[0])) {
+                            foreach ($bodymaterial_info as $data4) {
+                                if ($filterrr->bodymaterial == $data4) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($videochannel_info[0])) {
+                            foreach ($videochannel_info as $data5) {
+                                if ($filterrr->videochannel == $data5) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($poeports_info[0])) {
+                            foreach ($poeports_info as $data6) {
+                                if ($filterrr->poeports == $data6) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($poetype_info[0])) {
+                            foreach ($poetype_info as $data7) {
+                                if ($filterrr->poetype == $data7) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($sataports_info[0])) {
+                            foreach ($sataports_info as $data8) {
+                                if ($filterrr->sataports == $data8) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($length_info[0])) {
+                            foreach ($length_info as $data9) {
+                                if ($filterrr->length == $data9) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($screensize_info[0])) {
+                            foreach ($screensize_info as $data10) {
+                                if ($filterrr->screensize == $data10) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($ledtype_info[0])) {
+                            foreach ($ledtype_info as $data11) {
+                                if ($filterrr->ledtype == $data11) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($size_info[0])) {
+                            foreach ($size_info as $data12) {
+                                if ($filterrr->size == $data12) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($lens_info[0])) {
+                            foreach ($lens_info as $data13) {
+                                if ($filterrr->lens == $data13) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($night_vision_info[0])) {
+                            foreach ($night_vision_info as $data14) {
+                                if ($filterrr->night_vision == $data14) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
+                        }
+                        if (!empty($audio_type_info[0])) {
+                            foreach ($audio_type_info as $data15) {
+                                if ($filterrr->audio_type == $data15) {
+                                    //    $send = [];
+                                    $send[] = array('product_id'=>$filterrr->id,
+                                                'product_name'=>$filterrr->productname,
+                                                'product_image'=>base_url().$filterrr->image,
+                                                'productdescription'=>$filterrr->productdescription,
+                                                'price'=>$filterrr->sellingprice,
+                                                'max'=>$filterrr->max
+                                              );
+                                    //  array_push($content, $send);
+                                }
+                            }
                         }
                     }
                 }
+
+
+                // array_unique($content);
+                // print_r(json_encode($send));exit;
+                $content = [];
+                //   $content = array('product_id'=>0);
+                $count = 0;
+                //   print_r($content);
+                foreach ($send as $object) {
+                    $a=0;
+                    if ($count==0) {
+                        $content[] = array('product_id'=>$object['product_id'],
+                                    'product_name'=>$object['product_name'],
+                                    'product_image'=>$object['product_image'],
+                                    'productdescription'=>$object['productdescription'],
+                                    'max'=>$object['max'],
+                                    'price'=>$object['price']
+                                  );
+                    } else {
+                        // print_r($content);
+                        foreach ($content as $pushin) {
+                            // echo $object['product_id']."-----------".$pushin['product_id']."<br />";
+                            if ($pushin['product_id']==$object['product_id']) {
+                                // echo "ji";
+                                $a=1;
+                            }
+                        }
+                        if ($a==0) {
+                            $content[] = array('product_id'=>$object['product_id'],
+                                      'product_name'=>$object['product_name'],
+                                      'product_image'=>$object['product_image'],
+                                      'productdescription'=>$object['productdescription'],
+                                      'max'=>$object['max'],
+                                      'price'=>$object['price'],
+                                      );
+                        }
+                    }
+
+                    $count++;
+                }
+                // echo $count;die();
+
 
                 header('Access-Control-Allow-Origin: *');
 
                 $res = array('message'=>'success',
 'status'=>200,
-'data'=>$filter_info,
+'data'=>$content,
 );
 
                 echo json_encode($res);

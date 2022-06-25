@@ -307,6 +307,7 @@ $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
 $this->form_validation->set_rules('zipcode', 'zipcode', 'required|xss_clean|trim');
 $this->form_validation->set_rules('company_name', 'company_name', 'required|xss_clean|trim');
 $this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim'); //--table all_cities id
+$this->form_validation->set_rules('gstin', 'gstin', 'xss_clean|trim'); //--table all_cities id
 $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim'); //-- varchar
 // $this->form_validation->set_rules('house_no', 'house_no', 'required|xss_clean|trim');
 $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -348,8 +349,12 @@ if ($file_check!=4) {
     $this->upload->initialize($this->upload_config);
     if (!$this->upload->do_upload($img1)) {
         $upload_error = $this->upload->display_errors();
-        // echo json_encode($upload_error);
-        echo $upload_error;
+        header('Access-Control-Allow-Origin: *');
+        $res = array('message'=>$upload_error,
+          'status'=>201
+          );
+
+        echo json_encode($res);
     } else {
         $file_info = $this->upload->data();
 
