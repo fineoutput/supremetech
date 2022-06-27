@@ -16,7 +16,7 @@
           <!-- Info boxes -->
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="<?=base_url()?>dcadmin/Vendors/view_vendors">
+              <a href="javascript:;">
               <div class="info-box">
                 <span class="info-box-icon bg-purple"><i class="ionicons ion-android-happy"></i></span>
                 <div class="info-box-content">
@@ -32,7 +32,7 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="javascript:void(0)">
+              <a href="<?=base_url()?>dcadmin/Vendors/view_pending_vendors">
               <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="ionicons ion-android-people"></i></span>
                 <div class="info-box-content">
@@ -49,7 +49,7 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <a href="javascript:void(0)">
+              <a href="<?=base_url()?>dcadmin/Vendors/view_vendors">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ionicons ion-ios-checkmark-outline"></i></span>
                 <div class="info-box-content">

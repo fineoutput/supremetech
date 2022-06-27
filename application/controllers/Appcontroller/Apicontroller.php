@@ -4111,7 +4111,7 @@ class Apicontroller extends CI_Controller
                                             echo json_encode($res);
                                             exit;
                                         }
-                                        if ($product_data->max > $data->quantity) {
+                                        if ($product_data->max >= $data->quantity) {
                                         } else {
                                             $res = array('message'=>'Maximum purchase limit exceeded',
   'status'=>201
