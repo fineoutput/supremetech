@@ -32,7 +32,11 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
+              <?if ($this->load->get_var('position')=="Super Admin") {?>
               <a href="<?=base_url()?>dcadmin/Vendors/view_pending_vendors">
+                <?}else{?>
+                  <a href="javascript:;">
+                  <?}?>
               <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="ionicons ion-android-people"></i></span>
                 <div class="info-box-content">
@@ -49,7 +53,11 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
+              <?if ($this->load->get_var('position')=="Super Admin") {?>
               <a href="<?=base_url()?>dcadmin/Vendors/view_vendors">
+                <?}else{?>
+                  <a href="javascript:;">
+                  <?}?>
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ionicons ion-ios-checkmark-outline"></i></span>
                 <div class="info-box-content">
@@ -81,7 +89,11 @@
             <div class="clearfix visible-sm-block"></div>
 
             <div class="col-md-3 col-sm-6 col-xs-12">
+              <?if ($this->load->get_var('position')=="Super Admin") {?>
               <a href="<?=base_url()?>dcadmin/Orders/view_orders">
+                <?}else{?>
+                  <a href="javascript:;">
+                  <?}?>
               <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="ionicons ion-bag"></i></span>
                 <div class="info-box-content">
@@ -96,7 +108,11 @@
               </div></a><!-- /.info-box -->
             </div><!-- /.col -->
               <div class="col-md-3 col-sm-6 col-xs-12">
+                <?if ($this->load->get_var('position')=="Super Admin") {?>
                 <a href="<?=base_url()?>dcadmin/Orders/view_hold_orders">
+                  <?}else{?>
+                  <a href="javascript:;">
+                  <?}?>
                 <div class="info-box">
                   <span class="info-box-icon bg-blue"><i class="ionicons ion-android-bookmark"></i></span>
                   <div class="info-box-content">
@@ -110,7 +126,11 @@
                 </div></a><!-- /.info-box -->
               </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
+              <?if ($this->load->get_var('position')=="Super Admin") {?>
               <a href="<?=base_url()?>dcadmin/Inventory/view_out_of_stock">
+                <?}else{?>
+                  <a href="javascript:;">
+                  <?}?>
               <div class="info-box">
                 <span class="info-box-icon bg-grey"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">
