@@ -42,6 +42,16 @@
           <script>
           // Attach a submit handler to the form
           $(document).ready(function(){
+            $('#userTable').dataTable({
+              responsive: true,
+              "bStateSave": true,
+              "fnStateSave": function (oSettings, oData) {
+                  localStorage.setItem('offersDataTables', JSON.stringify(oData));
+              },
+              "fnStateLoad": function (oSettings) {
+                  return JSON.parse(localStorage.getItem('offersDataTables'));
+              }
+            });
                // alert('OKay');
       $("#msgid9").one('click', function() {
 

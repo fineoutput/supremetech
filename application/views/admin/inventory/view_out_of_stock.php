@@ -49,11 +49,12 @@ if(!empty($this->session->flashdata('emessage'))){ ?>
                   </thead>
                   <tbody>
                     <?php $i=1; foreach($product_list->result() as $data) {
-                      $this->db->select('*');
+          $this->db->select('*');
           $this->db->from('tbl_inventory');
           $this->db->where('product_id',$data->id);
+          $this->db->where('quantity', 0);
           $inventory= $this->db->get()->row();
-          if($inventory->quantity<1){
+          if(!empty($inventory)){
                        ?>
                     <tr>
                       <td><?php echo $i ?> </td>
@@ -106,7 +107,9 @@ $this->db->select('*');
                         </div>
                       </td>
                     </tr>
-                    <?php $i++; }} ?>
+                    <?php $i++;
+                  }
+                } ?>
                   </tbody>
                 </table>
 
@@ -136,10 +139,6 @@ $this->db->select('*');
 <script src="<?php echo base_url() ?>assets/admin/plugins/datatables/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#userTable').DataTable({
-      responsive: true,
-      // bSort: true
-    });
 
     $(document.body).on('click', '.dCnf', function() {
       var i = $(this).attr("mydata");

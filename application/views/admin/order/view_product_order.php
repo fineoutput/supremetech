@@ -70,7 +70,7 @@
                             ?></td>
 
 
-                            <td><?php echo $data->quantity; ?> </td>                            
+                            <td><?php echo $data->quantity; ?> </td>
                               <td>₹<?php echo $data->total_amount; ?> </td>
                                 <td>
                               <?
@@ -137,11 +137,6 @@
       <script type="text/javascript">
 
        $(document).ready(function(){
-      $('#userTable').DataTable({
-               responsive: true,
-               // bSort: true
-       });
-
       $(document.body).on('click', '.dCnf', function() {
        var i=$(this).attr("mydata");
        console.log(i);

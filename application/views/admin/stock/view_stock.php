@@ -25,7 +25,7 @@
               <? echo $this->session->flashdata('smessage'); ?>
             </div>
             <? }
- 			     if(!empty($this->session->flashdata('emessage'))){ ?>
+if(!empty($this->session->flashdata('emessage'))){ ?>
             <div class="alert alert-danger alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <h4><i class="icon fa fa-ban"></i> Alert!</h4>
@@ -134,10 +134,6 @@
 <script src="<?php echo base_url() ?>assets/admin/plugins/datatables/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#userTable').DataTable({
-      responsive: true,
-      // bSort: true
-    });
 
     $(document.body).on('click', '.dCnf', function() {
       var i = $(this).attr("mydata");

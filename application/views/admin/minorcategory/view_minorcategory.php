@@ -163,10 +163,6 @@ margin:5px;
 <script type="text/javascript">
 
 $(document).ready(function(){
-$('#userTable').DataTable({
-responsive: true,
-// bSort: true
-});
 
 $(document.body).on('click', '.dCnf', function() {
 var i=$(this).attr("mydata");

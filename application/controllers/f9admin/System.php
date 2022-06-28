@@ -243,9 +243,7 @@ class System extends CI_finecontrol
                             $file_info = $this->upload->data();
 
                             $videoNAmePath = "assets/uploads/team/".$new_file_name.$file_info['file_ext'];
-                            $file_info['new_name']=$videoNAmePath;
-                            // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                            $nnnn=$file_info['file_name'];
+                            $nnnn=$videoNAmePath;
                             // echo json_encode($file_info);
                         }
                     }

@@ -4,8 +4,8 @@
       View Two Images
     </h1>
     <ol class="breadcrumb">
-    <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li class="active">View Two Images</li>
+      <li><a href="<?php echo base_url() ?>dcadmin/home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active">View Two Images</li>
     </ol>
   </section>
   <section class="content">
@@ -25,7 +25,7 @@
               <?php echo $this->session->flashdata('smessage'); ?>
             </div>
             <?php }
-        if (!empty($this->session->flashdata('emessage'))) { ?>
+if (!empty($this->session->flashdata('emessage'))) { ?>
             <div class="alert alert-danger alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
               <h4><i class="icon fa fa-ban"></i> Alert!</h4>
@@ -55,7 +55,7 @@
                       <td>
                         <?php if ($data->image1!="") { ?>
                         <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image1
-        ?>">
+?>">
                         <?php } else { ?>
                         Sorry No File Found
                         <?php } ?>
@@ -65,7 +65,7 @@
                       <td>
                         <?php if ($data->image2!="") { ?>
                         <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image2
-        ?>">
+?>">
                         <?php } else { ?>
                         Sorry No File Found
                         <?php } ?>
@@ -94,13 +94,13 @@
 
                               <?php if ($data->is_active==1) { ?>
                               <li><a href="<?php echo base_url() ?>dcadmin/Two_images/updatetwo_imagesStatus/<?php echo
-        base64_encode($data->id) ?>/inactive">Inactive</a></li>
+base64_encode($data->id) ?>/inactive">Inactive</a></li>
                               <?php } else { ?>
                               <li><a href="<?php echo base_url() ?>dcadmin/Two_images/updatetwo_imagesStatus/<?php echo
-        base64_encode($data->id) ?>/active">Active</a></li>
+base64_encode($data->id) ?>/active">Active</a></li>
                               <?php } ?>
                               <li><a href="<?php echo base_url() ?>dcadmin/Two_images/update_two_images/<?php echo
-        base64_encode($data->id) ?>">Edit</a></li>
+base64_encode($data->id) ?>">Edit</a></li>
                               <!-- <li><a href="javascript:;" class="dCnf" mydata="<?php echo $i ?>">Delete</a></li> -->
                             </ul>
                           </div>
@@ -109,7 +109,7 @@
                         <div style="display:none" id="cnfbox<?php echo $i ?>">
                           <p> Are you sure delete this </p>
                           <a href="<?php echo base_url() ?>dcadmin/Two_images/delete_two_images/<?php echo
-        base64_encode($data->id); ?>" class="btn btn-danger">Yes</a>
+base64_encode($data->id); ?>" class="btn btn-danger">Yes</a>
                           <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>">No</a>
                         </div>
                       </td>
@@ -135,10 +135,6 @@
 <script src="<?php echo base_url() ?>assets/admin/plugins/datatables/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#userTable').DataTable({
-      responsive: true,
-      // bSort: true
-    });
 
     $(document.body).on('click', '.dCnf', function() {
       var i = $(this).attr("mydata");
@@ -160,5 +156,5 @@
   });
 </script>
 <!-- <script type="text/javascript" src="<?php echo base_url()
-        ?>assets/slider/ajaxupload.3.5.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/rs.js"></script> -->
+?>assets/slider/ajaxupload.3.5.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/slider/rs.js"></script> -->

@@ -235,9 +235,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
 <?
-                  if(!empty($imgr)){
+                  if(!empty($image)){
 ?>
-<img src="<? echo base_url() ?>assets/uploads/team/<? echo $imgr; ?>" class="img-circle" style="width:30px;height:30px;" alt="User Image"/>
+<img src="<? echo base_url().$image; ?>" class="img-circle" style="width:30px;height:30px;" alt="User Image"/>
 <?
                   }
                   else{
@@ -255,9 +255,9 @@
                   <!-- User image -->
                   <li class="user-header custom_header_top">
 <?
-                    if(!empty($imgr)){
+                    if(!empty($image)){
 ?>
-            <img src="<? echo base_url() ?>assets/uploads/team/<? echo $imgr; ?>" class="img-circle" style="width:70px;height:70px;" alt="User Image"/>
+            <img src="<? echo base_url().$image; ?>" class="img-circle" style="width:70px;height:70px;" alt="User Image"/>
 <?
                     }
                     else{
@@ -306,12 +306,12 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar custom_header">
           <!-- Sidebar user panel -->
-          <div class="user-panel custom_header">
+          <div class="user-panel custom_header" style="margin-top: 10px;">
             <div class="pull-left image">
             <?
-              if(!empty($imgr)){
+              if(!empty($image)){
 ?>
-      <img src="<? echo base_url() ?>assets/uploads/team/<? echo $imgr; ?>" class="img-circle" alt="User Image"/>
+      <img src="<? echo base_url().$image; ?>" class="img-circle" alt="User Image"/>
 <?
               }
               else{

@@ -162,16 +162,16 @@
                     </tr>
                     <td> <strong>Feature Product</strong> <span style="color:red;">*</span></strong> </td>
                     <td> <select class="form-control" id="featurepid" name="feature_product" value="<?=$products_data->feature_product?>"> />
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="yes" <?if($products_data->feature_product==1){echo "selected";}?>>Yes</option>
+                        <option value="no" <?if($products_data->feature_product==0){echo "selected";}?>>No</option>
                       </select>
                     </td>
                     </tr>
                     <tr>
                       <td> <strong>Most selling Product</strong> <span style="color:red;">*</span></strong> </td>
                       <td> <select class="form-control" id="polpularpid" name="popular_product" value="<?=$products_data->popular_product?>"> />
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
+                          <option value="yes" <?if($products_data->popular_product==1){echo "selected";}?>>Yes</option>
+                          <option value="no" <?if($products_data->popular_product==0){echo "selected";}?>>No</option>
                         </select>
                       </td>
                     </tr>

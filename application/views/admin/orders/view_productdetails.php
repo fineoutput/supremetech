@@ -37,7 +37,7 @@
 
                                   <div class="panel-body">
                                       <div class="box-body table-responsive no-padding">
-                                      <table class="table table-bordered table-hover table-striped" id="userTable">
+                                      <table class="table table-bordered table-hover table-striped" id="printTable">
                                           <thead>
                                               <tr>
                                                   <th>#</th>
@@ -101,7 +101,7 @@
       <script type="text/javascript">
 
        $(document).ready(function(){
-      $('#userTable').DataTable({
+      $('#printTable').DataTable({
                responsive: true,
                // bSort: true
        });
