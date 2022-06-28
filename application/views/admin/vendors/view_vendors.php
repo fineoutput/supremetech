@@ -47,8 +47,7 @@
                         <th>State</th>
                         <th>Contact Number</th>
                         <th>GST IN</th>
-                        <th>Images</th>
-                        <th>Images2</th>
+                        <th>Image</th>
 
                         <th>Registration date</th>
                         <th>Status</th>
@@ -70,14 +69,6 @@
                         <td>
                           <?php if ($data->image1!="") { ?>
                           <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image1
-                            ?>">
-                          <?php } else { ?>
-                          Sorry No File Found
-                          <?php } ?>
-                        </td>
-                        <td>
-                          <?php if ($data->image2!="") { ?>
-                          <img id="slide_img_path" height=50 width=100 src="<?php echo base_url().$data->image2
                             ?>">
                           <?php } else { ?>
                           Sorry No File Found
@@ -192,31 +183,31 @@
         buttons: [{
             extend: 'copyHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8] //number of columns, excluding # column
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] //number of columns, excluding # column
             }
           },
           {
             extend: 'csvHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
           },
           {
             extend: 'excelHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
           },
           {
             extend: 'pdfHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
           },
           {
             extend: 'print',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
           },
 

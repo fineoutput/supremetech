@@ -137,7 +137,7 @@
                       <td> <input type="text" onkeypress="return valide_weight(event)" name="weight" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
                     <tr>
-                      <td> <strong>Feature Product</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Featured Product</strong> <span style="color:red;">*</span> </td>
                       <td> <select class="form-control" id="featurepid" name="feature_product"> />
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
@@ -145,7 +145,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Most selling Product</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>Popular Product</strong> <span style="color:red;">*</span> </td>
                       <td> <select class="form-control" id="polpularpid" name="popular_product"> />
                           <option value="yes">Yes</option>
                           <option value="no">No</option>

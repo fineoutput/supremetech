@@ -54,8 +54,8 @@ if(!empty($this->session->flashdata('emessage'))){ ?>
                       <th>Model No.</th>
                       <th>Inventory</th>
                       <th>weight</th>
-                      <th>feature_product</th>
-                      <th>popular_product</th>
+                      <th>Featured Product</th>
+                      <th>Popular Product</th>
                       <th>Max Limit</th>
 
 

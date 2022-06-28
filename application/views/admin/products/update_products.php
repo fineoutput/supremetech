@@ -160,7 +160,7 @@
                       <td> <strong>Weight</strong> <span style="color:red;">*<br/>in grams</span></strong> </td>
                       <td> <input type="number" name="weight" class="form-control" placeholder="" value="<?=$products_data->weight?>" /> </td>
                     </tr>
-                    <td> <strong>Feature Product</strong> <span style="color:red;">*</span></strong> </td>
+                    <td> <strong>Featured Product</strong> <span style="color:red;">*</span></strong> </td>
                     <td> <select class="form-control" id="featurepid" name="feature_product" value="<?=$products_data->feature_product?>"> />
                         <option value="yes" <?if($products_data->feature_product==1){echo "selected";}?>>Yes</option>
                         <option value="no" <?if($products_data->feature_product==0){echo "selected";}?>>No</option>
@@ -168,7 +168,7 @@
                     </td>
                     </tr>
                     <tr>
-                      <td> <strong>Most selling Product</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Popular Product</strong> <span style="color:red;">*</span></strong> </td>
                       <td> <select class="form-control" id="polpularpid" name="popular_product" value="<?=$products_data->popular_product?>"> />
                           <option value="yes" <?if($products_data->popular_product==1){echo "selected";}?>>Yes</option>
                           <option value="no" <?if($products_data->popular_product==0){echo "selected";}?>>No</option>
