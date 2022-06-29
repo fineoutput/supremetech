@@ -43,8 +43,10 @@
                         <th>Full Name</th>
                         <th>Company Name</th>
                         <th>Address</th>
+                        <th>District</th>
                         <th>City</th>
                         <th>State</th>
+                        <th>Zipcode</th>
                         <th>Contact Number</th>
                         <th>GST IN</th>
                         <th>Image</th>
@@ -63,7 +65,20 @@
                         <td><?php echo $data->company_name ?></td>
                         <td><?php echo $data->address ?></td>
                         <td><?php echo $data->district ?></td>
-                        <td><?php echo $data->state ?></td>
+                        <td><?php echo $data->city ?></td>
+                        <td><?php
+                                    $this->db->select('*');
+                        $this->db->from('all_states');
+                        $this->db->where('id',$data->state);
+                        $state_data= $this->db->get()->row();
+                        if(!empty($state_data)){
+                          echo $state_data->state_name;
+                        }else{
+                          echo 'No State Found';
+                        }
+
+                         ?></td>
+                        <td><?php echo $data->zipcode ?></td>
                         <td><?php echo $data->phone ?></td>
                         <td><?php echo $data->gstin ?></td>
                         <td>
@@ -183,31 +198,31 @@
         buttons: [{
             extend: 'copyHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9] //number of columns, excluding # column
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] //number of columns, excluding # column
             }
           },
           {
             extend: 'csvHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
           },
           {
             extend: 'excelHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
           },
           {
             extend: 'pdfHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
           },
           {
             extend: 'print',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
             }
           },
 

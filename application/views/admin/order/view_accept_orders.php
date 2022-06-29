@@ -42,9 +42,8 @@
                                                   <th>#</th>
                                                   <th>Order_id</th>
                                                   <th>User</th>
-                                                  <th>Total Order Weight</th>
                                                   <th>Total Amount</th>
-                                                  <th>promocode</th>
+                                                  <th>Total Order Weight</th>
                                                   <th>User mob.</th>
                                                   <th>Address</th>
                                                   <th>District</th>
@@ -83,23 +82,9 @@
 
                               ?></td>
                             <td>₹<?php echo $data->total_amount;  ?></td>
-                            <td><?php $check_prmocode_id= $data->promocode_id;
-                               $this->db->select('*');
-                                           $this->db->from('tbl_promocode');
-                                           $this->db->where('id',$check_prmocode_id);
-                                           $promocode_id= $this->db->get()->row();
-                                           if(!empty($promocode_id)){
-                                             echo $promocode_id->promocode;
-                                           }else{
-                                             echo "No promocode";
-                                           }
 
-
-
-
-                              ?></td>
                               <td>
-                              <?php echo $data->weight;?> gm</td>
+                              <?php echo $data->weight.' gm';?> </td>
                             <td><?php echo $data->phone  ?></td>
                             <td><?php echo $data->street_address  ?></td>
                             <td><?php $this->db->select('*');
