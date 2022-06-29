@@ -2695,12 +2695,12 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_products');
                 $this->db->like('productname', $string);
                 $this->db->or_like('modelno', $string);
-                $this->db->where('is_active', 1);
                 $search_string= $this->db->get();
                 // print_r ($string_check);
                 // exit;
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
+                  if($data->is_active==1){
                     $this->db->select('*');
                     $this->db->from('tbl_category');
                     $this->db->where('id', $data->category_id);
@@ -2745,6 +2745,7 @@ class Apicontroller extends CI_Controller
 );
                     }
                 }
+              }
                 header('Access-Control-Allow-Origin: *');
                 $res = array('message'=>"success",
 'status'=>200,
