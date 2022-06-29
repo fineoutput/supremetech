@@ -64,7 +64,18 @@
                         <td><?php echo $data->name ?></td>
                         <td><?php echo $data->company_name ?></td>
                         <td><?php echo $data->address ?></td>
-                        <td><?php echo $data->district ?></td>
+                        <td><?php
+                                    $this->db->select('*');
+                        $this->db->from('all_cities');
+                        $this->db->where('id',$data->district);
+                        $district_data= $this->db->get()->row();
+                        if(!empty($district_data)){
+                          echo $district_data->city_name;
+                        }else{
+                          echo 'No District Found';
+                        }
+
+                         ?></td>
                         <td><?php echo $data->city ?></td>
                         <td><?php
                                     $this->db->select('*');
