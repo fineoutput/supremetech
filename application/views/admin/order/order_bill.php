@@ -94,7 +94,7 @@ User: <?=$user_name;?>
       }
       $this->db->select('*');
       $this->db->from('all_cities');
-      $this->db->where('id', $order1_data->city);
+      $this->db->where('id', $order1_data->district);
       $city_data = $this->db->get()->row();
       if(!empty($city_data)){
         $city= $city_data->city_name;
@@ -130,7 +130,7 @@ if (!empty($address)) {
 ?> <br>
 
 Place of supply: <?php echo $city;?><br>
-Place of delivery: <?php echo $city.", ".$state;?><br>
+Place of delivery: <?php echo $order1_data->city.", ".$state;?><br>
 Zipcode: <?php echo $zipcode;?><br>
 </div>
 </div>
