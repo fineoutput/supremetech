@@ -35,7 +35,7 @@ class Apicontroller extends CI_Controller
             }
 
 
-
+            header('Access-Control-Allow-Origin: *');
             $res = array('message'=>'success',
                        'status'=>200,
                        'data'=>$address,
@@ -43,6 +43,7 @@ class Apicontroller extends CI_Controller
 
             echo json_encode($res);
         } else {
+          header('Access-Control-Allow-Origin: *');
             $res = array('message'=>'some error occured',
                                            'status'=>201,
 
@@ -64,6 +65,7 @@ class Apicontroller extends CI_Controller
         foreach ($city_data->result() as $cities) {
             $city[] = array('id'=>$cities->id, 'name'=>$cities->city_name);
         }
+        header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
       'status'=>200,
       'data'=>$city,
