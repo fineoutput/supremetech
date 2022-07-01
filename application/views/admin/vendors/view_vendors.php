@@ -42,6 +42,7 @@
                         <th>#</th>
                         <th>Full Name</th>
                         <th>Company Name</th>
+                        <th>Email</th>
                         <th>Address</th>
                         <th>District</th>
                         <th>City</th>
@@ -50,7 +51,6 @@
                         <th>Contact Number</th>
                         <th>GST IN</th>
                         <th>Image</th>
-
                         <th>Registration date</th>
                         <th>Status</th>
                         <!-- <th>Request Status</th> -->
@@ -63,6 +63,7 @@
                         <td><?php echo $i ?> </td>
                         <td><?php echo $data->name ?></td>
                         <td><?php echo $data->company_name ?></td>
+                        <td><?php echo $data->email ?></td>
                         <td><?php echo $data->address ?></td>
                         <td><?php
                                     $this->db->select('*');
