@@ -140,7 +140,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Ports</strong> </strong> </td>
+                      <td> <strong>Ports</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_ports[]">
                           <?php foreach ($poeports_data->result() as $value) {?>
@@ -149,7 +149,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>POE Types</strong> </strong> </td>
+                      <td> <strong>Switch Type</strong> </strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="poe_type[]">
                           <?php foreach ($poetype_data->result() as $value) {?>
@@ -231,7 +231,7 @@
                           <?php } ?>
                         </select>
                       </td>
-                      <td> <strong>Audio Type</strong></strong> </td>
+                      <td> <strong>Inbuilt Audio</strong></strong> </td>
                       <td>
                         <select class="selectpicker form-control" multiple="multiple" name="audio_type[]">
                           <?php foreach ($audio_type_data->result() as $value) {?>

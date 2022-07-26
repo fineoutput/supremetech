@@ -139,16 +139,16 @@
                     <tr>
                       <td> <strong>Featured Product</strong> <span style="color:red;">*</span> </td>
                       <td> <select class="form-control" id="featurepid" name="feature_product"> />
+                        <option value="no">No</option>
                           <option value="yes">Yes</option>
-                          <option value="no">No</option>
                         </select>
                       </td>
                     </tr>
                     <tr>
                       <td> <strong>Popular Product</strong> <span style="color:red;">*</span> </td>
                       <td> <select class="form-control" id="polpularpid" name="popular_product"> />
+                        <option value="no">No</option>
                           <option value="yes">Yes</option>
-                          <option value="no">No</option>
                         </select>
                       </td>
                     </tr>
@@ -260,7 +260,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Audio type</strong> <span style="color:red;"></span> </td>
+                      <td> <strong>Inbuilt Audio</strong> <span style="color:red;"></span> </td>
                       <td> <select class="form-control" id="audiotype" name="audiotype"> />
                           <option>Select Minorcategory first</option>
                       </td>
