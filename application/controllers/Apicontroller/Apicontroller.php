@@ -3654,13 +3654,27 @@ $total = $order1_data->total_amount;
                         if (!empty($brand_info[0])) {
                             foreach ($brand_info as $data0) {
                                 if ($filterrr->brand == $data0) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data0->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3669,13 +3683,27 @@ $total = $order1_data->total_amount;
                         if (!empty($resolution_info[0])) {
                             foreach ($resolution_info as $data1) {
                                 if ($filterrr->resolution == $data1) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data1->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3684,13 +3712,27 @@ $total = $order1_data->total_amount;
                         if (!empty($irdistance_info[0])) {
                             foreach ($irdistance_info as $data2) {
                                 if ($filterrr->irdistance == $data2) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data2->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3699,13 +3741,27 @@ $total = $order1_data->total_amount;
                         if (!empty($cameratype_info[0])) {
                             foreach ($cameratype_info as $data3) {
                                 if ($filterrr->cameratype == $data3) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data3->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3714,13 +3770,27 @@ $total = $order1_data->total_amount;
                         if (!empty($bodymaterial_info[0])) {
                             foreach ($bodymaterial_info as $data4) {
                                 if ($filterrr->bodymaterial == $data4) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data4->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3729,13 +3799,27 @@ $total = $order1_data->total_amount;
                         if (!empty($videochannel_info[0])) {
                             foreach ($videochannel_info as $data5) {
                                 if ($filterrr->videochannel == $data5) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data5->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3744,13 +3828,27 @@ $total = $order1_data->total_amount;
                         if (!empty($poeports_info[0])) {
                             foreach ($poeports_info as $data6) {
                                 if ($filterrr->poeports == $data6) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data6->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3759,13 +3857,27 @@ $total = $order1_data->total_amount;
                         if (!empty($poetype_info[0])) {
                             foreach ($poetype_info as $data7) {
                                 if ($filterrr->poetype == $data7) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data7->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3774,13 +3886,27 @@ $total = $order1_data->total_amount;
                         if (!empty($sataports_info[0])) {
                             foreach ($sataports_info as $data8) {
                                 if ($filterrr->sataports == $data8) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data8->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3789,13 +3915,27 @@ $total = $order1_data->total_amount;
                         if (!empty($length_info[0])) {
                             foreach ($length_info as $data9) {
                                 if ($filterrr->length == $data9) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data9->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3804,13 +3944,27 @@ $total = $order1_data->total_amount;
                         if (!empty($screensize_info[0])) {
                             foreach ($screensize_info as $data10) {
                                 if ($filterrr->screensize == $data10) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data10->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3819,13 +3973,27 @@ $total = $order1_data->total_amount;
                         if (!empty($ledtype_info[0])) {
                             foreach ($ledtype_info as $data11) {
                                 if ($filterrr->ledtype == $data11) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data11->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3834,13 +4002,27 @@ $total = $order1_data->total_amount;
                         if (!empty($size_info[0])) {
                             foreach ($size_info as $data12) {
                                 if ($filterrr->size == $data12) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data12->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3849,13 +4031,27 @@ $total = $order1_data->total_amount;
                         if (!empty($lens_info[0])) {
                             foreach ($lens_info as $data13) {
                                 if ($filterrr->lens == $data13) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data13->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3864,13 +4060,27 @@ $total = $order1_data->total_amount;
                         if (!empty($night_vision_info[0])) {
                             foreach ($night_vision_info as $data14) {
                                 if ($filterrr->night_vision == $data14) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data14->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3879,13 +4089,27 @@ $total = $order1_data->total_amount;
                         if (!empty($audio_type_info[0])) {
                             foreach ($audio_type_info as $data15) {
                                 if ($filterrr->audio_type == $data15) {
+                                  $this->db->select('*');
+                                  $this->db->from('tbl_inventory');
+                                  $this->db->where('product_id', $data15->id);
+                                  $inventory_data = $this->db->get()->row();
+                                  if (!empty($inventory_data)) {
+                                      if ($inventory_data->quantity>0) {
+                                          $stock = 1;
+                                      } else {
+                                          $stock =0;
+                                      }
+                                  } else {
+                                      $stock =0;
+                                  }
                                     //    $send = [];
                                     $send[] = array('product_id'=>$filterrr->id,
                                                 'product_name'=>$filterrr->productname,
                                                 'product_image'=>base_url().$filterrr->image,
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
-                                                'max'=>$filterrr->max
+                                                'max'=>$filterrr->max,
+                                                'stock'=>$stock
                                               );
                                     //  array_push($content, $send);
                                 }
