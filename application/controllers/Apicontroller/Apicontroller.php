@@ -3938,7 +3938,8 @@ $total = $order1_data->total_amount;
                                     'product_image'=>$object['product_image'],
                                     'productdescription'=>$object['productdescription'],
                                     'max'=>$object['max'],
-                                    'price'=>$object['price']
+                                    'price'=>$object['price'],
+                                    'stock'=>$object['stock']
                                   );
                     } else {
                         // print_r($content);
@@ -3956,6 +3957,7 @@ $total = $order1_data->total_amount;
                                       'productdescription'=>$object['productdescription'],
                                       'max'=>$object['max'],
                                       'price'=>$object['price'],
+                                      'stock'=>$object['stock']
                                       );
                         }
                     }
