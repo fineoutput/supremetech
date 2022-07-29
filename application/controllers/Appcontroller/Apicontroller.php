@@ -3633,7 +3633,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3648,7 +3649,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3663,7 +3665,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3678,7 +3681,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3693,7 +3697,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3708,7 +3713,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3723,7 +3729,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3738,7 +3745,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3753,7 +3761,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3768,7 +3777,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3783,7 +3793,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3798,7 +3809,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3813,7 +3825,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3828,7 +3841,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3843,7 +3857,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3858,7 +3873,8 @@ class Apicontroller extends CI_Controller
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
-                                'max'=>$filterrr->max
+                                'max'=>$filterrr->max,
+                                'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3873,8 +3889,21 @@ class Apicontroller extends CI_Controller
                 $content = [];
                 //   $content = array('product_id'=>0);
                 $count = 0;
+                $array_brand_approved = 0;
                 //   print_r($content);
                 foreach ($send as $object) {
+                  $array_brand_approved = 0;
+                  if (!empty($brand_info[0])) {
+                      foreach ($brand_info as $brand_check) {
+                        // echo $brand_check;die();
+                          if ($object['brand'] == $brand_check) {
+                            $array_brand_approved = 1;
+                          }
+                        }
+                      }else{
+                        $array_brand_approved = 1;
+                      }
+                      if($array_brand_approved==1){
                     $a=0;
                     if ($count==0) {
                         $content[] = array('product_id'=>$object['product_id'],
@@ -3905,6 +3934,7 @@ class Apicontroller extends CI_Controller
                     }
 
                     $count++;
+                  }
                 }
                 // echo $count;die();
 
