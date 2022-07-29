@@ -3954,8 +3954,6 @@ $total = $order1_data->total_amount;
                         // echo $brand_check;die();
                           if ($object['brand'] == $brand_check) {
                             $array_brand_approved = 1;
-                          }else{
-                            $array_brand_approved = 0;
                           }
                         }
                       }else{
