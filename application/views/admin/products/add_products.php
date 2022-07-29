@@ -206,13 +206,13 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Ports</strong> <span style="color:red;"></span> </td>
+                      <td> <strong>Ports</strong> <span style="color:red;"></span> </td>
                       <td> <select class="form-control" id="povport" name="poeports"> />
                           <option>Select Minorcategory first</option>
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Type</strong> <span style="color:red;"></span> </td>
+                      <td> <strong>Switch Type</strong> <span style="color:red;"></span> </td>
                       <td> <select class="form-control" id="povtype" name="poetype"> />
                           <option>Select Minorcategory first</option>
                       </td>

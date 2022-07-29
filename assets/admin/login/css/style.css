@@ -116,7 +116,7 @@ span.fa {
     float: right;
     color: #d7314a;
     line-height:1.5;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 .sub-agile {
     float: left;

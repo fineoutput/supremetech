@@ -252,7 +252,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Ports</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Ports</strong> <span style="color:red;">*</span></strong> </td>
                       <td> <select class="form-control" id="povport" name="poeports" value="<?=$products_data->poeports?>"> />
                           <!-- <option value="" selected>Select POE Ports</option> -->
                           <?php foreach ($pov_ports as $port1) { ?>
@@ -261,7 +261,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>POE Type</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Switch Type</strong> <span style="color:red;">*</span></strong> </td>
                       <td> <select class="form-control" id="povtype" name="poetype" value="<?=$products_data->poetype?>"> />
                           <!-- <option value="" selected>Select POE Type</option> -->
                           <?php foreach ($pov_type as $port) { ?>
@@ -330,7 +330,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Audio type</strong> <span style="color:red;"></span> </td>
+                      <td> <strong>Inbuilt Audio</strong> <span style="color:red;"></span> </td>
                       <td> <select class="form-control" id="audiotype" name="audiotype"> />
                           <!-- <option value="" selected>Select Audio Type</option> -->
                           <?php foreach ($audio_type as $audio) { ?>

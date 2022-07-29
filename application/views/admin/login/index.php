@@ -64,8 +64,8 @@
 				<? } ?>
 				<form action="<? echo base_url() ?>login/admin_login_process" method="post">
 					<div class="pom-agile">
-						<span class="fa fa-user-o" aria-hidden="true"></span>
-						<input placeholder="Username" name="email" class="user" type="email" required="">
+						<span class="fa fa-envelope" aria-hidden="true"></span>
+						<input placeholder="Email" name="email" class="user" type="email" required="">
 					</div>
 					<div class="pom-agile">
 						<span class="fa fa-key" aria-hidden="true"></span>
