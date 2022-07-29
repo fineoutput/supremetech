@@ -3674,7 +3674,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3690,7 +3691,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3706,7 +3708,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3722,7 +3725,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3738,7 +3742,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3754,7 +3759,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3770,7 +3776,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3786,7 +3793,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3802,7 +3810,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3818,7 +3827,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3834,7 +3844,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3850,7 +3861,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3866,7 +3878,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3882,7 +3895,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3898,7 +3912,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3914,7 +3929,8 @@ $total = $order1_data->total_amount;
                                                 'productdescription'=>$filterrr->productdescription,
                                                 'price'=>$filterrr->sellingprice,
                                                 'max'=>$filterrr->max,
-                                                'stock'=>$stock
+                                                'stock'=>$stock,
+                                                'brand'=>$filterrr->brand
                                               );
                                     //  array_push($content, $send);
                                 }
@@ -3925,12 +3941,27 @@ $total = $order1_data->total_amount;
 
 
                 // array_unique($content);
-                // print_r(json_encode($send));exit;
+                // print_r($brand_info);exit;
                 $content = [];
                 //   $content = array('product_id'=>0);
                 $count = 0;
-                //   print_r($content);
+                $array_brand_approved = 0;
+                  // print_r($send);die();
                 foreach ($send as $object) {
+                  $array_brand_approved = 0;
+                  if (!empty($brand_info[0])) {
+                      foreach ($brand_info as $brand_check) {
+                        // echo $brand_check;die();
+                          if ($object['brand'] == $brand_check) {
+                            $array_brand_approved = 1;
+                          }else{
+                            $array_brand_approved = 0;
+                          }
+                        }
+                      }else{
+                        $array_brand_approved = 1;
+                      }
+                      if($array_brand_approved==1){
                     $a=0;
                     if ($count==0) {
                         $content[] = array('product_id'=>$object['product_id'],
@@ -3963,7 +3994,8 @@ $total = $order1_data->total_amount;
                     }
 
                     $count++;
-                }
+                  }
+            }
                 // echo $count;die();
 
 
