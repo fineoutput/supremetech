@@ -814,7 +814,7 @@
                            $this->db->from('tbl_sataports');
                            $this->db->where('id', $data9);
                            $sata_ports_result = $this->db->get()->row();
-                           $sata_ports[] = array('id'=>$sata_ports_result, 'name'=>$sata_ports_result->filter_name);
+                           $sata_ports[] = array('id'=>$sata_ports_result->id, 'name'=>$sata_ports_result->filter_name);
                        }
                        $data['sata_ports'] = $sata_ports;
                    } else {
