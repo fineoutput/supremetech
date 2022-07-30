@@ -50,7 +50,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td> <strong>Mobile Image</strong> <span style="color:red;">*<br />1920X620px</span></strong> </td>
+                      <td> <strong>Mobile Image</strong> <span style="color:red;">*<br />840X1206px</span></strong> </td>
                       <td>
                         <input type="file" name="mob_image" class="form-control" placeholder=""  value="" />
                         <?php if($slider->mob_image!=""){  ?>
