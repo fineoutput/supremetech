@@ -80,19 +80,16 @@ class Apicontroller extends CI_Controller
         $this->db->select('*');
         $this->db->from('tbl_slider');
         $this->db->where('is_active', 1);
-
         $sliderdata= $this->db->get();
         $slider=[];
+
         foreach ($sliderdata->result() as $data) {
-            $slider[] = array(base_url().$data->slider_image
-);
+          $slider[] = array(
+          'link'=> $data->link,
+          'web_image'=> base_url().$data->web_image,
+          'mob_image'=> base_url().$data->mob_image
+          );
         }
-//         foreach ($sliderdata->result() as $data) {
-//             $slider[] = array(
-// 'name'=> $data->title,
-// 'image'=> base_url().$data->slider_image
-// );
-//         }
         header('Access-Control-Allow-Origin: *');
         $res = array('message'=>"success",
 'status'=>200,

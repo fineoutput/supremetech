@@ -65,23 +65,23 @@ class Slider extends CI_finecontrol
             $this->load->library('form_validation');
             $this->load->helper('security');
             if ($this->input->post()) {
-                $this->form_validation->set_rules('title', 'title', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('link', 'link', 'required|xss_clean|trim');
 
                 if ($this->form_validation->run()== true) {
-                    $title=$this->input->post('title');
+                    $link=$this->input->post('link');
 
                     // Load library
                     $this->load->library('upload');
 
-                    $img1='slider_image';
+                    $img1='web_image';
 
-                    $file_check=($_FILES['slider_image']['error']);
+                    $file_check=($_FILES['web_image']['error']);
                     if ($file_check!=4) {
                         $image_upload_folder = FCPATH . "assets/uploads/slider/";
                         if (!file_exists($image_upload_folder)) {
                             mkdir($image_upload_folder, DIR_WRITE_MODE, true);
                         }
-                        $new_file_name="slider".date("Ymdhms");
+                        $new_file_name="web_slider".date("Ymdhms");
                         $this->upload_config = array(
                                                                 'upload_path'   => $image_upload_folder,
                                                                 'file_name' => $new_file_name,
@@ -96,21 +96,35 @@ class Slider extends CI_finecontrol
                         } else {
                             $file_info = $this->upload->data();
 
-                            $image = "assets/uploads/slider/".$new_file_name.$file_info['file_ext'];
-                            $file_info['new_name']=$image;
-                            // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-                            $nnn=$file_info['file_name'];
-                            // echo json_encode($file_info);
+                            $web_image = "assets/uploads/slider/".$new_file_name.$file_info['file_ext'];
                         }
                     }
+                    $img2='mob_image';
 
+                    $file_check=($_FILES['mob_image']['error']);
+                    if ($file_check!=4) {
+                        $image_upload_folder = FCPATH . "assets/uploads/slider/";
+                        if (!file_exists($image_upload_folder)) {
+                            mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                        }
+                        $new_file_name="mob_slider".date("Ymdhms");
+                        $this->upload_config = array(
+                                                                'upload_path'   => $image_upload_folder,
+                                                                'file_name' => $new_file_name,
+                                                                'allowed_types' =>'jpg|jpeg|png',
+                                                                'max_size'      => 25000
+                                                        );
+                        $this->upload->initialize($this->upload_config);
+                        if (!$this->upload->do_upload($img2)) {
+                            $upload_error = $this->upload->display_errors();
+                            // echo json_encode($upload_error);
+                            echo $upload_error;
+                        } else {
+                            $file_info = $this->upload->data();
 
-                    // $slider = time() . '_' . $_FILES["slider_image"]["name"];
-                    // $liciense_tmp_name = $_FILES["slider_image"]["tmp_name"];
-                    // $error = $_FILES["slider_image"]["error"];
-                    // $liciense_path = 'assets/admin/slider/' . $slider;
-                    // move_uploaded_file($liciense_tmp_name, $liciense_path);
-                    // $image = $liciense_path;
+                            $mob_image = "assets/uploads/slider/".$new_file_name.$file_info['file_ext'];
+                        }
+                    }
 
 
 
@@ -122,8 +136,9 @@ class Slider extends CI_finecontrol
 
                     $typ=base64_decode($t);
                     if ($typ==1) {
-                        $data_insert = array('title'=>$title,
-                    'slider_image'=>$image,
+                        $data_insert = array('link'=>$link,
+                    'web_image'=>$web_image,
+                    'mob_image'=>$mob_image,
                     'added_by' =>$addedby,
                     'is_active' =>1,
                     'date'=>$cur_date
@@ -146,30 +161,22 @@ class Slider extends CI_finecontrol
                     }
                     if ($typ==2) {
                         $idw=base64_decode($iw);
+                        $this->db->select('*');
+                        $this->db->from('tbl_slider');
+                        $this->db->where('id', $idw);
+                        $sliderdata= $this->db->get()->row();
 
-                        // $this->db->select('*');
-//     $this->db->from('tbl_minor_category');
-//    $this->db->where('name',$name);
-//     $damm= $this->db->get();
-//    foreach($damm->result() as $da) {
-//      $uid=$da->id;
-                        // if($uid==$idw)
-                        // {
-//
-                        //  }
-                        // else{
-//    echo "Multiple Entry of Same Name";
-//       exit;
-                        //  }
-//     }
-                        if (!empty($image)) {
-                            $data_insert = array('title'=>$title,
-                    'slider_image'=>$image,
-                    );
-                        } else {
-                            $data_insert = array('title'=>$title,
-                        );
+                        if (empty($web_image)) {
+                            $web_image = $sliderdata->web_image;
                         }
+                        if (empty($mob_image)) {
+                            $mob_image = $sliderdata->mob_image;
+                        }
+                        $data_insert = array('link'=>$link,
+                            'web_image'=>$web_image,
+                            'mob_image'=>$mob_image,
+                          );
+
 
 
                         $this->db->where('id', $idw);
@@ -247,8 +254,8 @@ class Slider extends CI_finecontrol
                     exit;
                 }
             } else {
-              $this->session->set_flashdata('emessage', 'Sorry You Dont Have Permission To Delete Anything');
-              redirect($_SERVER['HTTP_REFERER']);
+                $this->session->set_flashdata('emessage', 'Sorry You Dont Have Permission To Delete Anything');
+                redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
             $this->load->view('admin/login/index');
@@ -279,8 +286,8 @@ class Slider extends CI_finecontrol
                     $this->session->set_flashdata('smessage', 'Slider status updated successfully');
                     redirect($_SERVER['HTTP_REFERER']);
                 } else {
-                  $this->session->set_flashdata('emessage', 'Some error occured');
-                  redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
             if ($t=="inactive") {
@@ -296,8 +303,8 @@ class Slider extends CI_finecontrol
                     $this->session->set_flashdata('smessage', 'Slider status updated successfully');
                     redirect($_SERVER['HTTP_REFERER']);
                 } else {
-                  $this->session->set_flashdata('emessage', 'Some error occured');
-                  redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
         } else {

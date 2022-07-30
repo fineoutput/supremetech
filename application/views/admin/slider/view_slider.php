@@ -40,8 +40,9 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Slider Image</th>
-                      <th>Title</th>
+                      <th>Web Image</th>
+                      <th>Mobile Image</th>
+                      <th>Link</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -51,13 +52,20 @@
                     <tr>
                       <td><?php echo $i ?> </td>
                       <td>
-                        <?php if ($data->slider_image!="") {  ?>
-                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $data->slider_image; ?>">
+                        <?php if ($data->web_image!="") {  ?>
+                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $data->web_image; ?>">
                         <?php } else {  ?>
                         Sorry No image Found
                         <?php } ?>
                       </td>
-                      <td><?php echo $data->title ?></td>
+                      <td>
+                        <?php if ($data->mob_image!="") {  ?>
+                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $data->mob_image; ?>">
+                        <?php } else {  ?>
+                        Sorry No image Found
+                        <?php } ?>
+                      </td>
+                      <td><?php echo $data->link ?></td>
 
                       <td><?php if ($data->is_active==1) { ?>
                         <p class="label bg-green">Active</p>

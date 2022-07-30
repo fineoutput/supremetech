@@ -38,28 +38,33 @@
               <form action="<?php echo base_url() ?>dcadmin/Slider/add_slider_data/<? echo base64_encode(2); ?>/<?= $id ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
-
                     <tr>
-                      <td> <strong>Title</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> <strong>Web Image</strong> <span style="color:red;">*<br />1920X620px</span></strong> </td>
                       <td>
-                        <input type="text" name="title" class="form-control" placeholder="" required value="<?= $slider->title; ?>" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td> <strong>Image</strong> <span style="color:red;">*<br />1920X620px</span></strong> </td>
-                      <td>
-                        <input type="file" name="slider_image" class="form-control" placeholder="" value="<?= $slider->slider_image; ?>" />
-                      </td>
-
-
-                      <td>
-                        <?php if($slider->slider_image!=""){  ?>
-                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $slider->slider_image; ?>">
+                        <input type="file" name="web_image" class="form-control" placeholder=""  value="" />
+                        <?php if($slider->web_image!=""){  ?>
+                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $slider->web_image; ?>">
                         <?php }else {  ?>
                         Sorry No image Found
                         <?php } ?>
                       </td>
-
+                    </tr>
+                    <tr>
+                      <td> <strong>Mobile Image</strong> <span style="color:red;">*<br />1920X620px</span></strong> </td>
+                      <td>
+                        <input type="file" name="mob_image" class="form-control" placeholder=""  value="" />
+                        <?php if($slider->mob_image!=""){  ?>
+                        <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() ?><?php echo $slider->mob_image; ?>">
+                        <?php }else {  ?>
+                        Sorry No image Found
+                        <?php } ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>Link</strong> <span style="color:red;">*</span></strong> </td>
+                      <td>
+                        <input type="url" name="link" class="form-control" placeholder="" required value="<?= $slider->link; ?>" />
+                      </td>
                     </tr>
                     <tr>
                       <td colspan="2">
