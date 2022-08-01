@@ -64,11 +64,11 @@ class Slider extends CI_finecontrol
             $this->load->helper(array('form', 'url'));
             $this->load->library('form_validation');
             $this->load->helper('security');
-            if ($this->input->post()) {
-                $this->form_validation->set_rules('link', 'link', 'required|xss_clean|trim');
-
-                if ($this->form_validation->run()== true) {
-                    $link=$this->input->post('link');
+            // if ($this->input->post()) {
+            //     $this->form_validation->set_rules('link', 'link', 'xss_clean|trim');
+            //
+            //     if ($this->form_validation->run()== true) {
+            //         $link=$this->input->post('link');
 
                     // Load library
                     $this->load->library('upload');
@@ -136,7 +136,8 @@ class Slider extends CI_finecontrol
 
                     $typ=base64_decode($t);
                     if ($typ==1) {
-                        $data_insert = array('link'=>$link,
+                        $data_insert = array(
+                          // 'link'=>$link,
                     'web_image'=>$web_image,
                     'mob_image'=>$mob_image,
                     'added_by' =>$addedby,
@@ -172,7 +173,8 @@ class Slider extends CI_finecontrol
                         if (empty($mob_image)) {
                             $mob_image = $sliderdata->mob_image;
                         }
-                        $data_insert = array('link'=>$link,
+                        $data_insert = array(
+                          // 'link'=>$link,
                             'web_image'=>$web_image,
                             'mob_image'=>$mob_image,
                           );
@@ -191,14 +193,14 @@ class Slider extends CI_finecontrol
                             redirect($_SERVER['HTTP_REFERER']);
                         }
                     }
-                } else {
-                    $this->session->set_flashdata('emessage', validation_errors());
-                    redirect($_SERVER['HTTP_REFERER']);
-                }
-            } else {
-                $this->session->set_flashdata('emessage', 'Please insert some data, No data available');
-                redirect($_SERVER['HTTP_REFERER']);
-            }
+            //     } else {
+            //         $this->session->set_flashdata('emessage', validation_errors());
+            //         redirect($_SERVER['HTTP_REFERER']);
+            //     }
+            // } else {
+            //     $this->session->set_flashdata('emessage', 'Please insert some data, No data available');
+            //     redirect($_SERVER['HTTP_REFERER']);
+            // }
         } else {
             redirect("login/admin_login", "refresh");
         }

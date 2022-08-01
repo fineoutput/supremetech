@@ -60,12 +60,12 @@
                         <?php } ?>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td> <strong>Link</strong> <span style="color:red;">*</span></strong> </td>
                       <td>
                         <input type="url" name="link" class="form-control" placeholder="" required value="<?= $slider->link; ?>" />
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <td colspan="2">
                         <input type="submit" class="btn btn-success" value="save">

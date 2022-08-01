@@ -42,7 +42,7 @@
                       <th>#</th>
                       <th>Web Image</th>
                       <th>Mobile Image</th>
-                      <th>Link</th>
+                      <!-- <th>Link</th> -->
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -65,7 +65,7 @@
                         Sorry No image Found
                         <?php } ?>
                       </td>
-                      <td><?php echo $data->link ?></td>
+                      <!-- <td><?php echo $data->link ?></td> -->
 
                       <td><?php if ($data->is_active==1) { ?>
                         <p class="label bg-green">Active</p>
