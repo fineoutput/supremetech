@@ -3624,6 +3624,19 @@ class Apicontroller extends CI_Controller
 
                 foreach ($filter_data->result() as $filterrr) {
                     if ($filterrr->is_active == 1) {
+                      $this->db->select('*');
+                                $this->db->from('tbl_inventory');
+                                $this->db->where('product_id', $filterrr->id);
+                                $inventory_data = $this->db->get()->row();
+                                if (!empty($inventory_data)) {
+                                    if ($inventory_data->quantity>0) {
+                                        $stock = 1;
+                                    } else {
+                                        $stock =0;
+                                    }
+                                } else {
+                                    $stock =0;
+                                }
                         if (!empty($brand_info[0])) {
                             foreach ($brand_info as $data0) {
                                 if ($filterrr->brand == $data0) {
@@ -3634,6 +3647,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3650,6 +3664,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3666,6 +3681,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3682,6 +3698,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3698,6 +3715,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3714,6 +3732,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3730,6 +3749,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3746,6 +3766,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3762,6 +3783,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3778,6 +3800,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3794,6 +3817,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3810,6 +3834,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3826,6 +3851,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3842,6 +3868,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3858,6 +3885,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3874,6 +3902,7 @@ class Apicontroller extends CI_Controller
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
+                                'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
                                     //  array_push($content, $send);
@@ -3908,10 +3937,12 @@ class Apicontroller extends CI_Controller
                     if ($count==0) {
                         $content[] = array('product_id'=>$object['product_id'],
                     'product_name'=>$object['product_name'],
-                    'product_image'=>$object['product_image'],
+                    'image'=>$object['product_image'],
                     'productdescription'=>$object['productdescription'],
                     'max'=>$object['max'],
-                    'price'=>$object['price']
+                    'price'=>$object['price'],
+                    'stock'=>$object['stock']
+
                   );
                     } else {
                         // print_r($content);
@@ -3925,10 +3956,12 @@ class Apicontroller extends CI_Controller
                         if ($a==0) {
                             $content[] = array('product_id'=>$object['product_id'],
                       'product_name'=>$object['product_name'],
-                      'product_image'=>$object['product_image'],
+                      'image'=>$object['product_image'],
                       'productdescription'=>$object['productdescription'],
                       'max'=>$object['max'],
                       'price'=>$object['price'],
+                      'stock'=>$object['stock']
+
                       );
                         }
                     }
