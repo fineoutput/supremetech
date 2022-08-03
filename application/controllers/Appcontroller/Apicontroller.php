@@ -1905,6 +1905,8 @@ class Apicontroller extends CI_Controller
         $this->db->from('tbl_products');
         $this->db->where('popular_product', 1);
         $this->db->where('is_active', 1);
+        $this->db->order_by('rand()');
+        $this->db->limit(10);
         $productslimitdata= $this->db->get();
         $products=[];
         foreach ($productslimitdata->result() as $limit) {
@@ -2055,6 +2057,8 @@ class Apicontroller extends CI_Controller
         $this->db->from('tbl_products');
         $this->db->where('feature_product', 1);
         $this->db->where('is_active', 1);
+        $this->db->order_by('rand()');
+        $this->db->limit(10);
         $data= $this->db->get();
         $feature=[];
         foreach ($data->result() as $limit) {
@@ -2149,6 +2153,8 @@ class Apicontroller extends CI_Controller
         $this->db->from('tbl_products');
         $this->db->where('minorcategory_id', $product_data->minorcategory_id);
         $this->db->where('is_active', 1);
+        $this->db->order_by('rand()');
+        $this->db->limit(10);
         $related_data= $this->db->get();
 
         $related_info = [];
