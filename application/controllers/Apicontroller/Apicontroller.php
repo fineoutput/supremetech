@@ -643,7 +643,8 @@ class Apicontroller extends CI_Controller
                                     if ($check_inventory_id->quantity >= $quantity) {
                                     } else {
                                         header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=> "$check_product_id->productname Product is out of stock",
+                                        // $res = array('message'=> "$check_product_id->productname Product is out of stock",
+                                        $res = array('message'=> "Product is out of stock",
 'status'=>201
 );
 
@@ -753,7 +754,8 @@ class Apicontroller extends CI_Controller
                             if ($check_inventory_id->quantity >= $quantity) {
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=> "$check_product_id->productname Product is out of stock",
+                                // $res = array('message'=> "$check_product_id->productname Product is out of stock",
+                                $res = array('message'=> "Product is out of stock",
 'status'=>201
 );
 
