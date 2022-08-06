@@ -3092,37 +3092,37 @@ class Apicontroller extends CI_Controller
                 // exit;
                 $search_data=[];
                 foreach ($search_string->result() as $data) {
-                  if($data->is_active==1){
-                    $this->db->select('*');
-                    $this->db->from('tbl_category');
-                    $this->db->where('id', $data->category_id);
-                    $this->db->where('is_active', 1);
-                    $cat_check = $this->db->get()->row();
-                    $this->db->from('tbl_subcategory');
-                    $this->db->where('is_active', 1);
-                    $this->db->where('id', $data->subcategory_id);
-                    $subcat_check = $this->db->get()->row();
-                    $this->db->select('*');
-                    $this->db->from('tbl_minorcategory');
-                    $this->db->where('is_active', 1);
-                    $this->db->where('id', $data->minorcategory_id);
-                    $minorcat_check = $this->db->get()->row();
-
-                    if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
+                    if ($data->is_active==1) {
                         $this->db->select('*');
-                        $this->db->from('tbl_inventory');
-                        $this->db->where('product_id', $data->id);
-                        $inventory_data = $this->db->get()->row();
-                        if (!empty($inventory_data)) {
-                            if ($inventory_data->quantity>0) {
-                                $stock = 1;
+                        $this->db->from('tbl_category');
+                        $this->db->where('id', $data->category_id);
+                        $this->db->where('is_active', 1);
+                        $cat_check = $this->db->get()->row();
+                        $this->db->from('tbl_subcategory');
+                        $this->db->where('is_active', 1);
+                        $this->db->where('id', $data->subcategory_id);
+                        $subcat_check = $this->db->get()->row();
+                        $this->db->select('*');
+                        $this->db->from('tbl_minorcategory');
+                        $this->db->where('is_active', 1);
+                        $this->db->where('id', $data->minorcategory_id);
+                        $minorcat_check = $this->db->get()->row();
+
+                        if (!empty($cat_check) && !empty($subcat_check) && !empty($minorcat_check)) {
+                            $this->db->select('*');
+                            $this->db->from('tbl_inventory');
+                            $this->db->where('product_id', $data->id);
+                            $inventory_data = $this->db->get()->row();
+                            if (!empty($inventory_data)) {
+                                if ($inventory_data->quantity>0) {
+                                    $stock = 1;
+                                } else {
+                                    $stock =0;
+                                }
                             } else {
                                 $stock =0;
                             }
-                        } else {
-                            $stock =0;
-                        }
-                        $search_data[]=array(
+                            $search_data[]=array(
                        'product_id'=>$data->id,
                        'product_name'=>$data->productname,
                        'produt_image'=>base_url().$data->image,
@@ -3136,9 +3136,9 @@ class Apicontroller extends CI_Controller
 
 
    );
+                        }
                     }
                 }
-              }
                 $res = array('message'=>"success",
 'status'=>200,
 'data'=>$search_data
@@ -3632,24 +3632,25 @@ class Apicontroller extends CI_Controller
 
                 foreach ($filter_data->result() as $filterrr) {
                     if ($filterrr->is_active == 1) {
-                      $this->db->select('*');
-                                $this->db->from('tbl_inventory');
-                                $this->db->where('product_id', $filterrr->id);
-                                $inventory_data = $this->db->get()->row();
-                                if (!empty($inventory_data)) {
-                                    if ($inventory_data->quantity>0) {
-                                        $stock = 1;
-                                    } else {
-                                        $stock =0;
-                                    }
-                                } else {
-                                    $stock =0;
-                                }
-                        if (!empty($brand_info[0])) {
-                            foreach ($brand_info as $data0) {
-                                if ($filterrr->brand == $data0) {
-                                    //    $send = [];
-                                    $send[] = array('product_id'=>$filterrr->id,
+                        $this->db->select('*');
+                        $this->db->from('tbl_inventory');
+                        $this->db->where('product_id', $filterrr->id);
+                        $inventory_data = $this->db->get()->row();
+                        if (!empty($inventory_data)) {
+                            if ($inventory_data->quantity>0) {
+                                $stock = 1;
+                            } else {
+                                $stock =0;
+                            }
+                        } else {
+                            $stock =0;
+                        }
+                        if (empty($resolution_info[0]) && empty($irdistance_info[0]) && empty($cameratype_info[0]) && empty($bodymaterial_info[0]) && empty($videochannel_info[0]) && empty($poeports_info[0]) && empty($poetype_info[0]) &&empty($sataports_info[0]) && empty($length_info[0]) && empty($screensize_info[0]) && empty($ledtype_info[0]) &&empty($size_info[0]) && empty($lens_info[0]) && empty($night_vision_info[0]) && empty($audio_type_info[0])) {
+                            if (!empty($brand_info[0])) {
+                                foreach ($brand_info as $data0) {
+                                    if ($filterrr->brand == $data0) {
+                                        //    $send = [];
+                                        $send[] = array('product_id'=>$filterrr->id,
                                 'product_name'=>$filterrr->productname,
                                 'product_image'=>base_url().$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
@@ -3658,7 +3659,8 @@ class Apicontroller extends CI_Controller
                                 'stock'=>$stock,
                                 'brand'=>$filterrr->brand
                               );
-                                    //  array_push($content, $send);
+                                        //  array_push($content, $send);
+                                    }
                                 }
                             }
                         }
@@ -3929,21 +3931,21 @@ class Apicontroller extends CI_Controller
                 $array_brand_approved = 0;
                 //   print_r($content);
                 foreach ($send as $object) {
-                  $array_brand_approved = 0;
-                  if (!empty($brand_info[0])) {
-                      foreach ($brand_info as $brand_check) {
-                        // echo $brand_check;die();
-                          if ($object['brand'] == $brand_check) {
-                            $array_brand_approved = 1;
-                          }
+                    $array_brand_approved = 0;
+                    if (!empty($brand_info[0])) {
+                        foreach ($brand_info as $brand_check) {
+                            // echo $brand_check;die();
+                            if ($object['brand'] == $brand_check) {
+                                $array_brand_approved = 1;
+                            }
                         }
-                      }else{
+                    } else {
                         $array_brand_approved = 1;
-                      }
-                      if($array_brand_approved==1){
-                    $a=0;
-                    if ($count==0) {
-                        $content[] = array('product_id'=>$object['product_id'],
+                    }
+                    if ($array_brand_approved==1) {
+                        $a=0;
+                        if ($count==0) {
+                            $content[] = array('product_id'=>$object['product_id'],
                     'product_name'=>$object['product_name'],
                     'image'=>$object['product_image'],
                     'productdescription'=>$object['productdescription'],
@@ -3952,17 +3954,17 @@ class Apicontroller extends CI_Controller
                     'stock'=>$object['stock']
 
                   );
-                    } else {
-                        // print_r($content);
-                        foreach ($content as $pushin) {
-                            // echo $object['product_id']."-----------".$pushin['product_id']."<br />";
-                            if ($pushin['product_id']==$object['product_id']) {
-                                // echo "ji";
-                                $a=1;
+                        } else {
+                            // print_r($content);
+                            foreach ($content as $pushin) {
+                                // echo $object['product_id']."-----------".$pushin['product_id']."<br />";
+                                if ($pushin['product_id']==$object['product_id']) {
+                                    // echo "ji";
+                                    $a=1;
+                                }
                             }
-                        }
-                        if ($a==0) {
-                            $content[] = array('product_id'=>$object['product_id'],
+                            if ($a==0) {
+                                $content[] = array('product_id'=>$object['product_id'],
                       'product_name'=>$object['product_name'],
                       'image'=>$object['product_image'],
                       'productdescription'=>$object['productdescription'],
@@ -3971,11 +3973,11 @@ class Apicontroller extends CI_Controller
                       'stock'=>$object['stock']
 
                       );
+                            }
                         }
-                    }
 
-                    $count++;
-                  }
+                        $count++;
+                    }
                 }
                 // echo $count;die();
 
