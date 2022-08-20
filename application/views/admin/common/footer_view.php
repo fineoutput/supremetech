@@ -46,6 +46,7 @@
               responsive: true,
               "bStateSave": true,
               "fnStateSave": function (oSettings, oData) {
+                  oData['oSearch']['sSearch']='';
                   localStorage.setItem('offersDataTables', JSON.stringify(oData));
               },
               "fnStateLoad": function (oSettings) {
