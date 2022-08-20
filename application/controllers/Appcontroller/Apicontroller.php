@@ -3657,7 +3657,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                         //  array_push($content, $send);
                                     }
@@ -3675,7 +3690,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3692,7 +3722,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3709,7 +3754,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3726,7 +3786,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3743,7 +3818,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3760,7 +3850,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3777,7 +3882,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3794,7 +3914,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3811,7 +3946,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3828,7 +3978,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3845,7 +4010,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3862,7 +4042,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3879,7 +4074,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3896,7 +4106,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3913,7 +4138,22 @@ class Apicontroller extends CI_Controller
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
                                 'stock'=>$stock,
-                                'brand'=>$filterrr->brand
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
                               );
                                     //  array_push($content, $send);
                                 }
@@ -3928,10 +4168,24 @@ class Apicontroller extends CI_Controller
                 $content = [];
                 //   $content = array('product_id'=>0);
                 $count = 0;
-                $array_brand_approved = 0;
                 //   print_r($content);
                 foreach ($send as $object) {
                     $array_brand_approved = 0;
+                    $array_resolution_approved = 0;
+                    $array_irdistance_approved = 0;
+                    $array_cameratype_approved = 0;
+                    $array_bodymaterial_approved = 0;
+                    $array_videochannel_approved = 0;
+                    $array_poeports_approved = 0;
+                    $array_poetype_approved = 0;
+                    $array_sataports_approved = 0;
+                    $array_length_approved = 0;
+                    $array_screensize_approved = 0;
+                    $array_ledtype_approved = 0;
+                    $array_size_approved = 0;
+                    $array_lens_approved = 0;
+                    $array_night_vision_approved = 0;
+                    $array_audio_type_approved = 0;
                     if (!empty($brand_info[0])) {
                         foreach ($brand_info as $brand_check) {
                             // echo $brand_check;die();
@@ -3942,7 +4196,24 @@ class Apicontroller extends CI_Controller
                     } else {
                         $array_brand_approved = 1;
                     }
-                    if ($array_brand_approved==1) {
+                    if(!empty($resolution_info[0])){ foreach($resolution_info as $resolution_check){if($object['resolution'] == $resolution_check){$array_resolution_approved = 1;}}}else{$array_resolution_approved = 1;}
+                    if(!empty($irdistance_info[0])){ foreach($irdistance_info as $irdistance_check){if($object['irdistance'] == $irdistance_check){$array_irdistance_approved = 1;}}}else{$array_irdistance_approved = 1;}
+                    if(!empty($cameratype_info[0])){ foreach($cameratype_info as $cameratype_check){if($object['cameratype'] == $cameratype_check){$array_cameratype_approved = 1;}}}else{$array_cameratype_approved = 1;}
+                    if(!empty($bodymaterial_info[0])){ foreach($bodymaterial_info as $bodymaterial_check){if($object['bodymaterial'] == $bodymaterial_check){$array_bodymaterial_approved = 1;}}}else{$array_bodymaterial_approved = 1;}
+                    if(!empty($videochannel_info[0])){ foreach($videochannel_info as $videochannel_check){if($object['videochannel'] == $videochannel_check){$array_videochannel_approved = 1;}}}else{$array_videochannel_approved = 1;}
+                    if(!empty($poeports_info[0])){ foreach($poeports_info as $poeports_check){if($object['poeports'] == $poeports_check){$array_poeports_approved = 1;}}}else{$array_poeports_approved = 1;}
+                    if(!empty($poetype_info[0])){ foreach($poetype_info as $poetype_check){if($object['poetype'] == $poetype_check){$array_poetype_approved = 1;}}}else{$array_poetype_approved = 1;}
+                    if(!empty($sataports_info[0])){ foreach($sataports_info as $sataports_check){if($object['sataports'] == $sataports_check){$array_sataports_approved = 1;}}}else{$array_sataports_approved = 1;}
+                    if(!empty($length_info[0])){ foreach($length_info as $length_check){if($object['length'] == $length_check){$array_length_approved = 1;}}}else{$array_length_approved = 1;}
+                    if(!empty($screensize_info[0])){ foreach($screensize_info as $screensize_check){if($object['screensize'] == $screensize_check){$array_screensize_approved = 1;}}}else{$array_screensize_approved = 1;}
+                    if(!empty($ledtype_info[0])){ foreach($ledtype_info as $ledtype_check){if($object['ledtype'] == $ledtype_check){$array_ledtype_approved = 1;}}}else{$array_ledtype_approved = 1;}
+                    if(!empty($size_info[0])){ foreach($size_info as $size_check){if($object['size'] == $size_check){$array_size_approved = 1;}}}else{$array_size_approved = 1;}
+                    if(!empty($lens_info[0])){ foreach($lens_info as $lens_check){if($object['lens'] == $lens_check){$array_lens_approved = 1;}}}else{$array_lens_approved = 1;}
+                    if(!empty($night_vision_info[0])){ foreach($night_vision_info as $night_vision_check){if($object['screensize'] == $night_vision_check){$array_night_vision_approved = 1;}}}else{$array_night_vision_approved = 1;}
+                    if(!empty($audio_type_info[0])){ foreach($audio_type_info as $audio_type_check){if($object['ledtype'] == $audio_type_check){$array_audio_type_approved = 1;}}}else{$array_audio_type_approved = 1;}
+
+
+                    if ($array_brand_approved==1 && $array_resolution_approved==1 && $array_irdistance_approved==1 && $array_cameratype_approved==1 && $array_bodymaterial_approved==1 && $array_videochannel_approved==1 && $array_poeports_approved==1 && $array_poetype_approved==1 && $array_sataports_approved==1 && $array_length_approved==1 && $array_screensize_approved==1 && $array_ledtype_approved==1 && $array_size_approved==1 && $array_lens_approved==1 && $array_night_vision_approved==1) {
                         $a=0;
                         if ($count==0) {
                             $content[] = array('product_id'=>$object['product_id'],
