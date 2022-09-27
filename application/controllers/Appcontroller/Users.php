@@ -49,8 +49,8 @@ $da=$dsa->row();
 if (!empty($da)) {
   // echo $da->is_active;die();
   if($da->is_active==1){
-// $OTP = random_int(100000, 999999);
-$OTP = 123456;
+$OTP = random_int(100000, 999999);
+// $OTP = 123456;
 $contacts = $phone;
   $from = 'SUPTEC';
   if($OTP==null){
@@ -410,8 +410,8 @@ $data_insert = array(
 $last_id=$this->base_model->insert_table("tbl_user_temp", $data_insert, 1) ;
 
 if ($last_id!=0) {
-// $OTP = random_int(100000, 999999);
-$OTP = 123456;
+$OTP = random_int(100000, 999999);
+// $OTP = 123456;
 $contacts = $phone;
   $from = 'SUPTEC';
   if($OTP==null){
