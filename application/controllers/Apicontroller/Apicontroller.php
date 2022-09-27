@@ -4758,4 +4758,51 @@ $total = $order1_data->total_amount;
             echo json_encode($res);
         }
     }
+    public function copy_users()
+    {
+      $old_data = $this->db->get_where('customer_information')->result();
+      $i=1;
+      foreach ($old_data as  $old) {
+        $ip = $this->input->ip_address();
+       date_default_timezone_set("Asia/Calcutta");
+       $cur_date=date("Y-m-d H:i:s");
+       $state_data = $this->db->like('state_name',$old->state)->get_where('all_states')->result();
+       if(!empty($state_data[0]->state_name)){
+         $state = $state_data[0]->state_name;
+       }else{
+         $state="";
+       }
+        $data_insert = array('name'=>$old->customer_name,
+                  'phone'=>$old->customer_mobile,
+                  'email'=>$old->customer_email,
+                  'address'=>$old->customer_short_address,
+                  'state'=>$state,
+                  'city'=>$old->city,
+                  'company_name'=>$old->company,
+                  'gstin'=>$old->company_gstin,
+                  'zipcode'=>$old->zip,
+                  'ip' =>$ip,
+                  'is_active' =>1,
+                  'date'=>$cur_date
+                  );
+
+        $last_id=$this->base_model->insert_table("tbl_users",$data_insert,1) ;
+        $i++;
+      }
+      if(!empty($last_id)){
+        header('Access-Control-Allow-Origin: *');
+        $res = array('message'=>"Success!",
+        'status'=>200
+        );
+
+        echo json_encode($res);
+      }else{
+        header('Access-Control-Allow-Origin: *');
+        $res = array('message'=>"Some Error Occurred!",
+'status'=>201
+);
+
+        echo json_encode($res);
+      }
+    }
 }
