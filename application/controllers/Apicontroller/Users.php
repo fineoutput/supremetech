@@ -140,7 +140,7 @@ if (!empty($da)) {
     } else {
       header('Access-Control-Allow-Origin: *');
         $res=array(
-                  'message'=>'some error occured',
+                  'message'=>'some error occurred',
                   'code'=>201,
                 );
         echo json_encode($res);
@@ -241,7 +241,7 @@ if (!empty($otp_data)) {
               }
             } else {
                 header('Access-Control-Allow-Origin: *');
-                $res = array('message'=>'some error occured! Please try again',
+                $res = array('message'=>'some error occurred! Please try again',
 'status'=>201
 );
 
@@ -526,7 +526,7 @@ if (empty($userdata1)) {
         echo json_encode($res);
     } else {
         header('Access-Control-Allow-Origin: *');
-        $res = array('message'=>"Sorry error occured",
+        $res = array('message'=>"Sorry error occurred",
               'status'=>201
               );
 
@@ -651,7 +651,7 @@ if (!empty($otp_data)) {
                     echo json_encode($res);
                 } else {
                     header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>'some error occured! Please try again',
+                    $res = array('message'=>'some error occurred! Please try again',
     'status'=>201
     );
 
@@ -659,7 +659,7 @@ if (!empty($otp_data)) {
                 }
             } else {
                 header('Access-Control-Allow-Origin: *');
-                $res = array('message'=>'some error occured',
+                $res = array('message'=>'some error occurred',
   'status'=>201
   );
 

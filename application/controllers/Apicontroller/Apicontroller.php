@@ -44,7 +44,7 @@ class Apicontroller extends CI_Controller
             echo json_encode($res);
         } else {
             header('Access-Control-Allow-Origin: *');
-            $res = array('message'=>'some error occured',
+            $res = array('message'=>'some error occurred',
                                            'status'=>201,
 
                                            );
@@ -686,7 +686,7 @@ class Apicontroller extends CI_Controller
                                         echo json_encode($res);
                                     } else {
                                         header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=>'Some error occured',
+                                        $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -785,7 +785,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -928,7 +928,7 @@ class Apicontroller extends CI_Controller
                                         echo json_encode($res);
                                     } else {
                                         header('Access-Control-Allow-Origin: *');
-                                        $res = array('message'=>'Some error occured',
+                                        $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1026,7 +1026,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1303,7 +1303,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1368,7 +1368,7 @@ class Apicontroller extends CI_Controller
                         echo json_encode($res);
                     } else {
                         header('Access-Control-Allow-Origin: *');
-                        $res = array('message'=>'Some error occured',
+                        $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1538,7 +1538,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1574,7 +1574,7 @@ class Apicontroller extends CI_Controller
                         echo json_encode($res);
                     } else {
                         header('Access-Control-Allow-Origin: *');
-                        $res = array('message'=>'Some error occured',
+                        $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -2092,7 +2092,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>"some error occured",
+                                $res = array('message'=>"some error occurred",
 'status'=>201,
 );
 
@@ -2288,7 +2288,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'some eroor occured! please try again',
+                                $res = array('message'=>'some eroor occurred! please try again',
 'status'=>201
 );
 
@@ -2399,7 +2399,7 @@ class Apicontroller extends CI_Controller
                             echo json_encode($res);
                         } else {
                             header('Access-Control-Allow-Origin: *');
-                            $res = array('message'=>'some error occured',
+                            $res = array('message'=>'some error occurred',
 'status'=>201
 );
 
@@ -2495,7 +2495,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'some error occured',
+                                $res = array('message'=>'some error occurred',
 'status'=>201
 );
 
@@ -2585,7 +2585,7 @@ class Apicontroller extends CI_Controller
                             echo json_encode($res);
                         } else {
                             header('Access-Control-Allow-Origin: *');
-                            $res = array('message'=>'some error occured',
+                            $res = array('message'=>'some error occurred',
 'status'=>201
 );
 
@@ -3435,7 +3435,7 @@ $total = $order1_data->total_amount;
                     echo json_encode($res);
                 } else {
                     header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>"sorry error occured",
+                    $res = array('message'=>"sorry error occurred",
 'status'=>201
 );
 
@@ -3523,7 +3523,7 @@ $total = $order1_data->total_amount;
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'some error occured',
+                                $res = array('message'=>'some error occurred',
 'status'=>201
 );
 
@@ -4735,7 +4735,7 @@ $total = $order1_data->total_amount;
                     echo json_encode($res);
                 } else {
                     header('Access-Control-Allow-Origin: *');
-                    $res = array('message'=>'Some error occured',
+                    $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -4767,11 +4767,12 @@ $total = $order1_data->total_amount;
        date_default_timezone_set("Asia/Calcutta");
        $cur_date=date("Y-m-d H:i:s");
        $state_data = $this->db->like('state_name',$old->state)->get_where('all_states')->result();
-       if(!empty($state_data[0]->state_name)){
-         $state = $state_data[0]->state_name;
+       if(!empty($state_data[0]->id)){
+         $state = $state_data[0]->id;
        }else{
          $state="";
        }
+       $authentication = bin2hex(random_bytes(12));
         $data_insert = array('name'=>$old->customer_name,
                   'phone'=>$old->customer_mobile,
                   'email'=>$old->customer_email,
@@ -4781,6 +4782,7 @@ $total = $order1_data->total_amount;
                   'company_name'=>$old->company,
                   'gstin'=>$old->company_gstin,
                   'zipcode'=>$old->zip,
+                  'authentication'=>$authentication,
                   'ip' =>$ip,
                   'is_active' =>1,
                   'date'=>$cur_date

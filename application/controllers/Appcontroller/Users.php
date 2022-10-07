@@ -140,7 +140,7 @@ $res=array(
 echo json_encode($res);
 } else {
 $res=array(
-  'message'=>'some error occured',
+  'message'=>'some error occurred',
   'code'=>201,
 );
 echo json_encode($res);
@@ -219,8 +219,9 @@ if($user_data->is_active==1){
 $res = array('message'=>'success',
 'status'=>200,
 'authentication'=>$user_data->authentication,
-'user_name'=>$user_data->name
-// 'phone'=>$user_data->phone
+'user_name'=>$user_data->name,
+'email'=>$user_data->email,
+'phone'=>$user_data->phone
 );
 
 echo json_encode($res);
@@ -232,7 +233,7 @@ echo json_encode($res);
   echo json_encode($res);
 }
 } else {
-$res = array('message'=>'Some error occured! Please try again',
+$res = array('message'=>'Some error occurred! Please try again',
 'status'=>201
 );
 
@@ -503,7 +504,7 @@ $res = array('message'=>"success",
 
 echo json_encode($res);
 } else {
-$res = array('message'=>"Sorry error occured",
+$res = array('message'=>"Sorry error occurred",
 'status'=>201
 );
 
@@ -587,7 +588,7 @@ $data_insert = array('name'=>$temp_data->name,
        'image1'=>$temp_data->image1,
        'image2'=>$temp_data->image2,
        'token_id'=>$temp_data->token_id,
- 'authentication'=>$authentication,
+       'authentication'=>$authentication,
        'ip' =>$ip,
        'is_active' =>0,
        'date'=>$cur_date
@@ -610,7 +611,7 @@ if (!empty($last_id2)) {
             $last_id3=$this->db->update('token_id', $data_insert);
         }
     }
-    $res = array('message'=>'You have scuccessfully signed up. Please wait for admin approval',
+    $res = array('message'=>'You have successfully signed up. Please wait for admin approval',
 'status'=>200,
 // 'user_id'=>$last_id2,
 // 'authentication'=>$authentication
@@ -618,14 +619,14 @@ if (!empty($last_id2)) {
 
     echo json_encode($res);
 } else {
-    $res = array('message'=>'Some error occured! Please try again',
+    $res = array('message'=>'Some error occurred! Please try again',
 'status'=>201
 );
 
     echo json_encode($res);
 }
 } else {
-$res = array('message'=>'Some error occured',
+$res = array('message'=>'Some error occurred',
 'status'=>201
 );
 

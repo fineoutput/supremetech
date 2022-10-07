@@ -793,7 +793,7 @@ class Apicontroller extends CI_Controller
 
                                         echo json_encode($res);
                                     } else {
-                                        $res = array('message'=>'Some error occured',
+                                        $res = array('message'=>'Some error occurred',
     'status'=>201
     );
 
@@ -886,7 +886,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
                                               'status'=>201
                                               );
 
@@ -1035,7 +1035,7 @@ class Apicontroller extends CI_Controller
 
                                         echo json_encode($res);
                                     } else {
-                                        $res = array('message'=>'Some error occured',
+                                        $res = array('message'=>'Some error occurred',
     'status'=>201
     );
 
@@ -1128,7 +1128,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
                                               'status'=>201
                                               );
 
@@ -1425,7 +1425,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1486,7 +1486,7 @@ class Apicontroller extends CI_Controller
 
                             echo json_encode($res);
                         } else {
-                            $res = array('message'=>'Some error occured',
+                            $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1836,7 +1836,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'Some error occured',
+                                $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -1869,7 +1869,7 @@ class Apicontroller extends CI_Controller
 
                             echo json_encode($res);
                         } else {
-                            $res = array('message'=>'Some error occured',
+                            $res = array('message'=>'Some error occurred',
 'status'=>201
 );
 
@@ -2369,7 +2369,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             }
                         } else {
-                            $res = array('message'=>"Some erro occured",
+                            $res = array('message'=>"Some erro occurred",
         'status'=>201,
         );
 
@@ -2556,7 +2556,7 @@ class Apicontroller extends CI_Controller
 
                                     echo json_encode($res);
                                 } else {
-                                    $res = array('message'=>'some eroor occured! please try again',
+                                    $res = array('message'=>'some eroor occurred! please try again',
   'status'=>201
   );
 
@@ -2674,7 +2674,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'some error occured',
+                                $res = array('message'=>'some error occurred',
 'status'=>201
 );
 
@@ -3229,7 +3229,7 @@ class Apicontroller extends CI_Controller
 
                             echo json_encode($res);
                         } else {
-                            $res = array('message'=>"sorry error occured",
+                            $res = array('message'=>"sorry error occurred",
 'status'=>201
 );
 
@@ -3401,7 +3401,7 @@ class Apicontroller extends CI_Controller
 
                     echo json_encode($res);
                 } else {
-                    $res = array('message'=>"sorry error occured",
+                    $res = array('message'=>"sorry error occurred",
 'status'=>201
 );
 
@@ -3486,7 +3486,7 @@ class Apicontroller extends CI_Controller
                                 echo json_encode($res);
                             } else {
                                 header('Access-Control-Allow-Origin: *');
-                                $res = array('message'=>'some error occured',
+                                $res = array('message'=>'some error occurred',
                   'status'=>201
                   );
 
@@ -4306,7 +4306,7 @@ class Apicontroller extends CI_Controller
 
             echo json_encode($res);
         } else {
-            $res = array('message'=>'some error occured',
+            $res = array('message'=>'some error occurred',
                                            'status'=>201,
 
                                            );
@@ -4637,7 +4637,7 @@ class Apicontroller extends CI_Controller
 
                                 echo json_encode($res);
                             } else {
-                                $res = array('message'=>'some error occured',
+                                $res = array('message'=>'some error occurred',
   'status'=>201
   );
 
@@ -4725,7 +4725,7 @@ class Apicontroller extends CI_Controller
 
                             echo json_encode($res);
                         } else {
-                            $res = array('message'=>'some error occured',
+                            $res = array('message'=>'some error occurred',
     'status'=>201
     );
 
@@ -5406,7 +5406,7 @@ class Apicontroller extends CI_Controller
 
                     echo json_encode($res);
                 } else {
-                    $res = array('message'=>'Some error occured',
+                    $res = array('message'=>'Some error occurred',
     'status'=>201
     );
 
