@@ -252,12 +252,12 @@ class Vendors extends CI_finecontrol
             // echo $this->session->userdata('position');
             // exit;
             $id=base64_decode($idd);
-
+// echo $id;die();
             if ($this->load->get_var('position')=="Super Admin") {
-                $zapak=$this->db->delete('tbl_vendors', array('id' => $id));
+                $zapak=$this->db->delete('tbl_users', array('id' => $id));
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Vendor deleted successfully');
-                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                	redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;

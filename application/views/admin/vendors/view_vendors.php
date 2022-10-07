@@ -133,6 +133,8 @@
                                 <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updatevendorsStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
                                 <?php } else { ?>
                                 <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updatevendorsStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
+                                <li><a href="<?php echo base_url() ?>dcadmin/Vendors/delete_vendors/<?php echo base64_encode($data->id) ?>">Delete</a></li>
+                                <!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
                                 <?php		}   ?>
                                 <!-- <?php if ($data->status==2) { ?>
                                 <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
@@ -245,7 +247,6 @@
       $(document.body).on('click', '.dCnf', function() {
         var i = $(this).attr("mydata");
         console.log(i);
-
         $("#btns" + i).hide();
         $("#cnfbox" + i).show();
 
