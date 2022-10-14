@@ -4280,6 +4280,674 @@ class Apicontroller extends CI_Controller
             echo json_encode($res);
         }
     }
+    //------------filter-----
+    public function filter_new()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if ($this->input->post()) {
+            $headers = apache_request_headers();
+            $phone=$headers['Phone'];
+            $authentication=$headers['Authentication'];
+            $token_id=$headers['Tokenid'];
+
+            $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+
+
+
+            if ($this->form_validation->run()== true) {
+                $minorcategory_id=$this->input->post('minorcategory_id');
+                $brand_id=$this->input->post('brand_id');
+                $resolution_id=$this->input->post('resolution_id');
+                $irdistance_id=$this->input->post('irdistance_id');
+                $cameratype_id=$this->input->post('cameratype_id');
+                $bodymaterial_id=$this->input->post('bodymaterial_id');
+                $videochannel_id=$this->input->post('videochannel_id');
+                $poeports_id=$this->input->post('poeports_id');
+                $poetype_id=$this->input->post('poetype_id');
+                $sataports_id=$this->input->post('sataports_id');
+                $length_id=$this->input->post('length_id');
+                $screensize_id=$this->input->post('screensize_id');
+                $ledtype_id=$this->input->post('ledtype_id');
+                $size_id=$this->input->post('size_id');
+                $lens_id=$this->input->post('lens_id');
+                $night_vision_id=$this->input->post('night_vision_id');
+                $audio_type_id=$this->input->post('audio_type_id');
+
+
+
+                $brand_info = explode(',', $brand_id);
+                $resolution_info = explode(',', $resolution_id);
+                $irdistance_info = explode(',', $irdistance_id);
+                $cameratype_info = explode(',', $cameratype_id);
+                $bodymaterial_info = explode(',', $bodymaterial_id);
+                $videochannel_info = explode(',', $videochannel_id);
+                $poeports_info = explode(',', $poeports_id);
+                $poetype_info = explode(',', $poetype_id);
+                $sataports_info = explode(',', $sataports_id);
+                $length_info = explode(',', $length_id);
+                $screensize_info = explode(',', $screensize_id);
+                $ledtype_info = explode(',', $ledtype_id);
+                $size_info = explode(',', $size_id);
+                $lens_info = explode(',', $lens_id);
+                $night_vision_info = explode(',', $night_vision_id);
+                $audio_type_info = explode(',', $audio_type_id);
+
+                // die();
+                $this->db->select('*');
+                $this->db->from('tbl_products');
+                $this->db->where('is_active', 1);
+                $this->db->where('minorcategory_id', $minorcategory_id);
+                $filter_data= $this->db->get();
+                $filter_check = $filter_data->row();
+                $final_filter = [];
+                foreach ($filter_data->result() as $filterrr) {
+                    if ($filterrr->is_active == 1) {
+                        $this->db->select('*');
+                        $this->db->from('tbl_inventory');
+                        $this->db->where('product_id', $filterrr->id);
+                        $inventory_data = $this->db->get()->row();
+                        if (!empty($inventory_data)) {
+                            if ($inventory_data->quantity>0) {
+                                $stock = 1;
+                            } else {
+                                $stock =0;
+                            }
+                        } else {
+                            $stock =0;
+                        }
+                        //------- brand wise filter ----------------
+                            if (!empty($brand_info[0])) {
+                                foreach ($brand_info as $data0) {
+                                    if ($filterrr->brand == $data0) {
+                                $final_filter[] = array('product_id'=>$filterrr->id,
+                                'product_name'=>$filterrr->productname,
+                                'product_image'=>base_url().$filterrr->image,
+                                'productdescription'=>$filterrr->productdescription,
+                                'price'=>$filterrr->sellingprice,
+                                'max'=>$filterrr->max,
+                                'stock'=>$stock,
+                                'brand'=>$filterrr->brand,
+                                'resolution'=>$filterrr->resolution,
+                                'irdistance'=>$filterrr->irdistance,
+                                'cameratype'=>$filterrr->cameratype,
+                                'bodymaterial'=>$filterrr->bodymaterial,
+                                'videochannel'=>$filterrr->videochannel,
+                                'poeports'=>$filterrr->poeports,
+                                'poetype'=>$filterrr->poetype,
+                                'sataports'=>$filterrr->sataports,
+                                'length'=>$filterrr->length,
+                                'screensize'=>$filterrr->screensize,
+                                'ledtype'=>$filterrr->ledtype,
+                                'size'=>$filterrr->size,
+                                'lens'=>$filterrr->lens,
+                                'night_vision'=>$filterrr->night_vision,
+                                'audio_type'=>$filterrr->audio_type,
+                              );
+                                    }
+                                }
+                            }
+                            //------- without brand wise filter ----------------
+                            else{
+                              $final_filter[] = array('product_id'=>$filterrr->id,
+                              'product_name'=>$filterrr->productname,
+                              'product_image'=>base_url().$filterrr->image,
+                              'productdescription'=>$filterrr->productdescription,
+                              'price'=>$filterrr->sellingprice,
+                              'max'=>$filterrr->max,
+                              'stock'=>$stock,
+                              'brand'=>$filterrr->brand,
+                              'resolution'=>$filterrr->resolution,
+                              'irdistance'=>$filterrr->irdistance,
+                              'cameratype'=>$filterrr->cameratype,
+                              'bodymaterial'=>$filterrr->bodymaterial,
+                              'videochannel'=>$filterrr->videochannel,
+                              'poeports'=>$filterrr->poeports,
+                              'poetype'=>$filterrr->poetype,
+                              'sataports'=>$filterrr->sataports,
+                              'length'=>$filterrr->length,
+                              'screensize'=>$filterrr->screensize,
+                              'ledtype'=>$filterrr->ledtype,
+                              'size'=>$filterrr->size,
+                              'lens'=>$filterrr->lens,
+                              'night_vision'=>$filterrr->night_vision,
+                              'audio_type'=>$filterrr->audio_type,
+                              );
+                            }
+                          }
+                        }
+                        //--- filter other data ----
+                      foreach ($final_filter as $filterrr) {
+                        if (!empty($resolution_info[0])) {
+                            foreach ($resolution_info as $data1) {
+                                if ($filterrr['resolution'] == $data1) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                      }
+                        if (!empty($irdistance_info[0])) {
+                            foreach ($irdistance_info as $data2) {
+                                if ($filterrr['irdistance'] == $data2) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($cameratype_info[0])) {
+                            foreach ($cameratype_info as $data3) {
+                                if ($filterrr['cameratype'] == $data3) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($bodymaterial_info[0])) {
+                            foreach ($bodymaterial_info as $data4) {
+                                if ($filterrr['bodymaterial'] == $data4) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($videochannel_info[0])) {
+                            foreach ($videochannel_info as $data5) {
+                                if ($filterrr['videochannel'] == $data5) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($poeports_info[0])) {
+                            foreach ($poeports_info as $data6) {
+                                if ($filterrr['poeports'] == $data6) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($poetype_info[0])) {
+                            foreach ($poetype_info as $data7) {
+                                if ($filterrr['poetype'] == $data7) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($sataports_info[0])) {
+                            foreach ($sataports_info as $data8) {
+                                if ($filterrr['sataports'] == $data8) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($length_info[0])) {
+                            foreach ($length_info as $data9) {
+                                if ($filterrr['length'] == $data9) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($screensize_info[0])) {
+                            foreach ($screensize_info as $data10) {
+                                if ($filterrr['screensize'] == $data10) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($ledtype_info[0])) {
+                            foreach ($ledtype_info as $data11) {
+                                if ($filterrr['ledtype'] == $data11) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($size_info[0])) {
+                            foreach ($size_info as $data12) {
+                                if ($filterr['size'] == $data12) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($lens_info[0])) {
+                            foreach ($lens_info as $data13) {
+                                if ($filterrr['lens'] == $data13) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($night_vision_info[0])) {
+                            foreach ($night_vision_info as $data14) {
+                                if ($filterrr['night_vision'] == $data14) {
+                                  $send[] = array('product_id'=>$filterrr['product_id'],
+                                  'product_name'=>$filterrr['product_name'],
+                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'productdescription'=>$filterrr['productdescription'],
+                                  'price'=>$filterrr['price'],
+                              'max'=>$filterrr['max'],
+                              'stock'=>$stock,
+                              'brand'=>$filterrr['brand'],
+                              'resolution'=>$filterrr['resolution'],
+                              'irdistance'=>$filterrr['irdistance'],
+                              'cameratype'=>$filterrr['cameratype'],
+                              'bodymaterial'=>$filterrr['bodymaterial'],
+                              'videochannel'=>$filterrr['videochannel'],
+                              'poeports'=>$filterrr['poeports'],
+                              'poetype'=>$filterrr['poetype'],
+                              'sataports'=>$filterrr['sataports'],
+                              'length'=>$filterrr['length'],
+                              'screensize'=>$filterrr['screensize'],
+                              'ledtype'=>$filterrr['ledtype'],
+                              'size'=>$filterrr['size'],
+                              'lens'=>$filterrr['lens'],
+                              'night_vision'=>$filterrr['night_vision'],
+                              'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+                        if (!empty($audio_type_info[0])) {
+                            foreach ($audio_type_info as $data15) {
+                                if ($filterrr['audio_type'] == $data15) {
+                                    $send[] = array('product_id'=>$filterrr['product_id'],
+                                'product_name'=>$filterrr['product_name'],
+                                'product_image'=>base_url().$filterrr['product_image'],
+                                'productdescription'=>$filterrr['productdescription'],
+                                'price'=>$filterrr['price'],
+                                'max'=>$filterrr['max'],
+                                'stock'=>$stock,
+                                'brand'=>$filterrr['brand'],
+                                'resolution'=>$filterrr['resolution'],
+                                'irdistance'=>$filterrr['irdistance'],
+                                'cameratype'=>$filterrr['cameratype'],
+                                'bodymaterial'=>$filterrr['bodymaterial'],
+                                'videochannel'=>$filterrr['videochannel'],
+                                'poeports'=>$filterrr['poeports'],
+                                'poetype'=>$filterrr['poetype'],
+                                'sataports'=>$filterrr['sataports'],
+                                'length'=>$filterrr['length'],
+                                'screensize'=>$filterrr['screensize'],
+                                'ledtype'=>$filterrr['ledtype'],
+                                'size'=>$filterrr['size'],
+                                'lens'=>$filterrr['lens'],
+                                'night_vision'=>$filterrr['night_vision'],
+                                'audio_type'=>$filterrr['audio_type'],
+                              );
+                                }
+                            }
+                        }
+
+                }
+
+if(empty($send)){
+  $send  = $final_filter;
+}
+
+
+                // ----  array sort by unique id -----------
+                $temp_array = array();
+                $key="product_id";
+              $i = 0;
+              $key_array = array();
+              foreach ($send as $val) {
+                  if (!in_array($val[$key], $key_array)) {
+                      $key_array[$i] = $val[$key];
+                      $temp_array[$i] = $val;
+                  }
+                  $i++;
+              }
+                print_r($temp_array);exit;
+                $content = [];
+                foreach ($temp_array as $object) {
+                    $content[] = array('product_id'=>$object['product_id'],
+                    'product_name'=>$object['product_name'],
+                    'image'=>$object['product_image'],
+                    'productdescription'=>$object['productdescription'],
+                    'max'=>$object['max'],
+                    'price'=>$object['price'],
+                    'stock'=>$object['stock']
+                  );
+                    }
+
+                // echo $count;die();
+
+
+                header('Access-Control-Allow-Origin: *');
+
+                $res = array('message'=>'success',
+'status'=>200,
+'data'=>$content
+);
+
+                echo json_encode($res);
+            } else {
+                header('Access-Control-Allow-Origin: *');
+
+                $res = array('message'=>validation_errors(),
+              'status'=>201
+              );
+
+                echo json_encode($res);
+            }
+        } else {
+            header('Access-Control-Allow-Origin: *');
+
+            $res = array('message'=>'No data available',
+              'status'=>201
+              );
+
+            echo json_encode($res);
+        }
+    }
     //-------------------state api--------------------
 
     public function all_state_get()
