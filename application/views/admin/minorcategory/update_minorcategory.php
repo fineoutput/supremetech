@@ -101,15 +101,16 @@
                           $brands=json_decode($minorcategory_data->brand);
                           foreach ($brand_data->result() as $value) {
                             $a=0;
+                            if(!empty($brands)){
                             foreach ($brands as $data) {
                             if($data==$value->id){
                               $a=1;
                             }
-                            }
+                          }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->name?></option>
 
-                          <?php } ?>
+                        <?php  }?>
                         </select>
                       </td>
                       <td> <strong>Resolution</strong> </strong> </td>
@@ -119,11 +120,12 @@
                           $resolution=json_decode($minorcategory_data->resolution);
                            foreach ($resolution_data->result() as $value) {
                              $a=0;
+                             if(!empty($resolution)){
                              foreach ($resolution as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
@@ -139,11 +141,12 @@
                           $ir_distance=json_decode($minorcategory_data->ir_distance);
                            foreach ($irdistance_data->result() as $value) {
                              $a=0;
+                             if(!empty($ir_distance)){
                              foreach ($ir_distance as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
@@ -157,11 +160,12 @@
                           $camera_type=json_decode($minorcategory_data->camera_type);
                            foreach ($cameratype_data->result() as $value) {
                              $a=0;
+                             if(!empty($camera_type)){
                              foreach ($camera_type as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
@@ -178,11 +182,12 @@
 
                            foreach ($bodymaterial_data->result() as $value) {
                              $a=0;
+                             if(!empty($body_materials)){
                              foreach ($body_materials as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -196,11 +201,12 @@
                           $video_channel=json_decode($minorcategory_data->video_channel);
                            foreach ($videochannel_data->result() as $value) {
                              $a=0;
-                             foreach ($ir_distance as $data) {
+                             if(!empty($video_channel)){
+                             foreach ($video_channel as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -216,11 +222,12 @@
                           $poe_ports=json_decode($minorcategory_data->poe_ports);
                            foreach ($poeports_data->result() as $value) {
                              $a=0;
+                             if(!empty($poe_ports)){
                              foreach ($poe_ports as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -234,11 +241,12 @@
                           $poe_type=json_decode($minorcategory_data->poe_type);
                           foreach ($poetype_data->result() as $value) {
                             $a=0;
+                             if(!empty($poe_type)){
                             foreach ($poe_type as $data) {
                             if($data==$value->id){
                               $a=1;
                             }
-                            }
+                          }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -255,11 +263,12 @@
                           $sata_ports=json_decode($minorcategory_data->sata_ports);
                           foreach ($sataports_data->result() as $value) {
                             $a=0;
+                             if(!empty($sata_ports)){
                              foreach ($sata_ports as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -273,11 +282,12 @@
                           $length=json_decode($minorcategory_data->length);
                           foreach ($length_data->result() as $value) {
                             $a=0;
+                             if(!empty($length)){
                              foreach ($length as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -293,11 +303,12 @@
                           $screen_size=json_decode($minorcategory_data->screen_size);
                           foreach ($screensize_data->result() as $value) {
                             $a=0;
+                             if(!empty($screen_size)){
                              foreach ($screen_size as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -311,11 +322,12 @@
                           $led_type=json_decode($minorcategory_data->led_type);
                           foreach ($ledtype_data->result() as $value) {
                             $a=0;
+                             if(!empty($led_type)){
                           foreach ($led_type as $data) {
                           if($data==$value->id){
                             $a=1;
                           }
-                          }
+                        }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -331,11 +343,12 @@
                           $size=json_decode($minorcategory_data->size);
                            foreach ($size_data->result() as $value) {
                              $a=0;
+                              if(!empty($size)){
                              foreach ($size as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filter_name?></option>
 
@@ -349,11 +362,12 @@
                           $lens=json_decode($minorcategory_data->lens);
                           foreach ($lens_data->result() as $value) {
                             $a=0;
+                             if(!empty($lens)){
                             foreach ($lens as $data) {
                             if($data==$value->id){
                               $a=1;
                             }
-                            }
+                          }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
@@ -370,11 +384,12 @@
                           $nv_data=json_decode($minorcategory_data->night_vision);
                            foreach ($night_vision_data->result() as $value) {
                              $a=0;
+                              if(!empty($nv_data)){
                              foreach ($nv_data as $data) {
                              if($data==$value->id){
                                $a=1;
                              }
-                             }
+                           }}
                              ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
@@ -388,11 +403,12 @@
                           $audio =json_decode($minorcategory_data->audio_type);
                           foreach ($audio_type_data->result() as $value) {
                             $a=0;
+                             if(!empty($audio)){
                             foreach ($audio as $data) {
                             if($data==$value->id){
                               $a=1;
                             }
-                            }
+                          }}
                             ?>
                           <option value="<?=$value->id;?>" <?if($a==1){echo "selected" ;}?>><?=$value->filtername?></option>
 
