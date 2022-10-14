@@ -4905,7 +4905,7 @@ if(empty($send)){
                   }
                   $i++;
               }
-                print_r($temp_array);exit;
+                // print_r($temp_array);exit;
                 $content = [];
                 foreach ($temp_array as $object) {
                     $content[] = array('product_id'=>$object['product_id'],
