@@ -4379,7 +4379,7 @@ class Apicontroller extends CI_Controller
                                     if ($filterrr->brand == $data0) {
                                 $final_filter[] = array('product_id'=>$filterrr->id,
                                 'product_name'=>$filterrr->productname,
-                                'product_image'=>base_url().$filterrr->image,
+                                'product_image'=>$filterrr->image,
                                 'productdescription'=>$filterrr->productdescription,
                                 'price'=>$filterrr->sellingprice,
                                 'max'=>$filterrr->max,
@@ -4408,7 +4408,7 @@ class Apicontroller extends CI_Controller
                             else{
                               $final_filter[] = array('product_id'=>$filterrr->id,
                               'product_name'=>$filterrr->productname,
-                              'product_image'=>base_url().$filterrr->image,
+                              'product_image'=>$filterrr->image,
                               'productdescription'=>$filterrr->productdescription,
                               'price'=>$filterrr->sellingprice,
                               'max'=>$filterrr->max,
@@ -4440,7 +4440,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['resolution'] == $data1) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4470,7 +4470,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['irdistance'] == $data2) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4500,7 +4500,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['cameratype'] == $data3) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4530,7 +4530,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['bodymaterial'] == $data4) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4560,7 +4560,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['videochannel'] == $data5) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4590,7 +4590,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['poeports'] == $data6) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4620,7 +4620,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['poetype'] == $data7) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4650,7 +4650,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['sataports'] == $data8) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4680,7 +4680,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['length'] == $data9) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4710,7 +4710,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['screensize'] == $data10) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4740,7 +4740,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['ledtype'] == $data11) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4770,7 +4770,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterr['size'] == $data12) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4800,7 +4800,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['lens'] == $data13) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4830,7 +4830,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['night_vision'] == $data14) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
-                                  'product_image'=>base_url().$filterrr['product_image'],
+                                  'product_image'=>$filterrr['product_image'],
                                   'productdescription'=>$filterrr['productdescription'],
                                   'price'=>$filterrr['price'],
                               'max'=>$filterrr['max'],
@@ -4860,7 +4860,7 @@ class Apicontroller extends CI_Controller
                                 if ($filterrr['audio_type'] == $data15) {
                                     $send[] = array('product_id'=>$filterrr['product_id'],
                                 'product_name'=>$filterrr['product_name'],
-                                'product_image'=>base_url().$filterrr['product_image'],
+                                'product_image'=>$filterrr['product_image'],
                                 'productdescription'=>$filterrr['productdescription'],
                                 'price'=>$filterrr['price'],
                                 'max'=>$filterrr['max'],
@@ -4910,7 +4910,7 @@ if(empty($send)){
                 foreach ($temp_array as $object) {
                     $content[] = array('product_id'=>$object['product_id'],
                     'product_name'=>$object['product_name'],
-                    'image'=>$object['product_image'],
+                    'image'=>base_url().$object['product_image'],
                     'productdescription'=>$object['productdescription'],
                     'max'=>$object['max'],
                     'price'=>$object['price'],
