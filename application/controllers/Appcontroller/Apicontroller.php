@@ -1566,13 +1566,13 @@ class Apicontroller extends CI_Controller
 
                 echo json_encode($res);
             } else {
-                $res = array('message'=>"email or password do not match",
-'status'=>201,
-
+              $res = array('message'=>"success",
+'status'=>200,
+'data'=>0,
+'wishlist_count'=>0
 );
 
-                echo json_encode($res);
-                exit();
+              echo json_encode($res);
             }
         } else {
             if (!empty($token_id)) {
