@@ -1249,7 +1249,7 @@ class Apicontroller extends CI_Controller
                         echo json_encode($res);
                     }
                 } else {
-                    $res = array('message'=>'Please Log in first',
+                    $res = array('message'=>'Please login first',
 'status'=>201
 );
 
