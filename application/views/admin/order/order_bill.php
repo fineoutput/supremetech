@@ -47,17 +47,23 @@ if (!empty($usr_dat)) {
     $user_name= $usr_dat->name;
     $user_email= $usr_dat->email;
     $user_contact= $usr_dat->phone;
+    $company_name= $usr_dat->company_name;
+    $gstin= $usr_dat->gstin;
 } else {
     $user_name="";
     $user_email="";
     $user_contact="";
+    $company_name="";
+    $gstin="";
 }
 ?>
 
 
 User: <?=$user_name;?>
 <br>Email: <?=$user_email;?>
-<br>Contact: <?=$user_contact;?><br>
+<br>Contact: <?=$user_contact;?>
+<br>Company Name: <?=$company_name;?>
+<br>GST NO: <?=$gstin;?>
 
 
       <?php

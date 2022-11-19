@@ -50,7 +50,7 @@
                         <th>Zipcode</th>
                         <th>Contact Number</th>
                         <th>GST IN</th>
-                        <th>Image</th>
+                        <th> Visiting card </th>
                         <th>Registration date</th>
                         <th>Status</th>
                         <!-- <th>Request Status</th> -->
@@ -140,8 +140,10 @@
                                 <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
                                 <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
                                 <?php	}  ?> -->
-                                <!-- <li><a href="dcadmin/Vendors/update_vendors/">Edit</a></li>
-<li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
+
+<!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
+<li><a href="<?php echo base_url() ?>dcadmin/Vendors/update_vendors/<?php echo
+base64_encode($data->id) ?>">Edit</a></li>
                               </ul>
                             </div>
                           </div>

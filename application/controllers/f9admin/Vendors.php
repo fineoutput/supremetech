@@ -97,41 +97,70 @@ class Vendors extends CI_finecontrol
             if ($this->input->post()) {
                 // print_r($this->input->post());
                 // exit;
-                $this->form_validation->set_rules('firstname', 'firstname', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('lastname', 'lastname', 'xss_clean|trim');
-                $this->form_validation->set_rules('dateofbirth', 'dateofbirth', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
+                // $this->form_validation->set_rules('lastname', 'lastname', 'xss_clean|trim');
+                // $this->form_validation->set_rules('dateofbirth', 'dateofbirth', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
-                $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
+                // $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('gstin', 'gstin', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('cityname', 'cityname', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
 
                 if ($this->form_validation->run()== true) {
-                    $firstname=$this->input->post('firstname');
-                    $lastname=$this->input->post('lastname');
-                    $dateofbirth=$this->input->post('dateofbirth');
+                    $name=$this->input->post('name');
+                    // $lastname=$this->input->post('lastname');
+                    // $dateofbirth=$this->input->post('dateofbirth');
                     $email=$this->input->post('email');
-                    $password=$this->input->post('password');
+                    // $password=$this->input->post('password');
                     $gstin=$this->input->post('gstin');
                     $address=$this->input->post('address');
-                    $cityname=$this->input->post('cityname');
+                    $city=$this->input->post('city');
 
                     $ip = $this->input->ip_address();
                     date_default_timezone_set("Asia/Calcutta");
                     $cur_date=date("Y-m-d H:i:s");
-
                     $addedby=$this->session->userdata('admin_id');
+
+                    $this->load->library('upload');
+                    $img1='image1';
+                    $nnnn = '';
+                    $file_check=($_FILES['image1']['error']);
+                    if ($file_check!=4) {
+                        $image_upload_folder = FCPATH . "assets/uploads/vendor/";
+                        if (!file_exists($image_upload_folder)) {
+                            mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+                        }
+                        $new_file_name="vendor".date("Ymdhms");
+                        $this->upload_config = array(
+                      'upload_path'   => $image_upload_folder,
+                      'file_name' => $new_file_name,
+                      'allowed_types' =>'jpg|jpeg|png',
+                      'max_size'      => 25000
+                      );
+                        $this->upload->initialize($this->upload_config);
+                        if (!$this->upload->do_upload($img1)) {
+                            $upload_error = $this->upload->display_errors();
+
+                            $this->session->set_flashdata('emessage', $upload_error);
+                            redirect($_SERVER['HTTP_REFERER']);
+                        } else {
+                            $file_info = $this->upload->data();
+                            $videoNAmePath = "assets/uploads/vendor/".$new_file_name.$file_info['file_ext'];
+                            $nnnn=$videoNAmePath;
+                        }
+                    }
 
                     $typ=base64_decode($t);
                     if ($typ==1) {
-                        $data_insert = array('firstname'=>$firstname,
-                    'lastname'=>$lastname,
-                    'dateofbirth'=>$dateofbirth,
+                        $data_insert = array('name'=>$name,
+                    // 'lastname'=>$lastname,
+                    // 'dateofbirth'=>$dateofbirth,
                     'email'=>$email,
                     'password'=>$password,
                     'gstin'=>$gstin,
                     'address'=>$address,
-                    'cityname'=>$cityname,
+                    'city'=>$city,
+                      'image1'=>$nnnn,
                     'ip' =>$ip,
                     'added_by' =>$addedby,
                     'is_active' =>1,
@@ -143,7 +172,7 @@ class Vendors extends CI_finecontrol
 
 
 
-                        $last_id=$this->base_model->insert_table("tbl_vendors", $data_insert, 1) ;
+                        $last_id=$this->base_model->insert_table("tbl_users", $data_insert, 1) ;
 												if ($last_id!=0) {
 		                        $this->session->set_flashdata('smessage', 'Vendor inserted successfully');
 
@@ -172,21 +201,22 @@ class Vendors extends CI_finecontrol
                         //  }
 //     }
 
-                        $data_insert = array('firstname'=>$firstname,
-                    'lastname'=>$lastname,
-                    'dateofbirth'=>$dateofbirth,
+                        $data_insert = array('name'=>$name,
+                    // 'lastname'=>$lastname,
+                    // 'dateofbirth'=>$dateofbirth,
                     'email'=>$email,
-                    'password'=>$password,
+                    // 'password'=>$password,
                     'gstin'=>$gstin,
                     'address'=>$address,
-                    'cityname'=>$cityname,
+                    'image1'=>$nnnn,
+                    'city'=>$city,
                     );
 
 
 
 
                         $this->db->where('id', $idw);
-                        $last_id=$this->db->update('tbl_vendors', $data_insert);
+                        $last_id=$this->db->update('tbl_users', $data_insert);
 												if ($last_id!=0) {
 		                        $this->session->set_flashdata('smessage', 'Vendor updated successfully');
 
@@ -228,7 +258,7 @@ class Vendors extends CI_finecontrol
             $data['id']=$idd;
 
             $this->db->select('*');
-            $this->db->from('tbl_vendors');
+            $this->db->from('tbl_users');
             $this->db->where('id', $id);
             $dsa= $this->db->get();
             $data['vendors']=$dsa->row();
@@ -293,7 +323,7 @@ class Vendors extends CI_finecontrol
 
                 if ($zapak!=0) {
 									$this->session->set_flashdata('smessage', 'Vendor status updated successfully');
-                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                    redirect("dcadmin/Vendors/view_pending_vendors", "refresh");
                 } else {
 									$this->session->set_flashdata('emessage', 'Some error occured');
 						redirect($_SERVER['HTTP_REFERER']);
