@@ -223,7 +223,9 @@ $res = array('message'=>'success',
 'authentication'=>$user_data->authentication,
 'user_name'=>$user_data->name,
 'email'=>$user_data->email,
-'phone'=>$user_data->phone
+'phone'=>$user_data->phone,
+'address'=>$user_data->address,
+'company_name'=>$user_data->company_name
 );
 
 echo json_encode($res);
