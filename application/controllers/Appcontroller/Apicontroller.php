@@ -4767,7 +4767,7 @@ class Apicontroller extends CI_Controller
                         }
                         if (!empty($size_info[0])) {
                             foreach ($size_info as $data12) {
-                                if ($filterr['size'] == $data12) {
+                                if ($filterrr['size'] == $data12) {
                                   $send[] = array('product_id'=>$filterrr['product_id'],
                                   'product_name'=>$filterrr['product_name'],
                                   'product_image'=>$filterrr['product_image'],
