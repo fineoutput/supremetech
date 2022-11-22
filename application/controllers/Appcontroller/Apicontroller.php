@@ -6006,7 +6006,7 @@ if(empty($send)){
         $this->db->where('is_active', 1);
         $popup_data= $this->db->get()->row();
 
-        $popoup =array('image'=>'');
+        $popoup =array('image'=>0);
         if (!empty($popup_data)) {
             $popoup = array('image'=>base_url().$popup_data->image);
         }
