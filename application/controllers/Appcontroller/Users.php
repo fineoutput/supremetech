@@ -415,7 +415,7 @@ $data_insert = array(
 
 
 $last_id=$this->base_model->insert_table("tbl_user_temp", $data_insert, 1) ;
-
+die();
 if ($last_id!=0) {
 $OTP = random_int(100000, 999999);
 // $OTP = 123456;
