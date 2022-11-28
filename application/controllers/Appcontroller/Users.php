@@ -294,8 +294,8 @@ $this->form_validation->set_rules('email', 'email', 'required|xss_clean|trim|val
 $this->form_validation->set_rules('dob', 'dob', 'xss_clean|trim');
 $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
-$this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
-$this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim'); //-- table all_cities id
+$this->form_validation->set_rules('state', 'state', 'xss_clean|trim');
+$this->form_validation->set_rules('district', 'district', 'xss_clean|trim'); //-- table all_cities id
 $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');   //-- varchar
 $this->form_validation->set_rules('zipcode', 'zipcode', 'required|xss_clean|trim');
 $this->form_validation->set_rules('company_name', 'company_name', 'required|xss_clean|trim');
@@ -319,8 +319,9 @@ $ip = $this->input->ip_address();
 date_default_timezone_set("Asia/Calcutta");
 $cur_date=date("Y-m-d H:i:s");
 $this->load->library('upload');
+$image1="";
 $img1='image1';
-
+if (!empty($_FILES['image1'])) {
 $file_check=($_FILES['image1']['error']);
 if ($file_check!=4) {
 $image_upload_folder = FCPATH . "assets/uploads/users/";
@@ -347,6 +348,7 @@ $file_info['new_name']=$videoNAmePath;
 // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
 $image1=$videoNAmePath;
 // echo json_encode($file_info);
+}
 }
 }
 $image2="";
