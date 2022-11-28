@@ -321,36 +321,36 @@ $cur_date=date("Y-m-d H:i:s");
 $this->load->library('upload');
 $image1="";
 $img1='image1';
-if (!empty($_FILES['image1'])) {
-$file_check=($_FILES['image1']['error']);
-if ($file_check!=4) {
-$image_upload_folder = FCPATH . "assets/uploads/users/";
-if (!file_exists($image_upload_folder)) {
-mkdir($image_upload_folder, DIR_WRITE_MODE, true);
-}
-$new_file_name="users".date("Ymdhms");
-$this->upload_config = array(
-'upload_path'   => $image_upload_folder,
-'file_name' => $new_file_name,
-'allowed_types' =>'jpg|jpeg|png',
-'max_size'      => 25000
-);
-$this->upload->initialize($this->upload_config);
-if (!$this->upload->do_upload($img1)) {
-$upload_error = $this->upload->display_errors();
-// echo json_encode($upload_error);
-echo $upload_error;
-} else {
-$file_info = $this->upload->data();
+// if (!empty($_FILES['image1'])) {
+// $file_check=($_FILES['image1']['error']);
+// if ($file_check!=4) {
+// $image_upload_folder = FCPATH . "assets/uploads/users/";
+// if (!file_exists($image_upload_folder)) {
+// mkdir($image_upload_folder, DIR_WRITE_MODE, true);
+// }
+// $new_file_name="users".date("Ymdhms");
+// $this->upload_config = array(
+// 'upload_path'   => $image_upload_folder,
+// 'file_name' => $new_file_name,
+// 'allowed_types' =>'jpg|jpeg|png',
+// 'max_size'      => 25000
+// );
+// $this->upload->initialize($this->upload_config);
+// if (!$this->upload->do_upload($img1)) {
+// $upload_error = $this->upload->display_errors();
+// // echo json_encode($upload_error);
+// echo $upload_error;
+// } else {
+// $file_info = $this->upload->data();
 
-$videoNAmePath = "assets/uploads/users/".$new_file_name.$file_info['file_ext'];
-$file_info['new_name']=$videoNAmePath;
-// $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
-$image1=$videoNAmePath;
-// echo json_encode($file_info);
-}
-}
-}
+// $videoNAmePath = "assets/uploads/users/".$new_file_name.$file_info['file_ext'];
+// $file_info['new_name']=$videoNAmePath;
+// // $this->step6_model->updateappIconImage($imageNAmePath,$appInfoId);
+// $image1=$videoNAmePath;
+// // echo json_encode($file_info);
+// }
+// }
+// }
 $image2="";
 $img2='image2';
 if (!empty($_FILES['image2'])) {
@@ -415,7 +415,7 @@ $data_insert = array(
 
 
 $last_id=$this->base_model->insert_table("tbl_user_temp", $data_insert, 1) ;
-die();
+// die();
 if ($last_id!=0) {
 $OTP = random_int(100000, 999999);
 // $OTP = 123456;
