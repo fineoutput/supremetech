@@ -718,11 +718,16 @@ class Users extends CI_Controller
     if (!empty($user_data)) {
       if ($user_data->authentication == $authentication) {
         if ($user_data->is_active == 1) {
+          //--- inactive account -------
+           $data_update = array('is_active'=>0);
+          $this->db->where('id', $user_data->id);
+          $zapak=$this->db->update('tbl_users', $data_update);
           $txn_id =  $this->generateRandomString(6);
           $user_name = $user_data->name;
           $ip = $this->input->ip_address();
           date_default_timezone_set("Asia/Calcutta");
           $cur_date = date("Y-m-d H:i:s");
+          //--- insert del account table---------
           $link = base_url() . "Appcontroller/Users/confirm_delete_my_account/" . $txn_id;
           $data_insert = array(
             'user_id' => $user_data->id,
@@ -733,6 +738,7 @@ class Users extends CI_Controller
           );
           $last_id = $this->base_model->insert_table("tbl_del_account", $data_insert, 1);
           $sent = '';
+          //--- send email ---------
           $delete_account_data = array(
             'user_name' => $user_name,
             'link' => $link
