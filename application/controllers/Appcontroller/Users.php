@@ -809,6 +809,7 @@ class Users extends CI_Controller
           $this->db->from('tbl_del_account');
           $this->db->where('txn_id', $id);
           $u1= $this->db->get()->row();
+          if(!empty($u1)){
           $st=$u1->status;
 
           if ($st==0) {
@@ -820,6 +821,9 @@ class Users extends CI_Controller
           } else {
             echo  'Link already used!';
           }
+        }else{
+          echo  'Permission not allowed!';
+        }
 
   }
 }
