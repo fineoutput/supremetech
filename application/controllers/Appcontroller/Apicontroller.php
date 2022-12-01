@@ -94,7 +94,7 @@ class Apicontroller extends CI_Controller
     {
         $this->db->select('*');
         $this->db->from('tbl_subcategory');
-        $this->db->where('category_id', $id);
+        // $this->db->where('category_id', $id);
         $this->db->where('is_active', 1);
         $subcategorydata= $this->db->get();
         $subcategory=[];
@@ -4892,7 +4892,7 @@ if(empty($send)){
   $send  = $final_filter;
 }
 
-
+print_r($send);die();
                 // ----  array sort by unique id -----------
                 $temp_array = array();
                 $key="product_id";
