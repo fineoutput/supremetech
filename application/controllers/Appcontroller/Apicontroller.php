@@ -4892,7 +4892,7 @@ if(empty($send)){
   $send  = $final_filter;
 }
 
-print_r($send);die();
+// print_r($send);die();
                 // ----  array sort by unique id -----------
                 $temp_array = array();
                 $key="product_id";
