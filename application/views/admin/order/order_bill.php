@@ -17,7 +17,7 @@
 <div class="container main_container">
 	<div class="row">
 		<div class="col-sm-6 oswal_logo">
-		<img src="https://www.supremetechnocom.com/application/views/website/themes/supreme/assets/img/logo.png" class="img-fluid" style="width:150px;">
+		<img src="<?=base_url()?>assets/admin/logo.png" class="img-fluid" style="width:150px;">
 		</div>
 		<div class="col-sm-6 content_part">Tax Invoice/Bill of Supply/Cash Memo
 			<p>(Original for Recipient)</p>
