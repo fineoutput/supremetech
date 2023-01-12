@@ -1,5 +1,4 @@
 <?php
-
     if (! defined('BASEPATH')) {
         exit('No direct script access allowed');
     }
@@ -14,33 +13,26 @@
                $this->load->library('user_agent');
                $this->load->library('upload');
            }
-
            public function view_products($idd)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $data['user_name']=$this->load->get_var('user_name');
-
                    // echo SITE_NAME;
                    // echo $this->session->userdata('image');
                    // echo $this->session->userdata('position');
                    // exit;
                    //  $id=base64_decode($idd);
-
                    $id=base64_decode($idd);
                    $data['id']=$idd;
-
                    $this->db->select('*');
                    $this->db->from('tbl_products');
                    $this->db->where('category_id', $id);
                    $data['products_data']= $this->db->get();
-
-
                    //Brands
                    $this->db->select('*');
                    $this->db->from('tbl_brands');
                    //$this->db->where('_id',$id);
                    $data['brand_data']= $this->db->get();
-
                    //resolution
                    $this->db->select('*');
                    $this->db->from('tbl_resolution');
@@ -61,7 +53,6 @@
                    $this->db->from('tbl_cameratype');
                    //$this->db->where('_id',$id);
                    $data['camera_data']= $this->db->get();
-
                    // body Material
                    $this->db->select('*');
                    $this->db->from('tbl_bodymaterial');
@@ -82,7 +73,6 @@
                    $this->db->from('tbl_sataports');
                    //$this->db->where('_id',$id);
                    $data['sata_data']= $this->db->get();
-
                    //Length
                    $this->db->select('*');
                    $this->db->from('tbl_length');
@@ -98,30 +88,25 @@
                    $this->db->from('tbl_ledtype');
                    //$this->db->where('_id',$id);
                    $data['led_data']= $this->db->get();
-
                    //size
                    $this->db->select('*');
                    $this->db->from('tbl_size');
                    //$this->db->where('_id',$id);
                    $data['size_data']= $this->db->get();
-
                    //night vision
                    $this->db->select('*');
                    $this->db->from('tbl_night_vision');
                    //$this->db->where('_id',$id);
                    $data['nv_data']= $this->db->get();
-
                    //audio type
                    $this->db->select('*');
                    $this->db->from('tbl_audio_type');
                    //$this->db->where('_id',$id);
                    $data['audio_type_data']= $this->db->get();
-
                    //             $this->db->select('*');
                    // $this->db->from('tbl_inventory');
                    // // $this->db->where('',$usr);
                    // $data['inventory_data']= $this->db->get();
-
                    $this->load->view('admin/common/header_view', $data);
                    $this->load->view('admin/products/view_products');
                    $this->load->view('admin/common/footer_view');
@@ -136,8 +121,6 @@
                    $this->db->from('tbl_category');
                    $this->db->where('is_active', 1);
                    $data['category_data']= $this->db->get();
-
-
                    $this->load->view('admin/common/header_view', $data);
                    $this->load->view('admin/products/view_product_categories');
                    $this->load->view('admin/common/footer_view');
@@ -145,25 +128,20 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
            public function add_products($idd)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $id=base64_decode($idd);
                    $data['id']=$idd;
-
-
                    $this->db->select('*');
                    $this->db->from('tbl_category');
                    $this->db->where('is_active', 1);
                    $data['category_data']= $this->db->get();
-
                    $this->db->select('*');
                    $this->db->from('tbl_subcategory');
                    $this->db->where('category_id', $id);
                    $this->db->where('is_active', 1);
                    $data['subcategory_data']= $this->db->get();
-
                    // $this->db->select('*');
                    // $this->db->from('tbl_minorcategory');
                    // $this->db->where('is_active', 1);
@@ -250,7 +228,6 @@
                    // $this->db->from('tbl_audio_type');
                    // //$this->db->where('_id',$id);
                    // $data['audio_type_data']= $this->db->get();
-
                    $this->load->view('admin/common/header_view', $data);
                    $this->load->view('admin/products/add_products');
                    $this->load->view('admin/common/footer_view');
@@ -258,7 +235,6 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
            public function set_filters()
            {
                $minorid =$this->input->post('minorid');
@@ -267,7 +243,6 @@
                $this->db->from('tbl_minorcategory');
                $this->db->where('id', $minorid);
                $minor_data = $this->db->get()->row();
-
                $brands=[];
                $brands[] = array('id'=>'', 'name'=>'None Selected');
                $brand_json = json_decode($minor_data->brand);
@@ -286,7 +261,6 @@
                } else {
                    $data['brands'] = '';
                }
-
                //resolution
                $resolution=[];
                $resolution[]=array('id'=>'', 'name'=>'None Selected');
@@ -320,7 +294,6 @@
                } else {
                    $data['lens'] = '';
                }
-
                // ir Distance
                $irdistance = [];
                $irdistance[] = array('id'=>'', 'name'=>'None Selected');
@@ -337,7 +310,6 @@
                } else {
                    $data['irdistance'] = '';
                }
-
                //camera type
                $camera_type = [];
                $camera_type[] = array('id'=>'', 'name'=>'None Selected');
@@ -354,8 +326,6 @@
                } else {
                    $data['camera_type'] = '';
                }
-
-
                // body Material
                $body_material = [];
                $body_material[] = array('id'=>'', 'name'=>'None Selected');;
@@ -372,7 +342,6 @@
                } else {
                    $data['body_material'] = '';
                }
-
                // video Channel
                $video_channel = [];
                $video_channel[] = array('id'=>'', 'name'=>'None Selected');
@@ -389,7 +358,6 @@
                } else {
                    $data['video_channel'] = '';
                }
-
                // poe Ports
                $pov_ports = [];
                $pov_ports[] = array('id'=>'', 'name'=>'None Selected');
@@ -406,7 +374,6 @@
                } else {
                    $data['pov_ports'] = '';
                }
-
                // Poe Type
                $pov_type = [];
                $pov_type[] = array('id'=>'', 'name'=>'None Selected');
@@ -423,7 +390,6 @@
                } else {
                    $data['pov_type'] = '';
                }
-
                // SATA ports
                $sata_ports = [];
                $sata_ports[] = array('id'=>'', 'name'=>'None Selected');
@@ -440,8 +406,6 @@
                } else {
                    $data['sata_ports'] = '';
                }
-
-
                //Length
                $length = [];
                $length[] = array('id'=>'', 'name'=>'None Selected');
@@ -490,7 +454,6 @@
                } else {
                    $data['led_type'] = '';
                }
-
                //size
                $size = [];
                $size[] = array('id'=>'', 'name'=>'None Selected');;
@@ -507,7 +470,6 @@
                } else {
                    $data['size'] = '';
                }
-
                //night vision
                $night_vision = [];
                $night_vision[] = array('id'=>'', 'name'=>'None Selected');;
@@ -524,7 +486,6 @@
                } else {
                    $data['night_vision'] = '';
                }
-
                //audio type
                $audio_type = [];
                $audio_type[] = array('id'=>'', 'name'=>'None Selected');;
@@ -542,46 +503,34 @@
                    $data['audio_type'] = '';
                }
                $data['data'] = true;
-
                echo json_encode($data);
            }
-
            public function getSubcategory()
            {
-
                    // $data['user_name']=$this->load->get_var('user_name');
-
                // echo SITE_NAME;
                // echo $this->session->userdata('image');
                // echo $this->session->userdata('position');
                // exit;
-
                $id=$_GET['isl'];
                $this->db->select('*');
                $this->db->from('tbl_subcategory');
                $this->db->where('category_id', $id);
                $this->db->where('is_active', 1);
-
                $dat= $this->db->get();
-
                $i=1;
                foreach ($dat->result() as $data) {
                    $igt[] = array('sub_id' =>$data->id ,'sub_name'=>$data->subcategory);
                }
-
-
                echo json_encode($igt);
            }
            public function getMinorcategory()
            {
-
                                   // $data['user_name']=$this->load->get_var('user_name');
-
                // echo SITE_NAME;
                // echo $this->session->userdata('image');
                // echo $this->session->userdata('position');
                // exit;
-
                $id=$_GET['isl'];
                $this->db->select('*');
                $this->db->from('tbl_minorcategory');
@@ -593,60 +542,46 @@
                foreach ($dat->result() as $data) {
                    $igt1[] = array('min_id' =>$data->id ,'min_name'=>$data->minorcategoryname);
                }
-
-
                echo json_encode($igt1);
            }
-
            public function update_products($idd, $idd1)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $data['user_name']=$this->load->get_var('user_name');
-
                    // echo SITE_NAME;
                    // echo $this->session->userdata('image');
                    // echo $this->session->userdata('position');
                    // exit;
-
                    $id=base64_decode($idd);
                    $data['id']=$idd;
-
                    $id1=base64_decode($idd1);
                    $data['id1']=$idd1;
-
                    $this->db->select('*');
                    $this->db->from('tbl_products');
                    $this->db->where('id', $id);
                    $data['products_data']= $this->db->get()->row();
                    $products_data = $data['products_data'];
-
-
                    $this->db->select('*');
                    $this->db->from('tbl_category');
                    $this->db->where('is_active', 1);
                    $data['category_data']= $this->db->get();
-
                    $this->db->select('*');
                    $this->db->from('tbl_subcategory');
                    $this->db->where('category_id', $id1);
                    $this->db->where('is_active', 1);
                    $data['subcategory_data']= $this->db->get();
-
                    $this->db->select('*');
                    $this->db->from('tbl_minorcategory');
                    $this->db->where('is_active', 1);
                    $data['minorcategory_data']= $this->db->get();
-
                    $this->db->select('*');
                    $this->db->from('tbl_inventory');
                    $this->db->where('product_id', $id);
                    $data['inventory_data']= $this->db->get()->row();
-
                    $this->db->select('*');
                    $this->db->from('tbl_minorcategory');
                    $this->db->where('id', $products_data->minorcategory_id);
                    $minor_data = $this->db->get()->row();
-
                                      $brands=[];
                    $brands[] = array('id'=>'', 'name'=>'None Selected');
                    $brand_json = json_decode($minor_data->brand);
@@ -665,7 +600,6 @@
                    } else {
                        $data['brands_data'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    //resolution
                    $resolution=[];
                    $resolution[]=array('id'=>'', 'name'=>'None Selected');
@@ -699,7 +633,6 @@
                    } else {
                        $data['lens_data'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    // ir Distance
                    $irdistance = [];
                    $irdistance[]=array('id'=>'', 'name'=>'None Selected');
@@ -717,7 +650,6 @@
                         // $something[] = array('id'=>'', 'name'=>'Not Found');
                        $data['irdistance_data'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    //camera type
                    $camera_type = [];
                    $camera_type[]=array('id'=>'', 'name'=>'None Selected');
@@ -734,8 +666,6 @@
                    } else {
                        $data['camera_type'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
-
                    // body Material
                    $body_material = [];
                    $body_material[]=array('id'=>'', 'name'=>'None Selected');;
@@ -752,7 +682,6 @@
                    } else {
                        $data['body_material'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    // video Channel
                    $video_channel = [];
                    $video_channel[] = array('id'=>'', 'name'=>'None Selected');
@@ -769,7 +698,6 @@
                    } else {
                        $data['video_channel'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    // poe Ports
                    $pov_ports = [];
                    $pov_ports[]= array('id'=>'', 'name'=>'None Selected');
@@ -786,7 +714,6 @@
                    } else {
                        $data['pov_ports'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    // Poe Type
                    $pov_type = [];
                    $pov_type[] = array('id'=>'', 'name'=>'None Selected');
@@ -803,7 +730,6 @@
                    } else {
                        $data['pov_type'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    // SATA ports
                    $sata_ports = [];
                    $sata_ports[] = array('id'=>'', 'name'=>'None Selected');
@@ -820,8 +746,6 @@
                    } else {
                        $data['sata_ports'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
-
                    //Length
                    $length = [];
                    $length[] = array('id'=>'', 'name'=>'None Selected');
@@ -870,7 +794,6 @@
                    } else {
                        $data['led_type'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    //size
                    $size = [];
                    $size[] = array('id'=>'', 'name'=>'None Selected');;
@@ -887,7 +810,6 @@
                    } else {
                        $data['size_data'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    //night vision
                    $night_vision = [];
                    $night_vision[] = array('id'=>'', 'name'=>'None Selected');;
@@ -904,7 +826,6 @@
                    } else {
                        $data['night_vision'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
                    //audio type
                    $audio_type = [];
                    $audio_type[] = array('id'=>'', 'name'=>'None Selected');;
@@ -921,10 +842,6 @@
                    } else {
                        $data['audio_type'][] = array('id'=>'', 'name'=>'Not Found');
                    }
-
-
-
-
                    $this->load->view('admin/common/header_view', $data);
                    $this->load->view('admin/products/update_products');
                    $this->load->view('admin/common/footer_view');
@@ -932,7 +849,6 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
            public function add_products_data($t, $iw="")
            {
                if (!empty($this->session->userdata('admin_data'))) {
@@ -951,14 +867,12 @@
                        // $this->form_validation->set_rules('gst', 'gst', 'trim');
                        // $this->form_validation->set_rules('gstprice', 'gstprice', 'trim');
                        // $this->form_validation->set_rules('sp', 'sp', 'trim');
-
                        $this->form_validation->set_rules('productdescription', 'productdescription', 'required|trim');
                        $this->form_validation->set_rules('modelno', 'modelno', 'required|trim');
                        $this->form_validation->set_rules('Inventory', 'Inventory', 'required|trim|integer');
                        $this->form_validation->set_rules('weight', 'weight', 'required|trim');
                        $this->form_validation->set_rules('feature_product', 'feature_product', 'required|trim');
                        $this->form_validation->set_rules('popular_product', 'popular_product', 'required|trim');
-
                        //filter
                        $this->form_validation->set_rules('brands', 'brands', 'trim');
                        $this->form_validation->set_rules('resolution', 'resolution', 'trim');
@@ -977,10 +891,6 @@
                        $this->form_validation->set_rules('max', 'max', 'trim');
                        $this->form_validation->set_rules('nv_data', 'nv_data', 'trim');
                        $this->form_validation->set_rules('audiotype', 'audiotype', 'trim');
-
-
-
-
                        if ($this->form_validation->run()== true) {
                            $productname=$this->input->post('productname');
                            $category_id=$this->input->post('category_id');
@@ -991,14 +901,12 @@
                            // $gst=$this->input->post('gst');
                            // $gstprice=$this->input->post('gstprice');
                            // $sp=$this->input->post('sp');
-
                            $productdescription=$this->input->post('productdescription');
                            $modelno=$this->input->post('modelno');
                            $inventory=$this->input->post('Inventory');
                            $weight=$this->input->post('weight');
                            $feature_product=$this->input->post('feature_product');
                            $popular_product=$this->input->post('popular_product');
-
                            //filter
                            $brand=$this->input->post('brands');
                            $resolution=$this->input->post('resolution');
@@ -1017,34 +925,23 @@
                            $max=$this->input->post('max');
                            $nv_data=$this->input->post('nv_data');
                            $audiotype=$this->input->post('audiotype');
-
                            // echo $nv_data;
                            // echo $audiotype;die();
-
-
-
                            if ($feature_product == 'yes') {
                                $feature_product=1;
                            } else {
                                $feature_product=0;
                            }
-
                            if ($popular_product == 'yes') {
                                $popular_product=1;
                            } else {
                                $popular_product=0;
                            }
-
-
                            $nnnn2='';
                            $nnnn3='';
                            $nnnn4='';
                            $nnnn5='';
-
-
-
                            $img1='image';
-
                                        $file_check=($_FILES['image']['error']);
                                        if($file_check!=4){
                                      	$image_upload_folder = FCPATH . "assets/uploads/products/";
@@ -1070,21 +967,14 @@
                              						}
                              						else
                              						{
-
                              							$file_info = $this->upload->data();
-
                              							$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
                              							$nnnn2=$videoNAmePath;
                              							// echo json_encode($file_info);
                              						}
                                        }
-
-
-
                            //-------------
-
                            $img3='image1';
-
                            $file_check=($_FILES['image1']['error']);
                            if($file_check!=4){
                          	$image_upload_folder = FCPATH . "assets/uploads/products/";
@@ -1110,18 +1000,13 @@
                  						}
                  						else
                  						{
-
                  							$file_info = $this->upload->data();
-
                  							$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
                  							$nnnn3=$videoNAmePath;
                  							// echo json_encode($file_info);
                  						}
                            }
-
-
                           $img4='video1';
-
                           $file_check=($_FILES['video1']['error']);
                           if($file_check!=4){
                         	$image_upload_folder = FCPATH . "assets/uploads/products/";
@@ -1147,18 +1032,13 @@
                 						}
                 						else
                 						{
-
                 							$file_info = $this->upload->data();
-
                 							$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
                 							$nnnn4=$videoNAmePath;
                 							// echo json_encode($file_info);
                 						}
                           }
-
-
                            $img5='video2';
-
                            $file_check=($_FILES['video2']['error']);
                            if($file_check!=4){
                          	$image_upload_folder = FCPATH . "assets/uploads/products/";
@@ -1184,26 +1064,18 @@
                  						}
                  						else
                  						{
-
                  							$file_info = $this->upload->data();
-
                  							$videoNAmePath = "assets/uploads/products/".$new_file_name.$file_info['file_ext'];
                  							$nnnn5=$videoNAmePath;
                  							// echo json_encode($file_info);
                  						}
                            }
-
-
                            $typ=base64_decode($t);
                            // $last_id = 0;
-
-
-
                            $ip = $this->input->ip_address();
                            date_default_timezone_set("Asia/Calcutta");
                            $cur_date=date("Y-m-d H:i:s");
                            $addedby=$this->session->userdata('admin_id');
-
                            if ($typ==1) {
                                $data_insert = array(
                   'productname'=>$productname,
@@ -1219,11 +1091,9 @@
   // 'gstrate'=>$gst,
   // 'gstprice'=>$gstprice,
   // 'sellingpricegst'=>$sp,
-
   'productdescription'=>$productdescription,
   'modelno'=>$modelno,
   'weight'=>$weight,
-
   'feature_product'=>$feature_product,
   'popular_product'=>$popular_product,
   'brand'=>$brand,
@@ -1243,39 +1113,27 @@
   'max'=>$max,
   'night_vision'=>$nv_data,
   'audio_type'=>$audiotype,
-
-
-
                      'ip' =>$ip,
                      'added_by' =>$addedby,
                      'is_active' =>1,
                      'date'=>$cur_date
                      );
-
-
                                $last_id=$this->base_model->insert_table("tbl_products", $data_insert, 1) ;
                                $last_id3=$last_id;
-
                                $inventory_data = array(
             'product_id'=> $last_id,
             'quantity'=>$inventory,
             'ip'=>$ip,
             'date'=>$addedby,
             'added_by'=>$cur_date
-
           );
                                $last_id2=$this->base_model->insert_table("tbl_inventory", $inventory_data, 1) ;
                                $this->db->select('*');
                                $this->db->from('tbl_products');
                                $this->db->where('id', $last_id3);
                                $get_products= $this->db->get()->row();
-
                                $c_id= $get_products->category_id;
                                $id1=base64_encode($c_id);
-
-
-
-
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Products inserted successfully');
                                    redirect("dcadmin/Products/view_products/$id1", "refresh");
@@ -1286,45 +1144,31 @@
                            }
                            if ($typ==2) {
                                $idw=base64_decode($iw);
-
-
                                $this->db->select('*');
                                $this->db->from('tbl_products');
                                $this->db->where('id', $idw);
                                $dsa=$this->db->get();
                                $da=$dsa->row();
-
                                if (!empty($nnnn2)) {
                                    $n1=$nnnn2;
                                } else {
                                    $n1=$da->image;
                                }
-
-
                                if (!empty($nnnn3)) {
                                    $n2=$nnnn3;
                                } else {
                                    $n2=$da->image1;
                                }
-
-
                                if (!empty($nnnn4)) {
                                    $n3=$nnnn4;
                                } else {
                                    $n3=$da->video1;
                                }
-
                                if (!empty($nnnn5)) {
                                    $n4=$nnnn5;
                                } else {
                                    $n4=$da->video2;
                                }
-
-
-
-
-
-
                                $data_insert = array(
        'productname'=>$productname,
        'category_id'=>$category_id,
@@ -1340,12 +1184,11 @@
 // 'gstprice'=>$gstprice,
 // 'sellingpricegst'=>$sp,
 'productdescription'=>$productdescription,
-'weight'=>$modelno,
+'modelno'=>$modelno,
 // 'inventory'=>$inventory,
 'weight'=>$weight,
 'feature_product'=>$feature_product,
 'popular_product'=>$popular_product,
-
 'brand'=>$brand,
 'resolution'=>$resolution,
 'irdistance'=>$irdistance,
@@ -1363,10 +1206,7 @@
 'max'=>$max,
 'night_vision'=>$nv_data,
 'audio_type'=>$audiotype,
-
-
                      );
-
                                $this->db->where('id', $idw);
                                $last_id=$this->db->update('tbl_products', $data_insert);
                                $last_id3=$idw;
@@ -1376,7 +1216,6 @@
                // 'ip'=>$ip,
                // 'date'=>$addedby,
                // 'added_by'=>$cur_date
-
              );
                                $this->db->where('product_id', $idw);
                                $last_id2=$this->db->update("tbl_inventory", $inventory_data) ;
@@ -1384,13 +1223,8 @@
                                $this->db->from('tbl_products');
                                $this->db->where('id', $last_id3);
                                $get_products= $this->db->get()->row();
-
                                $c_id= $get_products->category_id;
                                $id1=base64_encode($c_id);
-
-
-
-
                                if ($last_id!=0) {
                                    $this->session->set_flashdata('smessage', 'Products updated successfully');
                                    redirect("dcadmin/Products/view_products/$id1", "refresh");
@@ -1411,27 +1245,21 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
            public function updateproductsStatus($idd, $t)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $data['user_name']=$this->load->get_var('user_name');
-
                    // echo SITE_NAME;
                    // echo $this->session->userdata('image');
                    // echo $this->session->userdata('position');
                    // exit;
                    $id=base64_decode($idd);
-
                    if ($t=="active") {
                        $data_update = array(
                         'is_active'=>1
-
                         );
-
                        $this->db->where('id', $id);
                        $zapak=$this->db->update('tbl_products', $data_update);
-
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Product status updated successfully');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -1443,14 +1271,11 @@
                    if ($t=="inactive") {
                        $data_update = array(
                          'is_active'=>0
-
                          );
-
                        $this->db->where('id', $id);
                        $zapak=$this->db->update('tbl_products', $data_update);
                        $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
                        $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
-
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Product status updated successfully');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -1463,20 +1288,15 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
-
-
            public function delete_products($idd)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $data['user_name']=$this->load->get_var('user_name');
-
                    // echo SITE_NAME;
                    // echo $this->session->userdata('image');
                    // echo $this->session->userdata('position');
                    // exit;
                    $id=base64_decode($idd);
-
                    if ($this->load->get_var('position')=="Super Admin") {
                        $this->db->select('*');
                        $this->db->from('tbl_products');
@@ -1484,7 +1304,6 @@
                        $dsa= $this->db->get();
                        $da=$dsa->row();
                        // $img=$da->image;
-
                        $zapak=$this->db->delete('tbl_products', array('id' => $id));
                        $zapak=$this->db->delete('tbl_cart', array('product_id' => $id));
                        $zapak=$this->db->delete('tbl_wishlist', array('product_id' => $id));
@@ -1505,23 +1324,17 @@
                    redirect("login/admin_login", "refresh");
                }
            }
-
            public function remove_video($idd, $t)
            {
                if (!empty($this->session->userdata('admin_data'))) {
                    $data['user_name']=$this->load->get_var('user_name');
-
                    $id=base64_decode($idd);
-
                    if ($t=="video1") {
                        $data_update = array(
          'video1'=>""
-
          );
-
                        $this->db->where('id', $id);
                        $zapak=$this->db->update('tbl_products', $data_update);
-
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Successfully Removed');
                            redirect($_SERVER['HTTP_REFERER']);
@@ -1534,10 +1347,8 @@
                        $data_update = array(
           'video2'=>""
           );
-
                        $this->db->where('id', $id);
                        $zapak=$this->db->update('tbl_products', $data_update);
-
                        if ($zapak!=0) {
                            $this->session->set_flashdata('smessage', 'Successfully Removed');
                            redirect($_SERVER['HTTP_REFERER']);
