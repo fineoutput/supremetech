@@ -1915,7 +1915,7 @@ class Apicontroller extends CI_Controller
         $phone = $headers['Phone'];
         $authentication = $headers['Authentication'];
         $token_id = $headers['Tokenid'];
-        if (!empty($phone) && !empty($authentication) && !empty($token_id)) {
+        if (!empty($phone) && !empty($authentication)) {
             $ip = $this->input->ip_address();
             date_default_timezone_set("Asia/Calcutta");
             $cur_date = date("Y-m-d H:i:s");
