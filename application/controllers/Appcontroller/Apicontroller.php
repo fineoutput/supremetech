@@ -1344,6 +1344,8 @@ class Apicontroller extends CI_Controller
                 $res = array(
                     'message' => "success2",
                     'status' => 200,
+                    'phone' => $phone,
+                    'password' => $password,
                     'data' => 0,
                     'wishlist_count' => 0
                 );
