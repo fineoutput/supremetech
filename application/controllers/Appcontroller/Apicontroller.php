@@ -1336,6 +1336,8 @@ class Apicontroller extends CI_Controller
                 $res = array(
                     'message' => "success",
                     'status' => 200,
+                    'data' => $counting,
+                    'wishlist_count' => $wishcount
                 );
                 echo json_encode($res);
             } else {
