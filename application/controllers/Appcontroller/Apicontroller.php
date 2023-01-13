@@ -4860,7 +4860,7 @@ class Apicontroller extends CI_Controller
         $phone = $headers['Phone'];
         $authentication = $headers['Authentication'];
         $token_id = $headers['Tokenid'];
-        if (!empty($phone) && !empty($authentication) && !empty($token_id)) {
+        if (!empty($phone) && !empty($authentication)) {
             $this->form_validation->set_rules('product_id', 'product_id', 'required|xss_clean|trim');
             if ($this->form_validation->run() == true) {
                 // $phone=$this->input->post('phone');
