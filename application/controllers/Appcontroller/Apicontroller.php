@@ -3926,10 +3926,6 @@ class Apicontroller extends CI_Controller
         $this->load->library('form_validation');
         $this->load->helper('security');
         if ($this->input->post()) {
-            $headers = apache_request_headers();
-            $phone = $headers['Phone'];
-            $authentication = $headers['Authentication'];
-            $token_id = $headers['Tokenid'];
             $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
             $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
             $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
