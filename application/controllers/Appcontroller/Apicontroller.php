@@ -2561,7 +2561,7 @@ class Apicontroller extends CI_Controller
             $phone = $headers['Phone'];
             $authentication = $headers['Authentication'];
             $token_id = $headers['Tokenid'];
-            if (!empty($phone) && !empty($authentication) && !empty($token_id)) {
+            if (!empty($phone) && !empty($authentication) ) {
                 // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
