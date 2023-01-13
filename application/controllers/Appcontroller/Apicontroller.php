@@ -1334,7 +1334,7 @@ class Apicontroller extends CI_Controller
                 $this->db->where('user_id', $user_id);
                 $wishcount = $this->db->count_all_results();
                 $res = array(
-                    'message' => "success",
+                    'message' => "success1",
                     'status' => 200,
                     'data' => $counting,
                     'wishlist_count' => $wishcount
@@ -1342,7 +1342,7 @@ class Apicontroller extends CI_Controller
                 echo json_encode($res);
             } else {
                 $res = array(
-                    'message' => "success",
+                    'message' => "success2",
                     'status' => 200,
                     'data' => 0,
                     'wishlist_count' => 0
@@ -1351,7 +1351,7 @@ class Apicontroller extends CI_Controller
             }
         } else {
             $res = array(
-                'message' => "success",
+                'message' => "success3",
                 'status' => 200,
                 'data' => 0,
                 'wishlist_count' => 0
