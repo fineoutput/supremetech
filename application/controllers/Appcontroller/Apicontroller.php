@@ -1203,7 +1203,7 @@ class Apicontroller extends CI_Controller
                             if ($inventory_data->quantity >= $quantity) {
                             } else {
                                 $res = array(
-                                    'message' => " Product is out of stock",
+                                    'message' => " Product is out of stock!",
                                     'status' => 201
                                 );
                                 echo json_encode($res);
@@ -4887,20 +4887,20 @@ class Apicontroller extends CI_Controller
                             $last_id = $this->base_model->insert_table("tbl_wishlist", $data_insert, 1);
                             if (!empty($last_id)) {
                                 $res = array(
-                                    'message' => 'Product succesfully addded in your wishist',
+                                    'message' => 'Product successfully addded in your wishist!',
                                     'status' => 200
                                 );
                                 echo json_encode($res);
                             } else {
                                 $res = array(
-                                    'message' => 'some error occurred',
+                                    'message' => 'Some error occurred',
                                     'status' => 201
                                 );
                                 echo json_encode($res);
                             }
                         } else {
                             $res = array(
-                                'message' => 'Product is already in your wishist',
+                                'message' => 'Product is already in your wishist!',
                                 'status' => 201
                             );
                             echo json_encode($res);
@@ -4963,13 +4963,13 @@ class Apicontroller extends CI_Controller
                         $zapak = $this->db->delete('tbl_wishlist', array('user_id' => $user_data->id, 'product_id' => $product_id));
                         if (!empty($zapak)) {
                             $res = array(
-                                'message' => 'Product succesfully removed from your wishlist',
+                                'message' => 'Product successfully removed from your wishlist!',
                                 'status' => 200
                             );
                             echo json_encode($res);
                         } else {
                             $res = array(
-                                'message' => 'some error occurred',
+                                'message' => 'Some error occurred',
                                 'status' => 201
                             );
                             echo json_encode($res);

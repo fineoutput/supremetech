@@ -12,12 +12,10 @@
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Seller</h3>
           </div>
-
           <? if(!empty($this->session->flashdata('smessage'))){ ?>
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,21 +30,17 @@
             <? echo $this->session->flashdata('emessage'); ?>
           </div>
           <? } ?>
-
-
           <div class="panel-body">
             <div class="col-lg-10">
               <form action="<?php echo base_url() ?>dcadmin/Vendors/add_vendors_data/<? echo base64_encode(2); ?>/<?= $id ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
-
                     <tr>
                       <td> <strong>Full Name</strong> <span style="color:red;">*</span></strong> </td>
                       <td>
                         <input type="text" name="name" class="form-control" placeholder="" required value="<?= $vendors->name; ?>" />
                       </td>
                     </tr>
-
                     <tr>
                       <td> <strong>Company Name</strong> <span style="color:red;">*</span></strong> </td>
                       <td>
@@ -89,7 +83,6 @@
                   <input type="text" name="zipcode" class="form-control" placeholder="" value="<?= $vendors->zipcode; ?>" />
                 </td>
               </tr>
-
               <tr>
                 <td> <strong>Contact Number</strong> <span style="color:red;">*</span></strong> </td>
                 <td>
@@ -99,7 +92,7 @@
               <tr>
                 <td> <strong>GST IN</strong> <span style="color:red;">*</span></strong> </td>
                 <td>
-                  <input type="number" name="gstin" class="form-control" placeholder="" required value="<?= $vendors->gstin; ?>" />
+                  <input type="text" name="gstin" class="form-control" placeholder="" required value="<?= $vendors->gstin; ?>" />
                 </td>
               </tr>
               <tr>
@@ -113,20 +106,12 @@
                       <?php } ?>
                     </td>
                   </tr>
-
-
-
                     <tr>
                       <td> <strong>Registration date</strong> <span style="color:red;">*</span></strong> </td>
                       <td>
                         <input type="text" name="date" class="form-control" placeholder="" value="<?= $vendors->date; ?>" />
                       </td>
                     </tr>
-
-
-
-
-
                     <tr>
                       <td colspan="2">
                         <input type="submit" class="btn btn-success" value="save">
@@ -134,22 +119,13 @@
                     </tr>
                   </table>
                 </div>
-
               </form>
-
             </div>
-
-
-
           </div>
-
         </div>
-
       </div>
     </div>
   </section>
 </div>
-
-
 <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href="<? echo base_url() ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
