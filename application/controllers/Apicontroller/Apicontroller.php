@@ -4304,6 +4304,204 @@ $res = array('message'=>'No data available',
 echo json_encode($res);
 }
 }
+public function filter_products()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        if ($this->input->post()) {
+
+            $this->form_validation->set_rules('brand_id', 'brand_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('resolution_id', 'resolution_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('irdistance_id', 'irdistance_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('cameratype_id', 'cameratype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('bodymaterial_id', 'bodymaterial_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('videochannel_id', 'videochannel_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('poeports_id', 'poeports_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('poetype_id', 'poetype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('sataports_id', 'sataports_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('length_id', 'length_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('screensize_id', 'screensize_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('ledtype_id', 'ledtype_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('size_id', 'size_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('lens_id', 'lens_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
+            $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+
+
+
+            if ($this->form_validation->run() == true) {
+                $minorcategory_id = $this->input->post('minorcategory_id');
+                $brand_id = $this->input->post('brand_id');
+                $resolution_id = $this->input->post('resolution_id');
+                $irdistance_id = $this->input->post('irdistance_id');
+                $cameratype_id = $this->input->post('cameratype_id');
+                $bodymaterial_id = $this->input->post('bodymaterial_id');
+                $videochannel_id = $this->input->post('videochannel_id');
+                $poeports_id = $this->input->post('poeports_id');
+                $poetype_id = $this->input->post('poetype_id');
+                $sataports_id = $this->input->post('sataports_id');
+                $length_id = $this->input->post('length_id');
+                $screensize_id = $this->input->post('screensize_id');
+                $ledtype_id = $this->input->post('ledtype_id');
+                $size_id = $this->input->post('size_id');
+                $lens_id = $this->input->post('lens_id');
+                $night_vision_id = $this->input->post('night_vision_id');
+                $audio_type_id = $this->input->post('audio_type_id');
+
+
+
+                $brand_info = explode(',', $brand_id);
+                $resolution_info = explode(',', $resolution_id);
+                $irdistance_info = explode(',', $irdistance_id);
+                $cameratype_info = explode(',', $cameratype_id);
+                $bodymaterial_info = explode(',', $bodymaterial_id);
+                $videochannel_info = explode(',', $videochannel_id);
+                $poeports_info = explode(',', $poeports_id);
+                $poetype_info = explode(',', $poetype_id);
+                $sataports_info = explode(',', $sataports_id);
+                $length_info = explode(',', $length_id);
+                $screensize_info = explode(',', $screensize_id);
+                $ledtype_info = explode(',', $ledtype_id);
+                $size_info = explode(',', $size_id);
+                $lens_info = explode(',', $lens_id);
+                $night_vision_info = explode(',', $night_vision_id);
+                $audio_type_info = explode(',', $audio_type_id);
+
+                $this->db->select('*');
+                $this->db->from('tbl_products');
+                
+                $this->db->where('is_active', 1);
+                $this->db->where('minorcategory_id', $minorcategory_id);
+                $this->db->group_start();
+                foreach ($videochannel_info as $f4) {
+                    if (!empty($brand_info[0])) {
+                        foreach ($brand_info as $f1) {
+                        $this->db->where('brand', $f1, NULL, FALSE);
+
+                    }
+                }
+                if (!empty($resolution_info[0])) {
+                    foreach ($resolution_info as $f2) {
+                        $this->db->where('resolution', $f2, NULL, FALSE);
+
+                    }
+                }
+                // if (!empty($irdistance_info[0])) {
+                //     foreach ($irdistance_info as $f3) {
+                //         $this->db->or_where('irdistance', $f3, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($cameratype_info[0])) {
+                //     foreach ($cameratype_info as $f33) {
+                //         $this->db->or_where('cameratype', $f33, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($bodymaterial_info[0])) {
+                //     foreach ($bodymaterial_info as $f44) {
+                //         $this->db->or_where('bodymaterial', $f44, NULL, FALSE);
+                //     }
+                // }
+                if (!empty($videochannel_info[0])) {
+                        $this->db->where('videochannel', $f4, NULL, FALSE);
+
+                    }
+                }
+
+                // if (!empty($poeports_info[0])) {
+                //     foreach ($poeports_info as $f5) {
+                //         $this->db->or_where('poeports', $f5, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($poetype_info[0])) {
+                //     foreach ($poetype_info as $f6) {
+                //         $this->db->or_where('poetype', $f6, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($sataports_info[0])) {
+                //     foreach ($sataports_info as $f7) {
+                //         $this->db->or_where('sataports', $f7, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($length_info[0])) {
+                //     foreach ($length_info as $f8) {
+                //         $this->db->or_where('length', $f8, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($screensize_info[0])) {
+                //     foreach ($screensize as $f9) {
+                //         $this->db->or_where('screensize', $f9, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($ledtype_info[0])) {
+                //     foreach ($ledtype_info as $f10) {
+                //         $this->db->or_where('ledtype', $f10, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($size_info[0])) {
+                //     foreach ($size_info as $f11) {
+                //         $this->db->or_where('size', $f11, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($lens_info[0])) {
+                //     foreach ($lens_info as $f12) {
+                //         $this->db->or_where('lens', $f12, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($night_vision_info[0])) {
+                //     foreach ($night_vision_info as $f13) {
+                //         $this->db->or_where('night_vision', $f13, NULL, FALSE);
+                //     }
+                // }
+                // if (!empty($audio_type_info[0])) {
+                //     foreach ($audio_type_info as $f14) {
+                //         $this->db->or_where('audio_type', $f14, NULL, FALSE);
+                //     }
+                // }
+                $this->db->group_end();
+
+                $filter_data = $this->db->get();
+                $filter_check = $filter_data->row();
+                $final_filter = [];
+                foreach ($filter_data->result() as $filter) {
+                    print_r($filter);
+                }
+
+die();
+                // echo $count;die();
+
+
+                header('Access-Control-Allow-Origin: *');
+
+                $res = array(
+                    'message' => 'success',
+                    'status' => 200,
+                    'data' => $content
+                );
+
+                echo json_encode($res);
+            } else {
+                header('Access-Control-Allow-Origin: *');
+
+                $res = array(
+                    'message' => validation_errors(),
+                    'status' => 201
+                );
+
+                echo json_encode($res);
+            }
+        } else {
+            header('Access-Control-Allow-Origin: *');
+
+            $res = array(
+                'message' => 'No data available',
+                'status' => 201
+            );
+
+            echo json_encode($res);
+        }
+    }
 //------------filter-----
 public function filter_new()
 {
