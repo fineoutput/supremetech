@@ -47,7 +47,8 @@ class Users extends CI_Controller
             if ($OTP == null) {
               $sms_text = urlencode('Welcome to Supreme Technocom, your account has been activated. You can start shopping with us. ENJOY OUR EXPERTISE SERVICES!');
             } else {
-              $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is' . " " . $OTP);
+              // $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is' . " " . $OTP);
+              $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks');
             }
             //Submit to server
             $curl = curl_init();
