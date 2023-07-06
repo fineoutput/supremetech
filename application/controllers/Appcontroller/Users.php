@@ -662,10 +662,11 @@ class Users extends CI_Controller
   public function check($phone){
     $OTP = random_int(100000, 999999);
     $contacts = $phone;
-    $sms_text = 'Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks';
+    $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks');
+    // echo  'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=+91' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '';die();
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=91' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
+      CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=+91' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
