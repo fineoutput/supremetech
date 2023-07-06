@@ -43,7 +43,7 @@ class Users extends CI_Controller
               $OTP = 123456;
             }
             $contacts = $phone;
-            $sms_text = 'Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks';
+            $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks');
             $curl = curl_init();
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
@@ -352,7 +352,7 @@ class Users extends CI_Controller
             $OTP = random_int(100000, 999999);
             // $OTP = 123456;
             $contacts = $phone;
-            $sms_text = 'Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks';
+            $sms_text = urlencode('Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks');
             $curl = curl_init();
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
