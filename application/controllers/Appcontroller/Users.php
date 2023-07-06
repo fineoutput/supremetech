@@ -665,7 +665,7 @@ class Users extends CI_Controller
     $sms_text = 'Welcome to Supreme Technocom. your OTP is ' . $OTP . '. Thanks';
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
+      CURLOPT_URL => 'https://alerts.prioritysms.com/api/web2sms.php?workingkey=A3dd249c096dabadfca43a97952624aed&to=91' . $contacts . '&sender=SUPTEC&message=' . $sms_text . '',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
