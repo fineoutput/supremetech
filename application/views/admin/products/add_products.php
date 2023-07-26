@@ -3,17 +3,14 @@
     <h1>
       Add New Products
     </h1>
-
   </section>
   <section class="content">
     <div class="row">
       <div class="col-lg-12">
-
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Products</h3>
           </div>
-
           <? if(!empty($this->session->flashdata('smessage'))){  ?>
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -28,50 +25,38 @@
             <? echo $this->session->flashdata('emessage');  ?>
           </div>
           <? }  ?>
-
-
           <div class="panel-body">
             <div class="col-lg-10">
               <form action=" <?php echo base_url()  ?>dcadmin/Products/add_products_data/<? echo base64_encode(1);  ?>" method="POST" id="slide_frm" enctype="multipart/form-data">
                 <div class="table-responsive">
                   <table class="table table-hover">
-
-
                     <tr>
                       <td> <strong>Product Name</strong> <span style="color:red;">*</span> </td>
                       <td> <input type="text" name="productname" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
-
                     <input type="hidden" name="category_id" value="<?=base64_decode($id)?>">
-
                     <!-- <tr>
 <td> <strong>Category </strong>  <span style="color:red;">*</span> </td>
 <td>
     <select class="form-control" id="cid" name="category_id">
       <option value="">Please select category</option>
-
       <?
-
        foreach($category_data->result() as $value) {?>
          <option value="<?=$value->id;?>"><?=$value->category;?></option>
        <? }?>
     </select>
   </td>
 </tr> -->
-
                     <tr>
                       <td> <strong>Subcategory </strong> <span style="color:red;">*</span> </td>
                       <td>
                         <select class="form-control" id="sid" name="subcategory_id" required>
                           <option value="">Please select subcategory</option>
                           <?
-
        foreach($subcategory_data->result() as $value) {?>
                           <option value="<?=$value->id;?>"><?=$value->subcategory;?></option>
                           <? }?>
                         </select>
-
-
                       </td>
                     </tr>
                     <tr>
@@ -82,7 +67,6 @@
                         </select>
                       </td>
                     </tr>
-
                     <tr>
                       <td> <strong>Image</strong> <span style="color:red;">*<br />1447X799</span> </td>
                       <td> <input type="file" name="image" required class="form-control" placeholder="" value="" /> </td>
@@ -105,8 +89,26 @@
                     </tr> -->
                     <!-- <tr> -->
                     <tr>
-                      <td> <strong>Price</strong> <span style="color:red;">*</span> </td>
+                      <td> <strong>T3 Price</strong> <span style="color:red;">*</span> </td>
                       <td> <input type="number" required name="sellingprice" class="form-control" id="sellingprice" placeholder="" value="" /> </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>T3 Max Limit</strong> <span style="color:red;">*</span> </td>
+                      <td>
+                        <input type="text" name="max" class="form-control" value="" required>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>T2 Price</strong> <span style="color:red;">*</span> </td>
+                      <td> <input type="number" required name="t2_price" class="form-control" id="t2_price" placeholder="" value="" /> </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>T2 Min Limit</strong> <span style="color:red;">*</span> </td>
+                      <td> <input type="number" required name="t2_min" class="form-control" id="t2_min" placeholder="" value="" /> </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>T2 Max Limit</strong> <span style="color:red;">*</span> </td>
+                      <td> <input type="number" required name="t2_max" class="form-control" id="t2_max" placeholder="" value="" /> </td>
                     </tr>
                     <!-- <tr>
 <td> <strong>Gst %</strong>  <span style="color:red;"></span> </td>
@@ -152,10 +154,6 @@
                         </select>
                       </td>
                     </tr>
-
-
-
-
                     <tr>
                       <td> <strong>Brand</strong> <span style="color:red;"></span> </td>
                       <td> <select class="form-control" id="brand" name="brands"> />
@@ -265,16 +263,7 @@
                           <option>Select Minorcategory first</option>
                       </td>
                     </tr>
-                    <tr>
-                      <td> <strong>Max Limit</strong> <span style="color:red;">*</span> </td>
-                      <td>
-                        <input type="text" name="max" class="form-control" value="" required>
-                      </td>
-                    </tr>
-
-
-
-
+                    
                     <tr>
                       <td colspan="2">
                         <input type="submit" class="btn btn-success" value="save">
@@ -282,39 +271,26 @@
                     </tr>
                   </table>
                 </div>
-
               </form>
-
             </div>
-
-
-
           </div>
-
         </div>
-
       </div>
     </div>
   </section>
 </div>
-
 <script type="text/javascript">
   function valide_weight(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode != 46 && charCode > 31 &&
       (charCode < 48 || charCode > 57))
       return false;
-
     return true;
-
   }
 </script>
-
-
 <script type="text/javascript" src=" <?php echo base_url()  ?>assets/slider/ajaxupload.3.5.js"></script>
 <link href=" <? echo base_url()  ?>assets/cowadmin/css/jqvmap.css" rel='stylesheet' type='text/css' />
 <script src="<?php echo base_url() ?>assets/admin/plugins/ckeditor/ckeditor.js"></script>
-
 <script>
   $(document).ready(function() {
     $("#sid").change(function() {
@@ -322,7 +298,6 @@
       // var yr = $("#year_id option:selected").val();
       if (vf == "") {
         return false;
-
       } else {
         $('#mid option').remove();
         var opton = "<option value=''>Please Select </option>";
@@ -339,7 +314,6 @@
               });
               $('#mid').append(opton);
               //$('#city').append("<option value=''>Please Select State</option>");
-
               //var json = $.parseJSON(html);
               //var ayy = json[0].name;
               //var ayys = json[0].pincode;
@@ -347,46 +321,34 @@
               alert('No Minor category Found');
               return false;
             }
-
           }
-
         })
       }
-
-
     })
   });
 </script>
 <script>
   // Replace the <textarea id="editor1"> with a CKEditor
-
   // instance, using default configuration.
-
   CKEDITOR.replace('editor1');
   // CKEDITOR.replace( 'editor2' );
   // CKEDITOR.replace( 'editor3' );
   //
 </script>
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('#gst').keyup(function() {
-
       var price = $('#sellingprice').val();
       // alert("hello" + price);
       var gst = $('#gst').val();
       //alert('hello '+ price +"gst"+gst);
-
       $('#gstprice').val(price * gst / 100);
-
       // var sprice=$('#gstprice').val();
       var v1 = parseInt($('#sellingprice').val());
       var v2 = parseInt($('#gstprice').val());
       var v3 = v1 + v2;
       $('#sp').val(v3);
-
     });
-
   });
 </script>
 <script>
@@ -410,7 +372,6 @@
     $("#nightvision").html("");
     $("#audiotype").html("");
     var selectedminor = $("#mid").val();
-
     var base_url = "<?=base_url()?>";
     // alert(base_url);
     $.ajax({
@@ -423,7 +384,6 @@
       success: function(response) {
         // alert(response);
         if (response.data == true) {
-
           var brands = response.brands;
           var resolution = response.resolution;
           var lens = response.lens;
@@ -616,16 +576,10 @@
               // die();
             });
           }
-
-
-
-
         } else {
           alert('hiii');
         }
       }
     });
-
-
   });
 </script>

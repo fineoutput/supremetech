@@ -1,6 +1,5 @@
 <?php
-
-if (! defined('BASEPATH')) {
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 require_once(APPPATH . 'core/CI_finecontrol.php');
@@ -13,27 +12,20 @@ class Vendors extends CI_finecontrol
         $this->load->model("admin/base_model");
         $this->load->library('user_agent');
     }
-
-
     public function view_vendors()
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-
             $this->db->select('*');
             $this->db->from('tbl_users');
             $this->db->order_by('id', 'desc');
             $this->db->where('is_active', 1);
-            $data['vendors_data']= $this->db->get();
-
+            $data['vendors_data'] = $this->db->get();
             $data['heading'] = "Accepted";
-
-
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/view_vendors');
             $this->load->view('admin/common/footer_view');
@@ -41,26 +33,20 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-
     public function view_pending_vendors()
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-
             $this->db->select('*');
             $this->db->from('tbl_users');
             $this->db->order_by('id', 'desc');
             $this->db->where('is_active', 0);
-            $data['vendors_data']= $this->db->get();
-
+            $data['vendors_data'] = $this->db->get();
             $data['heading'] = "Pending";
-
-
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/view_vendors');
             $this->load->view('admin/common/footer_view');
@@ -68,18 +54,14 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-
     public function add_vendors()
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-
-
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/add_vendors');
             $this->load->view('admin/common/footer_view');
@@ -87,8 +69,7 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-
-    public function add_vendors_data($t, $iw="")
+    public function add_vendors_data($t, $iw = "")
     {
         if (!empty($this->session->userdata('admin_data'))) {
             $this->load->helper(array('form', 'url'));
@@ -105,130 +86,110 @@ class Vendors extends CI_finecontrol
                 $this->form_validation->set_rules('gstin', 'gstin', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
-
-                if ($this->form_validation->run()== true) {
-                    $name=$this->input->post('name');
+                if ($this->form_validation->run() == true) {
+                    $name = $this->input->post('name');
                     // $lastname=$this->input->post('lastname');
                     // $dateofbirth=$this->input->post('dateofbirth');
-                    $email=$this->input->post('email');
+                    $email = $this->input->post('email');
                     // $password=$this->input->post('password');
-                    $gstin=$this->input->post('gstin');
-                    $address=$this->input->post('address');
-                    $city=$this->input->post('city');
-
+                    $gstin = $this->input->post('gstin');
+                    $address = $this->input->post('address');
+                    $city = $this->input->post('city');
                     $ip = $this->input->ip_address();
                     date_default_timezone_set("Asia/Calcutta");
-                    $cur_date=date("Y-m-d H:i:s");
-                    $addedby=$this->session->userdata('admin_id');
-
+                    $cur_date = date("Y-m-d H:i:s");
+                    $addedby = $this->session->userdata('admin_id');
                     $this->load->library('upload');
-                    $img1='image1';
+                    $img1 = 'image1';
                     $nnnn = '';
-                    $file_check=($_FILES['image1']['error']);
-                    if ($file_check!=4) {
+                    $file_check = ($_FILES['image1']['error']);
+                    if ($file_check != 4) {
                         $image_upload_folder = FCPATH . "assets/uploads/vendor/";
                         if (!file_exists($image_upload_folder)) {
                             mkdir($image_upload_folder, DIR_WRITE_MODE, true);
                         }
-                        $new_file_name="vendor".date("Ymdhms");
+                        $new_file_name = "vendor" . date("Ymdhms");
                         $this->upload_config = array(
-                      'upload_path'   => $image_upload_folder,
-                      'file_name' => $new_file_name,
-                      'allowed_types' =>'jpg|jpeg|png',
-                      'max_size'      => 25000
-                      );
+                            'upload_path'   => $image_upload_folder,
+                            'file_name' => $new_file_name,
+                            'allowed_types' => 'jpg|jpeg|png',
+                            'max_size'      => 25000
+                        );
                         $this->upload->initialize($this->upload_config);
                         if (!$this->upload->do_upload($img1)) {
                             $upload_error = $this->upload->display_errors();
-
                             $this->session->set_flashdata('emessage', $upload_error);
                             redirect($_SERVER['HTTP_REFERER']);
                         } else {
                             $file_info = $this->upload->data();
-                            $videoNAmePath = "assets/uploads/vendor/".$new_file_name.$file_info['file_ext'];
-                            $nnnn=$videoNAmePath;
+                            $videoNAmePath = "assets/uploads/vendor/" . $new_file_name . $file_info['file_ext'];
+                            $nnnn = $videoNAmePath;
                         }
                     }
-
-                    $typ=base64_decode($t);
-                    if ($typ==1) {
-                        $data_insert = array('name'=>$name,
-                    // 'lastname'=>$lastname,
-                    // 'dateofbirth'=>$dateofbirth,
-                    'email'=>$email,
-                    'password'=>$password,
-                    'gstin'=>$gstin,
-                    'address'=>$address,
-                    'city'=>$city,
-                      'image1'=>$nnnn,
-                    'ip' =>$ip,
-                    'added_by' =>$addedby,
-                    'is_active' =>1,
-                    'date'=>$cur_date
-
-                    );
-
-
-
-
-
-                        $last_id=$this->base_model->insert_table("tbl_users", $data_insert, 1) ;
-												if ($last_id!=0) {
-		                        $this->session->set_flashdata('smessage', 'Vendor inserted successfully');
-
-		                        redirect("dcadmin/Vendors/view_vendors", "refresh");
-		                    } else {
-		                        $this->session->set_flashdata('emessage', 'Sorry error occured');
-		                        redirect($_SERVER['HTTP_REFERER']);
-		                    }
+                    $typ = base64_decode($t);
+                    if ($typ == 1) {
+                        $data_insert = array(
+                            'name' => $name,
+                            // 'lastname'=>$lastname,
+                            // 'dateofbirth'=>$dateofbirth,
+                            'email' => $email,
+                            'password' => $password,
+                            'gstin' => $gstin,
+                            'address' => $address,
+                            'city' => $city,
+                            'image1' => $nnnn,
+                            'ip' => $ip,
+                            'added_by' => $addedby,
+                            'is_active' => 1,
+                            'date' => $cur_date
+                        );
+                        $last_id = $this->base_model->insert_table("tbl_users", $data_insert, 1);
+                        if ($last_id != 0) {
+                            $this->session->set_flashdata('smessage', 'Vendor inserted successfully');
+                            redirect("dcadmin/Vendors/view_vendors", "refresh");
+                        } else {
+                            $this->session->set_flashdata('emessage', 'Sorry error occured');
+                            redirect($_SERVER['HTTP_REFERER']);
+                        }
                     }
-                    if ($typ==2) {
-                        $idw=base64_decode($iw);
-
+                    if ($typ == 2) {
+                        $idw = base64_decode($iw);
                         // $this->db->select('*');
-//     $this->db->from('tbl_minor_category');
-//    $this->db->where('name',$name);
-//     $damm= $this->db->get();
-//    foreach($damm->result() as $da) {
-//      $uid=$da->id;
+                        //     $this->db->from('tbl_minor_category');
+                        //    $this->db->where('name',$name);
+                        //     $damm= $this->db->get();
+                        //    foreach($damm->result() as $da) {
+                        //      $uid=$da->id;
                         // if($uid==$idw)
                         // {
-//
+                        //
                         //  }
                         // else{
-//    echo "Multiple Entry of Same Name";
-//       exit;
+                        //    echo "Multiple Entry of Same Name";
+                        //       exit;
                         //  }
-//     }
-
-                        $data_insert = array('name'=>$name,
-                    // 'lastname'=>$lastname,
-                    // 'dateofbirth'=>$dateofbirth,
-                    'email'=>$email,
-                    // 'password'=>$password,
-                    'gstin'=>$gstin,
-                    'address'=>$address,
-                    'image1'=>$nnnn,
-                    'city'=>$city,
-                    );
-
-
-
-
+                        //     }
+                        $data_insert = array(
+                            'name' => $name,
+                            // 'lastname'=>$lastname,
+                            // 'dateofbirth'=>$dateofbirth,
+                            'email' => $email,
+                            // 'password'=>$password,
+                            'gstin' => $gstin,
+                            'address' => $address,
+                            'image1' => $nnnn,
+                            'city' => $city,
+                        );
                         $this->db->where('id', $idw);
-                        $last_id=$this->db->update('tbl_users', $data_insert);
-												if ($last_id!=0) {
-		                        $this->session->set_flashdata('smessage', 'Vendor updated successfully');
-
-		                        redirect("dcadmin/Vendors/view_vendors", "refresh");
-		                    } else {
-		                        $this->session->set_flashdata('emessage', 'Sorry error occured');
-		                        redirect($_SERVER['HTTP_REFERER']);
-		                    }
+                        $last_id = $this->db->update('tbl_users', $data_insert);
+                        if ($last_id != 0) {
+                            $this->session->set_flashdata('smessage', 'Vendor updated successfully');
+                            redirect("dcadmin/Vendors/view_vendors", "refresh");
+                        } else {
+                            $this->session->set_flashdata('emessage', 'Sorry error occured');
+                            redirect($_SERVER['HTTP_REFERER']);
+                        }
                     }
-
-
-
                 } else {
                     $this->session->set_flashdata('emessage', validation_errors());
                     redirect($_SERVER['HTTP_REFERER']);
@@ -241,29 +202,21 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-
-
     public function update_vendors($idd)
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-
-            $id=base64_decode($idd);
-
-            $data['id']=$idd;
-
+            $id = base64_decode($idd);
+            $data['id'] = $idd;
             $this->db->select('*');
             $this->db->from('tbl_users');
             $this->db->where('id', $id);
-            $dsa= $this->db->get();
-            $data['vendors']=$dsa->row();
-
-
+            $dsa = $this->db->get();
+            $data['vendors'] = $dsa->row();
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/update_vendors');
             $this->load->view('admin/common/footer_view');
@@ -271,149 +224,164 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-
     public function delete_vendors($idd)
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-            $id=base64_decode($idd);
-// echo $id;die();
-            if ($this->load->get_var('position')=="Super Admin") {
-                $zapak=$this->db->delete('tbl_users', array('id' => $id));
-                if ($zapak!=0) {
-									$this->session->set_flashdata('smessage', 'Vendor deleted successfully');
-                	redirect($_SERVER['HTTP_REFERER']);
+            $id = base64_decode($idd);
+            // echo $id;die();
+            if ($this->load->get_var('position') == "Super Admin") {
+                $zapak = $this->db->delete('tbl_users', array('id' => $id));
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('smessage', 'Vendor deleted successfully');
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     echo "Error";
                     exit;
                 }
             } else {
-							$this->session->set_flashdata('emessage', 'Sorry You Dont Have Permission To Delete Anything');
-					redirect($_SERVER['HTTP_REFERER']);
+                $this->session->set_flashdata('emessage', 'Sorry You Dont Have Permission To Delete Anything');
+                redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
             $this->load->view('admin/login/index');
         }
     }
-
     public function updatevendorsStatus($idd, $t)
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-            $id=base64_decode($idd);
-
-            if ($t=="active") {
+            $id = base64_decode($idd);
+            if ($t == "active") {
                 $data_update = array(
-         'is_active'=>1
-
-         );
-
+                    'is_active' => 1
+                );
                 $this->db->where('id', $id);
-                $zapak=$this->db->update('tbl_users', $data_update);
-
-                if ($zapak!=0) {
-									$this->session->set_flashdata('smessage', 'Vendor status updated successfully');
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('smessage', 'Vendor status updated successfully');
                     redirect("dcadmin/Vendors/view_pending_vendors", "refresh");
                 } else {
-									$this->session->set_flashdata('emessage', 'Some error occured');
-						redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
-            if ($t=="inactive") {
+            if ($t == "inactive") {
                 $data_update = array(
-          'is_active'=>0
-
-          );
-
+                    'is_active' => 0
+                );
                 $this->db->where('id', $id);
-                $zapak=$this->db->update('tbl_users', $data_update);
-
-                if ($zapak!=0) {
-									$this->session->set_flashdata('smessage', 'Vendor status updated successfully');
-
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('smessage', 'Vendor status updated successfully');
                     redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
-									$this->session->set_flashdata('emessage', 'Some error occured');
-						redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
         } else {
             $this->load->view('admin/login/index');
         }
     }
-
-    public function updateVendorRequestStatus($idd, $stat)
+    public function updateVendorsType($idd, $t)
     {
         if (!empty($this->session->userdata('admin_data'))) {
-            $data['user_name']=$this->load->get_var('user_name');
-
+            $data['user_name'] = $this->load->get_var('user_name');
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-            $id=base64_decode($idd);
-
-            if ($stat=="approved") {
+            $id = base64_decode($idd);
+            if ($t == "T2") {
                 $data_update = array(
-         'status'=>1
-
-         );
-
+                    'type' => 'T2'
+                );
                 $this->db->where('id', $id);
-                $zapak=$this->db->update('tbl_users', $data_update);
-
-                if ($zapak!=0) {
-									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
-                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('smessage', 'Vendor status updated successfully');
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
-									$this->session->set_flashdata('emessage', 'Some error occured');
-					redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
-            if ($stat=="pending") {
+            if ($t == "T3") {
                 $data_update = array(
-          'status'=>2
-
-          );
-
+                    'type' => 'T3'
+                );
                 $this->db->where('id', $id);
-                $zapak=$this->db->update('tbl_users', $data_update);
-
-                if ($zapak!=0) {
-									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
-
-                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('smessage', 'Vendor status updated successfully');
+                    redirect($_SERVER['HTTP_REFERER']);
                 } else {
-									$this->session->set_flashdata('emessage', 'Some error occured');
-					redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
-            if ($stat=="reject") {
+        } else {
+            $this->load->view('admin/login/index');
+        }
+    }
+    public function updateVendorRequestStatus($idd, $stat)
+    {
+        if (!empty($this->session->userdata('admin_data'))) {
+            $data['user_name'] = $this->load->get_var('user_name');
+            // echo SITE_NAME;
+            // echo $this->session->userdata('image');
+            // echo $this->session->userdata('position');
+            // exit;
+            $id = base64_decode($idd);
+            if ($stat == "approved") {
                 $data_update = array(
-          'status'=>3
-
-          );
-
+                    'status' => 1
+                );
                 $this->db->where('id', $id);
-                $zapak=$this->db->update('tbl_vendors', $data_update);
-
-                if ($zapak!=0) {
-									$this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
-
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
                     redirect("dcadmin/Vendors/view_vendors", "refresh");
                 } else {
-									$this->session->set_flashdata('emessage', 'Some error occured');
-					redirect($_SERVER['HTTP_REFERER']);
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            }
+            if ($stat == "pending") {
+                $data_update = array(
+                    'status' => 2
+                );
+                $this->db->where('id', $id);
+                $zapak = $this->db->update('tbl_users', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                } else {
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            }
+            if ($stat == "reject") {
+                $data_update = array(
+                    'status' => 3
+                );
+                $this->db->where('id', $id);
+                $zapak = $this->db->update('tbl_vendors', $data_update);
+                if ($zapak != 0) {
+                    $this->session->set_flashdata('emessage', 'Vendor status updated sucessfully');
+                    redirect("dcadmin/Vendors/view_vendors", "refresh");
+                } else {
+                    $this->session->set_flashdata('emessage', 'Some error occured');
+                    redirect($_SERVER['HTTP_REFERER']);
                 }
             }
         } else {
