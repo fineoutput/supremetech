@@ -160,7 +160,8 @@ class Users extends CI_Controller
                     'status' => 200,
                     'name' => $user_data->name,
                     'phone' => $user_data->phone,
-                    'authentication' => $user_data->authentication
+                    'authentication' => $user_data->authentication,
+                    'type' => $user_data->type,
                   );
                   echo json_encode($res);
                 } else {
