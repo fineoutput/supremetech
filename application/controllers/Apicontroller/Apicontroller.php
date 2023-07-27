@@ -2023,8 +2023,13 @@ $this->db->where('is_active', 1);
 $product_data= $this->db->get()->row();
 
 if (!empty($product_data)) {
+ if($user_data->type=='T3'){   
 $total = $product_data->sellingprice * $data->quantity;
 $sub_total = $sub_total + $total;
+ }else{
+    $total = $product_data->t2_price * $data->quantity;
+    $sub_total = $sub_total + $total;  
+ }
 $weight = $product_data->weight * $data->quantity;
 $total_weight = $total_weight + $weight;
 } else {
@@ -2043,6 +2048,7 @@ $order1_insert = array('user_id'=>$user_data->id,
 'payment_status'=>0,
 'order_status'=>0,
 'payment_status'=>0,
+'type'=>$user_data->type,
 'txnid'=>$txn_id,
 'ip' =>$ip,
 'date'=>$cur_date
@@ -2074,7 +2080,12 @@ $product_data1= $this->db->get()->row();
 
 if (!empty($product_data1)) {
 if ($inventory_data1->quantity >= $data1->quantity) {
+    if($user_data->type=='T3'){   
     $total2 = $product_data1->sellingprice * $data1->quantity ;
+    }else{
+    $total2 = $product_data1->t2_price * $data1->quantity ;
+
+    }
     $order2_insert = array('main_id'=>$last_id,
 'product_id'=>$data1->product_id,
 'quantity'=>$data1->quantity,
