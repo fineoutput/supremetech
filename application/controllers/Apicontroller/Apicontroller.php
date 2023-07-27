@@ -1129,9 +1129,9 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'price'=>$product_data->sellingprice,
 'total='=>$total = $product_data->sellingprice * $data->quantity,
 'max'=>$product_data->max,
-'t2_price' => $data->t2_price,
-'t2_min' => $data->t2_min,
-'t2_max' => $data->t2_max,
+'t2_price' => $product_data->t2_price,
+'t2_min' => $product_data->t2_min,
+'t2_max' => $product_data->t2_max,
 
 );
 $sub_total= $sub_total + $total;
@@ -1201,7 +1201,12 @@ $cart_info[] = array('product_id'=>$data->product_id,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
 'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity
+'total='=>$total = $product_data->sellingprice * $data->quantity,
+'max'=>$product_data->max,
+'t2_price' => $product_data->t2_price,
+'t2_min' => $product_data->t2_min,
+'t2_max' => $product_data->t2_max,
+
 
 );
 $sub_total= $sub_total + $total;
