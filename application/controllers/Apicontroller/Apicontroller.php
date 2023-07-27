@@ -649,7 +649,7 @@ $this->db->where('product_id', $product_id);
 $check_inventory= $this->db->get();
 $check_inventory_id=$check_inventory->row();
 
-if ($check_inventory_id->quantity > $quantity) {
+if ($check_inventory_id->quantity >= $quantity) {
 } else {
 header('Access-Control-Allow-Origin: *');
 // $res = array('message'=> "$check_product_id->productname Product is out of stock",
