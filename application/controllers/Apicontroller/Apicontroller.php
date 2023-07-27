@@ -649,7 +649,7 @@ $this->db->where('product_id', $product_id);
 $check_inventory= $this->db->get();
 $check_inventory_id=$check_inventory->row();
 
-if ($check_inventory_id->quantity >= $quantity) {
+if ($check_inventory_id->quantity > $quantity) {
 } else {
 header('Access-Control-Allow-Origin: *');
 // $res = array('message'=> "$check_product_id->productname Product is out of stock",
@@ -660,16 +660,41 @@ $res = array('message'=> "Product is out of stock",
 echo json_encode($res);
 exit;
 }
-if ($check_product_id->max >= $quantity) {
-} else {
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=> "Maximum purchase limit exceeded",
-'status'=>201
-);
+if($check_id->type=="T3"){
+    if ($check_product_id->max > $quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=> "Maximum purchase limit exceeded",
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
+}else{
+    if ($check_product_id->t2_min < $quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=> "Minimum purchase quantity is ".$check_product_id->t2_min,
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
+    if ($check_product_id->t2_max > $quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=> "Maximum purchase limit exceeded",
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
 
-echo json_encode($res);
-exit;
 }
+
 
 
 
