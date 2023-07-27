@@ -3099,16 +3099,40 @@ $res = array('message'=>$product_data->productname.'is out of stock! Please remo
 echo json_encode($res);
 exit;
 }
-if ($product_data->max >= $data->quantity) {
-} else {
-header('Access-Control-Allow-Origin: *');
-$res = array('message'=>'Maximum purchase limit is '.$product_data->max,
-'status'=>201
-);
-
-echo json_encode($res);
-exit;
+if($user_data->type=="T3"){
+    if ($product_data->max >= $data->quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
+}else{
+    if ($product_data->t2_min <= $data->quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
+    if ($product_data->t2_max >= $data->quantity) {
+    } else {
+    header('Access-Control-Allow-Origin: *');
+    $res = array('message'=>'Maximum purchase limit is '.$product_data->max,
+    'status'=>201
+    );
+    
+    echo json_encode($res);
+    exit;
+    }
 }
+
 }//end of foreach
 }//end of order2
 $total = $order1_data->total_amount;
