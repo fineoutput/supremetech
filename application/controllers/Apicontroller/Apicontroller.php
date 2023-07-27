@@ -1146,13 +1146,18 @@ $product_data=$dsa->row();
 
 
 
-
+if($user_data->type=="T3"){
+    $total = $product_data->sellingprice * $data->quantity;
+}else{
+    $total = $product_data->t2_price * $data->quantity;
+    
+}
 $cart_info[] = array('product_id'=>$data->product_id,
 'product_name'=>$product_data->productname,
 'product_image'=>base_url().$product_data->image,
 'quantity'=>$data->quantity,
 'price'=>$product_data->sellingprice,
-'total='=>$total = $product_data->sellingprice * $data->quantity,
+'total='=>$total,
 'max'=>$product_data->max,
 't2_price' => $product_data->t2_price,
 't2_min' => $product_data->t2_min,
