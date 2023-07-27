@@ -661,7 +661,7 @@ echo json_encode($res);
 exit;
 }
 if($check_id->type=="T3"){
-    if ($check_product_id->max > $quantity) {
+    if ($check_product_id->max >= $quantity) {
     } else {
     header('Access-Control-Allow-Origin: *');
     $res = array('message'=> "Maximum purchase limit exceeded",
@@ -672,7 +672,7 @@ if($check_id->type=="T3"){
     exit;
     }
 }else{
-    if ($check_product_id->t2_min < $quantity) {
+    if ($check_product_id->t2_min <= $quantity) {
     } else {
     header('Access-Control-Allow-Origin: *');
     $res = array('message'=> "Minimum purchase quantity is ".$check_product_id->t2_min,
