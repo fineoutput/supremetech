@@ -5130,8 +5130,22 @@ class Apicontroller extends CI_Controller
         }
     }
     //-----------filter_data-------------------
-    public function view_filter($id)
-    {
+    public function view_filter($id,$phone = '',$authentication='')
+    {$T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_minorcategory');
         $this->db->where('id', $id);
@@ -5160,6 +5174,10 @@ class Apicontroller extends CI_Controller
         }
         //brands
         $this->db->from('tbl_brands');
+        $this->db->where('is_active',1);
+        if($T2==1){
+            $this->db->where('for_t2',1);
+        }
         $brands = $this->db->get();
         $brands_data = [];
         $brand = json_decode($minorcategory_data->brand);
