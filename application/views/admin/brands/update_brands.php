@@ -51,6 +51,16 @@
                       <td> <input type="file" name="image" class="form-control" placeholder="" />
                         <?php if($brands_data->image!=""){ ?> <img id="slide_img_path" height=200 width=300 src="<?php echo base_url().$brands_data->image; ?> "> <?php }else{ ?> Sorry No File Found <?php } ?> </td>
                     </tr>
+                     <tr>
+                      <td> <strong>For T2</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> 
+                      <select class="form-control" id="for_t2" name="for_t2" required>
+                      <option value="">-----Select---</option>
+                          <option value="Yes" <?  if($brands_data->for_t2=='Yes') { echo 'selected';} ?>>Yes</option>
+                          <option value="No" <?  if($brands_data->for_t2=='No') { echo 'selected';} ?>>No</option>
+                      </select>
+                      </td>
+                    </tr>
 
 
                     <tr>

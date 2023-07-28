@@ -50,6 +50,16 @@
                       <td> <strong>Image</strong> <span style="color:red;">*<br />400X200px</span></strong> </td>
                       <td> <input type="file" name="image" class="form-control" placeholder="" required value="" /> </td>
                     </tr>
+                    <tr>
+                      <td> <strong>For T2</strong> <span style="color:red;">*</span></strong> </td>
+                      <td> 
+                        <select class="form-control" id="for_t2" name="for_t2" required>
+                          <option value="">-----Select---</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </select>
+                      </td>
+                    </tr>
 
 
                     <tr>

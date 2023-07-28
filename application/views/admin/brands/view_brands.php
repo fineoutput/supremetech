@@ -44,6 +44,7 @@
                       <th>Name</th>
                       <th>Message</th>
                       <th>Image</th>
+                      <th>For T2</th>
 
 
                       <th>Status</th>
@@ -66,6 +67,7 @@
                         Sorry No File Found
                         <?php } ?>
                       </td>
+                      <td><?php echo $data->for_t2 ?></td>
 
 
 

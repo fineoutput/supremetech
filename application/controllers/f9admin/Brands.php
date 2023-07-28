@@ -87,6 +87,7 @@
                        // exit;
                        $this->form_validation->set_rules('name', 'name', 'required');
                        $this->form_validation->set_rules('message', 'message', 'required');
+                       $this->form_validation->set_rules('for_t2', 'for t2', 'required');
 
 
 
@@ -95,6 +96,7 @@
                        if ($this->form_validation->run()== true) {
                            $name=$this->input->post('name');
                            $message=$this->input->post('message');
+                           $for_t2=$this->input->post('for_t2');
 
                            $ip = $this->input->ip_address();
                            date_default_timezone_set("Asia/Calcutta");
@@ -149,6 +151,7 @@
                   'name'=>$name,
   'message'=>$message,
   'image'=>$nnnn2,
+  'for_t2'=>$for_t2,
 
                      'ip' =>$ip,
                      'added_by' =>$addedby,
@@ -233,6 +236,7 @@
                   'name'=>$name,
   'message'=>$message,
   'image'=>$nnnn2,
+  'for_t2'=>$for_t2,
 
                      );
                                $this->db->where('id', $idw);
