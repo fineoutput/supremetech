@@ -5112,7 +5112,7 @@ class Apicontroller extends CI_Controller
                 foreach ($temp_array as $object) {
                     $show = 1;
                     if (!empty($object['brand']) && $T2 == 1) {
-                        $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
+                        $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $object['brand']))->result();
                         if (empty($check)) {
                             $show = 0;
                         }
