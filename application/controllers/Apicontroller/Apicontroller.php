@@ -176,7 +176,7 @@ class Apicontroller extends CI_Controller
                 $product = [];
                 foreach ($product_data->result() as $data) {
                     $show = 1;
-                    if (!empty($data->brand) && $T2 == 1) {
+                    if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
                         $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                         if (empty($check)) {
                             $show = 0;
@@ -335,7 +335,7 @@ class Apicontroller extends CI_Controller
     }
     //---------------------
     // ========= Get Product Details =========================
-    public function get_productdetails($id,$phone = "", $authentication = '')
+    public function get_productdetails($id, $phone = "", $authentication = '')
     {
         $T2 = 0;
         if (!empty($phone)) {
@@ -358,7 +358,7 @@ class Apicontroller extends CI_Controller
         $this->db->where('is_active', 1);
         $productsdata = $this->db->get()->row();
         $show = 1;
-        if (!empty($productsdata->brand) && $T2 == 1) {
+        if (!empty($productsdata->brand) && $T2 == 1 && $productsdata->brand !=0) {
             $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $productsdata->brand))->result();
             if (empty($check)) {
                 $show = 0;
@@ -1525,7 +1525,7 @@ class Apicontroller extends CI_Controller
         $products = [];
         foreach ($productslimitdata->result() as $limit) {
             $show = 1;
-            if (!empty($limit->brand) && $T2 == 1) {
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand !=0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -1652,7 +1652,7 @@ class Apicontroller extends CI_Controller
         $products = [];
         foreach ($productslimitdata->result() as $limit) {
             $show = 1;
-            if (!empty($limit->brand) && $T2 == 1) {
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand !=0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -1785,7 +1785,7 @@ class Apicontroller extends CI_Controller
         echo json_encode($res);
     }
     //-------------------related product------------
-    public function related_products($id,$phone = "", $authentication = '')
+    public function related_products($id, $phone = "", $authentication = '')
     {
         $T2 = 0;
         if (!empty($phone)) {
@@ -1814,7 +1814,7 @@ class Apicontroller extends CI_Controller
         $related_info = [];
         foreach ($related_data->result() as $data) {
             $show = 1;
-            if (!empty($data->brand) && $T2 == 1) {
+            if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -2636,20 +2636,20 @@ class Apicontroller extends CI_Controller
                 $authentication = $this->input->post('authentication');
                 $string = $this->input->post('string');
                 $T2 = 0;
-        if (!empty($phone)) {
-            $this->db->select('*');
-            $this->db->from('tbl_users');
-            $this->db->where('phone', $phone);
-            $check_email = $this->db->get();
-            $check_id = $check_email->row();
-            if (!empty($check_id)) {
-                if ($check_id->authentication == $authentication) {
-                    if ($check_id->type == "T2") {
-                        $T2 = 1;
+                if (!empty($phone)) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_users');
+                    $this->db->where('phone', $phone);
+                    $check_email = $this->db->get();
+                    $check_id = $check_email->row();
+                    if (!empty($check_id)) {
+                        if ($check_id->authentication == $authentication) {
+                            if ($check_id->type == "T2") {
+                                $T2 = 1;
+                            }
+                        }
                     }
                 }
-            }
-        }
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->like('productname', $string);
@@ -2661,7 +2661,7 @@ class Apicontroller extends CI_Controller
                 foreach ($search_string->result() as $data) {
                     if ($data->is_active == 1) {
                         $show = 1;
-                        if (!empty($data->brand) && $T2 == 1) {
+                        if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
                             $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                             if (empty($check)) {
                                 $show = 0;
