@@ -2628,9 +2628,28 @@ class Apicontroller extends CI_Controller
         if ($this->input->post()) {
             // print_r($this->input->post());
             // exit;
+            $this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+            $this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
             $this->form_validation->set_rules('string', 'string', 'required|xss_clean|trim');
             if ($this->form_validation->run() == true) {
+                $phone = $this->input->post('phone');
+                $authentication = $this->input->post('authentication');
                 $string = $this->input->post('string');
+                $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->like('productname', $string);
@@ -2641,6 +2660,16 @@ class Apicontroller extends CI_Controller
                 $search_data = [];
                 foreach ($search_string->result() as $data) {
                     if ($data->is_active == 1) {
+                        $show = 1;
+                        if (!empty($data->brand) && $T2 == 1) {
+                            $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
+                            if (empty($check)) {
+                                $show = 0;
+                            }
+                        }
+                        if ($show == 0) {
+                            continue;
+                        }
                         $this->db->select('*');
                         $this->db->from('tbl_category');
                         $this->db->where('id', $data->category_id);
