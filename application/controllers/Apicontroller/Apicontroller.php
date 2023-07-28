@@ -335,13 +335,45 @@ class Apicontroller extends CI_Controller
     }
     //---------------------
     // ========= Get Product Details =========================
-    public function get_productdetails($id)
+    public function get_productdetails($id,$phone = "", $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('id', $id);
         $this->db->where('is_active', 1);
         $productsdata = $this->db->get()->row();
+        $show = 1;
+        if (!empty($productsdata->brand) && $T2 == 1) {
+            $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $productsdata->brand))->result();
+            if (empty($check)) {
+                $show = 0;
+            }
+        }
+        if ($show == 0) {
+            header('Access-Control-Allow-Origin: *');
+            $res = array(
+                'message' => "success",
+                'status' => 200,
+                'data' => []
+            );
+            echo json_encode($res);
+            die();
+        }
         if (!empty($productsdata)) {
             $this->db->select('*');
             $this->db->from('tbl_inventory');
@@ -1753,8 +1785,23 @@ class Apicontroller extends CI_Controller
         echo json_encode($res);
     }
     //-------------------related product------------
-    public function related_products($id)
+    public function related_products($id,$phone = "", $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('id', $id);
@@ -1766,6 +1813,16 @@ class Apicontroller extends CI_Controller
         $related_data = $this->db->get();
         $related_info = [];
         foreach ($related_data->result() as $data) {
+            $show = 1;
+            if (!empty($data->brand) && $T2 == 1) {
+                $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
+                if (empty($check)) {
+                    $show = 0;
+                }
+            }
+            if ($show == 0) {
+                continue;
+            }
             $this->db->select('*');
             $this->db->from('tbl_category');
             $this->db->where('id', $data->category_id);
