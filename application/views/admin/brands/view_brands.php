@@ -67,7 +67,13 @@
                         Sorry No File Found
                         <?php } ?>
                       </td>
-                      <td><?php echo $data->for_t2 ?></td>
+                      <td><?php $t2=$data->for_t2;
+                      if( $t2=='1'){
+                        echo 'Yes';
+                      }else{
+                        echo 'No';
+                      }
+                      ?></td>
 
 
 

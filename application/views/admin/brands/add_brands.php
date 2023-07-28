@@ -55,8 +55,8 @@
                       <td> 
                         <select class="form-control" id="for_t2" name="for_t2" required>
                           <option value="">-----Select---</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
                         </select>
                       </td>
                     </tr>

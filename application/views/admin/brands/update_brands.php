@@ -56,8 +56,8 @@
                       <td> 
                       <select class="form-control" id="for_t2" name="for_t2" required>
                       <option value="">-----Select---</option>
-                          <option value="Yes" <?  if($brands_data->for_t2=='Yes') { echo 'selected';} ?>>Yes</option>
-                          <option value="No" <?  if($brands_data->for_t2=='No') { echo 'selected';} ?>>No</option>
+                          <option value="1" <?  if($brands_data->for_t2=='1') { echo 'selected';} ?>>Yes</option>
+                          <option value="0" <?  if($brands_data->for_t2=='0') { echo 'selected';} ?>>No</option>
                       </select>
                       </td>
                     </tr>
