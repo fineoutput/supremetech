@@ -2048,7 +2048,7 @@ class Apicontroller extends CI_Controller
         $related_info = [];
         foreach ($related_data->result() as $data) {
             $show = 1;
-            if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+            if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -2912,7 +2912,7 @@ class Apicontroller extends CI_Controller
                 foreach ($search_string->result() as $data) {
                     if ($data->is_active == 1) {
                         $show = 1;
-                        if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+                        if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
                             $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                             if (empty($check)) {
                                 $show = 0;
@@ -5769,10 +5769,12 @@ class Apicontroller extends CI_Controller
         );
         echo json_encode($res);
     }
-    public function filter_content($mini_id, $b_name)
+    public function filter_content()
     {
-        // $mini_id = $this->uri->segment('3');
-        // $b_name = $this->uri->segment('4');
+        $mini_id = $this->uri->segment('4');
+        $b_name = $this->uri->segment('5');
+        $phone = $this->uri->segment('6');
+        $authentication = $this->uri->segment('7');
         $this->db->select('*');
         $this->db->from('tbl_minorcategory');
         $this->db->where('id', $mini_id);
@@ -5805,8 +5807,30 @@ class Apicontroller extends CI_Controller
         } else {
             $filter = json_decode($minorcategory_data->$b_name);
         }
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         if (!empty($filter)) {
             foreach ($filter_result->result() as $value) {
+                $show = 1;
+                if ($T2 == 1 && $value->for_t2 != 1) {
+                    $show = 0;
+                }
+                if ($show == 0) {
+                    continue;
+                }
                 $a = 0;
                 foreach ($filter as $data) {
                     if ($data == $value->id) {
