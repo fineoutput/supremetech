@@ -4189,7 +4189,11 @@ class Apicontroller extends CI_Controller
             $this->form_validation->set_rules('night_vision_id', 'night_vision_id', 'xss_clean|trim');
             $this->form_validation->set_rules('audio_type_id', 'audio_type_id', 'xss_clean|trim');
             $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
+            $this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+            $this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
             if ($this->form_validation->run() == true) {
+                $phone = $this->input->post('phone');
+                $authentication = $this->input->post('authentication');
                 $minorcategory_id = $this->input->post('minorcategory_id');
                 $brand_id = $this->input->post('brand_id');
                 $resolution_id = $this->input->post('resolution_id');
@@ -4224,6 +4228,21 @@ class Apicontroller extends CI_Controller
                 $night_vision_info = explode(',', $night_vision_id);
                 $audio_type_info = explode(',', $audio_type_id);
                 // die();
+                $T2 = 0;
+                if (!empty($phone)) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_users');
+                    $this->db->where('phone', $phone);
+                    $check_email = $this->db->get();
+                    $check_id = $check_email->row();
+                    if (!empty($check_id)) {
+                        if ($check_id->authentication == $authentication) {
+                            if ($check_id->type == "T2") {
+                                $T2 = 1;
+                            }
+                        }
+                    }
+                }
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->where('is_active', 1);
@@ -4256,6 +4275,9 @@ class Apicontroller extends CI_Controller
                                         'product_image' => $filterrr->image,
                                         'productdescription' => $filterrr->productdescription,
                                         'price' => $filterrr->sellingprice,
+                                        't2_price' => $filterrr->t2_price,
+                                        't2_min' => $filterrr->t2_min,
+                                        't2_max' => $filterrr->t2_max,
                                         'max' => $filterrr->max,
                                         'stock' => $stock,
                                         'brand' => $filterrr->brand,
@@ -4287,6 +4309,9 @@ class Apicontroller extends CI_Controller
                                 'productdescription' => $filterrr->productdescription,
                                 'price' => $filterrr->sellingprice,
                                 'max' => $filterrr->max,
+                                't2_price' => $filterrr->t2_price,
+                                't2_min' => $filterrr->t2_min,
+                                't2_max' => $filterrr->t2_max,
                                 'stock' => $stock,
                                 'brand' => $filterrr->brand,
                                 'resolution' => $filterrr->resolution,
@@ -4319,6 +4344,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4350,6 +4378,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4381,6 +4412,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4412,6 +4446,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4443,6 +4480,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4474,6 +4514,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4505,6 +4548,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4536,6 +4582,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4567,6 +4616,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4598,6 +4650,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4629,6 +4684,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4660,6 +4718,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4691,6 +4752,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4722,6 +4786,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4753,6 +4820,9 @@ class Apicontroller extends CI_Controller
                                     'product_image' => $filterrr['product_image'],
                                     'productdescription' => $filterrr['productdescription'],
                                     'price' => $filterrr['price'],
+                                    't2_price' => $filterrr['t2_price'],
+                                    't2_min' => $filterrr['t2_min'],
+                                    't2_max' => $filterrr['t2_max'],
                                     'max' => $filterrr['max'],
                                     'stock' => $stock,
                                     'brand' => $filterrr['brand'],
@@ -4795,6 +4865,16 @@ class Apicontroller extends CI_Controller
                 // print_r($temp_array);exit;
                 $content = [];
                 foreach ($temp_array as $object) {
+                    $show = 1;
+                    if (!empty($object['brand']) && $T2 == 1) {
+                        $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $object['brand']))->result();
+                        if (empty($check)) {
+                            $show = 0;
+                        }
+                    }
+                    if ($show == 0) {
+                        continue;
+                    }
                     $content[] = array(
                         'product_id' => $object['product_id'],
                         'product_name' => $object['product_name'],
@@ -4802,6 +4882,9 @@ class Apicontroller extends CI_Controller
                         'productdescription' => $object['productdescription'],
                         'max' => $object['max'],
                         'price' => $object['price'],
+                        't2_price' => $object['t2_price'],
+                        't2_min' => $object['t2_min'],
+                        't2_max' => $object['t2_max'],
                         'stock' => $object['stock']
                     );
                 }
