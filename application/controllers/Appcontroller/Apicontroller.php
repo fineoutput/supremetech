@@ -5294,7 +5294,10 @@ class Apicontroller extends CI_Controller
                                 'product_image' => base_url() . $product_data->image,
                                 'product_mrp' => $product_data->mrp,
                                 'product_selling_price' => $product_data->sellingprice,
-                                'stock' => $stock
+                                'stock' => $stock,
+                                't2_price' => $product_data->t2_price,
+                                't2_min' => $product_data->t2_min,
+                                't2_max' => $product_data->t2_max,
                             );
                         }
                     }
