@@ -639,7 +639,7 @@ class Apicontroller extends CI_Controller
                                             echo json_encode($res);
                                             exit;
                                         }
-                                        if ($check_product_id->t2_max > $quantity) {
+                                        if ($check_product_id->t2_max >= $quantity) {
                                         } else {
                                             header('Access-Control-Allow-Origin: *');
                                             $res = array(
