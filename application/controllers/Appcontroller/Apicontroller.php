@@ -5908,8 +5908,10 @@ class Apicontroller extends CI_Controller
         if (!empty($filter)) {
             foreach ($filter_result->result() as $value) {
                 $show = 1;
-                if ($T2 == 1 && $value->for_t2 != 1) {
-                    $show = 0;
+                if ($b_name == "brands") {
+                    if ($T2 == 1 && $value->for_t2 != 1) {
+                        $show = 0;
+                    }
                 }
                 if ($show == 0) {
                     continue;
