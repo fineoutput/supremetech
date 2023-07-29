@@ -166,7 +166,8 @@ class Users extends CI_Controller
                     'email' => $user_data->email,
                     'phone' => $user_data->phone,
                     'address' => $user_data->address,
-                    'company_name' => $user_data->company_name
+                    'company_name' => $user_data->company_name,
+                    'type' => $user_data->type,
                   );
                   echo json_encode($res);
                 } else {
