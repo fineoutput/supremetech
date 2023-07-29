@@ -107,11 +107,28 @@ class Apicontroller extends CI_Controller
             // exit;
             // $this->form_validation->set_rules('category_id', 'category_id', 'required|xss_clean|trim');
             // $this->form_validation->set_rules('subcategory_id', 'subcategory_id', 'required|xss_clean|trim');
+            $this->form_validation->set_rules('phone', 'phone', 'xss_clean|trim');
+            $this->form_validation->set_rules('authentication', 'authentication', 'xss_clean|trim');
             $this->form_validation->set_rules('minorcategory_id', 'minorcategory_id', 'required|xss_clean|trim');
             if ($this->form_validation->run() == true) {
-                // $category_id=$this->input->post('category_id');
-                // $subcategory_id=$this->input->post('subcategory_id');
+                $phone = $this->input->post('phone');
+                $authentication = $this->input->post('authentication');
                 $minorcategory_id = $this->input->post('minorcategory_id');
+                $T2 = 0;
+                if (!empty($phone)) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_users');
+                    $this->db->where('phone', $phone);
+                    $check_email = $this->db->get();
+                    $check_id = $check_email->row();
+                    if (!empty($check_id)) {
+                        if ($check_id->authentication == $authentication) {
+                            if ($check_id->type == "T2") {
+                                $T2 = 1;
+                            }
+                        }
+                    }
+                }
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 // $this->db->where('category_id',$category_id);
@@ -121,6 +138,16 @@ class Apicontroller extends CI_Controller
                 $product_data = $this->db->get();
                 $product = [];
                 foreach ($product_data->result() as $data) {
+                    $show = 1;
+                    if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
+                        $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
+                        if (empty($check)) {
+                            $show = 0;
+                        }
+                    }
+                    if ($show == 0) {
+                        continue;
+                    }
                     $this->db->select('*');
                     $this->db->from('tbl_category');
                     $this->db->where('id', $data->category_id);
@@ -158,6 +185,9 @@ class Apicontroller extends CI_Controller
                             'image' => base_url() . $data->image,
                             'wishlist' => $data->wishlist,
                             'max' => $data->max,
+                            't2_price' => $data->t2_price,
+                            't2_min' => $data->t2_min,
+                            't2_max' => $data->t2_max,
                             'stock' => $stock
                         );
                     }
@@ -308,13 +338,45 @@ class Apicontroller extends CI_Controller
     }
     //---------------------
     // ========= Get Product Details =========================
-    public function get_productdetails($id)
+    public function get_productdetails($id, $phone = "", $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('id', $id);
         $this->db->where('is_active', 1);
         $productsdata = $this->db->get()->row();
+        $show = 1;
+        if (!empty($productsdata->brand) && $T2 == 1 && $productsdata->brand != 0) {
+            $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $productsdata->brand))->result();
+            if (empty($check)) {
+                $show = 0;
+            }
+        }
+        if ($show == 0) {
+            header('Access-Control-Allow-Origin: *');
+            $res = array(
+                'message' => "success",
+                'status' => 200,
+                'data' => []
+            );
+            echo json_encode($res);
+            die();
+        }
         if (!empty($productsdata)) {
             if (!empty($productsdata->video1)) {
                 $video1 = base_url() . $productsdata->video1;
@@ -368,7 +430,10 @@ class Apicontroller extends CI_Controller
                 'productdescription' => $productsdata->productdescription,
                 'modelno' => $productsdata->modelno,
                 'stock' => $stock,
-                'max' => $productsdata->max
+                'max' => $productsdata->max,
+                't2_price' => $productsdata->t2_price,
+                't2_min' => $productsdata->t2_min,
+                't2_max' => $productsdata->t2_max,
             );
             $res = array(
                 'message' => "success",
@@ -645,15 +710,38 @@ class Apicontroller extends CI_Controller
                                         echo json_encode($res);
                                         exit;
                                     }
-                                    if ($check_product_id->max >= $quantity) {
+                                    if ($check_id->type == "T3") {
+                                        if ($check_product_id->max >= $quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Maximum purchase limit exceeded",
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
                                     } else {
-                                        header('Access-Control-Allow-Origin: *');
-                                        $res = array(
-                                            'message' => "Maximum purchase limit exceeded",
-                                            'status' => 201
-                                        );
-                                        echo json_encode($res);
-                                        exit;
+                                        if ($check_product_id->t2_min <= $quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Minimum purchase quantity is " . $check_product_id->t2_min,
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                        if ($check_product_id->t2_max > $quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Maximum purchase limit exceeded",
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
                                     }
                                     $data_insert = array(
                                         'product_id' => $product_id,
@@ -1041,14 +1129,22 @@ class Apicontroller extends CI_Controller
                             $this->db->where('id', $data->product_id);
                             $dsa = $this->db->get();
                             $product_data = $dsa->row();
+                            if ($user_data->type == "T3") {
+                                $total = $product_data->sellingprice * $data->quantity;
+                            } else {
+                                $total = $product_data->t2_price * $data->quantity;
+                            }
                             $cart_info[] = array(
                                 'product_id' => $data->product_id,
                                 'product_name' => $product_data->productname,
                                 'product_image' => base_url() . $product_data->image,
                                 'quantity' => $data->quantity,
                                 'price' => $product_data->sellingprice,
-                                'total=' => $total = $product_data->sellingprice * $data->quantity,
+                                'total=' => $total,
                                 'max' => $product_data->max,
+                                't2_price' => $product_data->t2_price,
+                                't2_min' => $product_data->t2_min,
+                                't2_max' => $product_data->t2_max,
                             );
                             $sub_total = $sub_total + $total;
                         }
@@ -1619,8 +1715,23 @@ class Apicontroller extends CI_Controller
         }
     }
     //-----------------most-popular product--------------
-    public function most_popular_products()
+    public function most_popular_products($phone = "", $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('popular_product', 1);
@@ -1630,6 +1741,16 @@ class Apicontroller extends CI_Controller
         $productslimitdata = $this->db->get();
         $products = [];
         foreach ($productslimitdata->result() as $limit) {
+            $show = 1;
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand != 0) {
+                $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
+                if (empty($check)) {
+                    $show = 0;
+                }
+            }
+            if ($show == 0) {
+                continue;
+            }
             $this->db->select('*');
             $this->db->from('tbl_category');
             $this->db->where('id', $limit->category_id);
@@ -1672,6 +1793,9 @@ class Apicontroller extends CI_Controller
                     'price' => $limit->sellingprice,
                     'productdescription' => $limit->productdescription,
                     'max' => $limit->max,
+                    't2_price' => $limit->t2_price,
+                    't2_min' => $limit->t2_min,
+                    't2_max' => $limit->t2_max,
                     'stock' => $stock
                     // 'colours'=> $limit->colours,
                     // 'inventory'=> $data->inventory
@@ -1756,8 +1880,23 @@ class Apicontroller extends CI_Controller
         echo json_encode($res);
     }
     //-----feature product--
-    public function feature_product()
+    public function feature_product($phone = "", $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('feature_product', 1);
@@ -1767,6 +1906,16 @@ class Apicontroller extends CI_Controller
         $data = $this->db->get();
         $feature = [];
         foreach ($data->result() as $limit) {
+            $show = 1;
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand != 0) {
+                $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
+                if (empty($check)) {
+                    $show = 0;
+                }
+            }
+            if ($show == 0) {
+                continue;
+            }
             $this->db->select('*');
             $this->db->from('tbl_category');
             $this->db->where('id', $limit->category_id);
@@ -1806,6 +1955,9 @@ class Apicontroller extends CI_Controller
                     'price' => $limit->sellingprice,
                     'productdescription' => $limit->productdescription,
                     'max' => $limit->max,
+                    't2_price' => $limit->t2_price,
+                    't2_min' => $limit->t2_min,
+                    't2_max' => $limit->t2_max,
                     'stock' => $stock
                 );
             }
@@ -1837,8 +1989,24 @@ class Apicontroller extends CI_Controller
         echo json_encode($res);
     }
     //-------------------related product------------
-    public function related_products($id)
+    public function related_products($id, $phone = "", $authentication = '')
     {
+        
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('id', $id);
@@ -1852,6 +2020,16 @@ class Apicontroller extends CI_Controller
         $related_data = $this->db->get();
         $related_info = [];
         foreach ($related_data->result() as $data) {
+            $show = 1;
+            if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+                $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
+                if (empty($check)) {
+                    $show = 0;
+                }
+            }
+            if ($show == 0) {
+                continue;
+            }
             $this->db->select('*');
             $this->db->from('tbl_category');
             $this->db->where('id', $data->category_id);
@@ -1890,6 +2068,9 @@ class Apicontroller extends CI_Controller
                         'mrp' => $data->mrp,
                         'price' => $data->sellingprice,
                         'max' => $data->max,
+                        't2_price' => $data->t2_price,
+                        't2_min' => $data->t2_min,
+                        't2_max' => $data->t2_max,
                         'stock' => $stock
                     );
                 }
@@ -1941,8 +2122,13 @@ class Apicontroller extends CI_Controller
                             $this->db->where('id', $data->product_id);
                             $product_data = $this->db->get()->row();
                             if (!empty($product_data)) {
-                                $total = $product_data->sellingprice * $data->quantity;
-                                $sub_total = $sub_total + $total;
+                                if ($user_data->type == 'T3') {
+                                    $total = $product_data->sellingprice * $data->quantity;
+                                    $sub_total = $sub_total + $total;
+                                } else {
+                                    $total = $product_data->t2_price * $data->quantity;
+                                    $sub_total = $sub_total + $total;
+                                }
                                 $weight = $product_data->weight * $data->quantity;
                                 $total_weight = $total_weight + $weight;
                             }
@@ -1955,6 +2141,7 @@ class Apicontroller extends CI_Controller
                             'payment_status' => 0,
                             'order_status' => 0,
                             'payment_status' => 0,
+                            'type' => $user_data->type,
                             'txnid' => $txn_id,
                             'ip' => $ip,
                             'date' => $cur_date
@@ -1980,7 +2167,11 @@ class Apicontroller extends CI_Controller
                                     $check_inventory_id = $check_inventory->row();
                                     if (!empty($check_inventory_id)) {
                                         if ($check_inventory_id->quantity >= $data1->quantity) {
-                                            $total2 = $product_data1->sellingprice * $data1->quantity;
+                                            if ($user_data->type == 'T3') {
+                                                $total2 = $product_data1->sellingprice * $data1->quantity;
+                                            } else {
+                                                $total2 = $product_data1->t2_price * $data1->quantity;
+                                            }
                                             $order2_insert = array(
                                                 'main_id' => $last_id,
                                                 'product_id' => $data1->product_id,
@@ -2561,7 +2752,7 @@ class Apicontroller extends CI_Controller
             $phone = $headers['Phone'];
             $authentication = $headers['Authentication'];
             $token_id = $headers['Tokenid'];
-            if (!empty($phone) && !empty($authentication) ) {
+            if (!empty($phone) && !empty($authentication)) {
                 // $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('authentication', 'authentication', 'required|xss_clean|trim');
                 // $this->form_validation->set_rules('token_id', 'token_id', 'required|xss_clean|trim');
@@ -2668,6 +2859,21 @@ class Apicontroller extends CI_Controller
             $this->form_validation->set_rules('string', 'string', 'required|xss_clean|trim');
             if ($this->form_validation->run() == true) {
                 $string = $this->input->post('string');
+                $T2 = 0;
+                if (!empty($phone)) {
+                    $this->db->select('*');
+                    $this->db->from('tbl_users');
+                    $this->db->where('phone', $phone);
+                    $check_email = $this->db->get();
+                    $check_id = $check_email->row();
+                    if (!empty($check_id)) {
+                        if ($check_id->authentication == $authentication) {
+                            if ($check_id->type == "T2") {
+                                $T2 = 1;
+                            }
+                        }
+                    }
+                }
                 $this->db->select('*');
                 $this->db->from('tbl_products');
                 $this->db->like('productname', $string);
@@ -2678,6 +2884,16 @@ class Apicontroller extends CI_Controller
                 $search_data = [];
                 foreach ($search_string->result() as $data) {
                     if ($data->is_active == 1) {
+                        $show = 1;
+                        if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+                            $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
+                            if (empty($check)) {
+                                $show = 0;
+                            }
+                        }
+                        if ($show == 0) {
+                            continue;
+                        }
                         $this->db->select('*');
                         $this->db->from('tbl_category');
                         $this->db->where('id', $data->category_id);
@@ -2714,6 +2930,9 @@ class Apicontroller extends CI_Controller
                                 'product_mrp' => $data->mrp,
                                 'product_selling_price' => $data->sellingprice,
                                 'max' => $data->max,
+                                't2_price' => $data->t2_price,
+                                't2_min' => $data->t2_min,
+                                't2_max' => $data->t2_max,
                                 'stock' => $stock
                             );
                         }
@@ -4740,14 +4959,38 @@ class Apicontroller extends CI_Controller
                                             echo json_encode($res);
                                             exit;
                                         }
-                                        if ($product_data->max >= $data->quantity) {
+                                        if ($user_data->type == "T3") {
+                                            if ($product_data->max >= $data->quantity) {
+                                            } else {
+                                                header('Access-Control-Allow-Origin: *');
+                                                $res = array(
+                                                    'message' => 'Maximum purchase limit is ' . $product_data->max,
+                                                    'status' => 201
+                                                );
+                                                echo json_encode($res);
+                                                exit;
+                                            }
                                         } else {
-                                            $res = array(
-                                                'message' => 'Maximum purchase limit exceeded',
-                                                'status' => 201
-                                            );
-                                            echo json_encode($res);
-                                            exit;
+                                            if ($product_data->t2_min <= $data->quantity) {
+                                            } else {
+                                                header('Access-Control-Allow-Origin: *');
+                                                $res = array(
+                                                    'message' => 'Maximum purchase limit is ' . $product_data->max,
+                                                    'status' => 201
+                                                );
+                                                echo json_encode($res);
+                                                exit;
+                                            }
+                                            if ($product_data->t2_max >= $data->quantity) {
+                                            } else {
+                                                header('Access-Control-Allow-Origin: *');
+                                                $res = array(
+                                                    'message' => 'Maximum purchase limit is ' . $product_data->max,
+                                                    'status' => 201
+                                                );
+                                                echo json_encode($res);
+                                                exit;
+                                            }
                                         }
                                     } //end of foreach
                                 } //end of order2
@@ -5107,8 +5350,23 @@ class Apicontroller extends CI_Controller
         //   }
     }
     //-----------filter_data-------------------
-    public function view_filter($id)
+    public function view_filter($id, $phone = '', $authentication = '')
     {
+        $T2 = 0;
+        if (!empty($phone)) {
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('phone', $phone);
+            $check_email = $this->db->get();
+            $check_id = $check_email->row();
+            if (!empty($check_id)) {
+                if ($check_id->authentication == $authentication) {
+                    if ($check_id->type == "T2") {
+                        $T2 = 1;
+                    }
+                }
+            }
+        }
         $this->db->select('*');
         $this->db->from('tbl_minorcategory');
         $this->db->where('id', $id);
@@ -5138,6 +5396,10 @@ class Apicontroller extends CI_Controller
         }
         //brands
         $this->db->from('tbl_brands');
+        $this->db->where('is_active', 1);
+        if ($T2 == 1) {
+            $this->db->where('for_t2', 1);
+        }
         $brands = $this->db->get();
         $brands_data = [];
         $brand = json_decode($minorcategory_data->brand);
