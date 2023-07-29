@@ -176,7 +176,7 @@ class Apicontroller extends CI_Controller
                 $product = [];
                 foreach ($product_data->result() as $data) {
                     $show = 1;
-                    if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+                    if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
                         $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                         if (empty($check)) {
                             $show = 0;
@@ -358,7 +358,7 @@ class Apicontroller extends CI_Controller
         $this->db->where('is_active', 1);
         $productsdata = $this->db->get()->row();
         $show = 1;
-        if (!empty($productsdata->brand) && $T2 == 1 && $productsdata->brand !=0) {
+        if (!empty($productsdata->brand) && $T2 == 1 && $productsdata->brand != 0) {
             $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $productsdata->brand))->result();
             if (empty($check)) {
                 $show = 0;
@@ -1525,7 +1525,7 @@ class Apicontroller extends CI_Controller
         $products = [];
         foreach ($productslimitdata->result() as $limit) {
             $show = 1;
-            if (!empty($limit->brand) && $T2 == 1 && $limit->brand !=0) {
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand != 0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -1652,7 +1652,7 @@ class Apicontroller extends CI_Controller
         $products = [];
         foreach ($productslimitdata->result() as $limit) {
             $show = 1;
-            if (!empty($limit->brand) && $T2 == 1 && $limit->brand !=0) {
+            if (!empty($limit->brand) && $T2 == 1 && $limit->brand != 0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $limit->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -1814,7 +1814,7 @@ class Apicontroller extends CI_Controller
         $related_info = [];
         foreach ($related_data->result() as $data) {
             $show = 1;
-            if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+            if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
                 $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                 if (empty($check)) {
                     $show = 0;
@@ -2575,7 +2575,10 @@ class Apicontroller extends CI_Controller
                                     'product_image' => base_url() . $product_data->image,
                                     'product_mrp' => $product_data->mrp,
                                     'product_selling_price' => $product_data->sellingprice,
-                                    'stock' => $stock
+                                    'stock' => $stock,
+                                    't2_price' => $product_data->t2_price,
+                                    't2_min' => $product_data->t2_min,
+                                    't2_max' => $product_data->t2_max,
                                 );
                             }
                         }
@@ -2661,7 +2664,7 @@ class Apicontroller extends CI_Controller
                 foreach ($search_string->result() as $data) {
                     if ($data->is_active == 1) {
                         $show = 1;
-                        if (!empty($data->brand) && $T2 == 1 && $data->brand !=0) {
+                        if (!empty($data->brand) && $T2 == 1 && $data->brand != 0) {
                             $check = $this->db->get_where('tbl_brands', array('is_active' => 1, 'for_t2' => 1, 'id' => $data->brand))->result();
                             if (empty($check)) {
                                 $show = 0;
