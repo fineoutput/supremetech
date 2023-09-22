@@ -1625,7 +1625,7 @@ class Apicontroller extends CI_Controller
             'message' => "success",
             'status' => 200,
             'data' => $products,
-            'type' => $T2,
+            'type' => $T2==1?'T2':'T3',
         );
         echo json_encode($res);
     }
