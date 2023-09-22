@@ -1833,7 +1833,8 @@ class Apicontroller extends CI_Controller
         $res = array(
             'message' => "success",
             'status' => 200,
-            'data' => $products
+            'data' => $products,
+            'type' => $T2==1?'T2':'T3',
         );
         echo json_encode($res);
     }
