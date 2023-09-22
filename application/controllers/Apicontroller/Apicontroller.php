@@ -1613,7 +1613,9 @@ class Apicontroller extends CI_Controller
                     't2_price' => $limit->t2_price,
                     't2_min' => $limit->t2_min,
                     't2_max' => $limit->t2_max,
-                    'stock' => $stock
+                    'stock' => $stock,
+                    
+
                     // 'inventory'=> $data->inventory
                 );
             }
@@ -1622,7 +1624,8 @@ class Apicontroller extends CI_Controller
         $res = array(
             'message' => "success",
             'status' => 200,
-            'data' => $products
+            'data' => $products,
+            'type' => $T2,
         );
         echo json_encode($res);
     }
@@ -1918,9 +1921,40 @@ class Apicontroller extends CI_Controller
                                 $product_data = $this->db->get()->row();
                                 if (!empty($product_data)) {
                                     if ($user_data->type == 'T3') {
+                                        if ($product_data->max >= $data->quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Maximum purchase limit exceeded",
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
                                         $total = $product_data->sellingprice * $data->quantity;
                                         $sub_total = $sub_total + $total;
                                     } else {
+                                        if ($product_data->t2_min <= $data->quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Minimum purchase quantity is " . $product_data->t2_min,
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                        if ($product_data->t2_max >= $data->quantity) {
+                                        } else {
+                                            header('Access-Control-Allow-Origin: *');
+                                            $res = array(
+                                                'message' => "Maximum purchase limit exceeded",
+                                                'status' => 201
+                                            );
+                                            echo json_encode($res);
+                                            exit;
+                                        }
+                                    
                                         $total = $product_data->t2_price * $data->quantity;
                                         $sub_total = $sub_total + $total;
                                     }
@@ -4479,7 +4513,7 @@ class Apicontroller extends CI_Controller
                 $res = array(
                     'message' => 'success',
                     'status' => 200,
-                    'data' => $content
+                    // 'data' => $content
                 );
                 echo json_encode($res);
             } else {
