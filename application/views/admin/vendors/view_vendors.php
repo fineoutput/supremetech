@@ -124,9 +124,12 @@
                                   <?php    }   ?>
                                   <?php if ($data->type == 'T2') { ?>
                                     <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T3">Mark T3</a></li>
-                                  <?php } else { ?>
+                                  <?php } else if ($data->type == 'T3') { ?>
                                     <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T2">Mark T2</a></li>
-                                  <?php    }   ?>
+                                  <?php    } else {   ?>
+                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T2">Mark T2</a></li>
+                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T3">Mark T3</a></li>
+                                  <? } ?>
                                   <!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
                                   <li><a href="<?php echo base_url() ?>dcadmin/Vendors/update_vendors/<?php echo
                                                                                                       base64_encode($data->id) ?>">Edit</a></li>
