@@ -110,15 +110,6 @@
                               <p class="label bg-yellow">Inactive</p>
                             <?php    }   ?>
                           </td>
-                          <!-- <td>
-                          <?php if ($data->status == 1) { ?>
-                          <p class="label bg-green">Approved</p>
-                          <?php } elseif ($data->status == 2) { ?>
-                          <p class="label bg-yellow">Pending</p>
-                          <?php  } elseif ($data->status == 3) { ?>
-                          <p class="label bg-red">Rejected</p>
-                          <?php  }   ?>
-                        </td> -->
                           <td>
                             <div class="btn-group" id="btns<?php echo $i ?>">
                               <div class="btn-group">
