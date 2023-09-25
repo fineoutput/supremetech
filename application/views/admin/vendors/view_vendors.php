@@ -136,10 +136,6 @@
                                   <?php } else { ?>
                                     <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T2">Mark T2</a></li>
                                   <?php    }   ?>
-                                  <!-- <?php if ($data->status == 2) { ?>
-                                <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/approved">Approved</a></li>
-                                <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorRequestStatus/<?php echo base64_encode($data->id) ?>/reject">Reject</a></li>
-                                <?php  }  ?> -->
                                   <!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
                                   <li><a href="<?php echo base_url() ?>dcadmin/Vendors/update_vendors/<?php echo
                                                                                                       base64_encode($data->id) ?>">Edit</a></li>
