@@ -458,24 +458,25 @@ class Users extends CI_Controller
                   'image2' => $temp_data->image2,
                   'token_id' => $temp_data->token_id,
                   'authentication' => $authentication,
+                  'type' => 'T3',
                   'ip' => $ip,
                   'is_active' => 0,
                   'date' => $cur_date
                 );
                 $last_id2 = $this->base_model->insert_table("tbl_users", $data_insert, 1);
                 if (!empty($last_id2)) {
-                  $this->db->select('*');
-                  $this->db->from('tbl_cart');
-                  $this->db->where('token_id', $temp_data->token_id);
-                  $cart_data = $this->db->get();
-                  $cart_check = $cart_data->row();
-                  if (!empty($cart_check)) {
-                    foreach ($cart_data->result() as $data) {
-                      $data_insert = array('user_id' => $last_id2);
-                      $this->db->where('token_id', $temp_data->token_id);
-                      $last_id3 = $this->db->update('token_id', $data_insert);
-                    }
-                  }
+                  // $this->db->select('*');
+                  // $this->db->from('tbl_cart');
+                  // $this->db->where('token_id', $temp_data->token_id);
+                  // $cart_data = $this->db->get();
+                  // $cart_check = $cart_data->row();
+                  // if (!empty($cart_check)) {
+                  //   foreach ($cart_data->result() as $data) {
+                  //     $data_insert = array('user_id' => $last_id2);
+                  //     $this->db->where('token_id', $temp_data->token_id);
+                  //     $last_id3 = $this->db->update('token_id', $data_insert);
+                  //   }
+                  // }
                   $res = array(
                     'message' => 'You have successfully signed up. Please wait for admin approval',
                     'status' => 200,
