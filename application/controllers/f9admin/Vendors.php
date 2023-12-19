@@ -20,12 +20,13 @@ class Vendors extends CI_finecontrol
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-            $this->db->select('*');
-            $this->db->from('tbl_users');
-            $this->db->order_by('id', 'desc');
-            $this->db->where('is_active', 1);
-            $data['vendors_data'] = $this->db->get();
+            // $this->db->select('*');
+            // $this->db->from('tbl_users');
+            // $this->db->order_by('id', 'desc');
+            // $this->db->where('is_active', 1);
+            // $data['vendors_data'] = $this->db->get();
             $data['heading'] = "Accepted";
+            $data['is_active'] = 1;
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/view_vendors');
             $this->load->view('admin/common/footer_view');
@@ -41,18 +42,64 @@ class Vendors extends CI_finecontrol
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
-            $this->db->select('*');
-            $this->db->from('tbl_users');
-            $this->db->order_by('id', 'desc');
-            $this->db->where('is_active', 0);
-            $data['vendors_data'] = $this->db->get();
+            // $this->db->select('*');
+            // $this->db->from('tbl_users');
+            // $this->db->order_by('id', 'desc');
+            // $this->db->where('is_active', 0);
+            // $data['vendors_data'] = $this->db->get();
             $data['heading'] = "Pending";
+            $data['is_active'] = 0;
+
             $this->load->view('admin/common/header_view', $data);
             $this->load->view('admin/vendors/view_vendors');
             $this->load->view('admin/common/footer_view');
         } else {
             redirect("login/admin_login", "refresh");
         }
+    }
+    public function get_vendors($status)
+    {
+
+
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->order_by('id', 'desc');
+        $this->db->where('is_active', $status);
+        $da1 = $this->db->get();
+        $i = 1;
+        foreach ($da1->result() as $da2) {
+            $this->db->select('*');
+            $this->db->from('all_cities');
+            $this->db->where('id', $da2->district);
+            $district_data = $this->db->get()->row();
+            if (!empty($district_data)) {
+                $dict =  $district_data->city_name;
+            } else {
+                $dict= 'No District Found';
+            }
+            $this->db->select('*');
+            $this->db->from('all_states');
+            $this->db->where('id', $da2->state);
+            $state_data = $this->db->get()->row();
+            if (!empty($state_data)) {
+                $state=  $state_data->state_name;
+            } else {
+                $state=  'No State Found';
+            }
+            $arr2[] = array($i, $da2->name, $da2->company_name, $da2->email, $da2->address, $dict, $da2->city, $state, $da2->zipcode, $da2->phone, $da2->gstin,);
+            $i++;
+        }
+        $arr = array(
+            'draw' => 1,
+            'recordsTotal' => $i,
+            'recordsFiltered' => $i,
+            'data' => $arr2
+
+        );
+
+        // print_r($arr);
+        echo json_encode($arr);
+        exit;
     }
     public function add_vendors()
     {

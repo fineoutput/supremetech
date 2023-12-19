@@ -47,105 +47,8 @@
                         <th>Zipcode</th>
                         <th>Contact Number</th>
                         <th>GST IN</th>
-                        <th> Visiting card </th>
-                        <th>Registration date</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php $i = 1;
-                      foreach ($vendors_data->result() as $data) { ?>
-                        <tr>
-                          <td><?php echo $i ?> </td>
-                          <td><?php echo $data->name ?></td>
-                          <td><?php echo $data->company_name ?></td>
-                          <td><?php echo $data->email ?></td>
-                          <td><?php echo $data->address ?></td>
-                          <td><?php
-                              $this->db->select('*');
-                              $this->db->from('all_cities');
-                              $this->db->where('id', $data->district);
-                              $district_data = $this->db->get()->row();
-                              if (!empty($district_data)) {
-                                echo $district_data->city_name;
-                              } else {
-                                echo 'No District Found';
-                              }
-                              ?></td>
-                          <td><?php echo $data->city ?></td>
-                          <td><?php
-                              $this->db->select('*');
-                              $this->db->from('all_states');
-                              $this->db->where('id', $data->state);
-                              $state_data = $this->db->get()->row();
-                              if (!empty($state_data)) {
-                                echo $state_data->state_name;
-                              } else {
-                                echo 'No State Found';
-                              }
-                              ?></td>
-                          <td><?php echo $data->zipcode ?></td>
-                          <td><?php echo $data->phone ?></td>
-                          <td><?php echo $data->gstin ?></td>
-                          <td>
-                            <?php if ($data->image1 != "") { ?>
-                              <img id="slide_img_path" height=50 width=100 src="<?php echo base_url() . $data->image1
-                                                                                ?>">
-                            <?php } else { ?>
-                              Sorry No File Found
-                            <?php } ?>
-                          </td>
-                          <td><?php echo $data->date ?></td>
-                          <td><?php if ($data->type == 'T2') { ?>
-                              <p class="label bg-primary">T2</p>
-                            <?php } else if ($data->type == 'T3') { ?>
-                              <p class="label bg-red">T3</p>
-                            <?php    }  ?>
-                          </td>
-                          <td><?php if ($data->is_active == 1) { ?>
-                              <p class="label bg-green">Active</p>
-                            <?php } else { ?>
-                              <p class="label bg-yellow">Inactive</p>
-                            <?php    }   ?>
-                          </td>
-                          <td>
-                            <div class="btn-group" id="btns<?php echo $i ?>">
-                              <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Action <span class="caret"></span></button>
-                                <ul class="dropdown-menu" role="menu">
-                                  <?php if ($data->is_active == 1) { ?>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updatevendorsStatus/<?php echo base64_encode($data->id) ?>/inactive">Inactive</a></li>
-                                  <?php } else { ?>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updatevendorsStatus/<?php echo base64_encode($data->id) ?>/active">Active</a></li>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/delete_vendors/<?php echo base64_encode($data->id) ?>">Delete</a></li>
-                                    <!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
-                                  <?php    }   ?>
-                                  <?php if ($data->type == 'T2') { ?>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T3">Mark T3</a></li>
-                                  <?php } else if ($data->type == 'T3') { ?>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T2">Mark T2</a></li>
-                                  <?php    } else {   ?>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T2">Mark T2</a></li>
-                                    <li><a href="<?php echo base_url() ?>dcadmin/Vendors/updateVendorsType/<?php echo base64_encode($data->id) ?>/T3">Mark T3</a></li>
-                                  <? } ?>
-                                  <!-- <li><a href="javascript:;" class="dCnf" mydata="">Delete</a></li> -->
-                                  <li><a href="<?php echo base_url() ?>dcadmin/Vendors/update_vendors/<?php echo
-                                                                                                      base64_encode($data->id) ?>">Edit</a></li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div style="display:none" id="cnfbox<?php echo $i ?>">
-                              <p> Are you sure delete this </p>
-                              <a href="<?php echo base_url() ?>dcadmin/Vendors/delete_vendors/<?php echo base64_encode($data->id); ?>" class="btn btn-danger">Yes</a>
-                              <a href="javasript:;" class="cans btn btn-default" mydatas="<?php echo $i ?>">No</a>
-                            </div>
-                          </td>
-                        </tr>
-                      <?php $i++;
-                      } ?>
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -176,6 +79,10 @@
     // ]
     $(document).ready(function() {
       $('#printTable').DataTable({
+        processing: true,
+        searching: true,
+        serverSide: true,
+        ajax: '<?= base_url() ?>dcadmin/Vendors/get_vendors/' + <?= $is_active ?>,
         responsive: true,
         "bStateSave": true,
         "fnStateSave": function(oSettings, oData) {
