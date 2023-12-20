@@ -57,16 +57,86 @@ class Vendors extends CI_finecontrol
             redirect("login/admin_login", "refresh");
         }
     }
-    public function get_vendors($status)
+    public function get_vendors()
     {
-
-
+        // Get DataTables parameters
+        $draw = $this->input->post('draw');
+        $start = $this->input->post('start');
+        $length = $this->input->post('length');
+        $status = $this->input->post('status');
+        $search = $this->input->post('search')['value'];
+        $orderBy = $this->input->post('order')[0];
+        $columnIndex = $orderBy['column'];
+        $columnName = $this->input->post('columns')[$columnIndex]['data'];
+        $columnDirection = $this->input->post('order')[0]['dir'];
+        // echo $columnName;
+        // echo $columnDirection;
+        // die();
+        $arr2 = [];
         $this->db->select('*');
         $this->db->from('tbl_users');
-        $this->db->order_by('id', 'desc');
+        if (!empty($columnName)) {
+            switch ($columnName) {
+                case 1:
+                    $this->db->order_by('name', $columnDirection);
+                    break;
+                case 2:
+                    $this->db->order_by('company_name', $columnDirection);
+                    break;
+                case 3:
+                    $this->db->order_by('email', $columnDirection);
+                    break;
+                case 4:
+                    $this->db->order_by('address', $columnDirection);
+                    break;
+                case 5:
+                    $this->db->order_by('district', $columnDirection);
+                    break;
+                case 6:
+                    $this->db->order_by('city', $columnDirection);
+                    break;
+                case 8:
+                    $this->db->order_by('zipcode', $columnDirection);
+                    break;
+                case 9:
+                    $this->db->order_by('phone', $columnDirection);
+                    break;
+                case 10:
+                    $this->db->order_by('gst', $columnDirection);
+                    break;
+                case 12:
+                    $this->db->order_by('date', $columnDirection);
+                    break;
+                case 13:
+                    $this->db->order_by('type', $columnDirection);
+                    break;
+                case 14:
+                    $this->db->order_by('is_active', $columnDirection);
+                    break;
+                default:
+                    $this->db->order_by('id', 'desc');
+            }
+        }
         $this->db->where('is_active', $status);
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('name', $search);
+            $this->db->or_like('phone', $search);
+            $this->db->or_like('dob', $search);
+            $this->db->or_like('address', $search);
+            $this->db->or_like('district', $search);
+            $this->db->or_like('zipcode', $search);
+            $this->db->or_like('company_name', $search);
+            $this->db->or_like('city', $search);
+            $this->db->or_like('type', $search);
+            // Add more columns as needed for searching
+            $this->db->group_end();
+        }
+        $this->db->limit($length, $start);
         $da1 = $this->db->get();
-        $i = 1;
+        $i = $start + 1;
+        //   print_r($status);
+        // die();
         foreach ($da1->result() as $da2) {
             $this->db->select('*');
             $this->db->from('all_cities');
@@ -75,30 +145,93 @@ class Vendors extends CI_finecontrol
             if (!empty($district_data)) {
                 $dict =  $district_data->city_name;
             } else {
-                $dict= 'No District Found';
+                $dict = 'No District Found';
             }
             $this->db->select('*');
             $this->db->from('all_states');
             $this->db->where('id', $da2->state);
             $state_data = $this->db->get()->row();
             if (!empty($state_data)) {
-                $state=  $state_data->state_name;
+                $state =  $state_data->state_name;
             } else {
-                $state=  'No State Found';
+                $state =  'No State Found';
             }
-            $arr2[] = array($i, $da2->name, $da2->company_name, $da2->email, $da2->address, $dict, $da2->city, $state, $da2->zipcode, $da2->phone, $da2->gstin,);
+            if ($da2->image1 != "") {
+                $path  = base_url() . $da2->image1;
+                $image = '<img id="slide_img_path" height=50 width=100 src="' . $path . '">';
+            } else {
+                $image = "Sorry No File Found";
+            }
+            if ($da2->type == 'T2') {
+                $type = '<p class="label bg-primary">T2</p>';
+            } else if ($da2->type == 'T3') {
+                $type = '<p class="label bg-red">T3</p>';
+            }
+            if ($da2->is_active == 1) {
+                $is_active = '<p class="label bg-green">Active</p>';
+            } else {
+                $is_active = '<p class="label bg-yellow">Inactive</p>';
+            }
+            $btn = '<div class="btn-group" id="btns' . $i . '">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Action <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">';
+            if ($da2->is_active == 1) {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updatevendorsStatus/' . base64_encode($da2->id) . '/inactive">Inactive</a></li>';
+            } else {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updatevendorsStatus/' . base64_encode($da2->id) . '/active">Active</a></li>';
+            }
+            if ($da2->type == 'T2') {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T3">Mark T3</a></li>';
+            } elseif ($da2->type == 'T3') {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T2">Mark T2</a></li>';
+            } else {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T2">Mark T2</a></li>';
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T3">Mark T3</a></li>';
+            }
+            // $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/delete_vendors/' . base64_encode($da2->id) . '">Delete</a></li>';
+            $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/update_vendors/' . base64_encode($da2->id) . '">Edit</a></li>';
+
+
+
+            $btn .= '</ul>
+            </div>
+          </div>';;
+            $arr2[] = array($i, $da2->name, $da2->company_name, $da2->email, $da2->address, $dict, $da2->city, $state, $da2->zipcode, $da2->phone, $da2->gstin, $image, $da2->date, $type, $is_active, $btn);
             $i++;
         }
-        $arr = array(
-            'draw' => 1,
-            'recordsTotal' => $i,
-            'recordsFiltered' => $i,
+        // Get total records without filtering
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tbl_users');
+        $this->db->where('is_active', $status);
+        $totalRecords = $this->db->get()->row()->total;
+        // Get total records with filtering
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tbl_users');
+        $this->db->where('is_active', $status);
+        // Modified: Add search condition for total filtered records
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('name', $search);
+            $this->db->or_like('company_name', $search);
+            $this->db->or_like('email', $search);
+            // Add more columns as needed for searching
+            $this->db->group_end();
+        }
+
+        $filteredRecords = $this->db->get()->row()->total;
+
+        // Modified: Create the final response array
+        $response = array(
+            'draw' => $draw,
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $filteredRecords,
             'data' => $arr2
-
         );
-
-        // print_r($arr);
-        echo json_encode($arr);
+        // print_r($response);
+        // die();
+        // Modified: Output JSON response
+        echo json_encode($response);
         exit;
     }
     public function add_vendors()
