@@ -140,7 +140,7 @@
             d.columns = d.columns || [{
               data: '0'
             }];
-            d.status = <?= $is_active ?> || 1; // DataTables draw counter
+            d.status = <?= $is_active ?>; // DataTables draw counter
             d.draw = d.draw || 1; // DataTables draw counter
             d.start = d.start || 0; // Paging first record indicator
             d.length = d.length || 50; // Number of records that the table can display in the current draw
