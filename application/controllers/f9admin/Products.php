@@ -24,6 +24,7 @@ class Products extends CI_finecontrol
             //  $id=base64_decode($idd);
             $id = base64_decode($idd);
             $data['id'] = $idd;
+            $data['id2'] = $id;
             $this->db->select('*');
             $this->db->from('tbl_products');
             $this->db->where('category_id', $id);
@@ -1356,5 +1357,235 @@ class Products extends CI_finecontrol
         } else {
             $this->load->view('admin/login/index');
         }
+    }
+    public function get_products()
+    {
+        // Get DataTables parameters
+        $draw = $this->input->post('draw');
+        $start = $this->input->post('start');
+        $length = $this->input->post('length');
+        $status = $this->input->post('status');
+        $search = $this->input->post('search')['value'];
+        $orderBy = $this->input->post('order')[0];
+        $columnIndex = $orderBy['column'];
+        $columnName = $this->input->post('columns')[$columnIndex]['data'];
+        $columnDirection = $this->input->post('order')[0]['dir'];
+        // echo $length;
+        // echo $columnDirection;
+        // die();
+        $arr2 = [];
+        $this->db->select('*');
+        $this->db->from('tbl_products');
+        $this->db->where('category_id', $status);
+        if (!empty($columnName)) {
+            switch ($columnName) {
+                case 1:
+                    $this->db->order_by('productname', $columnDirection);
+                    break;
+                case 9:
+                    $this->db->order_by('sellingprice', $columnDirection);
+                    break;
+                case 10:
+                    $this->db->order_by('max', $columnDirection);
+                    break;
+                case 11:
+                    $this->db->order_by('t2_price', $columnDirection);
+                    break;
+                case 12:
+                    $this->db->order_by('t2_min', $columnDirection);
+                    break;
+                case 13:
+                    $this->db->order_by('t2_max', $columnDirection);
+                    break;
+                case 14:
+                    $this->db->order_by('productdescription', $columnDirection);
+                    break;
+                case 15:
+                    $this->db->order_by('modelno', $columnDirection);
+                    break;
+                case 16:
+                    $this->db->order_by('weight', $columnDirection);
+                    break;
+                case 17:
+                    $this->db->order_by('feature_product', $columnDirection);
+                    break;
+                case 18:
+                    $this->db->order_by('popular_product', $columnDirection);
+                    break;
+                case 19:
+                    $this->db->order_by('is_active', $columnDirection);
+                    break;
+                default:
+                    $this->db->order_by('id', 'desc');
+            }
+        }
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('productname', $search);
+            $this->db->or_like('sellingprice', $search);
+            $this->db->or_like('max', $search);
+            $this->db->or_like('t2_price', $search);
+            $this->db->or_like('t2_min', $search);
+            $this->db->or_like('t2_max', $search);
+            $this->db->or_like('productdescription', $search);
+            $this->db->or_like('modelno', $search);
+            $this->db->or_like('weight', $search);
+            // Add more columns as needed for searching
+            $this->db->group_end();
+        }
+        $this->db->limit($length, $start);
+        $da1 = $this->db->get();
+        $i = $start + 1;
+        //   print_r($status);
+        // die();
+        foreach ($da1->result() as $da2) {
+            $this->db->select('*');
+            $this->db->from('tbl_category');
+            $this->db->where('id', $da2->category_id);
+            $category_data = $this->db->get()->row();
+            if (!empty($category_data)) {
+                $category =  $category_data->category;
+            } else {
+                $category = 'No category Found';
+            }
+            $this->db->select('*');
+            $this->db->from('tbl_subcategory');
+            $this->db->where('id', $da2->subcategory_id);
+            $subcategory_data = $this->db->get()->row();
+            if (!empty($subcategory_data)) {
+                $subcategory_name = $subcategory_data->subcategory;
+            } else {
+                $subcategory_name = "";
+            }
+            $this->db->select('*');
+            $this->db->from('tbl_minorcategory');
+            $this->db->where('id', $da2->minorcategory_id);
+            $minorcategory_data = $this->db->get()->row();
+            // print_r($subcategory_data);
+            // exit;
+            if (!empty($minorcategory_data)) {
+                $minorcategory_name = $minorcategory_data->minorcategoryname;
+            } else {
+                $minorcategory_name = "";
+            }
+            if ($da2->image != "") {
+                $path  = base_url() . $da2->image;
+                $image = '<img id="slide_img_path" height=50 width=100 src="' . $path . '">';
+            } else {
+                $image = "Sorry No File Found";
+            }
+            if ($da2->image1 != "") {
+                $path  = base_url() . $da2->image1;
+                $image1 = '<img id="slide_img_path" height=50 width=100 src="' . $path . '">';
+            } else {
+                $image1 = "Sorry No File Found";
+            }
+
+            if ($da2->video1 != "") {
+                $path  = base_url() . $da2->video1;
+                $video1 = '<video id="slide_img_path" height=50 width=100 src="' . $path . '">';
+            } else {
+                $video1 = "Sorry No File Found";
+            }
+            if ($da2->video2 != "") {
+                $path  = base_url() . $da2->video2;
+                $video2 = '<video id="slide_img_path" height=50 width=100 src="' . $path . '">';
+            } else {
+                $video2 = "Sorry No File Found";
+            }
+            $this->db->select('*');
+            $this->db->from('tbl_inventory');
+            $this->db->where('product_id', $da2->id);
+            $inventory_data = $this->db->get()->row();
+            $inventory_dat = $inventory_data->quantity;
+            if (!empty($inventory_data)) {
+                $inventory_dat = $inventory_data->quantity;
+            } else {
+                $inventory_dat = "";
+            }
+            if ($da2->feature_product == 1) {
+                $feature_product = "yes";
+            } else {
+                $feature_product = "no";
+            }
+            if ($da2->popular_product == 1) {
+                $popular_product = "yes";
+            } else {
+                $popular_product = "no";
+            }
+            if ($da2->is_active == 1) {
+                $is_active = '<p class="label bg-green">Active</p>';
+            } else {
+                $is_active = '<p class="label bg-yellow">Inactive</p>';
+            }
+            $btn = '<div class="btn-group" id="btns' . $i . '">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Action <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">';
+            if ($da2->is_active == 1) {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Products/updateproductsStatus/' . base64_encode($da2->id) . '/inactive">Inactive</a></li>';
+            } else {
+                $btn .= '<li><a href="' . base_url() . 'dcadmin/Products/updateproductsStatus/' . base64_encode($da2->id) . '/active">Active</a></li>';
+            }
+            $btn .= '<li><a href="' . base_url() . 'dcadmin/Products/update_products/' . base64_encode($da2->id) . '/' . base64_encode($status) . '">Edit</a></li>';
+            $btn .= ' <li><a href="javascript:;" class="dCnf" mydata="' . $i . '"">Delete</a></li>';
+            $btn .= '</ul>
+            </div>
+          </div>';
+            $btn .=  '<div style="display:none" id="cnfbox' . $i . '">
+          <p> Are you sure delete this </p>
+          <a href="' . base_url() . 'dcadmin/Products/delete_products/' . base64_encode($da2->id) . '" class="btn btn-danger">Yes</a>
+          <a href="javasript:;" class="cans btn btn-default" mydatas="' . $i . '">No</a>
+        </div>';
+            $string = strip_tags($da2->productdescription);
+            if (strlen($string) > 300) {
+
+                // truncate string
+                $stringCut = substr($string, 0, 300);
+                $endPoint = strrpos($stringCut, ' ');
+
+                //if the string doesn't contain any space then it will cut without word basis.
+                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                $string .= '...';
+            }
+            $arr2[] = array(
+                $i, $da2->productname,  $subcategory_name, $minorcategory_name, $image, $image1, $video1, $video2, "₹" . $da2->sellingprice, $da2->max, $da2->t2_price ? '₹' . $da2->t2_price : '', $da2->t2_min, $da2->t2_max,
+                $string, $da2->modelno, $inventory_dat, $da2->weight . 'gm', $feature_product, $popular_product, $is_active, $btn
+            );
+            $i++;
+        }
+        // Get total records without filtering
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tbl_products');
+        $this->db->where('category_id', $status);
+        $totalRecords = $this->db->get()->row()->total;
+        // Get total records with filtering
+        $this->db->select('COUNT(id) as total');
+        $this->db->from('tbl_products');
+        $this->db->where('category_id', $status);
+        // Modified: Add search condition for total filtered records
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('name', $search);
+            $this->db->or_like('company_name', $search);
+            $this->db->or_like('email', $search);
+            // Add more columns as needed for searching
+            $this->db->group_end();
+        }
+
+        $filteredRecords = $this->db->get()->row()->total;
+
+        // Modified: Create the final response array
+        $response = array(
+            'draw' => $draw,
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $filteredRecords,
+            'data' => $arr2
+        );
+        // print_r($response);
+        // die();
+        // Modified: Output JSON response
+        echo json_encode($response);
+        exit;
     }
 }
