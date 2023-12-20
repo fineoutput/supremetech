@@ -171,7 +171,7 @@
           {
             extend: 'csvHtml5',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
             },
             "titleAttr": 'Excel',
             "action": newexportaction
@@ -202,11 +202,6 @@
             "action": newexportaction
           },
         ],
-        "pageLength": -1,
-        "initComplete": function(settings, json) {
-          // Your code after DataTable initialization
-          console.log('DataTable initialized');
-        }
 
       });
 
