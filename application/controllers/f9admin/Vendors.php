@@ -189,14 +189,19 @@ class Vendors extends CI_finecontrol
                 $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T2">Mark T2</a></li>';
                 $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/updateVendorsType/' . base64_encode($da2->id) . '/T3">Mark T3</a></li>';
             }
-            // $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/delete_vendors/' . base64_encode($da2->id) . '">Delete</a></li>';
+            $btn .= ' <li><a href="javascript:;" class="dCnf" mydata="' . $i . '"">Delete</a></li>';
             $btn .= '<li><a href="' . base_url() . 'dcadmin/Vendors/update_vendors/' . base64_encode($da2->id) . '">Edit</a></li>';
 
 
 
             $btn .= '</ul>
             </div>
-          </div>';;
+          </div>';
+          $btn .=  '<div style="display:none" id="cnfbox' . $i . '">
+          <p> Are you sure delete this </p>
+          <a href="' . base_url() . 'dcadmin/Vendors/delete_vendors/' . base64_encode($da2->id) . '" class="btn btn-danger">Yes</a>
+          <a href="javasript:;" class="cans btn btn-default" mydatas="' . $i . '">No</a>
+        </div>';
             $arr2[] = array($i, $da2->name, $da2->company_name, $da2->email, $da2->address, $dict, $da2->city, $state, $da2->zipcode, $da2->phone, $da2->gstin, $image, $da2->date, $type, $is_active, $btn);
             $i++;
         }

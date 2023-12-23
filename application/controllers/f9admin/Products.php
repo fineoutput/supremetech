@@ -1566,9 +1566,15 @@ class Products extends CI_finecontrol
         // Modified: Add search condition for total filtered records
         if (!empty($search)) {
             $this->db->group_start();
-            $this->db->like('name', $search);
-            $this->db->or_like('company_name', $search);
-            $this->db->or_like('email', $search);
+            $this->db->like('productname', $search);
+            $this->db->or_like('sellingprice', $search);
+            $this->db->or_like('max', $search);
+            $this->db->or_like('t2_price', $search);
+            $this->db->or_like('t2_min', $search);
+            $this->db->or_like('t2_max', $search);
+            $this->db->or_like('productdescription', $search);
+            $this->db->or_like('modelno', $search);
+            $this->db->or_like('weight', $search);
             // Add more columns as needed for searching
             $this->db->group_end();
         }
