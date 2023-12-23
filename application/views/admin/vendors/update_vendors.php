@@ -16,19 +16,19 @@
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Add New Seller</h3>
           </div>
-          <? if(!empty($this->session->flashdata('smessage'))){ ?>
-          <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Alert!</h4>
-            <? echo $this->session->flashdata('smessage'); ?>
-          </div>
+          <? if (!empty($this->session->flashdata('smessage'))) { ?>
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              <? echo $this->session->flashdata('smessage'); ?>
+            </div>
           <? }
-                   if(!empty($this->session->flashdata('emessage'))){ ?>
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-            <? echo $this->session->flashdata('emessage'); ?>
-          </div>
+          if (!empty($this->session->flashdata('emessage'))) { ?>
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+              <? echo $this->session->flashdata('emessage'); ?>
+            </div>
           <? } ?>
           <div class="panel-body">
             <div class="col-lg-10">
@@ -66,46 +66,60 @@
                       </td>
                     </tr>
                     <tr>
-                <td> <strong>City</strong> <span style="color:red;">*</span></strong> </td>
-                <td>
-                  <input type="text" name="city" class="form-control" placeholder="" value="<?= $vendors->city; ?>" />
-                </td>
-              </tr>
-              <tr>
-                <td> <strong>State</strong> <span style="color:red;">*</span></strong> </td>
-                <td>
-                  <input type="text" name="state" class="form-control" placeholder="" value="<?= $vendors->state; ?>" />
-                </td>
-              </tr>
-              <tr>
-                <td> <strong>Zipcode</strong> <span style="color:red;">*</span></strong> </td>
-                <td>
-                  <input type="text" name="zipcode" class="form-control" placeholder="" value="<?= $vendors->zipcode; ?>" />
-                </td>
-              </tr>
-              <tr>
-                <td> <strong>Contact Number</strong> <span style="color:red;">*</span></strong> </td>
-                <td>
-                  <input type="number" name="phone" class="form-control" placeholder="" required value="<?= $vendors->phone; ?>" />
-                </td>
-              </tr>
-              <tr>
-                <td> <strong>GST IN</strong> <span style="color:red;">*</span></strong> </td>
-                <td>
-                  <input type="text" name="gstin" class="form-control" placeholder="" required value="<?= $vendors->gstin; ?>" />
-                </td>
-              </tr>
-              <tr>
-                    <td> <strong> Visiting card </strong> <span style="color:red;"><br />Big: 2220px X 1000px<br /></span></strong> </td>
-                    <td>
-                      <input type="file" name="image1" class="form-control" placeholder="" value="<?=$vendors->image1?>" />
-                      <?php if ($vendors->image1!="") {  ?>
-                      <img id="slide_img_path" height=250 width=250 src="<?php echo base_url().$vendors->image1 ?>">
-                      <?php } else {  ?>
-                      Sorry No image Found
-                      <?php } ?>
-                    </td>
-                  </tr>
+                      <td> <strong>City</strong> <span style="color:red;">*</span></strong> </td>
+                      <td>
+                        <input type="text" name="city" class="form-control" placeholder="" value="<?= $vendors->city; ?>" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>State </strong> <span style="color:red;">*</span> </td>
+                      <td>
+                        <select class="form-control" id="state" name="state">
+                          <option value="">Please select state</option>
+                          <?
+                          foreach ($state_data as $value) { ?>
+                            <option value="<?= $value->id; ?>" <?php if ($vendors->state == $value->id) {
+                                                                  echo "selected";
+                                                                } ?>><?= $value->state_name; ?></option>
+                          <? } ?>
+                        </select>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td> <strong>State</strong> <span style="color:red;">*</span></strong> </td>
+                      <td>
+                        <input type="text" name="state" class="form-control" placeholder="" value="<?= $vendors->state; ?>" />
+                      </td>
+                    </tr> -->
+                    <tr>
+                      <td> <strong>Zipcode</strong> <span style="color:red;">*</span></strong> </td>
+                      <td>
+                        <input type="text" name="zipcode" class="form-control" placeholder="" value="<?= $vendors->zipcode; ?>" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>Contact Number</strong> <span style="color:red;">*</span></strong> </td>
+                      <td>
+                        <input type="number" name="phone" class="form-control" placeholder="" required value="<?= $vendors->phone; ?>" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong>GST IN</strong> <span style="color:red;"></span></strong> </td>
+                      <td>
+                        <input type="text" name="gstin" class="form-control" placeholder="" value="<?= $vendors->gstin; ?>" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> <strong> Visiting card </strong> <span style="color:red;"><br />Big: 2220px X 1000px<br /></span></strong> </td>
+                      <td>
+                        <input type="file" name="image1" class="form-control" placeholder="" value="<?= $vendors->image1 ?>" />
+                        <?php if ($vendors->image1 != "") {  ?>
+                          <img id="slide_img_path" height=250 width=250 src="<?php echo base_url() . $vendors->image1 ?>">
+                        <?php } else {  ?>
+                          Sorry No image Found
+                        <?php } ?>
+                      </td>
+                    </tr>
                     <tr>
                       <td> <strong>Registration date</strong> <span style="color:red;">*</span></strong> </td>
                       <td>

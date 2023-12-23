@@ -197,7 +197,7 @@ class Vendors extends CI_finecontrol
             $btn .= '</ul>
             </div>
           </div>';
-          $btn .=  '<div style="display:none" id="cnfbox' . $i . '">
+            $btn .=  '<div style="display:none" id="cnfbox' . $i . '">
           <p> Are you sure delete this </p>
           <a href="' . base_url() . 'dcadmin/Vendors/delete_vendors/' . base64_encode($da2->id) . '" class="btn btn-danger">Yes</a>
           <a href="javasript:;" class="cans btn btn-default" mydatas="' . $i . '">No</a>
@@ -264,22 +264,28 @@ class Vendors extends CI_finecontrol
                 // print_r($this->input->post());
                 // exit;
                 $this->form_validation->set_rules('name', 'name', 'required|xss_clean|trim');
-                // $this->form_validation->set_rules('lastname', 'lastname', 'xss_clean|trim');
-                // $this->form_validation->set_rules('dateofbirth', 'dateofbirth', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('email', 'email', 'required|valid_email|xss_clean|trim');
-                // $this->form_validation->set_rules('password', 'password', 'required|xss_clean|trim');
-                $this->form_validation->set_rules('gstin', 'gstin', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('company_name', 'company_name', 'xss_clean|trim');
+                $this->form_validation->set_rules('email', 'email', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('address', 'address', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('district', 'district', 'required|xss_clean|trim');
                 $this->form_validation->set_rules('city', 'city', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('state', 'state', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('zipcode', 'zipcode', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('phone', 'phone', 'required|xss_clean|trim');
+                $this->form_validation->set_rules('gstin', 'gstin', 'xss_clean|trim');
+                $this->form_validation->set_rules('date', 'date', 'required|xss_clean|trim');
                 if ($this->form_validation->run() == true) {
                     $name = $this->input->post('name');
-                    // $lastname=$this->input->post('lastname');
-                    // $dateofbirth=$this->input->post('dateofbirth');
+                    $company_name = $this->input->post('company_name');
                     $email = $this->input->post('email');
-                    // $password=$this->input->post('password');
-                    $gstin = $this->input->post('gstin');
                     $address = $this->input->post('address');
+                    $district = $this->input->post('district');
                     $city = $this->input->post('city');
+                    $state = $this->input->post('state');
+                    $zipcode = $this->input->post('zipcode');
+                    $phone = $this->input->post('phone');
+                    $gstin = $this->input->post('gstin');
+                    $date = $this->input->post('date');
                     $ip = $this->input->ip_address();
                     date_default_timezone_set("Asia/Calcutta");
                     $cur_date = date("Y-m-d H:i:s");
@@ -315,16 +321,16 @@ class Vendors extends CI_finecontrol
                     if ($typ == 1) {
                         $data_insert = array(
                             'name' => $name,
-                            // 'lastname'=>$lastname,
-                            // 'dateofbirth'=>$dateofbirth,
+                            'company_name' => $company_name,
                             'email' => $email,
-                            'password' => $password,
-                            'gstin' => $gstin,
                             'address' => $address,
+                            'district' => $district,
                             'city' => $city,
+                            'state' => $state,
+                            'zipcode' => $zipcode,
+                            'phone' => $phone,
+                            'gstin' => $gstin,
                             'image1' => $nnnn,
-                            'ip' => $ip,
-                            'added_by' => $addedby,
                             'is_active' => 1,
                             'date' => $cur_date
                         );
@@ -356,14 +362,17 @@ class Vendors extends CI_finecontrol
                         //     }
                         $data_insert = array(
                             'name' => $name,
-                            // 'lastname'=>$lastname,
-                            // 'dateofbirth'=>$dateofbirth,
+                            'company_name' => $company_name,
                             'email' => $email,
-                            // 'password'=>$password,
-                            'gstin' => $gstin,
                             'address' => $address,
-                            'image1' => $nnnn,
+                            'district' => $district,
                             'city' => $city,
+                            'state' => $state,
+                            'zipcode' => $zipcode,
+                            'phone' => $phone,
+                            'gstin' => $gstin,
+                            'image1' => $nnnn,
+                            'date' => $date,
                         );
                         $this->db->where('id', $idw);
                         $last_id = $this->db->update('tbl_users', $data_insert);
@@ -395,6 +404,8 @@ class Vendors extends CI_finecontrol
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
             // exit;
+            $data['state_data'] = $this->db->get_where('all_states', array())->result();
+
             $id = base64_decode($idd);
             $data['id'] = $idd;
             $this->db->select('*');

@@ -2238,7 +2238,7 @@ class Apicontroller extends CI_Controller
                                     'email' => $user_data->email,
                                     'dob' => $user_data->dob,
                                     'address' => $user_data->address,
-                                    'state' => $statedata->state_name,
+                                    'state' => $statedata?$statedata->state_name:'',
                                     'district' => $user_data->district,
                                     'city' => $user_data->city,
                                     'zipcode' => $user_data->zipcode,
