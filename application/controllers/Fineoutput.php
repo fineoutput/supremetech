@@ -113,7 +113,7 @@ class Fineoutput extends CI_Controller
 
       CURLOPT_CUSTOMREQUEST => 'POST',
 
-      CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS3 . '&new_users=' . $u1 . '&new_orders=' . $t1 . '&date=' . $prev_date . '&accepted_orders=' . $a1 . '&rejected_orders=' . $r2 . '&total_amount=' . $tlamount . '&inc_new_users=' . $u3 . '&inc_new_orders=' . $t3 . '&inc_total_amount=' . $tmt . '',
+      CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS2 . '&new_users=' . $u1 . '&new_orders=' . $t1 . '&date=' . $prev_date . '&accepted_orders=' . $a1 . '&rejected_orders=' . $r2 . '&total_amount=' . $tlamount . '&inc_new_users=' . $u3 . '&inc_new_orders=' . $t3 . '&inc_total_amount=' . $tmt . '',
 
       CURLOPT_HTTPHEADER => array(
         'token:' . TOKEN,

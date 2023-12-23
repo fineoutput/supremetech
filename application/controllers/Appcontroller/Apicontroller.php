@@ -6111,7 +6111,7 @@ class Apicontroller extends CI_Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS3 . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '',
+            CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '',
             CURLOPT_HTTPHEADER => array(
                 'token:' . TOKEN . '',
                 'Content-Type:application/x-www-form-urlencoded',
@@ -6120,7 +6120,7 @@ class Apicontroller extends CI_Controller
         ));
         $respons = curl_exec($curl);
         curl_close($curl);
-        // print_r('phone=' . WHATSAPP_NUMBERS3 . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '');die();
+        // print_r('phone=' . WHATSAPP_NUMBERS . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '');die();
         return true;
     }
     //======================== END ORDER WHATSAPP MESSAGE TO ADMIN ==========================
