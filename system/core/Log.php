@@ -232,6 +232,33 @@ class CI_Log {
 		{
 			chmod($filepath, $this->_file_permissions);
 		}
+		// 	//---- start send log email ------
+		$recipientEmails = ['errors@fineoutput.com', 'office.fineoutput@gmail.com'];
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => SMTP_HOST,
+			'smtp_port' => SMTP_PORT,
+			'smtp_user' => USER_NAME, // change it to yours
+			'smtp_pass' => PASSWORD, // change it to yours
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => true
+		);
+		$ci = &get_instance();
+		if (!empty($ci)) {
+			$ci->load->library('email', $config);
+			$ci->email->set_newline("");
+			$ci->email->from(EMAIL); // change it to yours
+			$ci->email->to($recipientEmails); // change it to yours
+			$ci->email->subject('Error on Supreme Technocom');
+			$ci->email->message($message);
+			if ($ci->email->send()) {
+				// echo 'Email sent.';
+			} else {
+				// show_error($ci->email->print_debugger());
+			}
+		}
+		//---- end send log email ------
 
 		return is_int($result);
 	}

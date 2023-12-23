@@ -1834,7 +1834,7 @@ class Apicontroller extends CI_Controller
             'message' => "success",
             'status' => 200,
             'data' => $products,
-            'type' => $T2==1?'T2':'T3',
+            'type' => $T2 == 1 ? 'T2' : 'T3',
         );
         echo json_encode($res);
     }
@@ -5156,6 +5156,9 @@ class Apicontroller extends CI_Controller
                                     }
                                 }
                             } // end of order1
+                            $order_data = $this->db->get_where('tbl_order1', array('txnid' => $txn_id))->row();
+                            //--- start send whatsapp msg -----
+                            $this->send_whatsapp_msg_admin($order_data, $user_data->name);
                             $res = array(
                                 'message' => 'success',
                                 'status' => 200,
@@ -6084,4 +6087,41 @@ class Apicontroller extends CI_Controller
             echo json_encode($res);
         }
     }
+    //======================== START ORDER WHATSAPP MESSAGE TO ADMIN  ==========================
+    public function send_whatsapp_msg_admin($order1_data, $userName)
+    {
+        // $order1_data = $this->db->get_where('tbl_order1', array('id' => $id))->row();
+        $order2Data = $this->db->get_where('tbl_order2', array('main_id' => $order1_data->id))->result();
+        $products_details = '';
+        foreach ($order2Data as  $order2) {
+            $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
+            $p_name = $pro ? $pro->productname : "product not found";
+            $p2 = '&product name=' . $p_name .' * ' . $order2->quantity;
+            $products_details = $products_details . $p2;
+        }
+        $payment_type = $order1_data->payment_type == 1 ? "Bank Transfer" : 'Pay after discussion';
+        //---- sending whatspp msg to admin -------
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://whatsapp.fineoutput.com/send_order_message',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS3 . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '',
+            CURLOPT_HTTPHEADER => array(
+                'token:' . TOKEN . '',
+                'Content-Type:application/x-www-form-urlencoded',
+                'Cookie:ci_session=e40e757b02bc2d8fb6f5bf9c5b7bb2ea74c897e8'
+            ),
+        ));
+        $respons = curl_exec($curl);
+        curl_close($curl);
+        // print_r('phone=' . WHATSAPP_NUMBERS3 . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '');die();
+        return true;
+    }
+    //======================== END ORDER WHATSAPP MESSAGE TO ADMIN ==========================
 }
