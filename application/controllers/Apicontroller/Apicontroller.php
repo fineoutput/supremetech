@@ -1614,7 +1614,7 @@ class Apicontroller extends CI_Controller
                     't2_min' => $limit->t2_min,
                     't2_max' => $limit->t2_max,
                     'stock' => $stock,
-                    
+
 
                     // 'inventory'=> $data->inventory
                 );
@@ -1625,7 +1625,7 @@ class Apicontroller extends CI_Controller
             'message' => "success",
             'status' => 200,
             'data' => $products,
-            'type' => $T2==1?'T2':'T3',
+            'type' => $T2 == 1 ? 'T2' : 'T3',
         );
         echo json_encode($res);
     }
@@ -1809,6 +1809,15 @@ class Apicontroller extends CI_Controller
         $this->db->from('tbl_products');
         $this->db->where('id', $id);
         $product_data = $this->db->get()->row();
+        if (empty($product_data)) {
+            $res = array(
+                'message' => "success",
+                'status' => 200,
+                'data' => []
+            );
+            echo json_encode($res);
+            return;
+        }
         $this->db->select('*');
         $this->db->from('tbl_products');
         $this->db->where('is_active', 1);
@@ -1954,7 +1963,7 @@ class Apicontroller extends CI_Controller
                                             echo json_encode($res);
                                             exit;
                                         }
-                                    
+
                                         $total = $product_data->t2_price * $data->quantity;
                                         $sub_total = $sub_total + $total;
                                     }
@@ -3045,8 +3054,8 @@ class Apicontroller extends CI_Controller
                                 }
                             } // end of order1
                             $order_data = $this->db->get_where('tbl_order1', array('txnid' => $txn_id))->row();
-                             //--- start send whatsapp msg -----
-                             $this->send_whatsapp_msg_admin($order_data, $user_data->name);
+                            //--- start send whatsapp msg -----
+                            $this->send_whatsapp_msg_admin($order_data, $user_data->name);
                             header('Access-Control-Allow-Origin: *');
                             $res = array(
                                 'message' => 'success',
@@ -5788,7 +5797,7 @@ class Apicontroller extends CI_Controller
         foreach ($order2Data as  $order2) {
             $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
             $p_name = $pro ? $pro->productname : "product not found";
-            $p2 = '&product name=' . $p_name .' * ' . $order2->quantity;
+            $p2 = '&product name=' . $p_name . ' * ' . $order2->quantity;
             $products_details = $products_details . $p2;
         }
         $payment_type = $order1_data->payment_type == 1 ? "Bank Transfer" : 'Pay after discussion';
