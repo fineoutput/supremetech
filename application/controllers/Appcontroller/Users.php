@@ -582,7 +582,7 @@ class Users extends CI_Controller
             'link' => $link
           );
           $config = array(
-            'protocol' => 'smtp',
+            'protocol' => PROTOCOL,
             'smtp_host' => SMTP_HOST,
             'smtp_port' => SMTP_PORT,
             'smtp_user' => USER_NAME, // change it to yours

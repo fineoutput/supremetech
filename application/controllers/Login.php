@@ -153,7 +153,7 @@ public function admin_login_process()
 	exit;
 
 	                    $config = Array(
-	                  'protocol' => 'smtp',
+	                  'protocol' => PROTOCOL,
 	                  'smtp_host' => 'ssl://smtp.googlemail.com',
 	                  'smtp_port' => 465,
 	                  'smtp_user' => 'xxx@gmail.com', // change it to yours
