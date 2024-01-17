@@ -2238,7 +2238,7 @@ class Apicontroller extends CI_Controller
                                     'email' => $user_data->email,
                                     'dob' => $user_data->dob,
                                     'address' => $user_data->address,
-                                    'state' => $statedata?$statedata->state_name:'',
+                                    'state' => $statedata ? $statedata->state_name : '',
                                     'district' => $user_data->district,
                                     'city' => $user_data->city,
                                     'zipcode' => $user_data->zipcode,
@@ -2809,17 +2809,19 @@ class Apicontroller extends CI_Controller
                                 $this->db->from('tbl_products');
                                 $this->db->where('id', $data->product_id);
                                 $product_data = $this->db->get()->row();
-                                $order2[] = array(
-                                    'product_id' => $product_data->id,
-                                    'product_name' => $product_data->productname,
-                                    'product_image' => base_url() . $product_data->image,
-                                    'quantity' => $data->quantity,
-                                    'price' => $data->product_mrp,
-                                    'total_amount' => $data->total_amount,
-                                    'weight' => $product_data->weight,
-                                );
-                                $subtotal = $subtotal + $data->total_amount;
-                                $total_weight = ($product_data->weight * $data->quantity) + $total_weight;
+                                if (!empty($product_data)) {
+                                    $order2[] = array(
+                                        'product_id' => $product_data->id,
+                                        'product_name' => $product_data->productname,
+                                        'product_image' => base_url() . $product_data->image,
+                                        'quantity' => $data->quantity,
+                                        'price' => $data->product_mrp,
+                                        'total_amount' => $data->total_amount,
+                                        'weight' => $product_data->weight,
+                                    );
+                                    $subtotal = $subtotal + $data->total_amount;
+                                    $total_weight = ($product_data->weight * $data->quantity) + $total_weight;
+                                }
                             }
                             if ($total_weight > 1000) {
                                 $total_weight = $total_weight / 1000;
@@ -6096,7 +6098,7 @@ class Apicontroller extends CI_Controller
         foreach ($order2Data as  $order2) {
             $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
             $p_name = $pro ? $pro->productname : "product not found";
-            $p2 = '&product name=' . $p_name .' * ' . $order2->quantity;
+            $p2 = '&product name=' . $p_name . ' * ' . $order2->quantity;
             $products_details = $products_details . $p2;
         }
         $payment_type = $order1_data->payment_type == 1 ? "Bank Transfer" : 'Pay after discussion';

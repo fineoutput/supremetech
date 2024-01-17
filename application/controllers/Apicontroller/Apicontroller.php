@@ -3251,15 +3251,17 @@ class Apicontroller extends CI_Controller
                             $this->db->from('tbl_products');
                             $this->db->where('id', $data->product_id);
                             $product_data = $this->db->get()->row();
-                            $order2[] = array(
-                                'product_id' => $product_data->id,
-                                'product_name' => $product_data->productname,
-                                'product_image' => base_url() . $product_data->image,
-                                'quantity' => $data->quantity,
-                                'price' => $data->product_mrp,
-                                'total amount' => $data->total_amount,
-                                'weight' => $product_data->weight,
-                            );
+                            if (!empty($product_data)) {
+                                $order2[] = array(
+                                    'product_id' => $product_data->id,
+                                    'product_name' => $product_data->productname,
+                                    'product_image' => base_url() . $product_data->image,
+                                    'quantity' => $data->quantity,
+                                    'price' => $data->product_mrp,
+                                    'total amount' => $data->total_amount,
+                                    'weight' => $product_data->weight,
+                                );
+                            }
                             $subtotal = $subtotal + $data->total_amount;
                         }
                         header('Access-Control-Allow-Origin: *');
