@@ -99,7 +99,7 @@ class Fineoutput extends CI_Controller
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://www.fineoutput.com/Whatsapp/send_daily_message',
+      CURLOPT_URL => 'https://whatsapp.fineoutput.com/Whatsapp/send_daily_message',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
 
@@ -284,7 +284,7 @@ class Fineoutput extends CI_Controller
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://www.fineoutput.com/Whatsapp/send_weekly_message',
+      CURLOPT_URL => 'https://whatsapp.fineoutput.com/Whatsapp/send_weekly_message',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
 
