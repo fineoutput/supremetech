@@ -260,6 +260,7 @@ class Users extends CI_Controller
         date_default_timezone_set("Asia/Calcutta");
         $cur_date = date("Y-m-d H:i:s");
         $this->load->library('upload');
+        $image1 = '';
         $img1 = 'image1';
         $file_check = ($_FILES['image1']['error']);
         if ($file_check != 4) {

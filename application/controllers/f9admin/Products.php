@@ -595,7 +595,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_brands');
                     $this->db->where('id', $data1);
                     $brand_result = $this->db->get()->row();
-                    $brands[] = array('id' => $brand_result->id, 'name' => $brand_result->name);
+                    if (!empty($brand_result)) {
+                        $brands[] = array('id' => $brand_result->id, 'name' => $brand_result->name);
+                    }
                 }
                 $data['brands_data'] = $brands;
             } else {
@@ -612,7 +614,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_resolution');
                     $this->db->where('id', $data2);
                     $resolution_result = $this->db->get()->row();
-                    $resolution[] = array('id' => $resolution_result->id, 'name' => $resolution_result->filtername);
+                    if (!empty($resolution_result)) {
+                        $resolution[] = array('id' => $resolution_result->id, 'name' => $resolution_result->filtername);
+                    }
                 }
                 $data['resolution_data'] = $resolution;
             } else {
@@ -628,7 +632,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_lens');
                     $this->db->where('id', $data3);
                     $lens_result = $this->db->get()->row();
-                    $lens[] = array('id' => $lens_result->id, 'name' => $lens_result->filtername);
+                    if (!empty($lens_result)) {
+                        $lens[] = array('id' => $lens_result->id, 'name' => $lens_result->filtername);
+                    }
                 }
                 $data['lens_data']  = $lens;
             } else {
@@ -644,7 +650,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_irdistance');
                     $this->db->where('id', $data4);
                     $irdistance_result = $this->db->get()->row();
-                    $irdistance[] = array('id' => $irdistance_result->id, 'name' => $irdistance_result->filtername);
+                    if (!empty($irdistance_result)) {
+                        $irdistance[] = array('id' => $irdistance_result->id, 'name' => $irdistance_result->filtername);
+                    }
                 }
                 $data['irdistance_data'] = $irdistance;
             } else {
@@ -661,7 +669,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_cameratype');
                     $this->db->where('id', $data5);
                     $camera_type_result = $this->db->get()->row();
-                    $camera_type[] = array('id' => $camera_type_result->id, 'name' => $camera_type_result->filtername);
+                    if (!empty($camera_type_result)) {
+                        $camera_type[] = array('id' => $camera_type_result->id, 'name' => $camera_type_result->filtername);
+                    }
                 }
                 $data['camera_type'] = $camera_type;
             } else {
@@ -677,7 +687,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_bodymaterial');
                     $this->db->where('id', $data6);
                     $body_material_result = $this->db->get()->row();
-                    $body_material[] = array('id' => $body_material_result->id, 'name' => $body_material_result->filter_name);
+                    if (!empty($body_material_result)) {
+                        $body_material[] = array('id' => $body_material_result->id, 'name' => $body_material_result->filter_name);
+                    }
                 }
                 $data['body_material'] = $body_material;
             } else {
@@ -693,7 +705,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_videochannel');
                     $this->db->where('id', $data7);
                     $video_channel_result = $this->db->get()->row();
-                    $video_channel[] = array('id' => $video_channel_result->id, 'name' => $video_channel_result->filter_name);
+                    if (!empty($video_channel_result)) {
+                        $video_channel[] = array('id' => $video_channel_result->id, 'name' => $video_channel_result->filter_name);
+                    }
                 }
                 $data['video_channel'] = $video_channel;
             } else {
@@ -709,7 +723,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_poeports');
                     $this->db->where('id', $data8);
                     $pov_ports_result = $this->db->get()->row();
-                    $pov_ports[] = array('id' => $pov_ports_result->id, 'name' => $pov_ports_result->filter_name);
+                    if (!empty($pov_ports_result)) {
+                        $pov_ports[] = array('id' => $pov_ports_result->id, 'name' => $pov_ports_result->filter_name);
+                    }
                 }
                 $data['pov_ports'] = $pov_ports;
             } else {
@@ -725,7 +741,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_poetype');
                     $this->db->where('id', $data16);
                     $pov_type_result = $this->db->get()->row();
-                    $pov_type[] = array('id' => $pov_type_result->id, 'name' => $pov_type_result->filter_name);
+                    if (!empty($pov_type_result)) {
+                        $pov_type[] = array('id' => $pov_type_result->id, 'name' => $pov_type_result->filter_name);
+                    }
                 }
                 $data['pov_type'] = $pov_type;
             } else {
@@ -741,7 +759,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_sataports');
                     $this->db->where('id', $data9);
                     $sata_ports_result = $this->db->get()->row();
-                    $sata_ports[] = array('id' => $sata_ports_result->id, 'name' => $sata_ports_result->filter_name);
+                    if (!empty($sata_ports_result)) {
+                        $sata_ports[] = array('id' => $sata_ports_result->id, 'name' => $sata_ports_result->filter_name);
+                    }
                 }
                 $data['sata_ports'] = $sata_ports;
             } else {
@@ -757,7 +777,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_length');
                     $this->db->where('id', $data10);
                     $length_result = $this->db->get()->row();
-                    $length[] = array('id' => $length_result->id, 'name' => $length_result->filter_name);
+                    if (!empty($length_result)) {
+                        $length[] = array('id' => $length_result->id, 'name' => $length_result->filter_name);
+                    }
                 }
                 $data['length_data'] = $length;
             } else {
@@ -773,7 +795,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_screensize');
                     $this->db->where('id', $data11);
                     $screen_size_result = $this->db->get()->row();
-                    $screen_size[] = array('id' => $screen_size_result->id, 'name' => $screen_size_result->filter_name);
+                    if (!empty($screen_size)) {
+                        $screen_size[] = array('id' => $screen_size_result->id, 'name' => $screen_size_result->filter_name);
+                    }
                 }
                 $data['screen_size'] = $screen_size;
             } else {
@@ -789,7 +813,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_ledtype');
                     $this->db->where('id', $data12);
                     $led_type_result = $this->db->get()->row();
-                    $led_type[] = array('id' => $led_type_result->id, 'name' => $led_type_result->filter_name);
+                    if (!empty($led_type_result)) {
+                        $led_type[] = array('id' => $led_type_result->id, 'name' => $led_type_result->filter_name);
+                    }
                 }
                 $data['led_type'] = $led_type;
             } else {
@@ -805,7 +831,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_size');
                     $this->db->where('id', $data13);
                     $size_result = $this->db->get()->row();
-                    $size[] = array('id' => $size_result->id, 'name' => $size_result->filter_name);
+                    if (!empty($size_result)) {
+                        $size[] = array('id' => $size_result->id, 'name' => $size_result->filter_name);
+                    }
                 }
                 $data['size_data'] = $size;
             } else {
@@ -821,7 +849,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_night_vision');
                     $this->db->where('id', $data14);
                     $night_vision_result = $this->db->get()->row();
-                    $night_vision[] = array('id' => $night_vision_result->id, 'name' => $night_vision_result->filtername);
+                    if (!empty($night_vision_result)) {
+                        $night_vision[] = array('id' => $night_vision_result->id, 'name' => $night_vision_result->filtername);
+                    }
                 }
                 $data['night_vision'] = $night_vision;
             } else {
@@ -837,7 +867,9 @@ class Products extends CI_finecontrol
                     $this->db->from('tbl_audio_type');
                     $this->db->where('id', $data15);
                     $audio_type_result = $this->db->get()->row();
-                    $audio_type[] = array('id' => $audio_type_result->id, 'name' => $audio_type_result->filtername);
+                    if (!empty($audio_type_result)) {
+                        $audio_type[] = array('id' => $audio_type_result->id, 'name' => $audio_type_result->filtername);
+                    }
                 }
                 $data['audio_type'] = $audio_type;
             } else {

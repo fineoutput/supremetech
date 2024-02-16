@@ -2656,18 +2656,6 @@ class Apicontroller extends CI_Controller
                     $data_id = $data->row();
                     $viewcart = [];
                     if (!empty($data_id)) {
-                        $this->db->select('*');
-                        $this->db->from('tbl_order2');
-                        $this->db->where('main_id', $data_id->id);
-                        $data_mrp = $this->db->get()->row();
-                        if (!empty($data_mrp)) {
-                            $this->db->select('*');
-                            $this->db->from('tbl_products');
-                            $this->db->where('id', $data_mrp->product_id);
-                            $data_product = $this->db->get()->row();
-                            if (!empty($data_product)) {
-                                $data_result = $data_product->sellingprice;
-                            }
                             foreach ($data->result() as $value) {
                                 if ($value->payment_type == 1) {
                                     $payment_type = "Bank Transfer";
@@ -2699,10 +2687,8 @@ class Apicontroller extends CI_Controller
                                 $viewcart[] = array(
                                     'order_id' => $value->id,
                                     'order_date' => $d2,
-                                    'product_mrp' => $data_result,
                                     'total_amount' => $value->final_amount,
                                     'weight' => $value->weight,
-                                    'quantity' => $data_mrp->quantity,
                                     'payment_type' => $payment_type,
                                     'discount' => $value->discount,
                                     'order_status' => $order_status,
@@ -2715,13 +2701,6 @@ class Apicontroller extends CI_Controller
                                 'data' => $viewcart
                             );
                             echo json_encode($res);
-                        } else {
-                            $res = array(
-                                'message' => 'Order id error',
-                                'status' => 201
-                            );
-                            echo json_encode($res);
-                        }
                     } else {
                         $res = array(
                             'message' => 'No order',
@@ -5469,8 +5448,18 @@ class Apicontroller extends CI_Controller
         //   }
     }
     //-----------filter_data-------------------
-    public function view_filter($id, $phone = '', $authentication = '')
+    public function view_filter($id='', $phone = '', $authentication = '')
     {
+        if (empty($id)) {
+            header('Access-Control-Allow-Origin: *');
+            $res = array(
+                'message' => 'success',
+                'status' => 201,
+                'data' => [],
+            );
+            echo json_encode($res);
+            return;
+        }
         $T2 = 0;
         if (!empty($phone)) {
             $this->db->select('*');

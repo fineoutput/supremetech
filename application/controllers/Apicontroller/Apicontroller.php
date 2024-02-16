@@ -250,6 +250,7 @@ class Apicontroller extends CI_Controller
                 $this->db->from('tbl_category');
                 $this->db->where('id', $category_id);
                 $get_category_id = $this->db->get()->row();
+                $category_name = '';
                 if (!empty($get_category_id)) {
                     $category_name = $get_category_id->category;
                 }
@@ -5296,8 +5297,18 @@ class Apicontroller extends CI_Controller
         }
     }
     //-----------filter_data-------------------
-    public function view_filter($id, $phone = '', $authentication = '')
+    public function view_filter($id = '', $phone = '', $authentication = '')
     {
+        if (empty($id)) {
+            header('Access-Control-Allow-Origin: *');
+            $res = array(
+                'message' => 'success',
+                'status' => 201,
+                'data' => [],
+            );
+            echo json_encode($res);
+            return;
+        }
         $T2 = 0;
         if (!empty($phone)) {
             $this->db->select('*');
