@@ -45,6 +45,12 @@ class Orders extends CI_finecontrol
         if (!empty($this->session->userdata('admin_data'))) {
             $data['user_name'] = $this->load->get_var('user_name');
 
+            if (empty($_GET['year'])) {
+                $year = 2024; // Set default value to 2024
+            } else {
+                $year = $_GET['year']; // Use the value from the URL parameter
+            }
+
             // echo SITE_NAME;
             // echo $this->session->userdata('image');
             // echo $this->session->userdata('position');
@@ -52,6 +58,7 @@ class Orders extends CI_finecontrol
             $this->db->select('*');
             $this->db->from('tbl_order1');
             $this->db->where('order_status', 2);
+            $this->db->where("YEAR(date)", $year);
             $this->db->order_by("id", "desc");
             $data['order_data'] = $this->db->get();
 
