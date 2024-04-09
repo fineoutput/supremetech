@@ -15,17 +15,19 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>View Accepted Orders</h3>
-            <style>.w-10 {
-              width: 10%;
-               }</style>
+            <style>
+              .w-10 {
+                width: 10%;
+              }
+            </style>
             <select class="form-control w-10" id="year" name="year">
-                 <option value="2024">2024</option>
-                 <option value="2023">2023</option>
-                 <option value="2022">2022</option>
-                <option value="2021">2021</option>
-               <option value="2020">2020</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
             </select>
-            
+
           </div>
           <!-- Rest of your panel content goes here -->
         </div>
@@ -332,27 +334,27 @@
 </script>
 <!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/ajaxupload.3.5.js"></script>
       <script type="text/javascript" src="<?php echo base_url() ?>assets/slider/rs.js"></script>	  -->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#year').change(function() {
-            var selectedYear = $(this).val();
-            var baseurl = '<?php echo base_url("f9admin/Orders/view_accept_order/?year=");?>';
-            var url = baseurl + selectedYear;
-            // alert(url);
-            window.location.href=url;
+  $(document).ready(function() {
+    $('#year').change(function() {
+      var selectedYear = $(this).val();
+      var baseurl = '<?php echo base_url("f9admin/Orders/view_accept_order/?year="); ?>';
+      var url = baseurl + selectedYear;
+      // alert(url);
+      window.location.href = url;
 
-      
-        });
+
     });
+  });
 </script>
 <script>
-    // JavaScript to dynamically change selected option based on URL parameter
-    document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const year = urlParams.get('year');
-        if (year) {
-            document.getElementById('year').value = year;
-        }
-    });
+  // JavaScript to dynamically change selected option based on URL parameter
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const year = urlParams.get('year');
+    if (year) {
+      document.getElementById('year').value = year;
+    }
+  });
 </script>
