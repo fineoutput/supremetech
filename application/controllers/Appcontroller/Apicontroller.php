@@ -6090,8 +6090,14 @@ class Apicontroller extends CI_Controller
             log_message('error', 'ORDER - '.$order2->product_id);
             $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
             log_message('error', 'ORDER - '.$pro->productname);
-            $p_name = $pro ? $pro->productname : "product not found";
+            if(!empty($pro)){
+                $p_name =  $pro->productname;
+            }
+            else{
+                $p_name = "product not found";
+            }
             $p2 = '&product name=' . $p_name . ' * ' . $order2->quantity;
+            log_message('error', 'ORDER -p2 '.$p2);
             $products_details = $products_details . $p2;
         }
         $payment_type = $order1_data->payment_type == 1 ? "Bank Transfer" : 'Pay after discussion';
