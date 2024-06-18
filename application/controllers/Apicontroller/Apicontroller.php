@@ -5805,6 +5805,8 @@ class Apicontroller extends CI_Controller
     public function send_whatsapp_msg_admin($order1_data, $userName)
     {
         // $order1_data = $this->db->get_where('tbl_order1', array('id' => $id))->row();
+        log_message('error', 'ORDER - '.$order1_data);
+        $other_details = "NA";
         $order2Data = $this->db->get_where('tbl_order2', array('main_id' => $order1_data->id))->result();
         $products_details = '';
         foreach ($order2Data as  $order2) {
@@ -5825,7 +5827,7 @@ class Apicontroller extends CI_Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '',
+            CURLOPT_POSTFIELDS => 'phone=' . WHATSAPP_NUMBERS . '&order_id=' . $order1_data->id . '&amount=' . $order1_data->final_amount . '&date=' . $order1_data->date . '&method=' . $payment_type . '&products=' . $products_details . '&customer_name=' . $userName . '&others=' . $other_details .  '',
             CURLOPT_HTTPHEADER => array(
                 'token:' . TOKEN . '',
                 'Content-Type:application/x-www-form-urlencoded',
