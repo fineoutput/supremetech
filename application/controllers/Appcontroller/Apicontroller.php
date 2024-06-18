@@ -6084,7 +6084,7 @@ class Apicontroller extends CI_Controller
         // $order1_data = $this->db->get_where('tbl_order1', array('id' => $id))->row();
         $order2Data = $this->db->get_where('tbl_order2', array('main_id' => $order1_data->id))->result();
         $products_details = '';
-        log_message('error', 'ORDER - '.$order1_data);
+        // log_message('error', 'ORDER - '.$order1_data);
         $other_details = "NA";
         foreach ($order2Data as  $order2) {
             $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
