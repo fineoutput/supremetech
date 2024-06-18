@@ -5805,12 +5805,14 @@ class Apicontroller extends CI_Controller
     public function send_whatsapp_msg_admin($order1_data, $userName)
     {
         // $order1_data = $this->db->get_where('tbl_order1', array('id' => $id))->row();
-        log_message('error', 'ORDER - '.$order1_data);
+        // log_message('error', 'ORDER - '.$order1_data);
         $other_details = "NA";
         $order2Data = $this->db->get_where('tbl_order2', array('main_id' => $order1_data->id))->result();
         $products_details = '';
         foreach ($order2Data as  $order2) {
+            log_message('error', 'ORDER - '.$order2->product_id);
             $pro = $this->db->get_where('tbl_products', array('id' => $order2->product_id))->row();
+            log_message('error', 'ORDER - '.$pro->productname);
             $p_name = $pro ? $pro->productname : "product not found";
             $p2 = '&product name=' . $p_name . ' * ' . $order2->quantity;
             $products_details = $products_details . $p2;
