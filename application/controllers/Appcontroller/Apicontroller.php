@@ -6096,9 +6096,9 @@ class Apicontroller extends CI_Controller
             else{
                 $p_name = "product not found";
             }
-            $products_details = 'product name=' . $p_name . ' * ' . $order2->quantity;
-            log_message('error', 'ORDER -p2 '.$products_details);
-            $products_details .= $products_details;
+            $p2 = 'product name=' . $p_name . ' * ' . $order2->quantity;
+            // log_message('error', 'ORDER -p2 '.$products_details);
+            $products_details = $products_details . $p2;
             
         }
         log_message('error', 'ORDER -pfinal '.$products_details);
