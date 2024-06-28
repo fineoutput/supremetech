@@ -2867,7 +2867,8 @@ class Apicontroller extends CI_Controller
             $token_id = $headers['Tokenid'];
             $this->form_validation->set_rules('string', 'string', 'required|xss_clean|trim');
             if ($this->form_validation->run() == true) {
-                $string = $this->input->post('string');
+                $string = trim($this->input->post('string'));
+                echo $string;die;
                 $T2 = 0;
                 if (!empty($phone)) {
                     $this->db->select('*');
